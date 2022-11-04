@@ -246,3 +246,10 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij
+.npmignore
+.nvmrc
+CHANGELOG.md
+gulpfile.js
+lang/en.json
+templates/actor/actor-character-sheet-old.html
+templates/item/item-item-sheet-orig.html

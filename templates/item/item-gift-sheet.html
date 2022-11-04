@@ -22,10 +22,10 @@
           <label class="gift-lbl">조건</label>
           <input type="text" name="system.requirement" value="{{system.requirement}}"/>
         </div>
-        <div class="gift-ability">
+        <div class="gift-roll">
           <label class="gift-lbl">기능</label>
-          <select name="system.action.ability">
-            {{#select system.action.ability}}
+          <select name="system.action.roll">
+            {{#select system.action.roll}}
             <option value=""> - </option>
             {{#each label.abl as |ablname key|}}
             <option value="{{key}}">{{ablname}}</option>
@@ -38,18 +38,21 @@
 
     <section class="sheet-body">
       <div class="item gift-sheet-body" data-item-id="{{data._id}}">
-        <div class="gift-description">{{!-- 설명 textarea --}}
-          {{editor system.description target="system.description" button=true editable=editable}}
-        </div>
         <div class="gift-tag">
           <label class="gift-lbl">태그</label>
           <input type="text" name="system.tag" value="{{system.tag}}"/>
         </div>
         <div class="gift-effect">
-          <label>효과</label>{{!-- 마지막줄:효과 --}}
-          <textarea class="gift-effect" data-path="system.effect">{{gift.system.effect}}</textarea>
+          <label>효과</label>{{!-- 효과 --}}
+          {{editor system.effect target="system.effect" button=true editable=editable}}
+        </div>
+        <div class="gift-description">{{!-- 설명 --}}
+          {{editor system.description target="system.description" button=true editable=editable}}
         </div>
         {{#if item.isOwned}}
+        <div class="gift-formula">{{!-- 수식 --}}
+          <textarea class="gift-formula" data-path="system.formula">{{gift.system.formula}}</textarea>
+        </div>
         <div class="gift-memo">
           <label>메모</label>{{!-- 마지막줄:메모 --}}
           <input type="text" name="system.memo" value="{{system.memo}}"/>

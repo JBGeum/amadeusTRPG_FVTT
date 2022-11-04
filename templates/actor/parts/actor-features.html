@@ -4,8 +4,8 @@
     <div class="item gear" data-item-id="{{item._id}}">
       <div class="item-card"> {{!--  --}}
         <div class="item-name">{{!-- 첫줄: 기프트명   |버튼  --}}
-          <i class="{{#if item.system.action.ability}} item-rollcard fas fa-dice {{else}} item-notroll fas fa-square {{/if}}"
-             data-ability="{{item.system.action.ability}}"></i>
+          <i class="{{#if item.system.action.roll}} item-rollcard fas fa-dice {{else}} item-notroll fas fa-square {{/if}}"
+             data-ability="{{item.system.action.roll}}"></i>
           <a class="item-datacard item-name">{{item.name}}</a>
           <i class="fas fa-caret-down open-item"></i>
         </div>
@@ -26,7 +26,7 @@
         </div>
         <div class="item-abl roll-abl">
           <label class="item-lbl">기능</label>
-          {{localize @item.system.action.ability}}
+          {{localize @item.system.action.roll}}
         </div>
         <div class="item-hidden">
           <div class="item-tag">{{!-- 세번째줄: 태그   --}}

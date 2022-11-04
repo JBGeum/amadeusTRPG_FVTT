@@ -65,6 +65,7 @@
       "equip": "상비품",
       "consume": "소비품",
       "price": "가격",
+      "type": "분류",
       "food": "식량",
       "power": "위력",
       "effect": "특수기능",

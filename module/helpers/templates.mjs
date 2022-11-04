@@ -8,9 +8,10 @@
 
     // Actor partials.
     "systems/amadeus/templates/actor/parts/actor-features.html",
-    "systems/amadeus/templates/actor/parts/actor-items.html",
+    "systems/amadeus/templates/actor/parts/actor-item.html",
     "systems/amadeus/templates/actor/parts/actor-spells.html",
     "systems/amadeus/templates/actor/parts/actor-effects.html",
+    "systems/amadeus/templates/actor/parts/actor-gift.html",
 
     // chatcard templates
     "systems/amadeus/templates/chatcard/roll-amadeabl.html",

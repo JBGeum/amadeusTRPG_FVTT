@@ -108,9 +108,9 @@ export class AmadeusItem extends Item {
         name: this.name,
         type: game.i18n.localize(system.type),
         requirement: system.requirement,
-        ability: game.i18n.localize(system.action.ability),
+        roll: game.i18n.localize(system.action.roll),
         tag: system.tag,
-        desc: system.description
+        effect: system.effect
     };
     let content = await renderTemplate("systems/amadeus/templates/chatcard/data-item.html", templateData)
     return content;
@@ -127,7 +127,7 @@ async getItemRollCard(rollAbl) {
     //const rollAbl = getKeybyValue(CONFIG.AMADEUS.ability,this.system.action.ability);
     // AMADEUS.ability.warfare -> warfare
     const actorAbl = actor.system.ability[rollAbl];
-    const ablLabel = game.i18n.localize(this.system.action.ability);
+    const ablLabel = game.i18n.localize(this.system.action.roll);
     const rank = actorAbl.rank;
     let roll = await amadeRoll(rank, actorAbl.rankVal, actor.getRollData());
     const templateData = {

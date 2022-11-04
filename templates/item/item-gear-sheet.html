@@ -1,64 +1,40 @@
 <form class="{{cssClass}}" autocomplete="off">
   <div class="gear-sheet">
-  <header class="sheet-header">
-    <div class="item gear-sheet-header" data-item-id="{{data._id}}">
-      <div class="gift-sheet-name flex-center">
-        <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
-        <div class="gift-sheet-chkbox {{#if item.isOwned}}active{{else}}hidden{{/if}}">
-          <input type="checkbox" name="system.chkbox" {{#if system.chkbox}} checked {{/if}}>
+    <header class="sheet-header">
+      <div class="item item-sheet-header" data-item-id="{{data._id}}">
+        <div class="item-sheet-name flex-center">
+          <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+        </div>
+        <div class="item-price">
+          <label class="item-lbl">{{localize 'AMADEUS.item.price'}}</label>
+          <input type="text" name="system.price" value="{{system.price}}"/>
+        </div>
+        <div class="item-sheet-type">
+          <label class="item-lbl">{{localize 'AMADEUS.item.type'}}</label>
+          <select name="system.type">
+            {{#select system.type}}
+              <option value="AMADEUS.item.consume">{{localize 'AMADEUS.item.consume'}}</option>
+              <option value="AMADEUS.item.equip">{{localize 'AMADEUS.item.equip'}}</option>
+            {{/select}}
+          </select>
+        </div>
+        <div class="item-damage">
+          <label class="item-lbl">{{localize 'AMADEUS.item.power'}}</label>
+            <input type="text" name="system.action.damage" value="{{system.action.damage}}"/>
         </div>
       </div>
-      <div class="gift-sheet-type">
-        <label class="gift-lbl">가격</label>
-        <select name="system.type">
-          {{#select system.type}}
-          {{#each label.type as |typename key|}}
-          <option value="{{key}}">{{typename}}</option>
-          {{/each}}
-          {{/select}}
-        </select>
-      </div>
-      <div class="gift-requirement">
-        <label class="gift-lbl">조건</label>
-        <input type="text" name="system.requirement" value="{{system.requirement}}"/>
-      </div>
-      <div class="gift-ability">
-        <label class="gift-lbl">기능</label>
-        <select name="system.action.ability">
-          {{#select system.action.ability}}
-          <option value=""> - </option>
-          {{#each label.abl as |ablname key|}}
-          <option value="{{key}}">{{ablname}}</option>
-          {{/each}}
-          {{/select}}
-        </select>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="attributes">Attributes</a>
-  </nav>
-
-  {{!-- Sheet Body --}}
-  <section class="sheet-body">
-
-    {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-      {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the rollData prop. --}}
-      {{editor system.description target="system.description" rollData=rollData button=true owner=owner editable=editable}}
-    </div>
-
-    {{!-- Attributes Tab --}}
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
-      {{!-- As you add new fields, add them in here! --}}
-      <div class="resource">
-        <label class="resource-label">Roll Formula</label>
-        <input type="text" name="system.formula" value="{{system.formula}}" data-dtype="String"/>
+    <section class="item-sheet-body">
+      <div class="item item-sheet-body" data-item-id="{{data._id}}">
+        <div class="item-effect">
+          <label>효과</label>{{!-- 효과 --}}
+          {{editor system.effect target="item.effect" button=true editable=editable}}
+        </div>
+        <div class="item-description">{{!-- 설명 --}}
+          {{editor system.description target="item.description" button=true editable=editable}}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   </div>
 </form>

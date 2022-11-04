@@ -77,13 +77,14 @@
       "type": "",
       "requirement": "",
       "action": {
-        "ability": null,
+        "roll": null,
         "damage": "",
         "spAbl": {}
       },
       "tag":"",
-      "description":"",
-      "effect": "",
+      "effect": ".",
+      "description":".",
+      "formula": "",
       "memo": ""
     },
     "background": {
@@ -118,28 +119,28 @@
     },
     "weapon": {
       "name": "",
-      "quantity": 0,
       "price": 0,
       "type": "",
       "action": {
-        "ability": null,
+        "roll": null,
         "damage": "",
         "spAbl": {}
       },
+      "effect": ".",
       "description": ""
     },
     "gear": {
       "name": "",
-      "quantity": 0,
       "price": 0,
       "type": "",
       "action": {
-        "ability": null,
+        "roll": null,
         "damage": "",
         "spAbl": {}
       },
       "spAbl": {},
-      "description": ""
+      "effect": ".",
+      "description": "."
     }
   }
 }

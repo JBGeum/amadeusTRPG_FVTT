@@ -647,7 +647,7 @@ div.gift-card{
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
           "gift-name gift-name gift-control"
-          "gift-type gift-requirement gift-abl"
+          "gift-type gift-requirement gift-roll"
           "gift-hidden gift-hidden gift-hidden";
   border: 2px solid #999;
 }
@@ -655,12 +655,12 @@ div.gift-card{
 .gift-card div.gift-control{grid-area:gift-control;}
 .gift-card div.gift-type{grid-area:gift-type;}
 .gift-card div.gift-requirement{grid-area:gift-requirement;}
-.gift-card div.gift-abl{grid-area:gift-abl;}
+.gift-card div.roll{grid-area:gift-roll;}
 .gift-card div.gift-hidden{grid-area:gift-hidden;}
 .gift-card > div{margin: 2px;}
 
 
-.gift-hidden .active{display:block;}
+.active {display:block;}
 .gift-hidden {display:none;}
 
 
@@ -671,6 +671,9 @@ div.gift-card{
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 80px 40px;
 }
+.gift-sheet-header > div {
+  border: 1px solid #999;
+}
 .gift-sheet-header div.gift-sheet-name {
   grid-column: 1 / span 3;
   grid-row: 1 / span 1;
@@ -678,15 +681,23 @@ div.gift-card{
 .gift-sheet-name > input[type="text"]{
   width:calc(80%);
 }
-.gift-sheet-chkbox.active{display:block;}
+/*.gift-sheet-chkbox.active{display:block;}*/
 .gift-sheet-chkbox {display:none;}
 
-.gift-sheet-body .gift-description{
+.gift-sheet-body .gift-effect{
   height:300px;
   background-color:rgba(255,255,255,0.3);
   margin:10px;
   border-radius: 15px;
   padding:15px;
+}
+
+.gift-sheet-body .gift-description{
+  height:150px;
+  background-color:rgba(255,255,255,0.3);
+  margin:10px;
+  border-radius: 10px;
+  padding:10px;
 }
 .gift-sheet-header input,.gift-sheet-header select {
   width:calc(70% - 2px);
@@ -728,5 +739,64 @@ div.item-grid{
 .item-grid div.item-damage{grid-area:item-damage;}
 .item-grid div.item-control{grid-area:item-control;}
 .item-grid div.item-desc{grid-area:item-desc;}
+
+.item-sheet-header{
+  display: grid;
+  grid-gap: 1px;
+  padding: 2px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 80px 40px;
+}
+.item-sheet-header > div{
+  border:1px solid #999;
+}
+.item-sheet-header div.item-sheet-name {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 1;
+}
+.item-sheet-name > input[type="text"]{
+  width:calc(80%);
+}
+
+.item-sheet-header input,.item-sheet-header select {
+  width:calc(70% - 2px);
+}
+.item-sheet-header  label {
+  width: calc(25%);
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+}
+.item-sheet-body  label {
+  width: calc(15%);
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+}
+.item-sheet-body input {
+  width:calc(80% - 2px);
+}
+.item-sheet-body .item-effect{
+  height:300px;
+  background-color:rgba(255,255,255,0.3);
+  margin:10px;
+  border-radius: 15px;
+  padding:15px;
+}
+
+.item-sheet-body .item-description{
+  height:150px;
+  background-color:rgba(255,255,255,0.3);
+  margin:10px;
+  border-radius: 10px;
+  padding:10px;
+}
+
+a.editor-edit {
+  display:block;
+}
+.editor {
+  height: 100%;
+}
 
 /*# sourceMappingURL=amadeus.css.map */

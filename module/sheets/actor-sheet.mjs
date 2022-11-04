@@ -189,7 +189,7 @@ export class AmadeusActorSheet extends ActorSheet {
 
     html.find('.open-gift').click(this._onOpenGiftMenu.bind(this));
     html.find('.gift-memo').change(this._upDateItemMemo.bind(this));
-    html.find('.gift-effect').change(this._upDateItemMemo.bind(this));
+    html.find('.gift-formula').change(this._upDateItemMemo.bind(this));
 
   }
   _onOpenGiftMenu(event){
