@@ -1,0 +1,145 @@
+{
+  "Actor": {
+    "types": [
+      "character",
+      "monster"],
+    "htmlFields": ["biography"],
+    "character": {
+      "biography": "",
+      "health": 0,
+      "vitality": 0,
+      "dc" : 4,
+      "ability":{
+        "warfare": {
+          "rank": "A",
+          "mod": " "
+        },
+        "technique" : {
+          "rank": "A",
+          "mod": " "
+        },
+        "brain": {
+          "rank": "A",
+          "mod": " "
+        },
+        "spirit": {
+          "rank": "A",
+          "mod": " "
+        },
+        "love": {
+          "rank": "A",
+          "mod": " "
+        },
+        "mundane": {
+          "rank": "A",
+          "mod": " "
+        }
+      },
+      "chardata" : {
+        "pantheon": "",
+        "parent": "",
+        "background": "",
+        "prophecy": "",
+        "relationship": ""
+      },
+      "job": {
+        "chkbox": false
+      },
+      "status": {
+        "desperation": false,
+        "fury": false,
+        "coward": {
+          "check": false,
+          "level" : 0
+        },
+        "depravity": false,
+        "disgrace": false,
+        "wound": {
+          "check": false,
+          "level" : 0
+        }
+      },
+      "money": 0,
+      "level": 1,
+      "exp": 0,
+      "food": 0,
+      "color": "",
+      "attributes": {},
+      "groups": {}
+    },
+    "monster": {}
+  },
+  "Item": {
+    "types": ["gift","background","parent","bond","supporter","weapon","gear"],
+    "htmlFields": ["description"],
+    "gift": {
+      "chkbox": false,
+      "type": "",
+      "requirement": "",
+      "action": {
+        "ability": null,
+        "damage": "",
+        "spAbl": {}
+      },
+      "tag":"",
+      "description":"",
+      "effect": "",
+      "memo": ""
+    },
+    "background": {
+      "type": "",
+      "modSet" : []
+    },
+    "parent": {
+      "pantheon": "",
+      "color": "",
+      "weapon": "",
+      "authority": "",
+      "ability": {
+        "warfare" : {"rank": "","mod" : " "},
+        "technique" : {"rank": "","mod" : " "},
+        "brain" : {"rank": "","mod" : " "},
+        "spirit" : {"rank": "","mod" : " "},
+        "love" : {"rank": "","mod" : " "},
+        "mundane" : {"rank": "","mod" : " "}
+      }
+    },
+    "bond": {
+      "check" : false,
+      "name" : "",
+      "truth" : false,
+      "level" : 0,
+      "relationship" : ""
+    },
+    "supporter" : {
+      "check" : false,
+      "level" : 0,
+      "relationship" : ""
+    },
+    "weapon": {
+      "name": "",
+      "quantity": 0,
+      "price": 0,
+      "type": "",
+      "action": {
+        "ability": null,
+        "damage": "",
+        "spAbl": {}
+      },
+      "description": ""
+    },
+    "gear": {
+      "name": "",
+      "quantity": 0,
+      "price": 0,
+      "type": "",
+      "action": {
+        "ability": null,
+        "damage": "",
+        "spAbl": {}
+      },
+      "spAbl": {},
+      "description": ""
+    }
+  }
+}

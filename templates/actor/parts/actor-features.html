@@ -1,0 +1,60 @@
+<div class="itemtab-grid">
+  <div class="itemtab-leftside">
+  {{#each inventory as |item key|}}
+    <div class="item gear" data-item-id="{{item._id}}">
+      <div class="item-card"> {{!--  --}}
+        <div class="item-name">{{!-- 첫줄: 기프트명   |버튼  --}}
+          <i class="{{#if item.system.action.ability}} item-rollcard fas fa-dice {{else}} item-notroll fas fa-square {{/if}}"
+             data-ability="{{item.system.action.ability}}"></i>
+          <a class="item-datacard item-name">{{item.name}}</a>
+          <i class="fas fa-caret-down open-item"></i>
+        </div>
+        <div class="item-check item-controls">
+          <input type="checkbox" class="item-chk" data-path="system.chkbox" name="item.system.chkbox" {{checked item.system.chkbox}}>
+          <i class="{{#if item.system.chkbox}}fas fa-fire {{else}}fa-light fa-fire {{/if}} item-chk" ></i>
+          <a class="item-control item-edit" title="수정"><i class="fas fa-edit"></i></a>
+          <a class="item-control item-delete" title="삭제"><i class="fas fa-trash"></i></a>
+        </div>
+
+        <div class="item-type">{{!-- 두번째줄: 분류 | 조건 | 기능 --}}
+          <label class="item-lbl">분류</label>
+          {{localize @item.system.type}}
+        </div>
+        <div class="item-requirement">
+          <label class="item-lbl">조건</label>
+          {{item.system.requirement}}
+        </div>
+        <div class="item-abl roll-abl">
+          <label class="item-lbl">기능</label>
+          {{localize @item.system.action.ability}}
+        </div>
+        <div class="item-hidden">
+          <div class="item-tag">{{!-- 세번째줄: 태그   --}}
+            <label class="item-lbl">태그</label>
+            {{item.system.tag}}
+          </div>
+          <div class="item-desc">{{!-- 설명 textarea --}}
+            {{item.system.description}}
+          </div>
+          <div class="item-memo">
+            <label>메모</label>{{!-- 마지막줄:메모 --}}
+            {{item.system.memo}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <div class="itemtab-rightside">
+    <div class="sidebar-rtb flexcol">
+      <div class="rtb-header">
+        롤테이블
+      </div>
+      <button>롤테이블</button>
+      <button>롤테이블</button>
+      <button>롤테이블</button>
+      <button>롤테이블</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,186 @@
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+{{!--기본 크기 가로 660 정도 --}}
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <div class="header-fields">
+      <div class="grid actor-sheet-header">
+        <div class="profile-img">
+          <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="160" width="160"/>
+        </div>
+        <div class="charname">
+          <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></div>
+        <div class="actor-color">
+          속성 : {{system.color}}
+        </div>
+        <div class="parent-img">
+          <img class="parent-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120"/>
+        </div>
+        <div class="chardata job">
+          <label class="chardata-label">{{localize 'AMADEUS.label.job'}}</label>
+          <input type="checkbox" name="system.job.chkbox" {{checked system.job.chkbox}}>
+          <input type="text" name="system.chardata.job.name" value="{{system.chardata.job.name}}"/>
+        </div>
+        <div class="chardata pantheon">
+          <label class="chardata-label">{{localize 'AMADEUS.label.pantheon'}}</label>
+          <input type="text" name="system.chardata.pantheon" value="{{system.chardata.pantheon}}"/>
+        </div>
+        <div class="chardata parent-name">
+          <label class="chardata-label">{{localize 'AMADEUS.label.parent'}}</label>
+          <input type="text" name="system.chardata.parent" value="{{system.chardata.parent}}"/>
+        </div>
+        <div class="chardata">
+          <label class="chardata-label">{{localize 'AMADEUS.label.background'}}</label>
+          <input type="text" name="system.chardata.background" value="{{system.chardata.background}}"/>
+        </div>
+        <div class="chardata">
+          <label class="chardata-label">{{localize 'AMADEUS.label.prophecy'}}</label>
+          <input type="text" name="system.chardata.prophecy" value="{{system.chardata.prophecy}}"/>
+        </div>
+        <div class="chardata">
+          <label class="chardata-label">{{localize 'AMADEUS.label.relationship'}}</label>
+          <input type="text" name="system.chardata.relationship" value="{{system.chardata.relationship}}"/>
+        </div>
+        <div class="chardata">
+          <label class="chardata-label">{{localize 'AMADEUS.label.money'}}</label>
+          <input type="text" name="system.money" value="{{system.money}}" placeholder="{{system.initMoney}}"/>
+        </div>
+        <div class="chardata">
+          <label class="chardata-label">{{localize 'AMADEUS.label.level'}}</label>
+          <input type="number" name="system.level" value="{{system.level}}"/>
+        </div>
+        <div class="chardata">
+          <label class="chardata-label">{{localize 'AMADEUS.label.exp'}}</label>
+          <input type="number" name="system.exp" value="{{system.exp}}"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="grid grid-5col">
+    <section class="grid-span-1">
+      {{!-- 좌측바 --}}
+      <aside class="sidebar">
+        <div class="abilities flexcol flex-group-center">
+          {{#each system.ability as |ability key|}}
+          <div class="ability flexcol">
+            <div class="ability-label flexrow flex-group-center">
+              <label class="ability-label amade-abl-roll flexlarge"
+                     data-ability="{{key}}"
+                     data-label="{{ability.label}}">{{ability.label}}</label>
+            </div>
+            <div class="ability-value flexrow">
+              <select name="system.ability.{{key}}.rank">
+                {{#select ability.rank}}
+                {{#each ../config.rank as |number letter|}}
+                <option value="{{letter}}">{{letter}}</option>
+                {{/each}}
+                {{/select}}
+              </select>
+            </div>
+            <div class="ability-mod flexrow">
+              <select name="system.ability.{{key}}.mod">
+                {{#select ability.mod}}
+                {{#each ../config.modL as |number letter|}}
+                <option value="{{letter}}">{{letter}}</option>
+                {{/each}}
+                {{/select}}
+              </select>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+
+      </aside>
+    </section>
+
+    <section class="grid-span-4">
+
+      <div class="chardata-group-bottom">
+        <div class="left-side">{{!-- 목표치, 생명치--}}
+          <div class="dchp-grid">
+            <div class="chardata actor-dc">
+              <label>목표치</label>
+              <input type="number" name="system.dc" value="{{system.dc}}"/>
+            </div>
+            <div class="actor-dc-btn">
+              + | -
+            </div>
+            <div class="chardata actor-hp">
+              <label>생명력</label>
+              <input type="number" name="system.health" value="{{system.health}}"/>
+            </div>
+            <div class="actor-hp-max">/ 최대치 </div>
+            <div class="hp-vital flexrow flex-group-center">
+              <div class="chardata init-health">
+                <label class="wid-auto">초기치</label> {{system.initHealth}}</div>
+              <div class="chardata vitality">
+                <label>활력</label> <i class="fas fa-dice"></i>
+                <input type="number" class="min" name="system.vitality" value="{{system.vitality}}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="middle-side"></div>
+        <div class="right-side">{{!-- 상태이상--}}
+          <div class="badstatus-grid">
+            <div class="badstatus">상태이상1</div>
+            <div class="badstatus">상태이상2</div>
+            <div class="badstatus">상태이상3</div>
+            <div class="badstatus">상태이상4</div>
+            <div class="badstatus">상태이상5</div>
+            <div class="badstatus">상태이상6</div>
+          </div>
+        </div>
+      </div>
+
+
+      {{!-- Sheet Tab Navigation --}}
+      <nav class="sheet-tabs tabs" data-group="primary">
+        {{!-- Default tab is specified in actor-sheet.mjs --}}
+        <a class="item" data-tab="features">Features</a>
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="items">Items</a>
+        <a class="item" data-tab="spells">Spells</a>
+        <a class="item" data-tab="effects">Effects</a>
+      </nav>
+      {{!-- Sheet Body --}}
+      <section class="sheet-body">
+        {{!-- Owned Features Tab --}}
+        <div class="tab features" data-group="primary" data-tab="features">
+          {{> "systems/amadeus/templates/actor/parts/actor-features.html"}}
+        </div>
+
+        {{!-- Biography Tab --}}
+        <div class="tab gifts" data-group="primary" data-tab="gifts">
+          {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
+          {{> "systems/amadeus/templates/actor/parts/actor-gift.html"}}
+        </div>
+
+        {{!-- Owned Items Tab --}}
+        <div class="tab items" data-group="primary" data-tab="items">
+          <section class="items grid-span-2">
+            {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
+            {{> "systems/amadeus/templates/actor/parts/actor-items.html"}}
+          </section>
+          <section class="rolltable grid-span-1">
+
+          </section>
+        </div>
+
+        {{!-- Owned Spells Tab --}}
+        <div class="tab spells" data-group="primary" data-tab="spells">
+          {{editor system.biography target="system.biography" rollData=rollData button=true owner=owner editable=editable}}
+          {{> "systems/amadeus/templates/actor/parts/actor-spells.html"}}
+        </div>
+
+        {{!-- Active Effects Tab --}}
+        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
+          {{> "systems/amadeus/templates/actor/parts/actor-effects.html"}}
+        </div>
+
+      </section>
+    </section>
+  </section>
+</form>
+
+<!-- input은 80px정도로 float:right-->

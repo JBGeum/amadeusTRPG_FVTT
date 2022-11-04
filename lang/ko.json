@@ -1,0 +1,100 @@
+{
+  "AMADEUS": {
+    "ability" : {
+      "warfare" : "무용",
+      "technique": "기술",
+      "brain": "두뇌",
+      "spirit": "영력",
+      "love": "애정",
+      "mundane": "일상"
+    },
+    "label" : {
+      "name": "이름",
+      "age": "나이",
+      "job": "직업",
+      "pantheon": "신군",
+      "parent": "부모신",
+      "background" : "배경",
+      "prophecy": "예언",
+      "relationship": "관계",
+      "money": "소지금",
+      "color": "속성",
+      "level": "레벨",
+      "exp": "경험치",
+      "itemName": "아이템명"
+    },
+    "color" : {
+      "black": "흑",
+      "red": "적",
+      "blue": "청",
+      "green": "녹",
+      "white": "백"
+    },
+    "background": {
+      "genesis": "창세의 아이",
+      "calamity": "재앙의 아이",
+      "oracle": "인도의 아이",
+      "beast": "짐승의 아이",
+      "legend": "전설의 아이",
+      "machine": "기계의 아이",
+      "lost": "망각의 아이",
+      "changeling": "뒤바뀐 아이"
+    },
+    "pantheon": {
+      "greek": "그리스",
+      "yamato": "야마토",
+      "ezypt": "이집트",
+      "cthulhu": "크툴루",
+      "nordic": "북유럽",
+      "chinese": "중화",
+      "celtic": "켈트",
+      "indian": "인도",
+      "aztec": "메소아메리카",
+      "titan": "타이탄"
+    },
+    "dice" : {
+      "special": "스페셜",
+      "fumble": "펌블",
+      "shift": "시프트",
+      "1up": "1업",
+      "2up": "2업",
+      "1down": "1다운",
+      "drop": "드롭"
+    },
+    "item": {
+      "equip": "상비품",
+      "consume": "소비품",
+      "price": "가격",
+      "food": "식량",
+      "power": "위력",
+      "effect": "특수기능",
+      "description": "해설"
+    },
+    "gift": {
+      "spell": "술식",
+      "passive": "상주",
+      "support": "보조",
+      "type": "분류",
+      "requirement": "조건",
+      "ability": "판정",
+      "tag": "태그",
+      "descrption": "효과"
+    },
+    "spAbl": {
+      "melee": "근접",
+      "random": "변환",
+      "intercept": "유격",
+      "parry": "패리",
+      "critAtk": "필살",
+      "accuracy": "정도",
+      "stability": "안정성",
+      "armor": "장갑",
+      "antiFlight": "대공",
+      "antiDive": "대잠",
+      "spirAtk": "영격",
+      "glory": "화려",
+      "effective": "특공",
+      "relif": "경감"
+    }
+  }
+}

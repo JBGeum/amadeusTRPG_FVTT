@@ -1,0 +1,77 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    </div>
+  </header>
+
+  {{!-- Sheet Tab Navigation --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description">정보</a>
+    <a class="item" data-tab="attributes">속성</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Description Tab --}}
+    <div class="tab" data-group="primary" data-tab="description">
+      <div class="item flexcol" data-item-id="{{data._id}}">
+        <div class="gift-card flexcol"> {{!--  --}}
+          <div class="gift-title flexrow">{{!-- 첫줄: 기프트명   |버튼  --}}
+            <div class="gift-name">
+                <input type="text" name="gift.name" value="{{gift.name}}"/>
+            </div>
+          </div>
+          <div class="gift-detail grid grid-3col">{{!-- 두번째줄: 분류 | 조건 | 기능 --}}
+            <div class="gift-type grid-span-1">
+              <label class="gift-lbl">분류</label>
+              {{#select item.type}}
+              {{#each config.gift as |typename key|}}
+              <option value="{{key}}">{{typename}}</option>
+              {{/each}}
+              {{/select}}
+            </div>
+            <div class="gift-requirement grid-span-1">
+              <label class="gift-lbl">조건</label>
+              <input type="text" name="gift.requirement" value="{{gift.requirement}}"/>
+            </div>
+            <div class="gift-ability grid-span-1">
+              <label class="gift-lbl">기능</label>
+              {{#select item.action.ability}}
+              {{#each config.ability as |ablname key|}}
+              <option value="{{key}}">{{ablname}}</option>
+              {{/each}}
+              {{/select}}
+            </div>
+          </div>
+          <div class="gift-tag">{{!-- 세번째줄: 태그   --}}
+            <label class="gift-lbl">태그</label>
+            <input type="text" name="gift.tag" value="{{gift.tag}}"/>
+          </div>
+        </div>
+        <div class="gift-description">{{!-- 설명 textarea --}}
+          {{editor system.description target="system.description" rollData=rollData button=true owner=owner editable=editable}}
+
+        </div>
+        <div class="gift-memo">
+          <label>메모</label>{{!-- 마지막줄:메모 --}}
+          <input type="text" name="gift.memo" value="{{gift.memo}}"/>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    {{!-- 굴림용 수정탭 --}}
+    <div class="tab attributes" data-group="primary" data-tab="attributes">
+      {{!-- As you add new fields, add them in here! --}}
+      <div class="resource">
+        <label class="resource-label">Spell Level</label>
+        <input type="text" name="system.spellLevel" value="{{system.spellLevel}}" data-dtype="Number"/>
+      </div>
+    </div>
+  </section>
+</form>

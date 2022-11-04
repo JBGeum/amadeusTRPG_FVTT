@@ -1,0 +1,61 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <div class="gift-sheet">
+    <header class="sheet-header">
+      <div class="item gift-sheet-header" data-item-id="{{data._id}}">
+        <div class="gift-sheet-name flex-center">
+          <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+          <div class="gift-sheet-chkbox {{#if item.isOwned}}active{{else}}hidden{{/if}}">
+            <input type="checkbox" name="system.chkbox" {{#if system.chkbox}} checked {{/if}}>
+          </div>
+        </div>
+        <div class="gift-sheet-type">
+          <label class="gift-lbl">분류</label>
+          <select name="system.type">
+            {{#select system.type}}
+            {{#each label.type as |typename key|}}
+            <option value="{{key}}">{{typename}}</option>
+            {{/each}}
+            {{/select}}
+          </select>
+        </div>
+        <div class="gift-requirement">
+          <label class="gift-lbl">조건</label>
+          <input type="text" name="system.requirement" value="{{system.requirement}}"/>
+        </div>
+        <div class="gift-ability">
+          <label class="gift-lbl">기능</label>
+          <select name="system.action.ability">
+            {{#select system.action.ability}}
+            <option value=""> - </option>
+            {{#each label.abl as |ablname key|}}
+            <option value="{{key}}">{{ablname}}</option>
+            {{/each}}
+            {{/select}}
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <section class="sheet-body">
+      <div class="item gift-sheet-body" data-item-id="{{data._id}}">
+        <div class="gift-description">{{!-- 설명 textarea --}}
+          {{editor system.description target="system.description" button=true editable=editable}}
+        </div>
+        <div class="gift-tag">
+          <label class="gift-lbl">태그</label>
+          <input type="text" name="system.tag" value="{{system.tag}}"/>
+        </div>
+        <div class="gift-effect">
+          <label>효과</label>{{!-- 마지막줄:효과 --}}
+          <textarea class="gift-effect" data-path="system.effect">{{gift.system.effect}}</textarea>
+        </div>
+        {{#if item.isOwned}}
+        <div class="gift-memo">
+          <label>메모</label>{{!-- 마지막줄:메모 --}}
+          <input type="text" name="system.memo" value="{{system.memo}}"/>
+        </div>
+        {{/if}}
+      </div>
+    </section>
+  </div>
+</form>

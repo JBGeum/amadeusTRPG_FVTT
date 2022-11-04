@@ -1,0 +1,33 @@
+{
+  "id": "amadeus",
+  "title": "Amadeus",
+  "description": "아마데우스 TRPG",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.287"
+  },
+  "authors": [{
+    "name": "Sch"
+  }],
+  "esmodules": ["module/amadeus.mjs"],
+  "styles": ["css/amadeus.css"],
+  "scripts": [],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "ko",
+      "name": "Korean",
+      "path": "lang/ko.json"
+    }
+  ],
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "power",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "LICENSE.txt",
+  "changelog": "CHANGELOG.md"
+}
