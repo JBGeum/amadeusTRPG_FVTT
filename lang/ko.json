@@ -77,9 +77,10 @@
       "support": "보조",
       "type": "분류",
       "requirement": "조건",
-      "ability": "판정",
+      "roll": "판정",
       "tag": "태그",
-      "descrption": "효과"
+      "effect": "효과",
+      "description": "해설"
     },
     "spAbl": {
       "melee": "근접",

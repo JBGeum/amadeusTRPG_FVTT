@@ -323,7 +323,7 @@
 
 /* line 66, G:/swb/amadeus/scss/components/_forms.scss */
 .amadeus .tox .tox-edit-area {
-  padding: 0 8px;
+  padding: 0px;
 }
 
 /* line 1, G:/swb/amadeus/scss/components/_resource.scss */
@@ -725,20 +725,20 @@ div.itemtab-grid{
   grid-template-columns: 3fr 1fr;
 }
 
-div.item-grid{
+div.item-card{
   display: grid;
   grid-gap: 1px;
   padding: 2px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
           "item-name item-type item-damage item-control"
-          "item-desc item-desc item-desc item-desc";
+          "item-effect item-effect item-effect item-effect";
 }
 .item-grid div.item-name{grid-area:item-name;}
 .item-grid div.item-type{grid-area:item-type;}
 .item-grid div.item-damage{grid-area:item-damage;}
 .item-grid div.item-control{grid-area:item-control;}
-.item-grid div.item-desc{grid-area:item-desc;}
+.item-grid div.item-effect{grid-area:item-effect;}
 
 .item-sheet-header{
   display: grid;
@@ -797,6 +797,9 @@ a.editor-edit {
 }
 .editor {
   height: 100%;
+}
+.editor-content {
+  padding-top: 25px;
 }
 
 /*# sourceMappingURL=amadeus.css.map */
