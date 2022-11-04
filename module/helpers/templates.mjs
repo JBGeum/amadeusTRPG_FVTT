@@ -29,7 +29,11 @@ export function registerHandlebarsHelpers(){
     });
 
     Handlebars.registerHelper("successCheck", function (die,modVal,rollDC) {
-        return (die+modVal>=rollDC) ? "성공" : "실패";
+        if(die == 1) return "펌블";
+        else if(die == 6) return "스페셜";
+        else if (die+modVal>=rollDC) return "성공";
+        else if((die+modVal<rollDC)) return "실패";
+        else return "?";
     });
 
     Handlebars.registerHelper("formatModVal", function (modVal) {

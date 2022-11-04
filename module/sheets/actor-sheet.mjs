@@ -188,6 +188,7 @@ export class AmadeusActorSheet extends ActorSheet {
     html.find('.item-chk').click(this._updateItemChk.bind(this));
 
     html.find('.open-gift').click(this._onOpenGiftMenu.bind(this));
+    html.find('.open-item').click(this._onOpenItemMenu.bind(this));
     html.find('.gift-memo').change(this._upDateItemMemo.bind(this));
     html.find('.gift-formula').change(this._upDateItemMemo.bind(this));
 
@@ -196,11 +197,20 @@ export class AmadeusActorSheet extends ActorSheet {
     event.preventDefault()
     const element = event.currentTarget;
     var hidden = $(element).closest('.gift-card').children('.gift-hidden');
-    hidden.toggleClass('active');
-    if(hidden.hasClass('active')) hidden.css("display", "block");
-    else hidden.css("display", "none");
+    hidden.toggleClass('content-visible');
+    hidden.toggleClass('content-hidden');
+    if(hidden.hasClass('content-visible')) hidden.css("display", "block");
+    else if (hidden.hasClass('content-hidden'))  hidden.css("display", "none");
   };
-
+  _onOpenItemMenu(event){
+    event.preventDefault()
+    const element = event.currentTarget;
+    var hidden = $(element).closest('.item').children('.item-hidden');
+    hidden.toggleClass('content-visible');
+    hidden.toggleClass('content-hidden');
+    if(hidden.hasClass('content-visible')) hidden.css("display", "block");
+    else if (hidden.hasClass('content-hidden'))  hidden.css("display", "none");
+  };
 
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset

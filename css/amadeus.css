@@ -497,6 +497,18 @@
   align-items: center;
   text-align: center;
 }
+.text-right{
+  text-align:right;
+}
+.jf-space-around{
+  justify-content: space-around;
+}
+.jf-left{
+  justify-content: flex-start;
+}
+.margin-left{
+  margin-left:auto;
+}
 .vertical-center{
   display:flex;
   align-items: center;
@@ -565,8 +577,8 @@ img.parent-img{
   display: grid;
   grid-gap: 1px;
   margin: 0 10px;
-  grid-template-columns: 2fr 10px 3fr;
-  grid-template-areas: "left-side middle-side right-side";
+  grid-template-columns: 2fr 10px 3fr 2fr;
+  grid-template-areas: "left-side middle-side right-side memo-side";
 }
 .dchp-grid > div {
   display: flex;
@@ -577,7 +589,8 @@ img.parent-img{
 }
 .chardata-group-bottom > .left-side{grid-area:left-side;}
 .chardata-group-bottom > .right-side{grid-area:right-side;height:inherit;}
-.chardata-group-bottom > .middle-side{}
+.chardata-group-bottom > .middle-side{grid-area:middle-side;}
+.chardata-group-bottom > .memo-side{grid-area:memo-side; border:1px solid #999;}
 .chardata-group-bottom .dchp-grid{
   display: grid;
   grid-gap: 1px;
@@ -646,23 +659,28 @@ div.gift-card{
   padding: 5px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
-          "gift-name gift-name gift-control"
+          "gift-name gift-name gift-controls"
           "gift-type gift-requirement gift-roll"
           "gift-hidden gift-hidden gift-hidden";
   border: 2px solid #999;
+  align-items: center;
+  grid-template-rows: 30px 30px auto;
 }
 .gift-card div.gift-name{grid-area:gift-name;}
-.gift-card div.gift-control{grid-area:gift-control;}
+.gift-card div.gift-controls{grid-area:gift-controls;}
 .gift-card div.gift-type{grid-area:gift-type;}
 .gift-card div.gift-requirement{grid-area:gift-requirement;}
 .gift-card div.roll{grid-area:gift-roll;}
 .gift-card div.gift-hidden{grid-area:gift-hidden;}
-.gift-card > div{margin: 2px;}
 
 
-.active {display:block;}
-.gift-hidden {display:none;}
 
+.content-visible {display:block;}
+.content-hidden {display:none;}
+.gift-hidden {display:none }
+.gift-controls{ display: flex;  align-items: center;  text-align: right;}
+.gift-card >div{margin: 2px;}
+.gift-card i{margin: 0 0.2rem;}
 
 .gift-sheet-header{
   display: grid;
@@ -718,6 +736,10 @@ div.gift-card{
   width:calc(80% - 2px);
 }
 
+.item.gear {
+  width: 90%;
+}
+
 div.itemtab-grid{
   display: grid;
   grid-gap: 15px;
@@ -730,16 +752,13 @@ div.item-card{
   grid-gap: 1px;
   padding: 2px;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-areas:
-          "item-name item-type item-damage item-control"
-          "item-effect item-effect item-effect item-effect";
+  height:40px;
+  border:1px solid #999;
 }
-.item-grid div.item-name{grid-area:item-name;}
-.item-grid div.item-type{grid-area:item-type;}
-.item-grid div.item-damage{grid-area:item-damage;}
-.item-grid div.item-control{grid-area:item-control;}
-.item-grid div.item-effect{grid-area:item-effect;}
 
+.item-card > div{margin: 2px; display:flex; align-items:center; justify-content: center;}
+.item-card i{margin: 0 0.2rem;}
+.food-quantity input{width:2rem;}
 .item-sheet-header{
   display: grid;
   grid-gap: 1px;
@@ -791,6 +810,10 @@ div.item-card{
   border-radius: 10px;
   padding:10px;
 }
+i.item-chk{ float:right; margin-right:5px;}
+/*.open-item{ float:right; margin-right:5px;}*/
+/*margin-left: auto;*/
+
 
 a.editor-edit {
   display:block;
