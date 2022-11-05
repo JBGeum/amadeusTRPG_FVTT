@@ -1,22 +1,26 @@
-<div class='amade-dicecard text-align'>
-    <div class='roll-title'>
-        <h3>{{label}} ({{ablLabel}}판정)</h3>
-        <div class='rankMod flexrow'>
-            <div class='rank-label'>{{rank}}</div>
-            <div class='mod-label'>{{mod}}</div>
-        </div>
+<div class="chatcard amade-dicecard">
+  <div class="roll-gift-chatcard">
+    <div class="roll-title">
+      <div class="chatcard-gift-name flex-center">{{label}}</div>
+      <div class="rankMod flexrow flex-group-center">
+        <div class="roll-dc">
+          <label class="roll-dc-lbl">목표치</label>
+          {{rollDC}}</div>
+        <div class="rank-label">{{rank}}</div>
+        <div class="mod-label">{{mod}}</div>
+      </div>
     </div>
-    <div class='roll-dc'>목표치: {{rollDC}}</div>
-    <div class='diceset-area flexrow align-center'>
-        {{#each resultDiceset}}
-        <div class='die-result flexcol'>
-            <div class='die-area'>
-                <div class='amade-d6 dNum-{{this}}'>{{this}}</div>
-            </div>
-            <div class='modval-format'>{{formatModVal ../modVal}}</div>
-            {{successCheck this ../modVal ../rollDC}}
-            <div class='roll-result-text'>{{resultText}}</div>
+    <div class="diceset-area flexrow flex-group-center">
+      {{#each resultDiceset}}
+      <div class="die-result flexcol">
+        <div class="die-area">
+          <i class="amade-d6 dNum-{{this}} fa-duotone fa-squeare-{{this}}"></i>
         </div>
-        {{/each}}
+        <div class="modval-format">{{formatModVal ../modVal}}</div>
+        {{successCheck this ../modVal ../rollDC}}
+        <div class="roll-result-text">{{resultText}}</div>
+      </div>
+      {{/each}}
     </div>
+  </div>
 </div>

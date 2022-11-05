@@ -2,7 +2,7 @@
   <div class="itemtab-leftside">
     <div class="item gear" data-item-id="{{item._id}}">
       <div class="item food">
-        <div class="item-card">
+        <div class="grid item-card">
           <div class="item-name jf-left">
             <i class="fas fa-utensils"></i><a class="item-datacard item-name">{{localize 'AMADEUS.item.food'}}</a>
           </div>
@@ -27,10 +27,10 @@
     </div>
   {{#each inventory as |item key|}}
     <div class="item gear" data-item-id="{{item._id}}">
-      <div class="item-card">
+      <div class="grid item-card">
         <div class="item-name jf-left">
           <i class="{{#if item.system.action.roll}} item-rollcard fas fa-dice {{else}} item-notroll fas fa-square {{/if}}"
-             data-ability="{{item.system.action.roll}}"></i>
+            data-ability="{{item.system.action.roll}}"></i>
           <a class="item-datacard item-name">{{item.name}}</a>
         </div>
 

@@ -1,5 +1,47 @@
 // Grid.
-.grid,
+.grid{
+  display: grid;
+  grid-gap: 1px;
+  padding: 2px;
+}
+
+
+.gift-chatcard-top{
+  margin: 0 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(2, 30px);
+}
+.gift-chatcard-top>div{
+  display:flex;justify-content:center;align-items:center;/*fcc*/
+  border:1px solid #999;}
+.gift-name{
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 1;
+}
+.gift-chatcard-bottom{
+  display: grid;
+  grid-gap: 1px;
+  margin: 10px 10px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 30px;
+}
+.gift-chatcard-bottom>div{border:1px solid #999;}
+.gift-effect{
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 1;
+  padding:10px;
+}
+.chatcard label{
+  margin: 0 10px;
+}
+
+
+
+
+
+
+
+
 .grid-2col {
   display: grid;
   grid-column: span 2 / span 2;
@@ -59,6 +101,11 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
+.grid-14col {
+  grid-column: span 14 / span 14;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+}
+
 // Grid offset.
 .grid-start-2 { grid-column-start: 2 }
 .grid-start-3 { grid-column-start: 3 }
@@ -83,5 +130,3 @@
 .grid-span-10 { grid-column-end: span 10 }
 .grid-span-11 { grid-column-end: span 11 }
 .grid-span-12 { grid-column-end: span 12 }
-
-

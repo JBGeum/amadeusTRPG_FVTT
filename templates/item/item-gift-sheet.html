@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
   <div class="gift-sheet">
     <header class="sheet-header">
-      <div class="item gift-sheet-header" data-item-id="{{data._id}}">
+      <div class="item grid gift-sheet-header" data-item-id="{{data._id}}">
         <div class="gift-sheet-name flex-center">
           <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
           <div class="gift-sheet-chkbox {{#if item.isOwned}}content-visible{{else}}content-hidden{{/if}}">

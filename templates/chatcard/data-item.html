@@ -1,16 +1,12 @@
-<div class='gift-chatcard flexcol'>
-    <div class='gift-name'>{{name}}</div>
-    <div class='gift-detail grid grid-3col'>
-        <div class='gift-type grid-span-1'>
-            {{type}}</div>
-        <div class='gift-requirement grid-span-1'>
-            {{requirement}}</div>
-        <div class='gift-ability grid-span-1'>
-            <a class='gift-abl-roll'>
-                {{roll}}
-            </a>
-        </div>
+<div class='chatcard gift-chatcard'>
+    <div class='data-item-chatcard-top'>
+        <div class='item-name'>{{name}}</div>
+        <div class='item-type'>{{localize type}}</div>
+        <div class='item-price'>{{price}}</div>
+        <div class='item-power'>{{power}}</div>
     </div>
-    <div class='gift-effect'>{{effect}}</div>
-    <div class='gift-tag'>{{tag}}</div>
+    <div class='item-chatcard-bottom'>
+        <div class='item-effect'>{{effect}}</div>
+        <div class='item-description'>{{description}}</div>
+    </div>
 </div>
