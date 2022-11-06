@@ -51,6 +51,8 @@
       "chardata" : {
         "pantheon": "",
         "parent": "",
+        "parentkey": "",
+        "parentimg": "",
         "background": "",
         "prophecy": "",
         "relationship": ""
@@ -122,6 +124,7 @@
       "color": "",
       "weapon": "",
       "authority": "",
+      "portrait": "",
       "ability": {
         "warfare" : {"rank": "","mod" : " "},
         "technique" : {"rank": "","mod" : " "},

@@ -57,6 +57,14 @@
       </div>
       <div class="parent-sheet-description">
         {{editor parent.description target="parent.description" button=true editable=editable}}
+        <div class="parent-portrait">
+          <img class="parent-portrait"
+               src="{{system.portrait}}" data-edit="system.portrait" height="120" width="120"/>
+        </div>
+        <div class="parent-image">
+          <img class="parent-image"
+               src="{{item.img}}" data-edit="img" height="120" width="120"/>
+        </div>
       </div>
     </div>
   </div>

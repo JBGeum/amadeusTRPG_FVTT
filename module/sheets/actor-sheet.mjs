@@ -128,6 +128,50 @@ export class AmadeusActorSheet extends ActorSheet {
 
   }
 
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onDropItem(event, data) {
+    if ( !this.actor.isOwner ) return false;
+    const item = await Item.implementation.fromDropData(data);
+    const itemData = item.toObject();
+
+    //schmm 수정구간
+    if(item.type === 'parent'){
+      for(let [k, v] of this.actor.items.entries()){
+        if(v.type ==='parent') this.actor.items.delete(k);
+        } //이전 부모신 데이터 삭제
+      this.actor.update({
+        'system.chardata.parent' : item.name,
+        'system.chardata.pantheon' : item.system.pantheon,
+        'system.chardata.parentkey' : item._id,
+        'system.chardata.parentimg' : item.system.portrait,
+        'system.ability.warfare.rank' : item.system.ability.warfare.rank,
+        'system.ability.warfare.mod' : item.system.ability.warfare.mod,
+        'system.ability.technique.rank' : item.system.ability.technique,
+        'system.ability.technique.mod' : item.system.ability.technique.mod,
+        'system.ability.brain.rank' : item.system.ability.brain.rank,
+        'system.ability.brain.mod' : item.system.ability.brain.mod,
+        'system.ability.spirit.rank' : item.system.ability.spirit.rank,
+        'system.ability.spirit.mod' : item.system.ability.spirit.mod,
+        'system.ability.love.rank' : item.system.ability.love.rank,
+        'system.ability.love.mod' : item.system.ability.love.mod,
+        'system.ability.mundane.rank' : item.system.ability.mundane.rank,
+        'system.ability.mundane.mod' : item.system.ability.mundane.mod,
+      });
+      }
+
+    // Handle item sorting within the same Actor
+    if ( this.actor.uuid === item.parent?.uuid ) return this._onSortItem(event, itemData);
+
+    // Create the owned item
+    return this._onDropItemCreate(itemData);
+  }
+
+  /* -------------------------------------------- */
+
+
   /* -------------------------------------------- */
 
   /** @override */
