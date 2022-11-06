@@ -82,11 +82,8 @@ export class AmadeusItem extends Item {
     //타입별로 챗 카드 처리
     if (this.type === "gift") {
       content = await this.getGiftChatCard(this);
-    } else if (this.type = "weapon") {
-      ChatMessage.create({
-        speaker: speaker,
-        content: ""
-      });
+    } else if (this.type === "weapon") {
+      content = await this.getItemChatCard(this);
     } else if (this.type === "gear") {
       content = await this.getItemChatCard(this);
     } else if (this.type === "background") {
@@ -100,8 +97,8 @@ export class AmadeusItem extends Item {
   }
 
 
-  async getGiftChatCard(gift) {
-    const system = gift.system;
+  async getGiftChatCard(item) {
+    const system = item.system;
     const templateData = {
       name: this.name,
       type: game.i18n.localize(system.type),
@@ -110,7 +107,7 @@ export class AmadeusItem extends Item {
       tag: system.tag,
       effect: system.effect
     };
-    let content = await renderTemplate("systems/amadeus/templates/chatcard/data-item.html", templateData)
+    let content = await renderTemplate("systems/amadeus/templates/chatcard/data-gift.html", templateData)
     return content;
   }
 
@@ -119,10 +116,10 @@ export class AmadeusItem extends Item {
     const templateData = {
       name: this.name,
       type: game.i18n.localize(system.type),
-      requirement: system.requirement,
-      roll: game.i18n.localize(system.action.roll),
-      tag: system.tag,
-      effect: system.effect
+      price: system.price,
+      power: system.power,
+      effect: system.effect,
+      description: system.description
     };
     let content = await renderTemplate("systems/amadeus/templates/chatcard/data-item.html", templateData)
     return content;

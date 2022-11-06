@@ -21,7 +21,8 @@
       "color": "속성",
       "level": "레벨",
       "exp": "경험치",
-      "itemName": "아이템명"
+      "itemName": "아이템명",
+      "countunit": "개"
     },
     "color" : {
       "black": "흑",
@@ -66,7 +67,8 @@
       "consume": "소비품",
       "price": "가격",
       "type": "분류",
-      "food": "식량",
+      "food": "식료",
+      "foodeffect": "휴식 시, 식사를 해서 자신의 【생명력】을 1점 회복할 수 있습니다.",
       "power": "위력",
       "effect": "특수기능",
       "description": "해설"

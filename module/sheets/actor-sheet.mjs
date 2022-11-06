@@ -285,9 +285,15 @@ export class AmadeusActorSheet extends ActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
     const itemId = element.closest('.item').dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    if (item) return item.getItemDataCard();
+    if(element.closest('.item').dataset.special === 'food'){
+      const food = game.items.get(itemId);
+      if (food) return food.getItemDataCard();
+    } else {
+      const item = this.actor.items.get(itemId);
+      if (item) return item.getItemDataCard();
+    }
   }
+
   _onItemRollCard(event){
     event.preventDefault();
     const element = event.currentTarget;

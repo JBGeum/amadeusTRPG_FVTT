@@ -110,12 +110,12 @@
       "check" : false,
       "name" : "",
       "truth" : false,
-      "level" : 0,
+      "score" : 0,
       "relationship" : ""
     },
     "supporter" : {
       "check" : false,
-      "level" : 0,
+      "score" : 0,
       "relationship" : ""
     },
     "weapon": {

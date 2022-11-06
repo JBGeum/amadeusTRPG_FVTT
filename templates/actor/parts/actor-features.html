@@ -1,72 +1,48 @@
-<div class="itemtab-grid">
-  <div class="itemtab-leftside">
-    <div class="item gear" data-item-id="{{item._id}}">
-      <div class="item food">
-        <div class="grid item-card">
-          <div class="item-name jf-left">
-            <i class="fas fa-utensils"></i><a class="item-datacard item-name">{{localize 'AMADEUS.item.food'}}</a>
-          </div>
-          <div class="food-quantity">
-            <input type="number" name="system.food" value="{{system.food}}" data-type="Number" /> 개
-          </div>
-
-          <div class="item-damage">
-            1D6
-          </div>
-
-          <div class="item-controls">
-
-          </div>
+<div class="bond-grid">
+    <div class="bond-header">
+      인물
+    </div>
+    <div class="bond-top">
+    {{#each bonds as |bond key|}}
+    <div class="item bond" data-item-id="{{bond._id}}">
+      <div class="grid bond-card">
+        <div class="bond-name">
+          <input type="checkbox" />
+          {{bond.system.name}}
         </div>
-        <div class="item-hidden content-hidden">
-          <div class="item-effect">
-            휴식 시, 식사를 해서 자신의 【생명력】을 1점 회복할 수 있습니다.
-          </div>
+        <div class="bond-truth">
+          <input type="checkbox" />
+        </div>
+        <div class="bond-score">
+          {{bond.system.score}}
+        </div>
+        <div class="bond-relationship">
+          {{bond.system.relationship}}
         </div>
       </div>
     </div>
-  {{#each inventory as |item key|}}
-    <div class="item gear" data-item-id="{{item._id}}">
-      <div class="grid item-card">
-        <div class="item-name jf-left">
-          <i class="{{#if item.system.action.roll}} item-rollcard fas fa-dice {{else}} item-notroll fas fa-square {{/if}}"
-            data-ability="{{item.system.action.roll}}"></i>
-          <a class="item-datacard item-name">{{item.name}}</a>
+    {{/each}}
+  </div>
+  <div class="supporter-header">
+    협력자
+  </div>
+  <div class="bond-bottom">
+    {{#each supporters as |supporter key|}}
+    <div class="item supporter" data-itme-id="{{supporter._id}}">
+      <div class="grid supporter-card">
+        <div class="supporter-name">
+          <input type="checkbox" />
+          {{supporter.system.name}}
         </div>
-
-        <div class="item-type">{{!-- 두번째줄: 분류 | 조건 | 기능 --}}
-          {{localize @item.system.type}}
+        <div class="supporter-score">
+          {{supporter.system.score}}
         </div>
-
-        <div class="item-damage">
-          {{item.system.action.damage}}
-        </div>
-
-        <div class="item-controls">
-          <i class="fas fa-caret-down open-item"></i>
-          <a class="item-control item-edit" title="수정"><i class="fas fa-edit"></i></a>
-          <a class="item-control item-delete" title="삭제"><i class="fas fa-trash"></i></a>
-        </div>
-      </div>
-      <div class="item-hidden content-hidden">
-        <div class="item-effect">
-          {{{item.system.effect}}}
+        <div class="supporter-relationship">
+          {{supporter.system.relationship}}
         </div>
       </div>
     </div>
     {{/each}}
   </div>
 
-
-  <div class="itemtab-rightside">
-    <div class="sidebar-rtb flexcol">
-      <div class="rtb-header">
-        롤테이블
-      </div>
-      <button>롤테이블</button>
-      <button>롤테이블</button>
-      <button>롤테이블</button>
-      <button>롤테이블</button>
-    </div>
-  </div>
 </div>
