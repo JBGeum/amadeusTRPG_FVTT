@@ -17,7 +17,8 @@
         </div>
         <div class="chardata job">
           <label class="chardata-label">{{localize 'AMADEUS.label.job'}}</label>
-          <input type="checkbox" name="system.job.chkbox" {{checked system.job.chkbox}}>
+          <input type="checkbox" class="pathos" id="system.job.chkbox" name="system.job.chkbox" {{checked system.job.chkbox}}>
+          <label for="system.job.chkbox" class="pathos {{#if system.job.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
           <input type="text" name="system.chardata.job.name" value="{{system.chardata.job.name}}"/>
         </div>
         <div class="chardata pantheon">
@@ -138,17 +139,21 @@
       {{!-- Sheet Tab Navigation --}}
       <nav class="sheet-tabs tabs" data-group="primary">
         {{!-- Default tab is specified in actor-sheet.mjs --}}
-        <a class="item" data-tab="features">Features</a>
+        <a class="item" data-tab="features">features</a>
+        <a class="item" data-tab="item">item</a>
         <a class="item" data-tab="gift">gift</a>
-        <a class="item" data-tab="item">Item</a>
+        <a class="item" data-tab="bond">bond</a>
         <a class="item" data-tab="spells">Spells</a>
-        <a class="item" data-tab="effects">Effects</a>
       </nav>
       {{!-- Sheet Body --}}
       <section class="sheet-body">
-        {{!-- Owned Features Tab --}}
-        <div class="tab features" data-group="primary" data-tab="features">
+        <div class="tab effects flexcol" data-group="primary" data-tab="features">
           {{> "systems/amadeus/templates/actor/parts/actor-features.html"}}
+        </div>
+        
+        {{!-- Owned Features Tab --}}
+        <div class="tab item" data-group="primary" data-tab="item">
+          {{> "systems/amadeus/templates/actor/parts/actor-item.html"}}
         </div>
 
         {{!-- Biography Tab --}}
@@ -158,14 +163,8 @@
         </div>
 
         {{!-- Owned Items Tab --}}
-        <div class="tab item" data-group="primary" data-tab="item">
-          <section class="items grid-span-2">
-            {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
-            {{> "systems/amadeus/templates/actor/parts/actor-item.html"}}
-          </section>
-          <section class="rolltable grid-span-1">
-
-          </section>
+        <div class="tab bond" data-group="primary" data-tab="bond">
+            {{> "systems/amadeus/templates/actor/parts/actor-bond.html"}}
         </div>
 
         {{!-- Owned Spells Tab --}}

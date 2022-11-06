@@ -14,7 +14,7 @@ export class AmadeusActorSheet extends ActorSheet {
       classes: ["amadeus", "sheet", "actor"],
       template: "systems/amadeus/templates/actor/actor-sheet.html",
       width: 800,
-      height: 800,
+      height: 900,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
     });
   }
@@ -96,8 +96,6 @@ export class AmadeusActorSheet extends ActorSheet {
     const gifts = [];
     const background = [];
     const parent = [];
-    const bond = [];
-    const supporter = [];
     const inventory = [];
 
 
@@ -117,8 +115,6 @@ export class AmadeusActorSheet extends ActorSheet {
         gifts.push(i);}
       else if (i.type === 'background') {background.push(i);}
       else if (i.type === 'parent') {parent.push(i);}
-      else if (i.type === 'bond') {bond.push(i);}
-      else if (i.type === 'supporter') {supporter.push(i);}
       else if (i.type === 'weapon') {inventory.push(i);}
       else if (i.type === 'gear') {inventory.push(i);}
       }
@@ -127,8 +123,6 @@ export class AmadeusActorSheet extends ActorSheet {
     context.gifts = gifts;
     context.background = background;
     context.parent = parent;
-    context.bond = bond;
-    context.supporter = supporter;
     context.inventory = inventory;
 
 

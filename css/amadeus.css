@@ -519,6 +519,33 @@
   align-items: center;
 }
 
+
+
+/* 아이콘  */
+.amadeus i {
+  font-size: 1.2rem;
+}
+
+/*파토스 체크박스*/
+
+label.pathos{
+  margin:0 0.5rem;
+  width:20px;
+  height:20px;
+}
+
+label.pathos-on{
+  content: url('../icons/pathos-on.svg');
+  filter: invert(8%) sepia(90%) saturate(3003%) hue-rotate(345deg) brightness(108%) contrast(94%);
+}
+label.pathos-off{
+  content: url('../icons/pathos-off.svg');
+}
+
+input.pathos{
+  display:none;
+}
+
 .actor-sheet-header{
   margin: 0 10px;
   grid-template-columns: 170px 120px repeat(3, 1fr);
@@ -860,20 +887,66 @@ i.amade-d6{font-size: 40px}
   grid-template-columns: 3fr 40px 60px 2fr;
   grid-template-rows:minmax(30px,auto);
 }
-.bond-card >div{
+
+.bond-card > div{
+  display:flex;
+  align-items: center;
+  padding:2px;
   border:1px solid #999;
-  line-height:30px;
 }
+.bond-card .bond-name input{
+  width:calc(80%);
+}
+.bond-card .bond-name input[type="checkbox"]{
+  width:20px;
+}
+
+
 .supporter-card{
-  grid-template-columns: 3fr 40px 60px 2fr;
+  grid-template-columns:3fr+40px 60px 2fr;
   grid-template-rows:minmax(30px,auto);
+
 }
 .supporter-card .supporter-name{
   grid-column:1 / span 2;
-  grid-row:1 / span 1;
 }
-.supporter-card>div{
+.supporter-card > div{
+  display:flex;
+  align-items: center;
+  padding:2px;
   border:1px solid #999;
-  line-height:30px;
+}
+.supporter-card .supporter-name input{
+  width:calc(80%);
+}
+.supporter-card .supporter-name input[type="checkbox"]{
+  width:20px;
+}
+
+/*부모신시트*/
+
+.parent-sheet-body{
+  grid-template-columns: 1fr 2fr 2fr;
+}
+.parent-sheet-name{
+  grid-column : 1 / span 3;
+  grid-row : 1/ span 1;
+}
+.parent-sheet-authority{
+  grid-column : 1 / span 3;
+  grid-row: 3 / span 1;
+}
+.parent-sheet-ability-grid{
+  grid-column: 1 / span 3;
+  grid-row: 4 / span 1;
+  grid-template-columns: repeat(6, 1fr);
+}
+.parent-sheet-description{
+  grid-column:1 / span 3;
+  grid-row: 5 / span 1;
+}
+
+.parent-sheet input{
+  width:70%;
 }
 /*# sourceMappingURL=amadeus.css.map */

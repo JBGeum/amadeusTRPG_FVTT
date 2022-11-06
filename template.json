@@ -3,7 +3,20 @@
     "types": [
       "character",
       "monster"],
-    "htmlFields": ["biography"],
+    "templates": {
+      "bond": {
+          "chkbox" : false,
+          "name" : "",
+          "truth" : false,
+          "score" : 0,
+          "relationship" : ""
+      },
+      "supporter": {
+          "chkbox" : false,
+          "score" : 0,
+          "relationship" : ""
+      }
+    },
     "character": {
       "biography": "",
       "health": 0,
@@ -49,13 +62,13 @@
         "desperation": false,
         "fury": false,
         "coward": {
-          "check": false,
+          "chkbox": false,
           "level" : 0
         },
         "depravity": false,
         "disgrace": false,
         "wound": {
-          "check": false,
+          "chkbox": false,
           "level" : 0
         }
       },
@@ -66,13 +79,25 @@
       "color": "",
       "memo": "메모",
       "attributes": {},
-      "groups": {}
+      "groups": {},
+      "bonds": {
+        "bond1" : {"index":0, "chkbox" : false,"name" : "","truth" : false, "score" : 0, "relationship" : ""},
+        "bond2" : {"index":1, "chkbox" : false,"name" : "","truth" : false, "score" : 0, "relationship" : ""},
+        "bond3" : {"index":2, "chkbox" : false,"name" : "","truth" : false, "score" : 0, "relationship" : ""},
+        "bond4" : {"index":3, "chkbox" : false,"name" : "","truth" : false, "score" : 0, "relationship" : ""},
+        "bond5" : {"index":4, "chkbox" : false,"name" : "","truth" : false, "score" : 0, "relationship" : ""}
+      },
+      "supporters": {
+        "supporter1" : {"index":0, "chkbox" : false, "score" : 0, "relationship" : ""},
+        "supporter2" : {"index":1, "chkbox" : false, "score" : 0, "relationship" : ""},
+        "supporter3" : {"index":2, "chkbox" : false, "score" : 0, "relationship" : ""},
+        "supporter4" : {"index":3, "chkbox" : false, "score" : 0, "relationship" : ""}
+      }
     },
     "monster": {}
   },
   "Item": {
-    "types": ["gift","background","parent","bond","supporter","weapon","gear"],
-    "htmlFields": ["description"],
+    "types": ["gift","background","parent","weapon","gear","memory","treasure"],
     "gift": {
       "chkbox": false,
       "type": "",
@@ -104,19 +129,8 @@
         "spirit" : {"rank": "","mod" : " "},
         "love" : {"rank": "","mod" : " "},
         "mundane" : {"rank": "","mod" : " "}
-      }
-    },
-    "bond": {
-      "check" : false,
-      "name" : "",
-      "truth" : false,
-      "score" : 0,
-      "relationship" : ""
-    },
-    "supporter" : {
-      "check" : false,
-      "score" : 0,
-      "relationship" : ""
+      },
+      "description": ""
     },
     "weapon": {
       "name": "",
@@ -128,7 +142,7 @@
         "spAbl": {}
       },
       "effect": ".",
-      "description": ""
+      "description": "."
     },
     "gear": {
       "name": "",
@@ -139,9 +153,17 @@
         "damage": "",
         "spAbl": {}
       },
-      "spAbl": {},
       "effect": ".",
       "description": "."
+    },
+    "memory": {
+      "date": "",
+      "island": "",
+      "mission": "",
+      "completed": false
+    },
+    "treasure" : {
+      "description" : "."
     }
   }
 }

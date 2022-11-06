@@ -88,8 +88,6 @@ export class AmadeusItem extends Item {
       content = await this.getItemChatCard(this);
     } else if (this.type === "background") {
     } else if (this.type === "parent") {
-    } else if (this.type === "bond") {
-    } else if (this.type === "parent") {
     }
     if (content) {
       ChatMessage.create({content, speaker: ChatMessage.getSpeaker({alias: game.user.name}), type: 3});

@@ -1,0 +1,63 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <div class="parent-sheet">
+    <div class="item grid parent-sheet-body" data-item-id="{{data._id}}">
+      <div class="parent-sheet-name flex-center">
+        <input type="text" name="name" value="{{item.name}}" placeholder="Name"/>
+      </div>
+      <div class="parent-sheet-color">
+        <label class="item-lbl">{{localize 'AMADEUS.label.color'}}</label>
+        <select name="system.color">
+          {{#select system.color}}
+          {{#each config.color as |value key|}}
+          <option value="{{value}}">{{localize value}}</option>
+          {{/each}}
+          {{/select}}
+        </select>
+      </div>
+      <div class="parent-sheet-pantheon">
+        <input type="text" name="system.pantheon" value="{{system.pantheon}}"/>
+        {{localize 'AMADEUS.label.pantheon'}}
+      </div>
+      <div class="parent-sheet-weapon">
+        <label class="item-lbl">{{localize 'AMADEUS.parent.weapon'}}</label>
+        <input type="text" name="system.weapon" value="{{system.weapon}}"/>
+        </select>
+      </div>
+      <div class="parent-sheet-authority">
+        <label class="item-lbl">{{localize 'AMADEUS.parent.authority'}}</label>
+        <input type="text" name="system.authority" value="{{system.authority}}"/>
+      </div>
+      
+      <div class="grid parent-sheet-ability-grid">
+        {{#each system.ability as |ability key|}}
+        <div class="parent-ability">
+          <div class="parent-ability-label">
+            {{localize (lookup ../config.ability key)}}
+          </div>
+          <div class="parent-ability-rank">
+            <select name="system.ability.{{key}}.rank">
+              {{#select ability.rank}}
+              {{#each ../config.rank as |number letter|}}
+              <option value="{{letter}}">{{letter}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+          <div class="parent-ability-mod">
+            <select name="system.ability.{{key}}.mod">
+              {{#select ability.mod}}
+              {{#each ../config.modL as |number letter|}}
+              <option value="{{letter}}">{{letter}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      <div class="parent-sheet-description">
+        {{editor parent.description target="parent.description" button=true editable=editable}}
+      </div>
+    </div>
+  </div>
+</form>

@@ -22,7 +22,8 @@
       "level": "레벨",
       "exp": "경험치",
       "itemName": "아이템명",
-      "countunit": "개"
+      "countunit": "개",
+      "divineweapon": "신성무기"
     },
     "color" : {
       "black": "흑",
@@ -99,6 +100,10 @@
       "glory": "화려",
       "effective": "특공",
       "relif": "경감"
+    },
+    "parent": {
+      "weapon": "신성무기",
+      "authority": "권능"
     }
   }
 }
