@@ -1,5 +1,18 @@
 // Add custom fonts by visiting and search https://fonts.google.com
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@font-face {
+  font-family: 'RIDIBatang';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GyeonggiBatang';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 // Import utilities.
 @import 'utils/typography';
@@ -15,7 +28,20 @@
 /* Styles limited to amadeus sheets */
 .amadeus {
   @import 'components/forms';
-  @import 'components/resource';
   @import 'components/items';
   @import 'components/effects';
+}
+@import 'components/chatcard';
+
+.sheet.actor section.window-content{
+  background: url('../icons/amade-bg-center.png') center no-repeat, url('../icons/amade-bg-top.png') top no-repeat, url('../icons/amade-bg-bottom.png') bottom no-repeat ;
+  background-size: contain, contain, contain;
+  background-color: $color-bg;
+;
+
+  input {
+    background-color: $color-dim;
+    color: $color-bg;
+    border:none;
+  }
 }

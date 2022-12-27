@@ -115,7 +115,7 @@ export class AmadeusItem extends Item {
       name: this.name,
       type: game.i18n.localize(system.type),
       price: system.price,
-      power: system.power,
+      power: system.action.damage,
       effect: system.effect,
       description: system.description
     };

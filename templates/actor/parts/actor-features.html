@@ -1,1 +1,72 @@
-d
+<div class="biography">
+  {{editor system.bio target="system.bio" rollData=rollData button=true owner=owner editable=editable}}
+</div>
+
+<div class="treasure-list">
+  <div class="treasure-header">
+    {{localize 'AMADEUS.label.treasure'}}
+    <span class="treasure-list-control">
+      <i class="fas fa-caret-down open-treasure"></i>
+      <a class="item-control item-create" title="추가" data-type="treasure"><i class="fas fa-plus"></i></a>
+          </span>
+  </div>
+  <div class="treasure-hidden content-hidden">
+    <div class="grid treasure-grid">
+      {{#each treasure as |treasure key|}}
+      <div class="item treasure" data-item-id="{{treasure._id}}">
+        <div class="treasure-card">
+          <div class="treasure-card-title">
+            <span class="treasure-name">{{treasure.name}}</span>
+            <div class="treasure-control">
+              <a class="item-control item-edit" title="새 창"><i class="fas fa-up-right-from-square"></i></a>
+              {{#if @root.editable}}<a class="item-control item-delete" title="삭제"><i class="fas fa-trash"></i></a>{{/if}}
+            </div>
+          </div>
+          <div class="treasure-card-body">
+            <p class="treasure-body">{{{treasure.system.description}}}</p>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<div class="memory-list">
+  <div class="item memory-header">
+    {{localize 'AMADEUS.label.memory'}}
+    <span class="memory-list-control">
+      <i class="fas fa-caret-down open-memory"></i>
+      <a class="item-control item-create" title="추가" data-type="memory"><i class="fas fa-plus"></i></a>
+    </span>
+  </div>
+  <div class="memory-hidden content-hidden">
+    <div class="grid memory-grid">
+      {{#each memory as |memory key|}}
+      <div class="item memory" data-item-id="{{memory._id}}">
+        <div class="memory-card">
+          <div class="memory-card-title">
+            <span class="memory-name">{{memory.name}}</span>
+            <div class="memory-control">
+              <a class="item-control item-edit" title="새 창"><i class="fas fa-up-right-from-square"></i></a>
+              {{#if @root.editable}}<a class="item-control item-delete" title="삭제"><i class="fas fa-trash"></i></a>{{/if}}
+            </div>
+          </div>
+          <div class="memory-card-body">
+            <div class="memory-date">{{memory.system.date.year}}년 {{memory.system.date.month}}월 {{memory.system.date.day}}일</div>
+            <div class="memory-island">
+              「{{memory.system.island}}」</div>
+            <div class="memory-mission">{{memory.system.mission}}</div>
+            <div class="memory-completed">
+              {{localize 'AMADEUS.label.completed'}}
+              <input type="checkbox" name="memory.system.completed" {{checked memory.system.completed}} />
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+

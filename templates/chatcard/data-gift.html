@@ -1,10 +1,19 @@
 <div class="chatcard gift-chatcard">
-  <div class="grid data-gift-chatcard-top">
-    <div class="gift-name">{{name}}</div>
-    <div class="gift-type">{{type}}</div>
-    <div class="gift-requirement">{{requirement}}</div>
+  <div class="data-gift-chatcard-top">
+    <div class="gift-name">
+      {{name}}
+    </div>
+    <div class="gift-type">
+      <div class="item-lbl">분류</div>
+      <div>{{type}}</div>
+    </div>
+    <div class="gift-requirement">
+      <div class="item-lbl">조건</div>
+      <div>{{requirement}}</div>
+    </div>
     <div class="gift-ability">
-      <a class="gift-abl-roll">{{roll}}</a>
+      <div class="item-lbl">조건</div>
+      <div><a class="gift-abl-roll">{{roll}}</a></div>
     </div>
   </div>
   <div class="data-gift-chatcard-bottom">

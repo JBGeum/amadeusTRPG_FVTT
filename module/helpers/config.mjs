@@ -35,7 +35,12 @@ AMADEUS.label = {
     "color": "AMADEUS.label.color",
     "level": "AMADEUS.label.level",
     "exp": "AMADEUS.label.exp",
-    "itemName": "AMADEUS.label.itemName"
+    "itemName": "AMADEUS.label.itemName",
+    "tag": "AMADEUS.label.tag",
+    "memo": "AMADEUS.label.memo",
+    "formula": "AMADEUS.label.formula",
+    "treasure": "AMADEUS.label.treasure",
+    "memory": "AMADEUS.label.memory"
 }
 
 AMADEUS.rank = {

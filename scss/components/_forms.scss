@@ -2,6 +2,81 @@
   font-family: $font-primary;
 }
 
+//전체 fontawsome 크기 조절
+i {
+  font-size: 0.9rem;
+}
+
+a:hover {
+  text-shadow: 0 0 8px $color-bg;
+}
+
+
+//input focus
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="search"]:focus{
+  border:2px solid $color-bg;
+}
+input[type="checkbox"]{
+  vertical-align: middle;
+}
+
+div.actor-dc, div.bond-score, div.supporter-score, div.actor-hp{
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: inner-spin-button !important;
+    opacity: 1 !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+}
+
+button{
+  background:rgba(255,255,255,0.9);
+}
+button:hover, button:focus{
+  box-shadow: 0 0 5px #FAFAFA;
+}
+//파토스 표시
+label.pathos{
+  margin:0 0.3rem;
+  width:18px;
+  height:18px;
+}
+label.pathos-on{
+  content: url('../icons/pathos-on.svg');
+  filter: invert(8%) sepia(90%) saturate(3003%) hue-rotate(345deg) brightness(108%) contrast(94%);
+}
+label.pathos-off{
+  content: url('../icons/pathos-off.svg');
+}
+
+input.pathos{
+  display:none;
+}
+
+//extend용
+.default-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-bright;
+  padding: 1px;
+}
+
+.sheet-header .actor-sheet-header img{
+  margin:auto;
+  border:none;
+  &.profile-img { width:160px; height:160px;}
+  &.parent-img { width:120px; height:120px;}
+}
+
 .sheet-header {
   flex: 0 auto;
   overflow: hidden;
@@ -9,7 +84,82 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 10px;
+  margin: 20px;
+
+  .actor-sheet-header{
+    margin: 0 10px;
+    grid-template-columns: 170px 120px repeat(3, 1fr);
+    grid-template-rows: repeat(4, 40px);
+    grid-template-areas:
+        "profile-img charname charname charjob actor-color"
+        "profile-img parent-img . . actor-color"
+        "profile-img parent-img . . ."
+        "profile-img parent-img . . .";
+    grid-gap: 6px;
+
+    .profile-img{ grid-area:profile-img; }
+    .parent-img{ grid-area: parent-img;}
+    .charname { grid-area:charname;}
+    .charjob { grid-area: charjob;}
+    .actor-color{ grid-area:actor-color;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      .chardata-color-label{font-weight: bold;}
+      .actor-color-select{width:100%; padding:10px}
+      select{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: none;
+        border-radius: 5px;
+        font-size:2rem;
+        padding:5px
+      }
+      optgroup{
+        font-size: 1rem;
+        text-align: center;
+      }
+    }
+
+    > div{
+      @extend .default-div;
+      border-radius: 5px;
+      justify-content: space-evenly;
+    }
+
+    input{
+      height:90%;
+      padding:5px;
+      border:none;
+      background-color:$color-bright;
+    }
+    .charname > input[type="text"] {
+      width: 100%;
+      height: 100%;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+    .chardata {
+      > input {
+        position: relative;
+        width: calc(70% - 2px);
+      }
+      label {
+        width: calc(30%);
+        text-align: center;
+        font-weight: bold;
+      }
+      label.pathos{
+        margin: 0 0.1rem;
+        height: 15px;
+        width: fit-content;
+      }
+    }
+  }
 
   .chardata-group-center{
     display:flex;
@@ -17,15 +167,13 @@
   .center-detail{
     flex:1;
   }
-
-
   .header-fields {
     flex: 1;
   }
 
   h1.charname {
     height: 50px;
-    padding: 0px;
+    padding: 0;
     margin: 5px 0;
     border-bottom: 0;
     input {
@@ -36,8 +184,296 @@
   }
 }
 
-.sheet-tabs {
+//어빌리티 바
+section.grid-6col{margin: 5px 25px;}
+aside.sidebar{  @extend .default-div; background-color:unset;}
+aside.sidebar .abilities{
+  background-color: $color-bright;
+  border-radius: 5px;
+  width:80%;
+  margin: 0 auto;
+  .ability-grid {
+    @include grid;
+    grid-template-rows: 1.3rem 2.5rem 1.3rem;
+    font-size: 1.2rem;
+    border:2px solid $color-bg;
+    margin:10px;
+    border-radius: 5px;
+
+    select{
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: $color-dim;
+      border:none;
+      border-radius: 0;
+    }
+    optgroup{
+      font-size: 1rem;
+      text-align: center;
+    }
+    .ability-label {text-align:center;font-weight: bold;}
+    .ability-value select{font-size:2rem;}
+    }
+  }
+
+//공통부분 중하
+.chardata-group-bottom{
+
+  grid-template-columns: 2fr 5px 3fr 2fr;
+  grid-template-areas: "left-side middle-side right-side memo-side";
+
+  .left-side{
+    grid-area:left-side;
+
+    .dchp-grid{
+      margin: 0;
+      grid-template-columns: 1fr 2fr 1fr;
+      grid-template-rows: 1.2fr 1fr 1fr;
+      background-color: $color-bright;
+      border-radius: 5px;
+      padding:5px;
+      grid-template-areas:
+          "actor-dc actor-dc actor-dc"
+          "actor-hp actor-hp actor-hp-max"
+          "hp-vital hp-vital hp-vital";
+      input{
+        position: relative;
+        text-align: center;
+      }
+      label{
+        font-weight: bold;}
+    }
+    div.actor-dc{  grid-area:actor-dc; display:flex; input{ flex-grow:1;}font-size:1.2rem;font-weight:bold;text-align: center;
+
+    }
+    div.actor-dc-btn{  grid-area:actor-dc-btn;}
+    div.actor-hp{  grid-area:actor-hp; display:flex; input{ flex-grow:1;} font-weight:bold;.divider{display:inline-block}}
+    div.actor-hp-max{  grid-area:actor-hp-max; input{width:3rem;}}
+    div.hp-vital{ grid-area:hp-vital; input{width:1.5rem;}}
+    .dchp-label, .divider{flex-shrink:0; margin: 5px;}
+  }
+  .right-side{
+    grid-area:right-side;
+    height:inherit;
+
+    .badstatus-grid{
+      margin: 0 0;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap:2px;
+      height:100%;
+      font-size: 1.1rem;
+      font-weight: bold;
+      >div{@extend .default-div; border-radius: 10px; padding:5px;}
+      .badstatus{
+        input[type="checkbox"]{display:none;}
+        &.checked{background-color :rgba(0,0,0,0.5); color:#ffffff; border:1px solid white;}
+        .bs-input {width:0.8rem;}
+        input.bs-input{
+          border: none;background-color:$color-dim;font-size: 1rem;
+          &.checked{color:#ffffff;border:none;background: none;}
+        }
+        &.bs-num{justify-content: space-between;}
+      }
+    }
+  }
+  .middle-side{grid-area:middle-side;}
+  .memo-side{
+    grid-area:memo-side;
+    background-color: #ffffff;
+    padding: 2px;
+    textarea{width : 100%; height : 100%; resize:none;}
+  }
+}
+
+.sheet-body {
+  padding: 10px;
+
+  //item tab
+  .item.gear{background-color: $color-bright;}
+  .itemtab-grid {
+    display: grid;
+    grid-gap: 15px;
+    padding: 10px;
+    grid-template-columns: 3fr 1fr;
+
+    .item-card{
+      padding: 1px;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      grid-gap:0;
+      height:40px;
+
+      > div{@extend .default-div;}
+      .i{margin: 0 0.2rem;}
+      .food-quantity input{width:2rem;}
+      .item-name{padding-left:0.5rem;}
+      a.item-name{flex-grow:1;}
+      .item-controls{justify-content:space-evenly;}
+    }
+    .item-effect{padding:10px 20px;}
+  }
+
+  //gift tab
+  .gift-grid {
+    display: grid;
+    grid-auto-rows: minmax(80px, auto);
+    grid-auto-flow: row;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+
+    .gift-card{
+      padding: 5px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+          "gift-name gift-name gift-name"
+          "gift-type gift-requirement gift-roll"
+          "gift-hidden gift-hidden gift-hidden";
+      border: 2px solid #999;
+      border-radius: 10px;
+      align-items: center;
+      grid-template-rows: 30px 30px auto;
+      background-color: $color-bright;
+
+      .gift-name{grid-area:gift-name;font-size: 1.1rem;font-weight: bold;display:flex;
+        a{flex-grow:1;}}
+      .gift-controls{flex-shrink: 0;}
+      .gift-type{grid-area:gift-type;}
+      .gift-requirement{grid-area:gift-requirement;}
+      .gift-type, .gift-requirement, .gift-abl {
+        height:100%;
+        background-color: $color-dim;
+        margin: 1px;
+        border-radius:5px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      }
+      .roll{grid-area:gift-roll;}
+      .gift-hidden{grid-area:gift-hidden; display:none;
+        .gift-effect{
+          background-color: $color-bright;
+          padding: 5px 10px;
+          border: 1px solid #999;
+          border-radius: 5px;
+          margin: 10px 2px;}
+        div{display:flex; align-items: center; padding:2px;
+          input{flex-grow:1;}
+          label{flex-shrink: 0; margin: 5px; }}}
+      .gift-type, .gift-requirement, .gift-abl { text-align: center;}
+      .gift-formula{display: flex;align-items: center;}
+
+      i{
+        margin: 0 0.2rem;
+        .item-rollcard{ float:right;}
+      }
+    }
+  }
+
+  //bond tab
+  .bond-top, .bond-bottom {
+    padding: 5px;
+    background-color: rgba(255,255,255,0.7);
+    margin: 10px;
+    border-radius: 5px;
+  }
+  .bond-header, .supporter-header {
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    border-bottom: 1px solid $color-bg;
+  }
+  .bond-card{
+    grid-template-columns: 3fr 40px 60px 2fr;
+    grid-template-rows:minmax(30px,auto);
+    >div{ @extend .default-div; background-color: transparent;}
+
+    .bond-name input{ flex-grow:1;padding:5px;margin:3px;}
+    .bond-relationship input{padding:5px;margin:3px;}
+    input[type="checkbox"]{ width:20px;}
+  }
+  .supporter-card{
+    grid-template-columns: 3fr 40px 60px 2fr;
+    grid-template-rows:minmax(30px,auto);
+    .supporter-name{  grid-column:1 / span 2;}
+    >div{ @extend .default-div;  background-color: transparent;}
+    .supporter-name input{ flex-grow:1;padding:5px;margin:3px;}
+    .supporter-relationship input{padding:5px;margin:3px;}
+    input[type="checkbox"]{ width:20px;}
+  }
+  .biography {
+    height : 200px;
+    background-color: #FAFAFA;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+
+  //feature tab
+  .treasure-grid, .memory-grid{
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap:0;
+    background-color: $color-bright;
+  }
+  .treasure-list-control, .memory-list-control{
+    float:right;
+    margin: 0 10px;
+    a{margin: 0 5px;}
+  }
+  .treasure-list, .memory-list {
+    border: 1px solid #999;
+    line-height: 2;
+    background-color: $color-bright;
+    margin: 10px;
+    div{text-align:center;
+      .treasure-body, .memory-mission{text-align:left;}
+      .memory-date, .memory-completed{text-align:right;}
+    }
+  .treasure-header, .memory-header{
+    border: 1px solid #999;
+    background-color: #FAFAFA;
+    color: $color-bg;
+    height: 30px;
+    font-weight: bold;}
+  }
+  .treasure-card,.memory-card {
+    margin: 4px;
+    border: 2px solid #999;
+    background-color: #FAFAFA;
+    border-radius: 5px;
+    padding: 5px;
+    height: calc(100% - 8px); //margin*2 빼기
+  }
+  .memory-date>input {  width: 50px;}
+  .treasure-card-title, .memory-card-title{display:flex;}
+  .treasure-name, .memory-name{flex-grow:1;}
+  .treasure-card-body, .memory-island {
+    background-color: #FAFAFA;
+    color: $color-bg;
+    border: 1px solid #999;
+    padding:5px;
+    border-radius: 5px;
+  }
+}
+
+
+nav.sheet-tabs {
   flex: 0;
+  background-color:$color-dim;
+  color: #FAFAFA;
+  .active{
+    background-color:#FAFAFA;
+    color:$color-bg;
+    font-weight:bold;
+    font-size:larger;
+    border-radius: 5px;
+    text-shadow: none;
+  }
+  a:hover.item{
+    text-shadow: none;
+  }
 }
 
 .sheet-body,
@@ -48,11 +484,21 @@
 
 .tox {
   .tox-editor-container {
-    background: $c-white;
+    background: #FAFAFA;
   }
 
   .tox-edit-area {
     //padding: 0 8px;
     padding: 0;
   }
+
+}
+a.editor-edit {
+  display:block;
+}
+.editor {
+  height: 100%;
+}
+.editor-content {
+  padding-top: 25px;
 }

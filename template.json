@@ -17,9 +17,13 @@
           "relationship" : ""
       }
     },
+    "htmlFields": ["biography"],
     "character": {
       "biography": "",
-      "health": 0,
+      "health": {
+        "value": 0,
+        "max": ""
+      },
       "vitality": 0,
       "dc" : 4,
       "ability":{
@@ -74,12 +78,12 @@
           "level" : 0
         }
       },
-      "money": 0,
+      "money": "",
       "level": 1,
       "exp": 0,
       "food": 0,
       "color": "",
-      "memo": "메모",
+      "memo": "memo",
       "attributes": {},
       "groups": {},
       "bonds": {
@@ -160,7 +164,11 @@
       "description": "."
     },
     "memory": {
-      "date": "",
+      "date": {
+        "year": 2022,
+        "month": 1,
+        "day": 1
+      },
       "island": "",
       "mission": "",
       "completed": false

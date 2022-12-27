@@ -1,9 +1,9 @@
 <form class="{{cssClass}}" autocomplete="off">
   <div class="gear-sheet">
-    <header class="sheet-header">
+    <div class="sheet-header">
       <div class="item grid item-sheet-header" data-item-id="{{data._id}}">
         <div class="item-sheet-name flex-center">
-          <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+          <input name="name" type="text" value="{{item.name}}" placeholder="아이템명"/>
         </div>
         <div class="item-price">
           <label class="item-lbl">{{localize 'AMADEUS.item.price'}}</label>
@@ -23,18 +23,16 @@
             <input type="text" name="system.action.damage" value="{{system.action.damage}}"/>
         </div>
       </div>
-    </header>
-
-    <section class="item-sheet-body">
+    </div>
+    <div class="item-sheet-body">
       <div class="item item-sheet-body" data-item-id="{{data._id}}">
         <div class="item-effect">
-          <label>효과</label>{{!-- 효과 --}}
           {{editor system.effect target="system.effect" button=true editable=editable}}
         </div>
         <div class="item-description">{{!-- 설명 --}}
           {{editor system.description target="system.description" button=true editable=editable}}
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </form>

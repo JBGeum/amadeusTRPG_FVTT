@@ -1,0 +1,12 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <div class="item treasure-sheet" data-item-id="{{data._id}}">
+      <div class="treasure-sheet-title">
+        <input type="text" name="name" class="trasure-name" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.itemName'}}" />
+      </div>
+      <div class="treasure-sheet-body">
+        <p class="treasure-body">
+          {{editor system.description target="system.description" button=true editable=editable}}
+        </p>
+      </div>
+  </div>
+</form>

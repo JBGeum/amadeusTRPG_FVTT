@@ -63,6 +63,7 @@ export class AmadeusActor extends Actor {
 
     this._setRankModLetter(systemData);
     this._calculateInitHealth(systemData);
+    this._calculateCalcHealth(systemData);
     this._calculateInitMoney(systemData);
     // // Loop through ability scores, and add their modifiers to our sheet output.
     // for (let [key, ability] of Object.entries(systemData.abilities)) {
@@ -126,6 +127,10 @@ export class AmadeusActor extends Actor {
       case '+++': initHealth += 6;  break;
     }
     systemData.initHealth = initHealth;
+  }
+
+  _calculateCalcHealth(systemData) {
+  systemData.calcHealth = systemData.initHealth + systemData.vitality;
   }
 
   _calculateInitMoney(systemData) {
@@ -196,6 +201,8 @@ export class AmadeusActor extends Actor {
    * Prepare character roll data.
    */
   _getCharacterRollData(data) {
+    // 여기서 data는 캐릭터의 system
+
     if (this.type !== 'character') return;
     // Copy the ability scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.

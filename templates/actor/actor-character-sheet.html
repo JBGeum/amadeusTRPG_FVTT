@@ -8,17 +8,28 @@
           <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="160" width="160"/>
         </div>
         <div class="charname">
-          <input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></div>
+          <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'AMADEUS.label.name'}}"/></div>
         <div class="actor-color">
-          속성 : {{system.color}}
+          <label class="chardata-color-label">{{localize 'AMADEUS.label.color'}}</label>
+          <div class="actor-color-select">
+            <select name="system.color">
+            {{#select system.color}}
+              <optgroup>
+            {{#each config.color as |value key|}}
+              <option value="{{value}}">{{localize value}}</option>
+            {{/each}}
+              </optgroup>
+            {{/select}}
+            </select>
+          </div>
         </div>
         <div class="parent-img">
           <img class="parent-img" src="{{system.chardata.parentimg}}" data-edit="system.chardata.parentimg" title="{{system.chardata.parent}}" height="120" width="120"/>
         </div>
         <div class="chardata job">
           <label class="chardata-label">{{localize 'AMADEUS.label.job'}}</label>
-          <input type="checkbox" class="pathos" id="system.job.chkbox" name="system.job.chkbox" {{checked system.job.chkbox}}>
-          <label for="system.job.chkbox" class="pathos {{#if system.job.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
+          <input type="checkbox" class="pathos" id="job.{{actor._id}}" name="system.job.chkbox" {{checked system.job.chkbox}}>
+          <label for="job.{{actor._id}}" class="pathos {{#if system.job.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
           <input type="text" name="system.chardata.job.name" value="{{system.chardata.job.name}}"/>
         </div>
         <div class="chardata pantheon">
@@ -57,33 +68,37 @@
     </div>
   </header>
 
-  <section class="grid grid-5col">
+  <section class="grid grid-6col">
     <section class="grid-span-1">
       {{!-- 좌측바 --}}
       <aside class="sidebar">
-        <div class="abilities flexcol flex-group-center">
+        <div class="abilities">
           {{#each system.ability as |ability key|}}
-          <div class="ability flexcol">
-            <div class="ability-label flexrow flex-group-center">
-              <label class="ability-label amade-abl-roll flexlarge"
+          <div class="ability-grid">
+            <div class="ability-label">
+              <span class="ability-label amade-abl-roll"
                      data-ability="{{key}}"
-                     data-label="{{ability.label}}">{{ability.label}}</label>
+                     data-label="{{ability.label}}">{{ability.label}}</span>
             </div>
-            <div class="ability-value flexrow">
+            <div class="ability-value">
               <select name="system.ability.{{key}}.rank">
                 {{#select ability.rank}}
+                <optgroup>
                 {{#each ../config.rank as |number letter|}}
-                <option value="{{letter}}">{{letter}}</option>
+                  <option value="{{letter}}">{{letter}}</option>
                 {{/each}}
+                </optgroup>
                 {{/select}}
               </select>
             </div>
-            <div class="ability-mod flexrow">
+            <div class="ability-mod">
               <select name="system.ability.{{key}}.mod">
                 {{#select ability.mod}}
+                <optgroup>
                 {{#each ../config.modL as |number letter|}}
-                <option value="{{letter}}">{{letter}}</option>
+                  <option value="{{letter}}">{{letter}}</option>
                 {{/each}}
+                </optgroup>
                 {{/select}}
               </select>
             </div>
@@ -94,28 +109,29 @@
       </aside>
     </section>
 
-    <section class="grid-span-4">
-
+    <section class="grid-span-5">
       <div class="grid chardata-group-bottom">
-        <div class="left-side">{{!-- 목표치, 생명치--}}
+        <div class="left-side">
           <div class="grid dchp-grid">
             <div class="chardata actor-dc">
-              <label>목표치</label>
+              <div class="dchp-label">{{localize 'AMADEUS.label.dc'}}</div>
               <input type="number" name="system.dc" value="{{system.dc}}"/>
             </div>
-            <div class="actor-dc-btn">
-              + | -
-            </div>
             <div class="chardata actor-hp">
-              <label>생명력</label>
-              <input type="number" name="system.health" value="{{system.health}}"/>
+              <div class="dchp-label">{{localize 'AMADEUS.label.health'}}</div>
+              <input type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number">
+              <div class="divider">/</div>
             </div>
-            <div class="actor-hp-max">/ 최대치 </div>
+            <div class="actor-hp-max">
+              <input type="number" class="min" name="system.health.max" value="{{system.health.max}}" placeholder="{{system.calcHealth}}" data-dtype="Number"/>
+            </div>
             <div class="hp-vital flexrow flex-group-center">
               <div class="chardata init-health">
-                <label class="wid-auto">초기치</label> {{system.initHealth}}</div>
+                <label class="wid-auto">{{localize 'AMADEUS.label.inithealth'}}</label> {{system.initHealth}}</div>
               <div class="chardata vitality">
-                <label>활력</label> <i class="fas fa-dice"></i>
+                <label>{{localize 'AMADEUS.label.vitality'}}</label>
+                <a class="vitality-roll" data-roll="{{system.level}}d6" data-label="{{localize 'AMADEUS.roll.vitality'}}">
+                  <i class="fas fa-dice"></i></a>
                 <input type="number" class="min" name="system.vitality" value="{{system.vitality}}"/>
               </div>
             </div>
@@ -124,60 +140,75 @@
         <div class="middle-side"></div>
         <div class="right-side">{{!-- 상태이상--}}
           <div class="grid badstatus-grid">
-            <div class="badstatus">상태이상1</div>
-            <div class="badstatus">상태이상2</div>
-            <div class="badstatus">상태이상3</div>
-            <div class="badstatus">상태이상4</div>
-            <div class="badstatus">상태이상5</div>
-            <div class="badstatus">상태이상6</div>
+            <div class="badstatus {{checked system.status.desperation}}">
+              <input type="checkbox" class="badstatus" id="bs1.{{actor._id}}"
+                     name="system.status.desperation" {{checked system.status.desperation}} />
+              <label for="bs1.{{actor._id}}" class="badstatus">
+                <i class="fas fa-dice-one color-d1"></i> {{localize 'AMADEUS.badstatus.desperation'}}</label>
+            </div>
+            <div class="badstatus {{checked system.status.fury}}">
+              <input type="checkbox" class="badstatus" id="bs2.{{actor._id}}"
+                     name="system.status.fury" {{checked system.status.fury}} />
+              <label for="bs2.{{actor._id}}" class="badstatus">
+                <i class="fas fa-dice-two color-d2"></i> {{localize 'AMADEUS.badstatus.fury'}}</label>
+            </div>
+            <div class="badstatus {{checked system.status.coward.chkbox}} bs-num">
+              <input type="checkbox" class="badstatus" id="bs3.{{actor._id}}"
+                     name="system.status.coward.chkbox" {{checked system.status.coward.chkbox}} />
+              <label for="bs3.{{actor._id}}" class="badstatus">
+                <i class="fas fa-dice-three color-d3"></i> {{localize 'AMADEUS.badstatus.coward'}}</label>
+              <input type="number" class="bs-input  {{checked system.status.coward.chkbox}}" name="system.status.coward.level" value="{{system.status.coward.level}}" />
+            </div>
+            <div class="badstatus {{checked system.status.depravity}}">
+              <input type="checkbox" class="badstatus" id="bs4.{{actor._id}}"
+                     name="system.status.depravity" {{checked system.status.depravity}} />
+              <label for="bs4.{{actor._id}}" class="badstatus">
+                <i class="fas fa-dice-four color-d4"></i> {{localize 'AMADEUS.badstatus.depravity'}}</label>
+            </div>
+            <div class="badstatus {{checked system.status.disgrace}}">
+              <input type="checkbox" class="badstatus" id="bs5.{{actor._id}}"
+                     name="system.status.disgrace" {{checked system.status.disgrace}} />
+              <label for="bs5.{{actor._id}}" class="badstatus">
+                <i class="fas fa-dice-five color-d5"></i> {{localize 'AMADEUS.badstatus.disgrace'}}</label>
+            </div>
+            <div class="badstatus {{checked system.status.wound.chkbox}} bs-num">
+              <input type="checkbox" class="badstatus" id="bs6.{{actor._id}}"
+                     name="system.status.wound.chkbox" {{checked system.status.wound.chkbox}} />
+              <label for="bs6.{{actor._id}}" class="badstatus">
+                <i class="fas fa-dice-six color-d6"></i> {{localize 'AMADEUS.badstatus.wound'}}</label>
+              <input type="number" class="bs-input {{checked system.status.wound.chkbox}}" name="system.status.wound.level" value="{{system.status.wound.level}}" />
+            </div>
           </div>
         </div>
-        <div class="memo-side"></div>
+        <div class="memo-side">
+          <textarea name="system.memo" class="actor-memo">{{system.memo}}</textarea>
+        </div>
       </div>
 
 
       {{!-- Sheet Tab Navigation --}}
       <nav class="sheet-tabs tabs" data-group="primary">
         {{!-- Default tab is specified in actor-sheet.mjs --}}
-        <a class="item" data-tab="features">features</a>
-        <a class="item" data-tab="item">item</a>
-        <a class="item" data-tab="gift">gift</a>
-        <a class="item" data-tab="bond">bond</a>
-        <a class="item" data-tab="spells">Spells</a>
+        <a class="item" data-tab="item">{{localize 'AMADEUS.menu.item'}}</a>
+        <a class="item" data-tab="gift">{{localize 'AMADEUS.menu.gift'}}</a>
+        <a class="item" data-tab="bond">{{localize 'AMADEUS.menu.bond'}}</a>
+        <a class="item" data-tab="features">{{localize 'AMADEUS.menu.features'}}</a>
       </nav>
       {{!-- Sheet Body --}}
       <section class="sheet-body">
-        <div class="tab effects flexcol" data-group="primary" data-tab="features">
-          {{> "systems/amadeus/templates/actor/parts/actor-features.html"}}
-        </div>
-        
-        {{!-- Owned Features Tab --}}
         <div class="tab item" data-group="primary" data-tab="item">
           {{> "systems/amadeus/templates/actor/parts/actor-item.html"}}
         </div>
-
-        {{!-- Biography Tab --}}
         <div class="tab gift" data-group="primary" data-tab="gift">
           {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
           {{> "systems/amadeus/templates/actor/parts/actor-gift.html"}}
         </div>
-
-        {{!-- Owned Items Tab --}}
         <div class="tab bond" data-group="primary" data-tab="bond">
             {{> "systems/amadeus/templates/actor/parts/actor-bond.html"}}
         </div>
-
-        {{!-- Owned Spells Tab --}}
-        <div class="tab spells" data-group="primary" data-tab="spells">
-          {{editor system.biography target="system.biography" rollData=rollData button=true owner=owner editable=editable}}
-          {{> "systems/amadeus/templates/actor/parts/actor-spells.html"}}
+        <div class="tab item" data-group="primary" data-tab="features">
+          {{> "systems/amadeus/templates/actor/parts/actor-features.html"}}
         </div>
-
-        {{!-- Active Effects Tab --}}
-        <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-          {{> "systems/amadeus/templates/actor/parts/actor-effects.html"}}
-        </div>
-
       </section>
     </section>
   </section>

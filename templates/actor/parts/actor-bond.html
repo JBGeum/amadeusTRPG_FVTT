@@ -1,14 +1,14 @@
 <div class="bond-grid">
-  <div class="bond-header">
-    인물
-  </div>
   <div class="bond-top">
+    <div class="bond-header">
+      인물
+    </div>
     <div class="item bond" >
       <div class="grid bond-card">
         {{#each system.bonds as |bond key|}}
         <div class="bond-name vertical-center">
-          <input type="checkbox" class="pathos" id="system.bonds.{{key}}.chkbox" name="system.bonds.{{key}}.chkbox" {{checked bond.chkbox}}/>
-          <label for="system.bonds.{{key}}.chkbox" class="pathos {{#if bond.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
+          <input type="checkbox" class="pathos" id="bonds.{{key}}.{{actor._id}}" name="system.bonds.{{key}}.chkbox" {{checked bond.chkbox}}/>
+          <label for="bonds.{{key}}.{{actor._id}}" class="pathos {{#if bond.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
           <input type="text" name="system.bonds.{{key}}.name" value="{{bond.name}}" />
         </div>
         <div class="bond-truth">
@@ -24,17 +24,18 @@
       </div>
     </div>
   </div>
-  <div class="supporter-header">
-    협력자
-  </div>
+
   <div class="bond-bottom">
+    <div class="supporter-header">
+      협력자
+    </div>
     <div class="item supporter">
       <div class="grid supporter-card">
         {{#each system.supporters as |supporter key|}}
         <div class="supporter-name">
-          <input type="checkbox"  class="pathos"  id="system.supporters.{{key}}.chkbox" name="system.supporters.{{key}}.chkbox" {{checked supporter.chkbox}}/>
-          <label for="system.supporters.{{key}}.chkbox" class="pathos {{#if supporter.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
-          <input type="text" name="system.supporter.{{key}}.name" value="{{supporter.name}}" />
+          <input type="checkbox"  class="pathos"  id="supporters.{{key}}.{{actor._id}}" name="system.supporters.{{key}}.chkbox" {{checked supporter.chkbox}}/>
+          <label for="supporters.{{key}}.{{actor._id}}" class="pathos {{#if supporter.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
+          <input type="text" name="system.supporters.{{key}}.name" value="{{supporter.name}}" />
         </div>
         <div class="supporter-score">
           <input type="number" name="system.supporters.{{key}}.score" value="{{supporter.score}}" />

@@ -13,7 +13,36 @@
   "esmodules": ["module/amadeus.mjs"],
   "styles": ["css/amadeus.css"],
   "scripts": [],
-  "packs": [],
+  "packs": [
+    {
+      "name": "gifts",
+      "label" : "gifts",
+      "system": "amadeus",
+      "path": "./packs/gifts.db",
+      "type": "Item"
+    },
+    {
+      "name": "items",
+      "label" : "items",
+      "system": "amadeus",
+      "path": "./packs/items.db",
+      "type": "Item"
+    },
+    {
+      "name": "parents",
+      "label" : "parents",
+      "system": "amadeus",
+      "path": "./packs/parents.db",
+      "type": "Item"
+    },
+    {
+      "name": "rolltable",
+      "label" : "rolltable",
+      "system": "amadeus",
+      "path": "./packs/rolltable.db",
+      "type": "RollTable"
+    }
+  ],
   "languages": [
     {
       "lang": "ko",
@@ -24,7 +53,7 @@
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "health",
-  "secondaryTokenAttribute": "power",
+  "secondaryTokenAttribute": null,
   "url": "",
   "manifest": "",
   "download": "",

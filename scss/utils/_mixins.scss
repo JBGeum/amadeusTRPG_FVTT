@@ -14,3 +14,42 @@
 @mixin hide {
   display: none;
 }
+
+@mixin grid{
+  display: grid;
+  grid-gap: 1px;
+  padding: 2px;
+}
+
+@mixin wid-auto{
+  width:auto !important;
+}
+
+@mixin flex-center{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+@mixin text-right{
+  text-align:right !important;
+}
+@mixin jf-space-around{
+  justify-content: space-around !important;
+}
+@mixin jf-left{
+  justify-content: flex-start !important;
+}
+@mixin margin-left{
+  margin-left:auto !important;
+}
+@mixin vertical-center{
+  display:flex;
+  align-items: center !important;
+}
+
+
+
+.content-visible {display:block;}
+.content-hidden {display:none;}
+

@@ -11,7 +11,7 @@
         </div>
         
         <div class="item-damage">
-          1D6
+          <a class="damage-formula" data-rolltype="item" data-roll="1D6">1D6</a>
         </div>
         
         <div class="item-controls">
@@ -38,13 +38,13 @@
         </div>
         
         <div class="item-damage">
-          {{item.system.action.damage}}
+          <a class="damage-formula" data-rolltype="item" data-roll="{{item.system.action.damage}}">{{item.system.action.damage}}</a>
         </div>
         
         <div class="item-controls">
           <i class="fas fa-caret-down open-item"></i>
-          <a class="item-control item-edit" title="수정"><i class="fas fa-edit"></i></a>
-          <a class="item-control item-delete" title="삭제"><i class="fas fa-trash"></i></a>
+          <a class="item-control item-edit" title="새 창"><i class="fas fa-up-right-from-square"></i></a>
+          {{#if @root.editable}}<a class="item-control item-delete" title="삭제"><i class="fas fa-trash"></i></a>{{/if}}
         </div>
       </div>
       <div class="item-hidden content-hidden">
@@ -62,8 +62,8 @@
       <div class="rtb-header">
         롤테이블
       </div>
-      <button>롤테이블</button>
-      <button>롤테이블</button>
+      <a class="amd-rolltable" data-rtid="EroSbTqlikS55Zp5"><button>시련표</button></a>
+      <a class="amd-rolltable" data-rtid="IkNCphhCNk3Bx0yj"><button>휴식표</button></a>
       <button>롤테이블</button>
       <button>롤테이블</button>
     </div>

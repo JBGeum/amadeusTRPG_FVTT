@@ -1,0 +1,1023 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+/* Global styles */
+/* line 1, G:/swb/amadeus/scss/global/_window.scss */
+.window-app {
+	font-family: "Roboto", sans-serif;
+}
+
+/* line 6, G:/swb/amadeus/scss/global/_window.scss */
+.rollable:hover, .rollable:focus {
+	color: #000;
+	text-shadow: 0 0 10px red;
+	cursor: pointer;
+}
+
+/* line 2, G:/swb/amadeus/scss/global/_grid.scss */
+.grid,
+.grid-2col {
+	display: grid;
+	grid-column: span 2 / span 2;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+	margin: 10px 0;
+	padding: 0;
+}
+
+/* line 12, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-3col {
+	grid-column: span 3 / span 3;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* line 17, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-4col {
+	grid-column: span 4 / span 4;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* line 22, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-5col {
+	grid-column: span 5 / span 5;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+/* line 27, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-6col {
+	grid-column: span 6 / span 6;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+/* line 32, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-7col {
+	grid-column: span 7 / span 7;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+/* line 37, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-8col {
+	grid-column: span 8 / span 8;
+	grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+/* line 42, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-9col {
+	grid-column: span 9 / span 9;
+	grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
+/* line 47, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-10col {
+	grid-column: span 10 / span 10;
+	grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+/* line 52, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-11col {
+	grid-column: span 11 / span 11;
+	grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+/* line 57, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-12col {
+	grid-column: span 12 / span 12;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+/* line 63, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-2 {
+	grid-column-start: 2;
+}
+
+/* line 64, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-3 {
+	grid-column-start: 3;
+}
+
+/* line 65, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-4 {
+	grid-column-start: 4;
+}
+
+/* line 66, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-5 {
+	grid-column-start: 5;
+}
+
+/* line 67, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-6 {
+	grid-column-start: 6;
+}
+
+/* line 68, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-7 {
+	grid-column-start: 7;
+}
+
+/* line 69, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-8 {
+	grid-column-start: 8;
+}
+
+/* line 70, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-9 {
+	grid-column-start: 9;
+}
+
+/* line 71, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-10 {
+	grid-column-start: 10;
+}
+
+/* line 72, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-11 {
+	grid-column-start: 11;
+}
+
+/* line 73, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-start-12 {
+	grid-column-start: 12;
+}
+
+/* line 75, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-2 {
+	grid-column-end: span 2;
+}
+
+/* line 76, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-3 {
+	grid-column-end: span 3;
+}
+
+/* line 77, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-4 {
+	grid-column-end: span 4;
+}
+
+/* line 78, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-5 {
+	grid-column-end: span 5;
+}
+
+/* line 79, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-6 {
+	grid-column-end: span 6;
+}
+
+/* line 80, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-7 {
+	grid-column-end: span 7;
+}
+
+/* line 81, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-8 {
+	grid-column-end: span 8;
+}
+
+/* line 82, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-9 {
+	grid-column-end: span 9;
+}
+
+/* line 83, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-10 {
+	grid-column-end: span 10;
+}
+
+/* line 84, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-11 {
+	grid-column-end: span 11;
+}
+
+/* line 85, G:/swb/amadeus/scss/global/_grid.scss */
+.grid-span-12 {
+	grid-column-end: span 12;
+}
+
+/* line 2, G:/swb/amadeus/scss/global/_flex.scss */
+.flex-group-center,
+.flex-group-left,
+.flex-group-right {
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+
+}
+
+/* line 12, G:/swb/amadeus/scss/global/_flex.scss */
+.flex-group-left {
+	justify-content: flex-start;
+	text-align: left;
+}
+
+/* line 17, G:/swb/amadeus/scss/global/_flex.scss */
+.flex-group-right {
+	justify-content: flex-end;
+	text-align: right;
+}
+
+/* line 22, G:/swb/amadeus/scss/global/_flex.scss */
+.flexshrink {
+	flex: 0;
+}
+
+/* line 26, G:/swb/amadeus/scss/global/_flex.scss */
+.flex-between {
+	justify-content: space-between;
+}
+
+/* line 30, G:/swb/amadeus/scss/global/_flex.scss */
+.flexlarge {
+	flex: 2;
+}
+
+/* line 35, G:/swb/amadeus/scss/global/_flex.scss */
+.align-left {
+	justify-content: flex-start;
+	text-align: left;
+}
+
+/* line 40, G:/swb/amadeus/scss/global/_flex.scss */
+.align-right {
+	justify-content: flex-end;
+	text-align: right;
+}
+
+/* line 45, G:/swb/amadeus/scss/global/_flex.scss */
+.align-center {
+	justify-content: center;
+	text-align: center;
+}
+
+/* Styles limited to boilerplate sheets */
+/* line 16, G:/swb/amadeus/scss/amadeus.scss */
+.amadeus {
+	/* ----------------------------------------- */
+	/*  Items Lists                              */
+	/* ----------------------------------------- */
+	/* Example style for Boilerplate (can be removed if not needed) */
+}
+
+/* line 1, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .item-form {
+	font-family: "Roboto", sans-serif;
+}
+
+/* line 5, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .sheet-header {
+	flex: 0 auto;
+	overflow: hidden;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	margin-bottom: 10px;
+}
+
+
+/* line 26, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .sheet-header .chardata-group-center {
+	display: flex;
+}
+
+/* line 29, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .sheet-header .center-detail {
+	flex: 1;
+}
+
+/* line 34, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .sheet-header .header-fields {
+	flex: 1;
+}
+
+/* line 38, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .sheet-header h1.charname {
+	height: 50px;
+	padding: 0px;
+	margin: 5px 0;
+	border-bottom: 0;
+}
+
+/* line 43, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .sheet-header h1.charname input {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+/* line 51, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .sheet-tabs {
+	flex: 0;
+}
+
+/* line 55, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .sheet-body,
+.amadeus .sheet-body .tab,
+.amadeus .sheet-body .tab .editor {
+	height: 100%;
+}
+
+/* line 62, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .tox .tox-editor-container {
+	background: #fff;
+}
+
+/* line 66, G:/swb/amadeus/scss/components/_forms.scss */
+.amadeus .tox .tox-edit-area {
+	padding: 0px;
+}
+
+/* line 1, G:/swb/amadeus/scss/components/_chatcard.scss */
+.amadeus .resource-label {
+	font-weight: bold;
+}
+
+/* line 2, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-header {
+	height: 28px;
+	margin: 2px 0;
+	padding: 0;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.05);
+	border: 2px groove #eeede0;
+	font-weight: bold;
+}
+
+/* line 10, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-header > * {
+	font-size: 14px;
+	text-align: center;
+}
+
+/* line 14, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-header .item-name {
+	font-weight: bold;
+	padding-left: 5px;
+	text-align: left;
+	display: flex;
+}
+
+/* line 27, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	color: #444;
+}
+
+/* line 36, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* line 43, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item-name {
+	flex: 2;
+	margin: 0;
+	overflow: hidden;
+	font-size: 13px;
+	text-align: left;
+	align-items: center;
+	display: flex;
+}
+
+/* line 51, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item-name h3, .amadeus .items-list .item-name h4 {
+	margin: 0;
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+
+/* line 59, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item-controls {
+	display: flex;
+	flex: 0 0 100px;
+	justify-content: flex-end;
+}
+
+/* line 63, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item-controls a {
+	font-size: 12px;
+	text-align: center;
+	margin: 0 6px;
+}
+
+/* line 71, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item {
+	align-items: center;
+	padding: 0 2px;
+	border-bottom: 1px solid #c9c7b8;
+}
+
+/* line 75, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item:last-child {
+	border-bottom: none;
+}
+
+/* line 76, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item .item-name {
+	color: #191813;
+}
+
+/* line 78, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item .item-name .item-image {
+	flex: 0 0 30px;
+	height: 30px;
+	background-size: 30px;
+	border: none;
+	margin-right: 5px;
+}
+
+/* line 88, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .item-prop {
+	text-align: center;
+	border-left: 1px solid #c9c7b8;
+	border-right: 1px solid #c9c7b8;
+	font-size: 12px;
+}
+
+/* line 96, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .items-header {
+	height: 28px;
+	margin: 2px 0;
+	padding: 0;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.05);
+	border: 2px groove #eeede0;
+	font-weight: bold;
+}
+
+/* line 104, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .items-header > * {
+	font-size: 12px;
+	text-align: center;
+}
+
+/* line 108, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .items-list .items-header .item-name {
+	padding-left: 5px;
+	text-align: left;
+}
+
+/* line 117, G:/swb/amadeus/scss/components/_items.scss */
+.amadeus .item-formula {
+	flex: 0 0 200px;
+	padding: 0 8px;
+}
+
+/* line 2, G:/swb/amadeus/scss/components/_effects.scss */
+.amadeus .effects .item .effect-source,
+.amadeus .effects .item .effect-duration,
+.amadeus .effects .item .effect-controls {
+	text-align: center;
+	border-left: 1px solid #c9c7b8;
+	border-right: 1px solid #c9c7b8;
+	font-size: 12px;
+}
+
+/* line 11, G:/swb/amadeus/scss/components/_effects.scss */
+.amadeus .effects .item .effect-controls {
+	border: none;
+}
+
+
+
+/* 맨위 */
+.grid{
+	display: grid;
+	grid-gap: 1px;
+	padding: 2px;
+}
+
+.wid-auto{
+	width:auto !important;
+}
+
+.flex-center{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.text-right{
+	text-align:right !important;
+}
+.jf-space-around{
+	justify-content: space-around !important;
+}
+.jf-left{
+	justify-content: flex-start !important;
+}
+.margin-left{
+	margin-left:auto !important;
+}
+.vertical-center{
+	display:flex;
+	align-items: center !important;
+}
+
+
+
+/* 아이콘  */
+.amadeus i {
+	font-size: 0.9rem;
+}
+
+/*파토스 체크박스*/
+
+label.pathos{
+	margin:0 0.3rem;
+	width:18px;
+	height:18px;
+}
+
+label.pathos-on{
+	content: url('../icons/pathos-on.svg');
+	filter: invert(8%) sepia(90%) saturate(3003%) hue-rotate(345deg) brightness(108%) contrast(94%);
+}
+label.pathos-off{
+	content: url('../icons/pathos-off.svg');
+}
+
+input.pathos{
+	display:none;
+}
+
+.actor-sheet-header{
+	margin: 0 10px;
+	grid-template-columns: 170px 120px repeat(3, 1fr);
+	grid-template-rows: repeat(4, 40px);
+	grid-template-areas:
+  "profile-img charname charname charjob actor-color"
+  "profile-img parent-img . . actor-color"
+  "profile-img parent-img . . ."
+  "profile-img parent-img . . .";
+}
+.actor-sheet-header > div{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	/*  border: 1px solid #999; */
+	background-color: rgba(255,255,255,0.2);
+	border-radius:5px;
+	padding: 2px;
+}
+.chardata > input[type="text"],.chardata > input[type="number"]{
+	position:relative;
+	width:calc(70% - 2px);
+}
+.chardata > input[type="text"].min,.chardata > input[type="number"].min{
+	position:relative;
+	width:calc(50% - 2px);
+}
+.chardata > label {
+	width: calc(30%);
+	text-align: center;
+	font-weight: bold;
+}
+img.profile-img{
+	width:160px !important;
+	height:160px !important;
+}
+.profile-img{
+	grid-area: profile-img;
+	margin-right: 10px;
+}
+.parent-img{
+	grid-area: parent-img;
+}
+img.parent-img{
+	width:120px !important;
+	height:120px !important;
+}
+.charname {
+	grid-area:charname;
+}
+.charname > input[type="text"] {
+	width: -webkit-fill-available;
+	height: -webkit-fill-available;
+	font-size: x-large;
+}
+.actor-color{
+	grid-area:actor-color;
+}
+
+.chardata-group-bottom{
+	margin: 0 10px;
+	grid-template-columns: 2fr 10px 3fr 2fr;
+	grid-template-areas: "left-side middle-side right-side memo-side";
+}
+.dchp-grid > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/*  border: 1px solid #999; */
+	background-color: rgba(255,255,255,0.2);
+	border-radius:5px;
+	padding: 2px;
+	padding: 2px;
+}
+.chardata-group-bottom > .left-side{grid-area:left-side;}
+.chardata-group-bottom > .right-side{grid-area:right-side;height:inherit;}
+.chardata-group-bottom > .middle-side{grid-area:middle-side;}
+.chardata-group-bottom > .memo-side{
+	grid-area:memo-side; /*  border: 1px solid #999; */
+	background-color: rgba(255,255,255,0.2);
+	border-radius:5px;
+	padding: 2px;}
+
+.chardata-group-bottom .dchp-grid{
+	margin: 0;
+	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-areas:
+          "actor-dc actor-dc actor-dc"
+          "actor-hp actor-hp actor-hp-max"
+          "hp-vital hp-vital hp-vital";
+}
+div.actor-dc{  grid-area:actor-dc;}
+div.actor-dc-btn{  grid-area:actor-dc-btn;}
+div.actor-hp{  grid-area:actor-hp;}
+div.actor-hp-max{  grid-area:actor-hp-max;}
+div.hp-vital{ grid-area:hp-vital;}
+.right-side div{
+
+}
+.chardata-group-bottom .badstatus-grid{
+	margin: 0 10px;
+	grid-template-columns: repeat(3, 1fr);
+	height:100%;
+}
+div.badstatus{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #999;
+
+	background-color: rgba(255,255,255,0.2);
+	border-radius:5px;
+	padding: 2px;
+	padding: 2px;
+}
+
+.ability-label {
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+label.aility-label {
+	font-size:1.5rem;
+	font-weight:bold;
+}
+.ability select{
+	width: 40%;
+}
+div.ability{
+	/*  border: 1px solid #999; */
+	background-color: rgba(255,255,255,0.2);
+	border-radius:5px;
+	padding: 2px;
+	width: 60%;
+}
+div.abilities{gap:10px 0;}
+
+div.gift-grid {
+	display: grid;
+	grid-auto-rows: minmax(80px,auto);
+	grid-auto-flow: row;
+	gap: 10px;
+	grid-template-columns: 1fr 1fr;
+}
+section.sheet-body {
+	padding: 10px;
+}
+
+div.gift-card{
+	padding: 5px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-areas:
+          "gift-name gift-name gift-controls"
+          "gift-type gift-requirement gift-roll"
+          "gift-hidden gift-hidden gift-hidden";
+	border: 2px solid #999;
+	align-items: center;
+	grid-template-rows: 30px 30px auto;
+}
+.gift-card div.gift-name{grid-area:gift-name;}
+.gift-card div.gift-controls{grid-area:gift-controls;}
+.gift-card div.gift-type{grid-area:gift-type;}
+.gift-card div.gift-requirement{grid-area:gift-requirement;}
+.gift-card div.roll{grid-area:gift-roll;}
+.gift-card div.gift-hidden{grid-area:gift-hidden;}
+
+
+
+.content-visible {display:block;}
+.content-hidden {display:none;}
+.gift-hidden {display:none }
+.gift-controls{ text-align: right;}
+.gift-card >div{margin: 2px;}
+.gift-card i{margin: 0 0.2rem;}
+
+
+.gift-type, .gift-requirement, .gift-abl { text-align: center;}
+i.item-rollcard {  float: right;}
+.gift-check.gift-controls > i, .gift-check.gift-controls > a {
+	display: inline-block;
+	text-align: right;
+	vertical-align: middle;
+}
+
+div.gift-sheet-header{
+	padding: 2px;
+	grid-template-columns: 1fr 2fr 1fr;
+	grid-template-rows: 80px 40px;
+}
+.gift-sheet-header > div {
+	border: 1px solid #999;
+}
+.gift-sheet-header div.gift-sheet-name {
+	grid-column: 1 / span 3;
+	grid-row: 1 / span 1;
+}
+.gift-sheet-name > input[type="text"]{
+	width:calc(80%);
+}
+/*.gift-sheet-chkbox.active{display:block;}*/
+.gift-sheet-chkbox {display:none;}
+
+.gift-sheet-body .gift-effect{
+	height:300px;
+	background-color:rgba(255,255,255,0.3);
+	margin:10px;
+	border-radius: 15px;
+	padding:15px;
+}
+
+.gift-sheet-body .gift-description{
+	height:150px;
+	background-color:rgba(255,255,255,0.3);
+	margin:10px;
+	border-radius: 10px;
+	padding:10px;
+}
+.gift-sheet-header input,.gift-sheet-header select {
+	width:calc(70% - 2px);
+}
+.gift-sheet-header  label {
+	width: calc(25%);
+	text-align: center;
+	display: inline-block;
+	font-weight: bold;
+}
+.gift-sheet-body  label {
+	width: calc(15%);
+	text-align: center;
+	display: inline-block;
+	font-weight: bold;
+}
+.gift-sheet-body input {
+	width:calc(80% - 2px);
+}
+
+.item.gear {
+	width: 90%;
+}
+
+div.itemtab-grid{
+	display: grid;
+	grid-gap: 15px;
+	padding: 10px;
+	grid-template-columns: 3fr 1fr;
+}
+
+div.item-card{
+	padding: 2px;
+	grid-template-columns: 2fr repeat(3, 1fr);
+	height:40px;
+	border:1px solid #999;
+}
+
+.item-card > div{margin: 2px; display:flex; align-items:center; justify-content: center;}
+.item-card i{margin: 0 0.2rem;}
+.food-quantity input{width:2rem;}
+.item-card .item-name{padding-left:0.5rem;}
+
+
+div.item-sheet-header{
+	padding: 2px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 80px 40px;
+}
+.item-sheet-header > div{
+	border:1px solid #999;
+}
+.item-sheet-header div.item-sheet-name {
+	grid-column: 1 / span 3;
+	grid-row: 1 / span 1;
+}
+.item-sheet-name > input[type="text"]{
+	width:calc(80%);
+}
+
+.item-sheet-header input,.item-sheet-header select {
+	width:calc(70% - 2px);
+}
+.item-sheet-header  label {
+	width: calc(25%);
+	text-align: center;
+	display: inline-block;
+	font-weight: bold;
+}
+.item-sheet-body  label {
+	width: calc(15%);
+	text-align: center;
+	display: inline-block;
+	font-weight: bold;
+}
+.item-sheet-body input {
+	width:calc(80% - 2px);
+}
+.item-sheet-body .item-effect{
+	height:300px;
+	background-color:rgba(255,255,255,0.3);
+	margin:10px;
+	border-radius: 15px;
+	padding:15px;
+}
+
+.item-sheet-body .item-description{
+	height:150px;
+	background-color:rgba(255,255,255,0.3);
+	margin:10px;
+	border-radius: 10px;
+	padding:10px;
+}
+i.item-chk{ float:right; margin-right:5px;}
+/*.open-item{ float:right; margin-right:5px;}*/
+/*margin-left: auto;*/
+
+a.editor-edit {
+	display:block;
+}
+.editor {
+	height: 100%;
+}
+.editor-content {
+	padding-top: 25px;
+}
+i.amade-d6{font-size: 40px}
+
+.data-gift-chatcard-top{
+	margin: 0 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: repeat(2, 30px);
+}
+.data-gift-chatcard-top>div{
+	display:flex;justify-content:center;align-items:center;/*fcc*/
+	border:1px solid #999;}
+
+.data-gift-chatcard-top .gift-name{
+	grid-column: 1 / span 3;
+	grid-row: 1 / span 1;
+}
+.data-gift-chatcard-bottom{ margin: 5px 10px;}
+.data-gift-chatcard-bottom>div{border:1px solid #999;}
+.data-gift-chatcard-bottom .gift-effect{padding:10px;}
+
+.chatcard label{
+	margin: 0 10px;
+}
+
+.data-item-chatcard-top{
+	margin: 0 10px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: repeat(2, 30px);
+}
+.data-item-chatcard-top>div{
+	display:flex;justify-content:center;align-items:center;/*fcc*/
+	border:1px solid #999;}
+
+.data-item-chatcard-top .item-name{
+	grid-column: 1 / span 3;
+	grid-row: 1 / span 1;
+}
+
+.data-item-chatcard-bottom{ margin: 5px 10px;}
+.data-item-chatcard-bottom>div{border:1px solid #999;}
+.chatcard label{
+	margin: 0 10px;
+}
+
+
+.bond-card{
+	grid-template-columns: 3fr 40px 60px 2fr;
+	grid-template-rows:minmax(30px,auto);
+}
+
+.bond-card > div{
+	display:flex;
+	align-items: center;
+	padding:2px;
+	border:1px solid #999;
+}
+.bond-card .bond-name input{
+	width:calc(80%);
+}
+.bond-card .bond-name input[type="checkbox"]{
+	width:20px;
+}
+
+
+.supporter-card{
+	grid-template-columns:3fr+40px 60px 2fr;
+	grid-template-rows:minmax(30px,auto);
+
+}
+.supporter-card .supporter-name{
+	grid-column:1 / span 2;
+}
+.supporter-card > div{
+	display:flex;
+	align-items: center;
+	padding:2px;
+	border:1px solid #999;
+}
+.supporter-card .supporter-name input{
+	width:calc(80%);
+}
+.supporter-card .supporter-name input[type="checkbox"]{
+	width:20px;
+}
+
+/*부모신시트*/
+
+.parent-sheet-body{
+	grid-template-columns: 1fr 2fr 2fr;
+}
+.parent-sheet-name{
+	grid-column : 1 / span 3;
+	grid-row : 1/ span 1;
+}
+.parent-sheet-authority{
+	grid-column : 1 / span 3;
+	grid-row: 3 / span 1;
+}
+.parent-sheet-ability-grid{
+	grid-column: 1 / span 3;
+	grid-row: 4 / span 1;
+	grid-template-columns: repeat(6, 1fr);
+}
+.parent-sheet-description{
+	grid-column:1 / span 3;
+	grid-row: 5 / span 1;
+}
+
+.parent-sheet input{
+	width:70%;
+}
+
+
+
+
+.grid{
+	display:grid
+}
+.treasure-grid, .memory-grid{
+	grid-template-columns: repeat(3, 1fr);
+}
+.treasure-list-control, .memory-list-control{
+	float:right;
+}
+.treasure-header, .memory-header{height:50px; border: 2px solid #999;}
+.treasure-list div, .memory-list div{text-align:center;}
+.treasure-body, .memory-island, .memory-mission{text-align:left !important;}
+.memory-date, .memory-completed{text-align:right !important;}
+.memory-date>input {  width: 50px;}
+
+.badstatus input[type="checkbox"]{display:none;}
+.badstatus.checked{background-color :rgba(0,0,0,0.5); color:#ffffff}
+.badstatus .bs-input {width:1rem; }
+input.bs-input{border: none;background: none;}
+input.bs-input.checked{color:#ffffff;border:none;background: none;}
+textarea{width : 100%; height : 100%;}
+.biography {height : 300px;}
+
+.amadeus.sheet.actor section.window-content{
+	background: url('../icons/amade-bg-center.png') center no-repeat, url('../icons/amade-bg-top.png') top no-repeat, url('../icons/amade-bg-bottom.png') bottom no-repeat ;
+	background-size: contain, contain, contain;
+	background-color:rgb(1,19,39);
+}
+
+.amadeus input {
+	background-color: rgba(66,66,66,0.7);
+	color: white;
+}
+
+.amadeus div {
+	color: white;
+}
+
+/*# sourceMappingURL=amadeus.css.map */

@@ -1,314 +1,314 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 @font-face {
-	font-family: "RIDIBatang";
-	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff") format("woff");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "RIDIBatang";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
-	font-family: "GyeonggiBatang";
-	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff") format("woff");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "GyeonggiBatang";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 .color-d1, .dNum-1 {
-	color: black;
+  color: black;
 }
 
 .color-d2, .dNum-2 {
-	color: darkred;
+  color: darkred;
 }
 
 .color-d3, .dNum-3 {
-	color: #113285;
+  color: #113285;
 }
 
 .color-d4, .dNum-4 {
-	color: darkgreen;
+  color: darkgreen;
 }
 
 .color-d5, .dNum-5 {
-	color: #aaaaaa;
+  color: #aaaaaa;
 }
 
 .color-d6, .dNum-6 {
-	color: #e8b647;
+  color: #e8b647;
 }
 
 .content-visible {
-	display: block;
+  display: block;
 }
 
 .content-hidden {
-	display: none;
+  display: none;
 }
 
 /* Global styles */
 .amadeus {
-	font-family: "GyeonggiBatang", sans-serif;
+  font-family: "GyeonggiBatang", sans-serif;
 }
 
 .amadeus input, .amadeus textarea, .amadeus .gift-effect {
-	font-family: "RIDIBatang", sans-serif;
+  font-family: "RIDIBatang", sans-serif;
 }
 
 .rollable:hover, .rollable:focus {
-	color: #000;
-	text-shadow: 0 0 10px #011327;
-	cursor: pointer;
+  color: #000;
+  text-shadow: 0 0 10px #011327;
+  cursor: pointer;
 }
 
 .grid {
-	display: grid;
-	padding: 2px;
+  display: grid;
+  padding: 2px;
 }
 
 .gift-chatcard-top {
-	margin: 0 10px;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: repeat(2, 30px);
+  margin: 0 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(2, 30px);
 }
 
 .gift-chatcard-top > div {
-	display: flex;
-	justify-content: center;
-	align-items: center; /*fcc*/
-	border: 1px solid #999;
+  display: flex;
+  justify-content: center;
+  align-items: center; /*fcc*/
+  border: 1px solid #999;
 }
 
 .gift-name {
-	grid-column: 1/span 3;
-	grid-row: 1/span 1;
+  grid-column: 1/span 3;
+  grid-row: 1/span 1;
 }
 
 .gift-chatcard-bottom {
-	display: grid;
-	grid-gap: 1px;
-	margin: 10px 10px;
-	grid-template-columns: 1fr;
-	grid-template-rows: 80px 30px;
+  display: grid;
+  grid-gap: 1px;
+  margin: 10px 10px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 30px;
 }
 
 .gift-chatcard-bottom > div {
-	border: 1px solid #999;
+  border: 1px solid #999;
 }
 
 .gift-effect {
-	grid-column: 1/span 3;
-	grid-row: 1/span 1;
-	padding: 10px;
+  grid-column: 1/span 3;
+  grid-row: 1/span 1;
+  padding: 10px;
 }
 
 .chatcard label {
-	margin: 0 10px;
+  margin: 0 10px;
 }
 
 .grid-2col {
-	display: grid;
-	grid-column: span 2/span 2;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 10px;
-	margin: 10px 0;
-	padding: 0;
+  display: grid;
+  grid-column: span 2/span 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 10px 0;
+  padding: 0;
 }
 
 .grid-3col {
-	grid-column: span 3/span 3;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-column: span 3/span 3;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-4col {
-	grid-column: span 4/span 4;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-column: span 4/span 4;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .grid-5col {
-	grid-column: span 5/span 5;
-	grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-column: span 5/span 5;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .grid-6col {
-	grid-column: span 6/span 6;
-	grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-column: span 6/span 6;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .grid-7col {
-	grid-column: span 7/span 7;
-	grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-column: span 7/span 7;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
 .grid-8col {
-	grid-column: span 8/span 8;
-	grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-column: span 8/span 8;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 
 .grid-9col {
-	grid-column: span 9/span 9;
-	grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-column: span 9/span 9;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
 }
 
 .grid-10col {
-	grid-column: span 10/span 10;
-	grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-column: span 10/span 10;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
 }
 
 .grid-11col {
-	grid-column: span 11/span 11;
-	grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-column: span 11/span 11;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
 }
 
 .grid-12col {
-	grid-column: span 12/span 12;
-	grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-column: span 12/span 12;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 .grid-14col {
-	grid-column: span 14/span 14;
-	grid-template-columns: repeat(14, minmax(0, 1fr));
+  grid-column: span 14/span 14;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
 }
 
 .grid-start-2 {
-	grid-column-start: 2;
+  grid-column-start: 2;
 }
 
 .grid-start-3 {
-	grid-column-start: 3;
+  grid-column-start: 3;
 }
 
 .grid-start-4 {
-	grid-column-start: 4;
+  grid-column-start: 4;
 }
 
 .grid-start-5 {
-	grid-column-start: 5;
+  grid-column-start: 5;
 }
 
 .grid-start-6 {
-	grid-column-start: 6;
+  grid-column-start: 6;
 }
 
 .grid-start-7 {
-	grid-column-start: 7;
+  grid-column-start: 7;
 }
 
 .grid-start-8 {
-	grid-column-start: 8;
+  grid-column-start: 8;
 }
 
 .grid-start-9 {
-	grid-column-start: 9;
+  grid-column-start: 9;
 }
 
 .grid-start-10 {
-	grid-column-start: 10;
+  grid-column-start: 10;
 }
 
 .grid-start-11 {
-	grid-column-start: 11;
+  grid-column-start: 11;
 }
 
 .grid-start-12 {
-	grid-column-start: 12;
+  grid-column-start: 12;
 }
 
 .grid-span-2 {
-	grid-column-end: span 2;
+  grid-column-end: span 2;
 }
 
 .grid-span-3 {
-	grid-column-end: span 3;
+  grid-column-end: span 3;
 }
 
 .grid-span-4 {
-	grid-column-end: span 4;
+  grid-column-end: span 4;
 }
 
 .grid-span-5 {
-	grid-column-end: span 5;
+  grid-column-end: span 5;
 }
 
 .grid-span-6 {
-	grid-column-end: span 6;
+  grid-column-end: span 6;
 }
 
 .grid-span-7 {
-	grid-column-end: span 7;
+  grid-column-end: span 7;
 }
 
 .grid-span-8 {
-	grid-column-end: span 8;
+  grid-column-end: span 8;
 }
 
 .grid-span-9 {
-	grid-column-end: span 9;
+  grid-column-end: span 9;
 }
 
 .grid-span-10 {
-	grid-column-end: span 10;
+  grid-column-end: span 10;
 }
 
 .grid-span-11 {
-	grid-column-end: span 11;
+  grid-column-end: span 11;
 }
 
 .grid-span-12 {
-	grid-column-end: span 12;
+  grid-column-end: span 12;
 }
 
 .flex-group-center,
 .flex-group-left,
 .flex-group-right {
-	justify-content: center;
-	align-items: center;
-	text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .flex-group-left {
-	justify-content: flex-start;
-	text-align: left;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .flex-group-right {
-	justify-content: flex-end;
-	text-align: right;
+  justify-content: flex-end;
+  text-align: right;
 }
 
 .flexshrink {
-	flex: 0;
+  flex: 0;
 }
 
 .flex-between {
-	justify-content: space-between;
+  justify-content: space-between;
 }
 
 .flexlarge {
-	flex: 2;
+  flex: 2;
 }
 
 .align-left {
-	justify-content: flex-start;
-	text-align: left;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .align-right {
-	justify-content: flex-end;
-	text-align: right;
+  justify-content: flex-end;
+  text-align: right;
 }
 
 .align-center {
-	justify-content: center;
-	text-align: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Styles limited to amadeus sheets */
 .amadeus .item-form {
-	font-family: "GyeonggiBatang", sans-serif;
+  font-family: "GyeonggiBatang", sans-serif;
 }
 .amadeus i {
-	font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 .amadeus a:hover {
-	text-shadow: 0 0 8px #011327;
+  text-shadow: 0 0 8px #011327;
 }
 .amadeus input[type=text]:focus,
 .amadeus input[type=number]:focus,
@@ -316,887 +316,887 @@
 .amadeus input[type=date]:focus,
 .amadeus input[type=time]:focus,
 .amadeus input[type=search]:focus {
-	border: 2px solid #011327;
+  border: 2px solid #011327;
 }
 .amadeus input[type=checkbox] {
-	vertical-align: middle;
+  vertical-align: middle;
 }
 .amadeus div.actor-dc input[type=number]::-webkit-inner-spin-button,
 .amadeus div.actor-dc input[type=number]::-webkit-outer-spin-button, .amadeus div.bond-score input[type=number]::-webkit-inner-spin-button,
 .amadeus div.bond-score input[type=number]::-webkit-outer-spin-button, .amadeus div.supporter-score input[type=number]::-webkit-inner-spin-button,
 .amadeus div.supporter-score input[type=number]::-webkit-outer-spin-button, .amadeus div.actor-hp input[type=number]::-webkit-inner-spin-button,
 .amadeus div.actor-hp input[type=number]::-webkit-outer-spin-button {
-	-webkit-appearance: inner-spin-button !important;
-	opacity: 1 !important;
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 100%;
+  -webkit-appearance: inner-spin-button !important;
+  opacity: 1 !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
 }
 .amadeus button {
-	background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.9);
 }
 .amadeus button:hover, .amadeus button:focus {
-	box-shadow: 0 0 5px #FAFAFA;
+  box-shadow: 0 0 5px #FAFAFA;
 }
 .amadeus label.pathos {
-	margin: 0 0.3rem;
-	width: 18px;
-	height: 18px;
+  margin: 0 0.3rem;
+  width: 18px;
+  height: 18px;
 }
 .amadeus label.pathos-on {
-	content: url("../icons/pathos-on.svg");
-	filter: invert(8%) sepia(90%) saturate(3003%) hue-rotate(345deg) brightness(108%) contrast(94%);
+  content: url("../icons/pathos-on.svg");
+  filter: invert(8%) sepia(90%) saturate(3003%) hue-rotate(345deg) brightness(108%) contrast(94%);
 }
 .amadeus label.pathos-off {
-	content: url("../icons/pathos-off.svg");
+  content: url("../icons/pathos-off.svg");
 }
 .amadeus input.pathos {
-	display: none;
+  display: none;
 }
 .amadeus .default-div, .amadeus .sheet-body .supporter-card > div, .amadeus .sheet-body .bond-card > div, .amadeus .sheet-body .itemtab-grid .item-card > div, .amadeus .chardata-group-bottom .right-side .badstatus-grid > div, .amadeus aside.sidebar, .amadeus .sheet-header .actor-sheet-header > div {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: rgba(255, 255, 255, 0.7);
-	padding: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 1px;
 }
 .amadeus .sheet-header .actor-sheet-header img {
-	margin: auto;
-	border: none;
+  margin: auto;
+  border: none;
 }
 .amadeus .sheet-header .actor-sheet-header img.profile-img {
-	width: 160px;
-	height: 160px;
+  width: 160px;
+  height: 160px;
 }
 .amadeus .sheet-header .actor-sheet-header img.parent-img {
-	width: 120px;
-	height: 120px;
+  width: 120px;
+  height: 120px;
 }
 .amadeus .sheet-header {
-	flex: 0 auto;
-	overflow: hidden;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	margin: 20px;
+  flex: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 20px;
 }
 .amadeus .sheet-header .actor-sheet-header {
-	margin: 0 10px;
-	grid-template-columns: 170px 120px repeat(3, 1fr);
-	grid-template-rows: repeat(4, 40px);
-	grid-template-areas: "profile-img charname charname charjob actor-color" "profile-img parent-img . . actor-color" "profile-img parent-img . . ." "profile-img parent-img . . .";
-	grid-gap: 6px;
+  margin: 0 10px;
+  grid-template-columns: 170px 120px repeat(3, 1fr);
+  grid-template-rows: repeat(4, 40px);
+  grid-template-areas: "profile-img charname charname charjob actor-color" "profile-img parent-img . . actor-color" "profile-img parent-img . . ." "profile-img parent-img . . .";
+  grid-gap: 6px;
 }
 .amadeus .sheet-header .actor-sheet-header .profile-img {
-	grid-area: profile-img;
+  grid-area: profile-img;
 }
 .amadeus .sheet-header .actor-sheet-header .parent-img {
-	grid-area: parent-img;
+  grid-area: parent-img;
 }
 .amadeus .sheet-header .actor-sheet-header .charname {
-	grid-area: charname;
+  grid-area: charname;
 }
 .amadeus .sheet-header .actor-sheet-header .charjob {
-	grid-area: charjob;
+  grid-area: charjob;
 }
 .amadeus .sheet-header .actor-sheet-header .actor-color {
-	grid-area: actor-color;
-	justify-content: center;
-	display: flex;
-	flex-direction: column;
+  grid-area: actor-color;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 .amadeus .sheet-header .actor-sheet-header .actor-color .chardata-color-label {
-	font-weight: bold;
+  font-weight: bold;
 }
 .amadeus .sheet-header .actor-sheet-header .actor-color .actor-color-select {
-	width: 100%;
-	padding: 10px;
+  width: 100%;
+  padding: 10px;
 }
 .amadeus .sheet-header .actor-sheet-header .actor-color select {
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	background-color: rgba(255, 255, 255, 0.3);
-	border: none;
-	border-radius: 5px;
-	font-size: 2rem;
-	padding: 5px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 5px;
+  font-size: 2rem;
+  padding: 5px;
 }
 .amadeus .sheet-header .actor-sheet-header .actor-color optgroup {
-	font-size: 1rem;
-	text-align: center;
+  font-size: 1rem;
+  text-align: center;
 }
 .amadeus .sheet-header .actor-sheet-header > div {
-	border-radius: 5px;
-	justify-content: space-evenly;
+  border-radius: 5px;
+  justify-content: space-evenly;
 }
 .amadeus .sheet-header .actor-sheet-header input {
-	height: 90%;
-	padding: 5px;
-	border: none;
-	background-color: rgba(255, 255, 255, 0.7);
+  height: 90%;
+  padding: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .amadeus .sheet-header .actor-sheet-header .charname > input[type=text] {
-	width: 100%;
-	height: 100%;
-	font-size: 1.6rem;
-	font-weight: bold;
+  width: 100%;
+  height: 100%;
+  font-size: 1.6rem;
+  font-weight: bold;
 }
 .amadeus .sheet-header .actor-sheet-header .chardata > input {
-	position: relative;
-	width: calc(70% - 2px);
+  position: relative;
+  width: calc(70% - 2px);
 }
 .amadeus .sheet-header .actor-sheet-header .chardata label {
-	width: 30%;
-	text-align: center;
-	font-weight: bold;
+  width: 30%;
+  text-align: center;
+  font-weight: bold;
 }
 .amadeus .sheet-header .actor-sheet-header .chardata label.pathos {
-	margin: 0 0.1rem;
-	height: 15px;
-	width: fit-content;
+  margin: 0 0.1rem;
+  height: 15px;
+  width: fit-content;
 }
 .amadeus .sheet-header .chardata-group-center {
-	display: flex;
+  display: flex;
 }
 .amadeus .sheet-header .center-detail {
-	flex: 1;
+  flex: 1;
 }
 .amadeus .sheet-header .header-fields {
-	flex: 1;
+  flex: 1;
 }
 .amadeus .sheet-header h1.charname {
-	height: 50px;
-	padding: 0;
-	margin: 5px 0;
-	border-bottom: 0;
+  height: 50px;
+  padding: 0;
+  margin: 5px 0;
+  border-bottom: 0;
 }
 .amadeus .sheet-header h1.charname input {
-	width: 100%;
-	height: 100%;
-	margin: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 .amadeus section.grid-6col {
-	margin: 5px 25px;
+  margin: 5px 25px;
 }
 .amadeus aside.sidebar {
-	background-color: unset;
+  background-color: unset;
 }
 .amadeus aside.sidebar .abilities {
-	background-color: rgba(255, 255, 255, 0.7);
-	border-radius: 5px;
-	width: 80%;
-	margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  width: 80%;
+  margin: 0 auto;
 }
 .amadeus aside.sidebar .abilities .ability-grid {
-	display: grid;
-	grid-gap: 1px;
-	padding: 2px;
-	grid-template-rows: 1.3rem 2.5rem 1.3rem;
-	font-size: 1.2rem;
-	border: 2px solid #011327;
-	margin: 10px;
-	border-radius: 5px;
+  display: grid;
+  grid-gap: 1px;
+  padding: 2px;
+  grid-template-rows: 1.3rem 2.5rem 1.3rem;
+  font-size: 1.2rem;
+  border: 2px solid #011327;
+  margin: 10px;
+  border-radius: 5px;
 }
 .amadeus aside.sidebar .abilities .ability-grid select {
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	background-color: rgba(255, 255, 255, 0.3);
-	border: none;
-	border-radius: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 0;
 }
 .amadeus aside.sidebar .abilities .ability-grid optgroup {
-	font-size: 1rem;
-	text-align: center;
+  font-size: 1rem;
+  text-align: center;
 }
 .amadeus aside.sidebar .abilities .ability-grid .ability-label {
-	text-align: center;
-	font-weight: bold;
+  text-align: center;
+  font-weight: bold;
 }
 .amadeus aside.sidebar .abilities .ability-grid .ability-value select {
-	font-size: 2rem;
+  font-size: 2rem;
 }
 .amadeus .chardata-group-bottom {
-	grid-template-columns: 2fr 5px 3fr 2fr;
-	grid-template-areas: "left-side middle-side right-side memo-side";
+  grid-template-columns: 2fr 5px 3fr 2fr;
+  grid-template-areas: "left-side middle-side right-side memo-side";
 }
 .amadeus .chardata-group-bottom .left-side {
-	grid-area: left-side;
+  grid-area: left-side;
 }
 .amadeus .chardata-group-bottom .left-side .dchp-grid {
-	margin: 0;
-	grid-template-columns: 1fr 2fr 1fr;
-	grid-template-rows: 1.2fr 1fr 1fr;
-	background-color: rgba(255, 255, 255, 0.7);
-	border-radius: 5px;
-	padding: 5px;
-	grid-template-areas: "actor-dc actor-dc actor-dc" "actor-hp actor-hp actor-hp-max" "hp-vital hp-vital hp-vital";
+  margin: 0;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1.2fr 1fr 1fr;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  padding: 5px;
+  grid-template-areas: "actor-dc actor-dc actor-dc" "actor-hp actor-hp actor-hp-max" "hp-vital hp-vital hp-vital";
 }
 .amadeus .chardata-group-bottom .left-side .dchp-grid input {
-	position: relative;
-	text-align: center;
+  position: relative;
+  text-align: center;
 }
 .amadeus .chardata-group-bottom .left-side .dchp-grid label {
-	font-weight: bold;
+  font-weight: bold;
 }
 .amadeus .chardata-group-bottom .left-side div.actor-dc {
-	grid-area: actor-dc;
-	display: flex;
-	font-size: 1.2rem;
-	font-weight: bold;
-	text-align: center;
+  grid-area: actor-dc;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
 }
 .amadeus .chardata-group-bottom .left-side div.actor-dc input {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .chardata-group-bottom .left-side div.actor-dc-btn {
-	grid-area: actor-dc-btn;
+  grid-area: actor-dc-btn;
 }
 .amadeus .chardata-group-bottom .left-side div.actor-hp {
-	grid-area: actor-hp;
-	display: flex;
-	font-weight: bold;
+  grid-area: actor-hp;
+  display: flex;
+  font-weight: bold;
 }
 .amadeus .chardata-group-bottom .left-side div.actor-hp input {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .chardata-group-bottom .left-side div.actor-hp .divider {
-	display: inline-block;
+  display: inline-block;
 }
 .amadeus .chardata-group-bottom .left-side div.actor-hp-max {
-	grid-area: actor-hp-max;
+  grid-area: actor-hp-max;
 }
 .amadeus .chardata-group-bottom .left-side div.actor-hp-max input {
-	width: 3rem;
+  width: 3rem;
 }
 .amadeus .chardata-group-bottom .left-side div.hp-vital {
-	grid-area: hp-vital;
+  grid-area: hp-vital;
 }
 .amadeus .chardata-group-bottom .left-side div.hp-vital input {
-	width: 1.5rem;
+  width: 1.5rem;
 }
 .amadeus .chardata-group-bottom .left-side .dchp-label, .amadeus .chardata-group-bottom .left-side .divider {
-	flex-shrink: 0;
-	margin: 5px;
+  flex-shrink: 0;
+  margin: 5px;
 }
 .amadeus .chardata-group-bottom .right-side {
-	grid-area: right-side;
-	height: inherit;
+  grid-area: right-side;
+  height: inherit;
 }
 .amadeus .chardata-group-bottom .right-side .badstatus-grid {
-	margin: 0 0;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 2px;
-	height: 100%;
-	font-size: 1.1rem;
-	font-weight: bold;
+  margin: 0 0;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2px;
+  height: 100%;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 .amadeus .chardata-group-bottom .right-side .badstatus-grid > div {
-	border-radius: 10px;
-	padding: 5px;
+  border-radius: 10px;
+  padding: 5px;
 }
 .amadeus .chardata-group-bottom .right-side .badstatus-grid .badstatus input[type=checkbox] {
-	display: none;
+  display: none;
 }
 .amadeus .chardata-group-bottom .right-side .badstatus-grid .badstatus.checked {
-	background-color: rgba(0, 0, 0, 0.5);
-	color: #ffffff;
-	border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  border: 1px solid white;
 }
 .amadeus .chardata-group-bottom .right-side .badstatus-grid .badstatus .bs-input {
-	width: 0.8rem;
+  width: 0.8rem;
 }
 .amadeus .chardata-group-bottom .right-side .badstatus-grid .badstatus input.bs-input {
-	border: none;
-	background-color: rgba(255, 255, 255, 0.3);
-	font-size: 1rem;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
 }
 .amadeus .chardata-group-bottom .right-side .badstatus-grid .badstatus input.bs-input.checked {
-	color: #ffffff;
-	border: none;
-	background: none;
+  color: #ffffff;
+  border: none;
+  background: none;
 }
 .amadeus .chardata-group-bottom .right-side .badstatus-grid .badstatus.bs-num {
-	justify-content: space-between;
+  justify-content: space-between;
 }
 .amadeus .chardata-group-bottom .middle-side {
-	grid-area: middle-side;
+  grid-area: middle-side;
 }
 .amadeus .chardata-group-bottom .memo-side {
-	grid-area: memo-side;
-	background-color: #ffffff;
-	padding: 2px;
+  grid-area: memo-side;
+  background-color: #ffffff;
+  padding: 2px;
 }
 .amadeus .chardata-group-bottom .memo-side textarea {
-	width: 100%;
-	height: 100%;
-	resize: none;
+  width: 100%;
+  height: 100%;
+  resize: none;
 }
 .amadeus .sheet-body {
-	padding: 10px;
+  padding: 10px;
 }
 .amadeus .sheet-body .item.gear {
-	background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .amadeus .sheet-body .itemtab-grid {
-	display: grid;
-	grid-gap: 15px;
-	padding: 10px;
-	grid-template-columns: 3fr 1fr;
+  display: grid;
+  grid-gap: 15px;
+  padding: 10px;
+  grid-template-columns: 3fr 1fr;
 }
 .amadeus .sheet-body .itemtab-grid .item-card {
-	padding: 1px;
-	grid-template-columns: 2fr repeat(3, 1fr);
-	grid-gap: 0;
-	height: 40px;
+  padding: 1px;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  grid-gap: 0;
+  height: 40px;
 }
 .amadeus .sheet-body .itemtab-grid .item-card .i {
-	margin: 0 0.2rem;
+  margin: 0 0.2rem;
 }
 .amadeus .sheet-body .itemtab-grid .item-card .food-quantity input {
-	width: 2rem;
+  width: 2rem;
 }
 .amadeus .sheet-body .itemtab-grid .item-card .item-name {
-	padding-left: 0.5rem;
+  padding-left: 0.5rem;
 }
 .amadeus .sheet-body .itemtab-grid .item-card a.item-name {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .sheet-body .itemtab-grid .item-card .item-controls {
-	justify-content: space-evenly;
+  justify-content: space-evenly;
 }
 .amadeus .sheet-body .itemtab-grid .item-effect {
-	padding: 10px 20px;
+  padding: 10px 20px;
 }
 .amadeus .sheet-body .gift-grid {
-	display: grid;
-	grid-auto-rows: minmax(80px, auto);
-	grid-auto-flow: row;
-	gap: 10px;
-	grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-auto-rows: minmax(80px, auto);
+  grid-auto-flow: row;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
 }
 .amadeus .sheet-body .gift-grid .gift-card {
-	padding: 5px;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-areas: "gift-name gift-name gift-name" "gift-type gift-requirement gift-roll" "gift-hidden gift-hidden gift-hidden";
-	border: 2px solid #999;
-	border-radius: 10px;
-	align-items: center;
-	grid-template-rows: 30px 30px auto;
-	background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "gift-name gift-name gift-name" "gift-type gift-requirement gift-roll" "gift-hidden gift-hidden gift-hidden";
+  border: 2px solid #999;
+  border-radius: 10px;
+  align-items: center;
+  grid-template-rows: 30px 30px auto;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-name {
-	grid-area: gift-name;
-	font-size: 1.1rem;
-	font-weight: bold;
-	display: flex;
+  grid-area: gift-name;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-name a {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-controls {
-	flex-shrink: 0;
+  flex-shrink: 0;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-type {
-	grid-area: gift-type;
+  grid-area: gift-type;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-requirement {
-	grid-area: gift-requirement;
+  grid-area: gift-requirement;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-type, .amadeus .sheet-body .gift-grid .gift-card .gift-requirement, .amadeus .sheet-body .gift-grid .gift-card .gift-abl {
-	height: 100%;
-	background-color: rgba(255, 255, 255, 0.3);
-	margin: 1px;
-	border-radius: 5px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 1px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .amadeus .sheet-body .gift-grid .gift-card .roll {
-	grid-area: gift-roll;
+  grid-area: gift-roll;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-hidden {
-	grid-area: gift-hidden;
-	display: none;
+  grid-area: gift-hidden;
+  display: none;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-hidden .gift-effect {
-	background-color: rgba(255, 255, 255, 0.7);
-	padding: 5px 10px;
-	border: 1px solid #999;
-	border-radius: 5px;
-	margin: 10px 2px;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px 10px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  margin: 10px 2px;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-hidden div {
-	display: flex;
-	align-items: center;
-	padding: 2px;
+  display: flex;
+  align-items: center;
+  padding: 2px;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-hidden div input {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-hidden div label {
-	flex-shrink: 0;
-	margin: 5px;
+  flex-shrink: 0;
+  margin: 5px;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-type, .amadeus .sheet-body .gift-grid .gift-card .gift-requirement, .amadeus .sheet-body .gift-grid .gift-card .gift-abl {
-	text-align: center;
+  text-align: center;
 }
 .amadeus .sheet-body .gift-grid .gift-card .gift-formula {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 .amadeus .sheet-body .gift-grid .gift-card i {
-	margin: 0 0.2rem;
+  margin: 0 0.2rem;
 }
 .amadeus .sheet-body .gift-grid .gift-card i .item-rollcard {
-	float: right;
+  float: right;
 }
 .amadeus .sheet-body .bond-top, .amadeus .sheet-body .bond-bottom {
-	padding: 5px;
-	background-color: rgba(255, 255, 255, 0.7);
-	margin: 10px;
-	border-radius: 5px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin: 10px;
+  border-radius: 5px;
 }
 .amadeus .sheet-body .bond-header, .amadeus .sheet-body .supporter-header {
-	font-size: 1.2rem;
-	text-align: center;
-	font-weight: bold;
-	padding: 5px;
-	border-bottom: 1px solid #011327;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  border-bottom: 1px solid #011327;
 }
 .amadeus .sheet-body .bond-card {
-	grid-template-columns: 3fr 40px 60px 2fr;
-	grid-template-rows: minmax(30px, auto);
+  grid-template-columns: 3fr 40px 60px 2fr;
+  grid-template-rows: minmax(30px, auto);
 }
 .amadeus .sheet-body .bond-card > div {
-	background-color: transparent;
+  background-color: transparent;
 }
 .amadeus .sheet-body .bond-card .bond-name input {
-	flex-grow: 1;
-	padding: 5px;
-	margin: 3px;
+  flex-grow: 1;
+  padding: 5px;
+  margin: 3px;
 }
 .amadeus .sheet-body .bond-card .bond-relationship input {
-	padding: 5px;
-	margin: 3px;
+  padding: 5px;
+  margin: 3px;
 }
 .amadeus .sheet-body .bond-card input[type=checkbox] {
-	width: 20px;
+  width: 20px;
 }
 .amadeus .sheet-body .supporter-card {
-	grid-template-columns: 3fr 40px 60px 2fr;
-	grid-template-rows: minmax(30px, auto);
+  grid-template-columns: 3fr 40px 60px 2fr;
+  grid-template-rows: minmax(30px, auto);
 }
 .amadeus .sheet-body .supporter-card .supporter-name {
-	grid-column: 1/span 2;
+  grid-column: 1/span 2;
 }
 .amadeus .sheet-body .supporter-card > div {
-	background-color: transparent;
+  background-color: transparent;
 }
 .amadeus .sheet-body .supporter-card .supporter-name input {
-	flex-grow: 1;
-	padding: 5px;
-	margin: 3px;
+  flex-grow: 1;
+  padding: 5px;
+  margin: 3px;
 }
 .amadeus .sheet-body .supporter-card .supporter-relationship input {
-	padding: 5px;
-	margin: 3px;
+  padding: 5px;
+  margin: 3px;
 }
 .amadeus .sheet-body .supporter-card input[type=checkbox] {
-	width: 20px;
+  width: 20px;
 }
 .amadeus .sheet-body .biography {
-	height: 200px;
-	background-color: #FAFAFA;
-	padding: 10px;
-	margin: 10px;
-	border-radius: 10px;
+  height: 200px;
+  background-color: #FAFAFA;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
 }
 .amadeus .sheet-body .treasure-grid, .amadeus .sheet-body .memory-grid {
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 0;
-	background-color: rgba(255, 255, 255, 0.7);
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .amadeus .sheet-body .treasure-list-control, .amadeus .sheet-body .memory-list-control {
-	float: right;
-	margin: 0 10px;
+  float: right;
+  margin: 0 10px;
 }
 .amadeus .sheet-body .treasure-list-control a, .amadeus .sheet-body .memory-list-control a {
-	margin: 0 5px;
+  margin: 0 5px;
 }
 .amadeus .sheet-body .treasure-list, .amadeus .sheet-body .memory-list {
-	border: 1px solid #999;
-	line-height: 2;
-	background-color: rgba(255, 255, 255, 0.7);
-	margin: 10px;
+  border: 1px solid #999;
+  line-height: 2;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin: 10px;
 }
 .amadeus .sheet-body .treasure-list div, .amadeus .sheet-body .memory-list div {
-	text-align: center;
+  text-align: center;
 }
 .amadeus .sheet-body .treasure-list div .treasure-body, .amadeus .sheet-body .treasure-list div .memory-mission, .amadeus .sheet-body .memory-list div .treasure-body, .amadeus .sheet-body .memory-list div .memory-mission {
-	text-align: left;
+  text-align: left;
 }
 .amadeus .sheet-body .treasure-list div .memory-date, .amadeus .sheet-body .treasure-list div .memory-completed, .amadeus .sheet-body .memory-list div .memory-date, .amadeus .sheet-body .memory-list div .memory-completed {
-	text-align: right;
+  text-align: right;
 }
 .amadeus .sheet-body .treasure-list .treasure-header, .amadeus .sheet-body .treasure-list .memory-header, .amadeus .sheet-body .memory-list .treasure-header, .amadeus .sheet-body .memory-list .memory-header {
-	border: 1px solid #999;
-	background-color: #FAFAFA;
-	color: #011327;
-	height: 30px;
-	font-weight: bold;
+  border: 1px solid #999;
+  background-color: #FAFAFA;
+  color: #011327;
+  height: 30px;
+  font-weight: bold;
 }
 .amadeus .sheet-body .treasure-card, .amadeus .sheet-body .memory-card {
-	margin: 4px;
-	border: 2px solid #999;
-	background-color: #FAFAFA;
-	border-radius: 5px;
-	padding: 5px;
-	height: calc(100% - 8px);
+  margin: 4px;
+  border: 2px solid #999;
+  background-color: #FAFAFA;
+  border-radius: 5px;
+  padding: 5px;
+  height: calc(100% - 8px);
 }
 .amadeus .sheet-body .memory-date > input {
-	width: 50px;
+  width: 50px;
 }
 .amadeus .sheet-body .treasure-card-title, .amadeus .sheet-body .memory-card-title {
-	display: flex;
+  display: flex;
 }
 .amadeus .sheet-body .treasure-name, .amadeus .sheet-body .memory-name {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .sheet-body .treasure-card-body, .amadeus .sheet-body .memory-island {
-	background-color: #FAFAFA;
-	color: #011327;
-	border: 1px solid #999;
-	padding: 5px;
-	border-radius: 5px;
+  background-color: #FAFAFA;
+  color: #011327;
+  border: 1px solid #999;
+  padding: 5px;
+  border-radius: 5px;
 }
 .amadeus nav.sheet-tabs {
-	flex: 0;
-	background-color: rgba(255, 255, 255, 0.3);
-	color: #FAFAFA;
+  flex: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #FAFAFA;
 }
 .amadeus nav.sheet-tabs .active {
-	background-color: #FAFAFA;
-	color: #011327;
-	font-weight: bold;
-	font-size: larger;
-	border-radius: 5px;
-	text-shadow: none;
+  background-color: #FAFAFA;
+  color: #011327;
+  font-weight: bold;
+  font-size: larger;
+  border-radius: 5px;
+  text-shadow: none;
 }
 .amadeus nav.sheet-tabs a:hover.item {
-	text-shadow: none;
+  text-shadow: none;
 }
 .amadeus .sheet-body,
 .amadeus .sheet-body .tab,
 .amadeus .sheet-body .tab .editor {
-	height: 100%;
+  height: 100%;
 }
 .amadeus .tox .tox-editor-container {
-	background: #FAFAFA;
+  background: #FAFAFA;
 }
 .amadeus .tox .tox-edit-area {
-	padding: 0;
+  padding: 0;
 }
 .amadeus a.editor-edit {
-	display: block;
+  display: block;
 }
 .amadeus .editor {
-	height: 100%;
+  height: 100%;
 }
 .amadeus .editor-content {
-	padding-top: 25px;
+  padding-top: 25px;
 }
 .amadeus .gift-sheet label {
-	padding: 3px;
+  padding: 3px;
 }
 .amadeus .gift-sheet .gift-sheet-header {
-	padding: 2px;
-	grid-template-columns: 1fr 2fr 1fr;
+  padding: 2px;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 .amadeus .gift-sheet .gift-sheet-header > div {
-	padding: 5px;
+  padding: 5px;
 }
 .amadeus .gift-sheet .gift-sheet-header > div label {
-	flex-shrink: 0;
+  flex-shrink: 0;
 }
 .amadeus .gift-sheet .gift-sheet-header > div select, .amadeus .gift-sheet .gift-sheet-header > div input {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .gift-sheet .gift-sheet-header .gift-sheet-name {
-	grid-column: 1/span 3;
-	grid-row: 1/span 1;
+  grid-column: 1/span 3;
+  grid-row: 1/span 1;
 }
 .amadeus .gift-sheet .gift-sheet-header .gift-sheet-name .gift-sheet-chkbox {
-	display: none;
+  display: none;
 }
 .amadeus .gift-sheet .gift-sheet-header .gift-sheet-name label {
-	font-weight: bold;
+  font-weight: bold;
 }
 .amadeus .gift-sheet .gift-sheet-body .gift-effect {
-	height: 200px;
-	background-color: rgba(255, 255, 255, 0.3);
-	margin: 10px;
-	border: 1px solid #999;
-	border-radius: 15px;
-	padding: 15px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 10px;
+  border: 1px solid #999;
+  border-radius: 15px;
+  padding: 15px;
 }
 .amadeus .gift-sheet .gift-sheet-body .gift-description {
-	height: 100px;
-	background-color: rgba(255, 255, 255, 0.3);
-	margin: 10px;
-	border: 1px solid #999;
-	border-radius: 10px;
-	padding: 10px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 10px;
+  border: 1px solid #999;
+  border-radius: 10px;
+  padding: 10px;
 }
 .amadeus .gift-sheet .gift-sheet-body .gift-tag, .amadeus .gift-sheet .gift-sheet-body .gift-memo, .amadeus .gift-sheet .gift-sheet-body .gift-formula {
-	padding: 4px;
+  padding: 4px;
 }
 .amadeus .gift-sheet .gift-sheet-body .gift-tag label, .amadeus .gift-sheet .gift-sheet-body .gift-memo label, .amadeus .gift-sheet .gift-sheet-body .gift-formula label {
-	flex-shrink: 0;
+  flex-shrink: 0;
 }
 .amadeus .gift-sheet .gift-sheet-body .gift-tag input, .amadeus .gift-sheet .gift-sheet-body .gift-memo input, .amadeus .gift-sheet .gift-sheet-body .gift-formula input {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .gear-sheet label {
-	padding: 3px;
+  padding: 3px;
 }
 .amadeus .gear-sheet .item-sheet-header {
-	padding: 2px;
-	grid-template-columns: 1fr 1fr 1fr;
+  padding: 2px;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .amadeus .gear-sheet .item-sheet-header > div {
-	padding: 5px;
+  padding: 5px;
 }
 .amadeus .gear-sheet .item-sheet-header > div label {
-	flex-shrink: 0;
+  flex-shrink: 0;
 }
 .amadeus .gear-sheet .item-sheet-header > div select, .amadeus .gear-sheet .item-sheet-header > div input {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .gear-sheet .item-sheet-header .item-sheet-name {
-	grid-column: 1/span 3;
-	grid-row: 1/span 1;
+  grid-column: 1/span 3;
+  grid-row: 1/span 1;
 }
 .amadeus .gear-sheet .item-sheet-body .item-effect {
-	height: 200px;
-	background-color: rgba(255, 255, 255, 0.3);
-	margin: 10px;
-	border: 1px solid #999;
-	border-radius: 15px;
-	padding: 15px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 10px;
+  border: 1px solid #999;
+  border-radius: 15px;
+  padding: 15px;
 }
 .amadeus .gear-sheet .item-sheet-body .item-description {
-	height: 100px;
-	background-color: rgba(255, 255, 255, 0.3);
-	margin: 10px;
-	border: 1px solid #999;
-	border-radius: 10px;
-	padding: 10px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 10px;
+  border: 1px solid #999;
+  border-radius: 10px;
+  padding: 10px;
 }
 .amadeus .parent-sheet label {
-	padding: 3px;
+  padding: 3px;
 }
 .amadeus .parent-sheet .parent-sheet-body {
-	grid-template-columns: 130px 1fr 1fr;
+  grid-template-columns: 130px 1fr 1fr;
 }
 .amadeus .parent-sheet .parent-sheet-body > div {
-	padding: 3px;
+  padding: 3px;
 }
 .amadeus .parent-sheet .parent-sheet-body label {
-	flex-shrink: 0;
+  flex-shrink: 0;
 }
 .amadeus .parent-sheet .parent-sheet-body select, .amadeus .parent-sheet .parent-sheet-body input {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 .amadeus .parent-sheet .parent-sheet-name {
-	grid-column: 2/span 2;
-	grid-row: 1/span 1;
+  grid-column: 2/span 2;
+  grid-row: 1/span 1;
 }
 .amadeus .parent-sheet .grid.parent-sheet-ability-grid {
-	display: grid;
+  display: grid;
 }
 .amadeus .parent-sheet .grid.parent-sheet-ability-grid div {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	text-align: center;
-	align-items: stretch;
-	padding: 3px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  align-items: stretch;
+  padding: 3px;
 }
 .amadeus .parent-sheet .grid.parent-sheet-ability-grid div .parent-ability-label {
-	font-weight: bold;
+  font-weight: bold;
 }
 .amadeus .parent-sheet .parent-sheet-ability-grid {
-	grid-column: 1/span 3;
-	grid-row: 4/span 1;
-	grid-template-columns: repeat(6, 1fr);
+  grid-column: 1/span 3;
+  grid-row: 4/span 1;
+  grid-template-columns: repeat(6, 1fr);
 }
 .amadeus .parent-sheet .parent-image {
-	grid-column: 1/span 1;
-	grid-row: 5/span 1;
-	height: 300px;
+  grid-column: 1/span 1;
+  grid-row: 5/span 1;
+  height: auto;
 }
 .amadeus .parent-sheet .parent-portrait {
-	grid-column: 1/span 1;
-	grid-row: 1/span 3;
-	height: 120px;
+  grid-column: 1/span 1;
+  grid-row: 1/span 3;
+  height: auto;
 }
 .amadeus .parent-sheet .parent-sheet-description {
-	grid-column: 2/span 2;
-	grid-row: 5/span 2;
-	height: 300px;
+  grid-column: 2/span 2;
+  grid-row: 5/span 2;
+  height: 300px;
 }
 .amadeus .parent-sheet .parent-sheet-description .parent-description {
-	height: 100%;
-	width: 100%;
-	border: 1px solid #999;
-	padding: 3px;
-	border-radius: 5px;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #999;
+  padding: 3px;
+  border-radius: 5px;
 }
 .amadeus .effects .item .effect-source,
 .amadeus .effects .item .effect-duration,
 .amadeus .effects .item .effect-controls {
-	text-align: center;
-	border-left: 1px solid #c9c7b8;
-	border-right: 1px solid #c9c7b8;
-	font-size: 12px;
+  text-align: center;
+  border-left: 1px solid #c9c7b8;
+  border-right: 1px solid #c9c7b8;
+  font-size: 12px;
 }
 .amadeus .effects .item .effect-controls {
-	border: none;
+  border: none;
 }
 
 i.amade-d6 {
-	font-size: 40px;
+  font-size: 40px;
 }
 
 .chatcard label {
-	margin: 0 10px;
+  margin: 0 10px;
 }
 
 .total-center, .item-chatcard .data-item-chatcard-top > div, .gift-chatcard .data-gift-chatcard-top > div, .roll-abl-chatcard .roll-header > div, .amadeus .gift-sheet .gift-sheet-header > div, .amadeus .gift-sheet .gift-sheet-body .gift-tag, .amadeus .gift-sheet .gift-sheet-body .gift-memo, .amadeus .gift-sheet .gift-sheet-body .gift-formula, .amadeus .gear-sheet .item-sheet-header > div, .amadeus .parent-sheet .parent-sheet-body > div {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chatcard-label-group, .item-chatcard .data-item-chatcard-top .item-type, .item-chatcard .data-item-chatcard-top .item-price, .item-chatcard .data-item-chatcard-top .item-power, .gift-chatcard .data-gift-chatcard-top .gift-type, .gift-chatcard .data-gift-chatcard-top .gift-requirement, .gift-chatcard .data-gift-chatcard-top .gift-ability, .roll-abl-chatcard .roll-header .roll-dc, .roll-abl-chatcard .roll-header .rank, .roll-abl-chatcard .roll-header .mod {
-	flex-direction: row;
-	justify-content: space-around;
-	border: 1px solid #999;
-	border-radius: 5px;
-	background: rgba(0, 0, 0, 0.2);
-	height: 2rem;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  height: 2rem;
 }
 .chatcard-label-group .item-lbl, .item-chatcard .data-item-chatcard-top .item-type .item-lbl, .item-chatcard .data-item-chatcard-top .item-price .item-lbl, .item-chatcard .data-item-chatcard-top .item-power .item-lbl, .gift-chatcard .data-gift-chatcard-top .gift-type .item-lbl, .gift-chatcard .data-gift-chatcard-top .gift-requirement .item-lbl, .gift-chatcard .data-gift-chatcard-top .gift-ability .item-lbl, .roll-abl-chatcard .roll-header .roll-dc .item-lbl, .roll-abl-chatcard .roll-header .rank .item-lbl, .roll-abl-chatcard .roll-header .mod .item-lbl {
-	font-size: 0.8rem;
-	font-weight: normal;
+  font-size: 0.8rem;
+  font-weight: normal;
 }
 
 .roll-abl-chatcard {
-	background: rgba(255, 255, 255, 0.3);
-	box-shadow: 0 0 2px #fff inset;
-	border-radius: 15px;
-	border: 1px solid #999;
-	padding: 10px 5px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 2px #fff inset;
+  border-radius: 15px;
+  border: 1px solid #999;
+  padding: 10px 5px;
 }
 .roll-abl-chatcard .roll-header {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .roll-abl-chatcard .roll-header > div {
-	font-weight: bold;
-	margin: 3px;
+  font-weight: bold;
+  margin: 3px;
 }
 .roll-abl-chatcard .roll-header .abl-name {
-	grid-column: 1/span 3;
-	grid-row: 1/span 1;
-	font-size: 1.5rem;
-	margin: 5px;
+  grid-column: 1/span 3;
+  grid-row: 1/span 1;
+  font-size: 1.5rem;
+  margin: 5px;
 }
 .roll-abl-chatcard .dicset-area .die-result {
-	margin: 5px 0;
+  margin: 5px 0;
 }
 
 .gift-chatcard {
-	background: rgba(255, 255, 255, 0.3);
-	box-shadow: 0 0 2px #fff inset;
-	border-radius: 15px;
-	border: 1px solid #999;
-	padding: 10px 5px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 2px #fff inset;
+  border-radius: 15px;
+  border: 1px solid #999;
+  padding: 10px 5px;
 }
 .gift-chatcard .data-gift-chatcard-top {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .gift-chatcard .data-gift-chatcard-top > div {
-	font-weight: bold;
-	margin: 3px;
+  font-weight: bold;
+  margin: 3px;
 }
 .gift-chatcard .data-gift-chatcard-top .gift-name {
-	grid-column: 1/span 3;
-	grid-row: 1/span 1;
-	font-size: 1.5rem;
-	margin: 5px;
+  grid-column: 1/span 3;
+  grid-row: 1/span 1;
+  font-size: 1.5rem;
+  margin: 5px;
 }
 .gift-chatcard .data-gift-chatcard-bottom {
-	margin: 5px;
+  margin: 5px;
 }
 .gift-chatcard .data-gift-chatcard-bottom .gift-effect {
-	padding: 5px;
-	border-bottom: 1px solid #999;
+  padding: 5px;
+  border-bottom: 1px solid #999;
 }
 .gift-chatcard .data-gift-chatcard-bottom .gift-tag {
-	padding: 10px 5px 5px 5px;
+  padding: 10px 5px 5px 5px;
 }
 
 .item-chatcard {
-	background: rgba(255, 255, 255, 0.3);
-	box-shadow: 0 0 2px #fff inset;
-	border-radius: 15px;
-	border: 1px solid #999;
-	padding: 10px 5px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 2px #fff inset;
+  border-radius: 15px;
+  border: 1px solid #999;
+  padding: 10px 5px;
 }
 .item-chatcard .data-item-chatcard-top {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .item-chatcard .data-item-chatcard-top > div {
-	font-weight: bold;
-	margin: 3px;
+  font-weight: bold;
+  margin: 3px;
 }
 .item-chatcard .data-item-chatcard-top .item-name {
-	grid-column: 1/span 3;
-	grid-row: 1/span 1;
-	font-size: 1.5rem;
-	margin: 5px;
+  grid-column: 1/span 3;
+  grid-row: 1/span 1;
+  font-size: 1.5rem;
+  margin: 5px;
 }
 .item-chatcard .data-item-chatcard-bottom {
-	margin: 5px;
+  margin: 5px;
 }
 .item-chatcard .data-item-chatcard-bottom .item-effect {
-	padding: 5px;
-	border-bottom: 1px solid #999;
+  padding: 5px;
+  border-bottom: 1px solid #999;
 }
 .item-chatcard .data-item-chatcard-bottom .item-description {
-	padding: 10px 5px 5px 5px;
+  padding: 10px 5px 5px 5px;
 }
 
 .sheet.actor section.window-content {
-	background: url("../icons/amade-bg-center.png") center no-repeat, url("../icons/amade-bg-top.png") top no-repeat, url("../icons/amade-bg-bottom.png") bottom no-repeat;
-	background-size: contain, contain, contain;
-	background-color: #011327;
+  background: url("../icons/amade-bg-center.png") center no-repeat, url("../icons/amade-bg-top.png") top no-repeat, url("../icons/amade-bg-bottom.png") bottom no-repeat;
+  background-size: contain, contain, contain;
+  background-color: #011327;
 }
 .sheet.actor section.window-content input {
-	background-color: rgba(255, 255, 255, 0.3);
-	color: #011327;
-	border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #011327;
+  border: none;
 }
 
 /*# sourceMappingURL=amadeus.css.map */

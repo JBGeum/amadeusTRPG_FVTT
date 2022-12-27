@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
   <div class="gift-sheet">
-    <header class="sheet-header">
+    <div class="sheet-header">
       <div class="item grid gift-sheet-header" data-item-id="{{data._id}}">
         <div class="gift-sheet-name flex-center">
           <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
@@ -34,24 +34,24 @@
           </select>
         </div>
       </div>
-    </header>
+    </div>
 
-    <section class="sheet-body">
+    <div class="sheet-body">
       <div class="item gift-sheet-body" data-item-id="{{data._id}}">
+        <div class="gift-effect" title="효과">
+          {{editor system.effect target="system.effect" button=true editable=editable}}
+        </div>
+        <div class="gift-description" title="설명">
+          {{editor system.description target="system.description" button=true editable=editable}}
+        </div>
         <div class="gift-tag">
           <label class="gift-lbl">태그</label>
           <input type="text" name="system.tag" value="{{system.tag}}"/>
         </div>
-        <div class="gift-effect">
-          <label>효과</label>{{!-- 효과 --}}
-          {{editor system.effect target="system.effect" button=true editable=editable}}
-        </div>
-        <div class="gift-description">{{!-- 설명 --}}
-          {{editor system.description target="system.description" button=true editable=editable}}
-        </div>
         {{#if item.isOwned}}
         <div class="gift-formula">{{!-- 수식 --}}
-          <textarea class="gift-formula" data-path="system.formula">{{gift.system.formula}}</textarea>
+          <label>수식</label>
+          <input type="text" class="gift-formula" data-path="system.formula" value="{{gift.system.formula}}">
         </div>
         <div class="gift-memo">
           <label>메모</label>{{!-- 마지막줄:메모 --}}
@@ -59,6 +59,6 @@
         </div>
         {{/if}}
       </div>
-    </section>
+    </div>
   </div>
 </form>

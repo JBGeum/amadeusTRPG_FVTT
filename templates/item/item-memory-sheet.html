@@ -1,0 +1,31 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <div class="item memory" data-item-id="{{data._id}}">
+    <div class="memory-card">
+      <div class="memory-card-title">
+        <span class="memory-name">
+          <input type="text" name="name" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.memory'}}"/>
+        </span>
+      </div>
+      <div class="memory-card-body">
+        <div class="memory-date">
+          <span class="memory-date">
+            <input type="number" name="system.date.year" value="{{system.date.year}}"/>{{localize 'AMADEUS.label.year'}}
+            <input type="number" name="system.date.month" value="{{system.date.month}}"/>{{localize 'AMADEUS.label.month'}}
+            <input type="number" name="system.date.day" value="{{system.date.day}}"/>{{localize 'AMADEUS.label.day'}}
+          </span>
+        </div>
+        <div class="memory-island">
+          <span class="memory-lbl">{{localize 'AMADEUS.label.island'}}</span>
+          <input type="text" name="system.island" value="{{system.island}}">
+        </div>
+        <div class="memory-mission">
+          <span class="memory-lbl">{{localize 'AMADEUS.label.mission'}}</span>
+          <input type="text" name="system.mission" value="{{system.mission}}">
+        </div>
+        <div class="memory-completed">
+          <input type="checkbox" name="system.completed" {{checked system.completed}} />
+          {{localize 'AMADEUS.label.completed'}}</div>
+      </div>
+    </div>
+  </div>
+</form>

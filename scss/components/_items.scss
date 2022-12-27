@@ -1,120 +1,149 @@
-// Section Header
-.items-header {
-  height: 28px;
-  margin: 2px 0;
-  padding: 0;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.05);
-  border: $border-groove;
-  font-weight: bold;
-  > * {
-    font-size: 14px;
-    text-align: center;
-  }
-  .item-name {
-    font-weight: bold;
-    padding-left: 5px;
-    text-align: left;
-    display: flex;
-    // font-size: 16px;
-  }
-}
+//.sheet.item section.window-content{background:$color-bg;}
+.gift-sheet {
+  label {padding : 3px;}
+  .gift-sheet-header {
+    padding               : 2px;
+    grid-template-columns : 1fr 2fr 1fr;
 
-/* ----------------------------------------- */
-/*  Items Lists                              */
-/* ----------------------------------------- */
+    > div {
+      //border: 1px solid #999;
+      @extend .total-center;
+      padding : 5px;
+      label {flex-shrink : 0;}
+      select, input {flex-grow : 1;}
+    }
 
-.items-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  color: $c-tan;
+    .gift-sheet-name {
+      grid-column : 1 / span 3;
+      grid-row    : 1 / span 1;
 
-  // Child lists
-  .item-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+      .gift-sheet-chkbox {display : none;}
 
-  // Item Name
-  .item-name {
-    flex: 2;
-    margin: 0;
-    overflow: hidden;
-    font-size: 13px;
-    text-align: left;
-    align-items: center;
-    display: flex;
-    h3, h4 {
-      margin: 0;
-      white-space: nowrap;
-      overflow-x: hidden;
+      label { font-weight : bold;}
     }
   }
 
-  // Control Buttons
-  .item-controls {
-    display: flex;
-    flex: 0 0 100px;
-    justify-content: flex-end;
-    a {
-      font-size: 12px;
-      text-align: center;
-      margin: 0 6px;
+  .gift-sheet-body {
+    .gift-effect {
+      height           : 200px;
+      background-color : rgba(255, 255, 255, 0.3);
+      margin           : 10px;
+      border: 1px solid #999;
+      border-radius    : 15px;
+      padding          : 15px;
     }
-  }
 
-  // Individual Item
-  .item {
-    align-items: center;
-    padding: 0 2px; // to align with the header border
-    border-bottom: 1px solid $c-faint;
-    &:last-child { border-bottom: none; }
-    .item-name {
-      color: $c-dark;
-      .item-image {
-        flex: 0 0 30px;
-        height: 30px;
-        background-size: 30px;
-        border: none;
-        margin-right: 5px;
-      }
+    .gift-description {
+      height           : 100px;
+      background-color : rgba(255, 255, 255, 0.3);
+      margin           : 10px;
+      border: 1px solid #999;
+      border-radius    : 10px;
+      padding          : 10px;
     }
-  }
 
-  .item-prop {
-    text-align: center;
-    border-left: 1px solid #c9c7b8;
-    border-right: 1px solid #c9c7b8;
-    font-size: 12px;
-  }
-
-  // Section Header
-  .items-header {
-    height: 28px;
-    margin: 2px 0;
-    padding: 0;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.05);
-    border: $border-groove;
-    font-weight: bold;
-    > * {
-      font-size: 12px;
-      text-align: center;
-    }
-    .item-name {
-      padding-left: 5px;
-      text-align: left;
-      // font-size: 16px;
+    .gift-tag, .gift-memo, .gift-formula { @extend .total-center;
+      label {flex-shrink : 0;}
+      input {flex-grow : 1;}
+      padding:4px;
     }
   }
 }
 
-/* Example style for Boilerplate (can be removed if not needed) */
-.item-formula {
-  flex: 0 0 200px;
-  padding: 0 8px;
+.gear-sheet{
+  label {padding : 3px;}
+  .item-sheet-header {
+    padding               : 2px;
+    grid-template-columns : 1fr 1fr 1fr;
+
+    > div {
+      @extend .total-center;
+      padding : 5px;
+
+      label {flex-shrink : 0;}
+
+      select, input {flex-grow : 1;}
+    }
+
+    .item-sheet-name {
+      grid-column : 1 / span 3;
+      grid-row    : 1 / span 1;
+    }
+  }
+  .item-sheet-body{
+    .item-effect {
+      height           : 200px;
+      background-color : rgba(255, 255, 255, 0.3);
+      margin           : 10px;
+      border: 1px solid #999;
+      border-radius    : 15px;
+      padding          : 15px;
+    }
+
+    .item-description {
+      height           : 100px;
+      background-color : rgba(255, 255, 255, 0.3);
+      margin           : 10px;
+      border: 1px solid #999;
+      border-radius    : 10px;
+      padding          : 10px;
+    }
+  }
+}
+
+.parent-sheet{
+  label {padding : 3px;}
+  .parent-sheet-body{
+    grid-template-columns: 130px 1fr 1fr;
+    >div{
+      @extend .total-center;
+      padding:3px;
+    }
+    label {flex-shrink : 0;}
+    select, input {flex-grow : 1;}
+  }
+  .parent-sheet-name{
+    grid-column : 2 / span 2;
+    grid-row : 1/ span 1;
+  }
+
+  .grid.parent-sheet-ability-grid {
+    display: grid;
+    div{
+      display:flex;
+      justify-content: center;
+      flex-direction: column;
+      text-align:center;
+      align-items:stretch;
+      padding:3px;
+      .parent-ability-label{font-weight: bold;}
+    }
+  }
+  .parent-sheet-ability-grid{
+    grid-column: 1 / span 3;
+    grid-row: 4 / span 1;
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .parent-image{
+    grid-column: 1 / span 1;
+    grid-row : 5 / span 1;
+    height:auto;
+  }
+  .parent-portrait{
+    grid-column: 1 / span 1;
+    grid-row : 1 / span 3;
+    height:auto;
+  }
+  .parent-sheet-description{
+    grid-column:2 / span 2;
+    grid-row: 5 / span 2;
+    height:300px;
+    .parent-description{
+      height: 100%;
+      width: 100%;
+      border:1px solid #999;
+      padding:3px;
+      border-radius:5px;
+    }
+  }
 }

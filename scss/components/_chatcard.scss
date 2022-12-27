@@ -1,0 +1,100 @@
+i.amade-d6{font-size: 40px}
+.chatcard label{ margin: 0 10px;}
+
+.total-center{
+  display:flex; justify-content: center; align-items: center;
+}
+
+.chatcard-label-group{
+  flex-direction: row; justify-content: space-around;
+  border:1px solid #999; border-radius: 5px;background: rgba(0, 0, 0, 0.2);height: 2rem;
+  .item-lbl{font-size:0.8rem;font-weight: normal;}
+}
+
+.roll-abl-chatcard{
+  background: $color-dim;
+  box-shadow: 0 0 2px #fff inset;
+  border-radius: 15px;
+  border: 1px solid #999;
+  padding: 10px 5px;
+  .roll-header{
+    >div{
+      @extend .total-center;
+      font-weight:bold;
+      margin:3px; }
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    .abl-name{
+      grid-column: 1 / span 3;
+      grid-row : 1 / span 1;
+      font-size:1.5rem;
+      margin:5px;
+    }
+    .roll-dc, .rank, .mod {
+      @extend .chatcard-label-group;}
+  }
+  .dicset-area{
+    .die-result{margin:5px 0;}
+  }
+}
+
+.gift-chatcard{
+  background: $color-dim;
+  box-shadow: 0 0 2px #fff inset;
+  border-radius: 15px;
+  border: 1px solid #999;
+  padding: 10px 5px;
+  .data-gift-chatcard-top{
+    >div{
+      @extend .total-center;
+      font-weight:bold;
+      margin:3px; }
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    .gift-name{
+      grid-column: 1 / span 3;
+      grid-row : 1 / span 1;
+      font-size:1.5rem;
+      margin:5px;
+    }
+    .gift-type, .gift-requirement, .gift-ability { @extend .chatcard-label-group;}
+  }
+
+  .data-gift-chatcard-bottom{
+    margin: 5px;
+    .gift-effect{padding:5px;border-bottom:1px solid #999}
+    .gift-tag{padding:10px 5px 5px 5px;}
+  }
+}
+
+
+
+.item-chatcard{
+  background: $color-dim;
+  box-shadow: 0 0 2px #fff inset;
+  border-radius: 15px;
+  border: 1px solid #999;
+  padding: 10px 5px;
+  .data-item-chatcard-top{
+    >div{
+      @extend .total-center;
+      font-weight:bold;
+      margin:3px; }
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    .item-name{
+      grid-column: 1 / span 3;
+      grid-row : 1 / span 1;
+      font-size:1.5rem;
+      margin:5px;
+    }
+    .item-type, .item-price, .item-power { @extend .chatcard-label-group;
+      }
+  }
+  .data-item-chatcard-bottom{
+    margin: 5px;
+    .item-effect{padding:5px;border-bottom:1px solid #999}
+    .item-description{padding:10px 5px 5px 5px;}
+  }
+}
+

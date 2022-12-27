@@ -1,12 +1,23 @@
-<div class="chatcard gift-chatcard">
-    <div class="grid data-item-chatcard-top">
-        <div class="item-name">{{name}}</div>
-        <div class="item-type">{{type}}</div>
-        <div class="item-price">{{price}}</div>
-        <div class="item-power">{{power}}</div>
+<div class="chatcard item-chatcard">
+  <div class="grid data-item-chatcard-top">
+    <div class="item-name">
+      {{name}}
     </div>
-    <div class="data-item-chatcard-bottom">
-        <div class="item-effect">{{{effect}}}</div>
-        <div class="item-description">{{{description}}}</div>
+    <div class="item-type">
+      <div class="item-lbl">{{localize 'AMADEUS.item.type'}}</div>
+      <div>{{type}}</div>
     </div>
+    <div class="item-price">
+      <div class="item-lbl">{{localize 'AMADEUS.item.price'}}</div>
+      <div>{{price}}</div>
+    </div>
+    <div class="item-power">
+      <div class="item-lbl">{{localize 'AMADEUS.item.power'}}</div>
+      <div>{{power}}</div>
+    </div>
+  </div>
+  <div class="data-item-chatcard-bottom">
+    <div class="item-effect">{{{effect}}}</div>
+    <div class="item-description">{{{description}}}</div>
+  </div>
 </div>

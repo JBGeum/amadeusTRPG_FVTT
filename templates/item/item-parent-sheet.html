@@ -1,6 +1,10 @@
 <form class="{{cssClass}}" autocomplete="off">
   <div class="parent-sheet">
     <div class="item grid parent-sheet-body" data-item-id="{{data._id}}">
+      <div class="parent-image">
+        <img class="parent-image"
+             src="{{item.img}}" data-edit="img" height="120" width="120"/>
+      </div>
       <div class="parent-sheet-name flex-center">
         <input type="text" name="name" value="{{item.name}}" placeholder="Name"/>
       </div>
@@ -16,7 +20,7 @@
       </div>
       <div class="parent-sheet-pantheon">
         <input type="text" name="system.pantheon" value="{{system.pantheon}}"/>
-        {{localize 'AMADEUS.label.pantheon'}}
+        <label class="item-lbl">{{localize 'AMADEUS.label.pantheon'}}</label>
       </div>
       <div class="parent-sheet-weapon">
         <label class="item-lbl">{{localize 'AMADEUS.parent.weapon'}}</label>
@@ -55,17 +59,17 @@
         </div>
         {{/each}}
       </div>
+      <div class="parent-portrait">
+        <img class="parent-portrait"
+             src="{{system.portrait}}" data-edit="system.portrait"/>
+      </div>
       <div class="parent-sheet-description">
-        {{editor parent.description target="parent.description" button=true editable=editable}}
-        <div class="parent-portrait">
-          <img class="parent-portrait"
-               src="{{system.portrait}}" data-edit="system.portrait" height="120" width="120"/>
-        </div>
-        <div class="parent-image">
-          <img class="parent-image"
-               src="{{item.img}}" data-edit="img" height="120" width="120"/>
+        <div class="parent-description">
+        {{editor system.description target="system.description" button=true editable=editable}}
         </div>
       </div>
     </div>
   </div>
 </form>
+
+

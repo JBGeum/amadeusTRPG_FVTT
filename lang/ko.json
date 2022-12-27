@@ -12,6 +12,10 @@
       "name": "이름",
       "age": "나이",
       "job": "직업",
+      "dc": "목표치",
+      "health": "생명력",
+      "inithealth": "초기치",
+      "vitality": "활력",
       "pantheon": "신군",
       "parent": "부모신",
       "background" : "배경",
@@ -22,8 +26,25 @@
       "level": "레벨",
       "exp": "경험치",
       "itemName": "아이템명",
+      "divineweapon": "신성무기",
+      "memory": "추억",
+      "treasure": "보물",
+      "mission": "임무",
+      "island": "절계",
+      "completed": "임무 달성",
       "countunit": "개",
-      "divineweapon": "신성무기"
+      "year": "년",
+      "month":"월",
+      "day": "일",
+      "formula": "수식",
+      "tag": "태그",
+      "memo": "메모"
+    },
+    "menu": {
+      "item": "아이템",
+      "gift": "기프트",
+      "bond": "인물",
+      "features": "기타"
     },
     "color" : {
       "black": "흑",
@@ -53,6 +74,14 @@
       "indian": "인도",
       "aztec": "메소아메리카",
       "titan": "타이탄"
+    },
+    "badstatus": {
+      "desperation": "절망",
+      "fury": "분노",
+      "coward": "겁",
+      "depravity": "타락",
+      "disgrace": "치욕",
+      "wound": "중상"
     },
     "dice" : {
       "special": "스페셜",
@@ -104,6 +133,10 @@
     "parent": {
       "weapon": "신성무기",
       "authority": "권능"
+    },
+    "roll": {
+      "roll": "판정",
+      "vitality": "활력 판정"
     }
   }
 }

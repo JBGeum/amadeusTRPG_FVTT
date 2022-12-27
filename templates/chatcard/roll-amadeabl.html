@@ -1,13 +1,18 @@
 <div class="chatcard amade-dicecard text-align">
   <div class="roll-abl-chatcard">
-    <div class="roll-title">
-      <div class="chatcard-abl-name flex-center">{{label}} 판정</div>
-      <div class="rankMod flexrow flex-group-center">
-        <div class="roll-dc">
-          <label class="roll-dc-lbl">목표치</label>
-          {{rollDC}}</div>
-        <div class="rank-label">{{rank}}</div>
-        <div class="mod-label">{{mod}}</div>
+    <div class="roll-header">
+      <div class="abl-name">{{label}} 판정</div>
+      <div class="roll-dc">
+        <div class="item-lbl">목표치</div>
+        <div>{{rollDC}}</div>
+        </div>
+      <div class="rank">
+        <div class="item-lbl">랭크</div>
+        <div>{{rank}}</div>
+      </div>
+      <div class="mod">
+        <div class="item-lbl">모드</div>
+        <div>{{mod}}</div>
       </div>
     </div>
     <div class="diceset-area flexrow align-center">

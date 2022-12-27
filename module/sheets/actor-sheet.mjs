@@ -15,7 +15,8 @@ export class AmadeusActorSheet extends ActorSheet {
       template: "systems/amadeus/templates/actor/actor-sheet.html",
       width: 800,
       height: 900,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
+      resizable: false,
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "item" }]
     });
   }
 
@@ -43,7 +44,7 @@ export class AmadeusActorSheet extends ActorSheet {
     context.system = actorData.system;
     context.flags = actorData.flags;
 
-    /*schmm ? 11.03 02.54 체크박스 수정 안 되나??
+    /*
     // Owned Items
     context.items = Array.from(this.actor.items.values());
     context.items = context.items.map( i => {
@@ -67,6 +68,7 @@ export class AmadeusActorSheet extends ActorSheet {
 
     // Prepare active effects
     context.effects = prepareActiveEffectCategories(this.actor.effects);
+    context.permission = this.editable;
 
     return context;
   }
@@ -97,33 +99,33 @@ export class AmadeusActorSheet extends ActorSheet {
     const background = [];
     const parent = [];
     const inventory = [];
+    const memory = [];
+    const treasure = [];
 
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'gift') {
-        /*
-        *         for (let [k, v] of Object.entries(context.items.system.action.ability)) {
-          v.label = game.i18n.localize(CONFIG.AMADEUS.ability[k]) ?? k;
-        }
-        for (let [k, v] of Object.entries(context.items.system.type)) {
-          v.label = game.i18n.localize(CONFIG.AMADEUS.gift[k]) ?? k;
-        }
-        * */
-        gifts.push(i);}
+      if (i.type === 'gift') {gifts.push(i);}
       else if (i.type === 'background') {background.push(i);}
       else if (i.type === 'parent') {parent.push(i);}
       else if (i.type === 'weapon') {inventory.push(i);}
       else if (i.type === 'gear') {inventory.push(i);}
+      else if (i.type === 'memory') {memory.push(i);}
+      else if (i.type === 'treasure') {treasure.push(i);}
       }
 
     // Assign and return
+    gifts.sort(function(a,b){return a._stats.modifiedTime - b._stats.modifiedTime});
+    inventory.sort(function(a,b){return a._stats.modifiedTime - b._stats.modifiedTime});
+    memory.sort(function(a,b){return a._stats.createdTime - b._stats.createdTime});
     context.gifts = gifts;
     context.background = background;
     context.parent = parent;
     context.inventory = inventory;
+    context.memory = memory;
+    context.treasure = treasure;
 
 
   }
@@ -185,6 +187,12 @@ export class AmadeusActorSheet extends ActorSheet {
       item.sheet.render(true);
     });
 
+    // 접힌 메뉴 열기
+    html.find('.open-gift').click(this._onOpenGiftMenu.bind(this));
+    html.find('.open-item').click(this._onOpenItemMenu.bind(this));
+    html.find('.open-treasure').click(this._onOpenTrsMemMenu.bind(this));
+    html.find('.open-memory').click(this._onOpenTrsMemMenu.bind(this));
+    // 위쪽으로는 수정권한 없어도 가능
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
@@ -205,7 +213,7 @@ export class AmadeusActorSheet extends ActorSheet {
 
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
-
+    html.find('.damage-formula').click(this._onDamageRoll.bind(this));
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = ev => this._onDragStart(ev);
@@ -214,23 +222,24 @@ export class AmadeusActorSheet extends ActorSheet {
         li.setAttribute("draggable", true);
         li.addEventListener("dragstart", handler, false);
       });
-
-      //아마데우스 능력치 롤
-      html.find('.amade-abl-roll').click(this._onRollAmadeAbl.bind(this));
     }
+    //아마데우스 능력치 롤
+    html.find('.amade-abl-roll').click(this._onRollAmadeAbl.bind(this));
+    html.find('.vitality-roll').click(this._onRollVitality.bind(this));
     //아이템 이름 클릭시 (데이터 챗카드 표시)
     html.find('.item-datacard').click(this._onItemDataCard.bind(this));
     //아이템 능력치 롤
     html.find('.item-rollcard').click(this._onItemRollCard.bind(this));
-
+    html.find('.gift-formula-roll').click(this._onGiftFormulaRoll.bind(this));
+    //업데이트 류
     html.find('.item-chk').click(this._updateItemChk.bind(this));
-
-    html.find('.open-gift').click(this._onOpenGiftMenu.bind(this));
-    html.find('.open-item').click(this._onOpenItemMenu.bind(this));
     html.find('.gift-memo').change(this._upDateItemMemo.bind(this));
     html.find('.gift-formula').change(this._upDateItemMemo.bind(this));
 
+    html.find('.amd-rolltable').click(this._onRollTable.bind(this));
+
   }
+
   _onOpenGiftMenu(event){
     event.preventDefault()
     const element = event.currentTarget;
@@ -240,6 +249,7 @@ export class AmadeusActorSheet extends ActorSheet {
     if(hidden.hasClass('content-visible')) hidden.css("display", "block");
     else if (hidden.hasClass('content-hidden'))  hidden.css("display", "none");
   };
+
   _onOpenItemMenu(event){
     event.preventDefault()
     const element = event.currentTarget;
@@ -249,6 +259,18 @@ export class AmadeusActorSheet extends ActorSheet {
     if(hidden.hasClass('content-visible')) hidden.css("display", "block");
     else if (hidden.hasClass('content-hidden'))  hidden.css("display", "none");
   };
+
+  _onOpenTrsMemMenu(event){
+    event.preventDefault()
+    const element = event.currentTarget;
+    var hidden = $(element).parent().parent().next();
+    hidden.toggleClass('content-visible');
+    hidden.toggleClass('content-hidden');
+    if(hidden.hasClass('content-visible')) hidden.css("display", "block");
+    else if (hidden.hasClass('content-hidden'))  hidden.css("display", "none");
+  };
+
+
 
   /**
    * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
@@ -263,7 +285,8 @@ export class AmadeusActorSheet extends ActorSheet {
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
     // Initialize a default name.
-    const name = `New ${type.capitalize()}`;
+    const name = game.i18n.localize(CONFIG.AMADEUS.label[type]);
+
     // Prepare the item object.
     const itemData = {
       name: name,
@@ -309,6 +332,63 @@ export class AmadeusActorSheet extends ActorSheet {
     }
   }
 
+
+  async _onRollTable(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+    // Handle item rolls.
+    if (dataset.rtid) {
+      const pack = game.packs.get("amadeus.rolltable")
+      const table = await pack.getDocuments();
+      for(let t of table){
+        if(t.id == dataset.rtid){
+          t.draw();
+        }
+      }
+    }
+  }
+
+
+
+  _onDamageRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    if (dataset.rolltype === "item") {
+      const itemId = element.closest('.item').dataset.itemId;
+      const item = this.actor.items.get(itemId);
+      let roll = new Roll(dataset.roll, this.actor.getRollData());
+      roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: item.name,
+        rollMode: game.settings.get('core', 'rollMode'),
+      });
+      return roll;
+    } else if (dataset.rolltype === "gift"){
+
+    }
+  }
+
+  _onGiftFormulaRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const itemId = element.closest('.item').dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const formula = element.previousElementSibling.value;
+    if(formula){
+      let roll = new Roll(formula, this.actor.getRollData());
+      roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: item.name,
+        rollMode: game.settings.get('core', 'rollMode'),
+      });
+      return roll;
+    }
+  }
+
+
   _onRollAmadeAbl(event) {
     event.preventDefault();
     const element = event.currentTarget;
@@ -317,6 +397,21 @@ export class AmadeusActorSheet extends ActorSheet {
     let label = dataset.label;
     this.actor.rollAmadeAbl(ability,label, {event: event});
 
+  }
+
+  _onRollVitality(event){
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+    let label = dataset.label ? `${dataset.label}` : '';
+    let roll = new Roll(dataset.roll, this.actor.getRollData());
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: label,
+      rollMode: game.settings.get('core', 'rollMode'),
+    });
+    this.actor.update({'system.vitality': roll.result});
+    return roll;
   }
 
   _onItemDataCard(event){
