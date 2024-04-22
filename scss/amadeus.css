@@ -1198,5 +1198,9 @@ i.amade-d6 {
   color: #011327;
   border: none;
 }
+.sheet.actor section.window-content input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+  font-style: italic;
+}
 
 /*# sourceMappingURL=amadeus.css.map */

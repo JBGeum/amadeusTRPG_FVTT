@@ -130,7 +130,7 @@ export class AmadeusActor extends Actor {
   }
 
   _calculateCalcHealth(systemData) {
-  systemData.calcHealth = systemData.initHealth + systemData.vitality;
+    systemData.calcHealth = parseInt(systemData.initHealth) + parseInt(systemData.vitality);
   }
 
   _calculateInitMoney(systemData) {
@@ -140,8 +140,8 @@ export class AmadeusActor extends Actor {
     switch(systemData.ability.love.rank) {
       case 'D': money += 2;  break;
       case 'C': money += 3;  break;
-      case 'B': money += 3;  break;
-      case 'A': money += 4;  break;
+      case 'B': money += 4;  break;
+      case 'A': money += 5;  break;
       case 'S': money += 7;  break;
     }
     switch(systemData.ability.love.mod) {
@@ -155,8 +155,8 @@ export class AmadeusActor extends Actor {
     switch(systemData.ability.mundane.rank) {
       case 'D': money += 2;  break;
       case 'C': money += 3;  break;
-      case 'B': money += 3;  break;
-      case 'A': money += 4;  break;
+      case 'B': money += 4;  break;
+      case 'A': money += 5;  break;
       case 'S': money += 7;  break;
     }
     switch(systemData.ability.mundane.mod) {
@@ -241,7 +241,7 @@ export class AmadeusActor extends Actor {
       rollDC: this.system.dc,
       resultDiceset}
     let content = await renderTemplate("systems/amadeus/templates/chatcard/roll-amadeabl.html", templateData)
-    ChatMessage.create({content, speaker : ChatMessage.getSpeaker({alias : game.user.name }), type : 3});
+    ChatMessage.create({content, speaker : ChatMessage.getSpeaker({actor: this})});
   }
 
 }

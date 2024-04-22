@@ -90,7 +90,7 @@ export class AmadeusItem extends Item {
     } else if (this.type === "parent") {
     }
     if (content) {
-      ChatMessage.create({content, speaker: ChatMessage.getSpeaker({alias: game.user.name}), type: 3});
+      ChatMessage.create({content, speaker: speaker});
     }
   }
 

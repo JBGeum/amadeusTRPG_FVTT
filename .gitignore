@@ -253,3 +253,6 @@ gulpfile.js
 lang/en.json
 templates/actor/actor-character-sheet-old.html
 templates/item/item-item-sheet-orig.html
+/foundry.js
+/handlebars/
+/fordev/

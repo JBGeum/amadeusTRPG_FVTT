@@ -1041,12 +1041,12 @@
 .amadeus .parent-sheet .parent-image {
 	grid-column: 1/span 1;
 	grid-row: 5/span 1;
-	height: 300px;
+	height: auto;
 }
 .amadeus .parent-sheet .parent-portrait {
 	grid-column: 1/span 1;
 	grid-row: 1/span 3;
-	height: 120px;
+	height: auto;
 }
 .amadeus .parent-sheet .parent-sheet-description {
 	grid-column: 2/span 2;
@@ -1198,5 +1198,3 @@ i.amade-d6 {
 	color: #011327;
 	border: none;
 }
-
-/*# sourceMappingURL=amadeus.css.map */

@@ -151,7 +151,7 @@ export class AmadeusActorSheet extends ActorSheet {
         'system.chardata.parentimg' : item.system.portrait,
         'system.ability.warfare.rank' : item.system.ability.warfare.rank,
         'system.ability.warfare.mod' : item.system.ability.warfare.mod,
-        'system.ability.technique.rank' : item.system.ability.technique,
+        'system.ability.technique.rank' : item.system.ability.technique.rank,
         'system.ability.technique.mod' : item.system.ability.technique.mod,
         'system.ability.brain.rank' : item.system.ability.brain.rank,
         'system.ability.brain.mod' : item.system.ability.brain.mod,
