@@ -49,21 +49,27 @@ npm run pack:compile   # src/packs/<name> → packs/<name> (Foundry가 로드)
 `init` 훅에서 모든 것을 배선한다:
 - `game.amadeus`에 `AmadeusActor`/`AmadeusItem` 노출
 - `CONFIG.AMADEUS = AMADEUS` (설정 상수 주입)
+- DataModel 등록 (`Object.assign(CONFIG.Actor.dataModels, …)`, `CONFIG.Item.dataModels`)
 - 커스텀 Document 클래스 등록 (`CONFIG.Actor.documentClass`, `CONFIG.Item.documentClass`)
-- 코어 시트 unregister 후 `AmadeusActorSheet`/`AmadeusItemSheet` 등록
+- 코어 시트 unregister 후 `AmadeusActorSheet`/`AmadeusItemSheet` 등록 (`foundry.documents.collections.*`)
 - Handlebars 헬퍼 등록 + 템플릿 프리로드
 
-### 데이터 모델 (`template.json`)
-시스템 데이터 스키마는 **`template.json`에 선언적으로 정의**되어 있다 (DataModel 클래스가 아님 — 이것이 v10 방식이다).
-- **Actor 타입**: `character`, `monster`. 단, 실제 코드(`actor.mjs`, `actor-sheet.mjs`)는 `npc` 타입을 분기 처리한다 — `template.json`의 `monster`와 코드의 `npc`가 **불일치**하므로 마이그레이션 시 정리 필요.
+### 데이터 모델 (`module/data/`, v13 DataModel)
+시스템 데이터 스키마는 **`foundry.abstract.TypeDataModel` 클래스로 정의**된다(`module/data/`). `template.json`은 **타입 목록만** 선언하고(`Actor`: `character`/`npc`, `Item`: 7종), 스키마는 DataModel이 담당한다.
+- `module/data/_fields.mjs`: 재사용 스키마 헬퍼(`abilityField`/`abilitiesField`) + 파생 계산용 룩업 상수(`RANK_VAL`/`MOD_VAL`/`HEALTH_BY_*`/`MONEY_BY_*`).
+- `actor-character.mjs`(`CharacterData`), `actor-npc.mjs`(`NpcData`), `item-data.mjs`(아이템 7종 DataModel).
+- **Actor 타입**: `character`, `npc` (구 `monster`는 `npc`로 통일됨).
 - **Item 타입**: `gift`(기프트), `background`(배경), `parent`(부모신), `weapon`, `gear`, `memory`(추억), `treasure`.
 - 핵심 능력치(`ability`)는 6종: `warfare/technique/brain/spirit/love/mundane`. 각각 **랭크(S~D)** 와 **수정치(`+++`~`--`)** 문자열을 가진다.
+- 파생값(`rankVal`/`modVal`/`initHealth`/`initMoney`)은 각 DataModel의 `prepareDerivedData()`에서 계산한다.
 
 ### 굴림(Roll) 시스템 — 시스템의 핵심 메커니즘
 아마데우스는 d20이 아니라 **랭크 기반 nd6** 시스템이다 (`module/documents/roll.mjs`):
 - 능력치 랭크 → 주사위 개수: `S=4d6, A=3d6, B=2d6, C=1d6, D=2d6`(D는 예외적으로 2d6).
 - 각 주사위에 수정치(`modVal`)를 더해 목표치(`dc`, 기본 4)와 비교, **주사위 하나하나가 개별 성공/실패** 판정된다. `1=펌블`, `6=스페셜`(헬퍼 `successCheck` 참조).
-- `actor.mjs`의 `_setRankModLetter`가 랭크/수정치 **문자열 → 숫자값**(`rankVal`, `modVal`) 변환을 `prepareDerivedData` 단계에서 수행한다. 생명력(`_calculateInitHealth`)·소지금(`_calculateInitMoney`)도 능력치 랭크 룩업 테이블로 파생 계산한다.
+- `CharacterData.prepareDerivedData()`(`module/data/actor-character.mjs`)가 랭크/수정치 **문자열 → 숫자값**(`rankVal`, `modVal`) 변환과 생명력 초기치(`initHealth`)·소지금 초기치(`initMoney`)를 `_fields.mjs`의 룩업 상수로 계산한다.
+- **파생값은 시트로 prepared 데이터로 전달해야 한다**: `actor-sheet.mjs`의 `getData()`는 `this.actor.system`(파생 포함)을 넘긴다 — `toObject(false)`(source)는 `initHealth`/`initMoney` 등 파생값을 포함하지 않으므로 사용하면 안 된다.
+- **생명력 표시**: 좌측 `health.value`는 실제 변동 HP(빈칸 유지), 우측 `health.max`는 비었을 때 `initHealth`를 placeholder로 흐릿하게 표시한다. 활력 굴림(`_onRollVitality`)은 `health.max`에 `initHealth + 활력`을 또렷한 값으로 자동 입력한다.
 
 ### 시트와 챗 카드 흐름
 - **시트 템플릿은 타입별로 분기**: `get template()`이 `actor-${type}-sheet.html` / `item-${type}-sheet.html`을 반환한다. (`defaultOptions`에 적힌 `actor-sheet.html`은 실제로 존재하지 않으며 `get template()`이 덮어쓴다.)
