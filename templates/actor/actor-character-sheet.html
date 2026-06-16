@@ -1,4 +1,4 @@
-<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+<div class="{{actor.type}} flexcol">
 {{!--기본 크기 가로 660 정도 --}}
   {{!-- Sheet Header --}}
   <header class="sheet-header">
@@ -13,13 +13,7 @@
           <label class="chardata-color-label">{{localize 'AMADEUS.label.color'}}</label>
           <div class="actor-color-select">
             <select name="system.color">
-            {{#select system.color}}
-              <optgroup>
-            {{#each config.color as |value key|}}
-              <option value="{{value}}">{{localize value}}</option>
-            {{/each}}
-              </optgroup>
-            {{/select}}
+              {{selectOptions label.color selected=system.color}}
             </select>
           </div>
         </div>
@@ -77,29 +71,18 @@
           <div class="ability-grid">
             <div class="ability-label">
               <span class="ability-label amade-abl-roll"
+                     data-action="ablRoll"
                      data-ability="{{key}}"
                      data-label="{{ability.label}}">{{ability.label}}</span>
             </div>
             <div class="ability-value">
               <select name="system.ability.{{key}}.rank">
-                {{#select ability.rank}}
-                <optgroup>
-                {{#each ../config.rank as |number letter|}}
-                  <option value="{{letter}}">{{letter}}</option>
-                {{/each}}
-                </optgroup>
-                {{/select}}
+                {{selectOptions ../label.rank selected=ability.rank}}
               </select>
             </div>
             <div class="ability-mod">
               <select name="system.ability.{{key}}.mod">
-                {{#select ability.mod}}
-                <optgroup>
-                {{#each ../config.modL as |number letter|}}
-                  <option value="{{letter}}">{{letter}}</option>
-                {{/each}}
-                </optgroup>
-                {{/select}}
+                {{selectOptions ../label.mod selected=ability.mod}}
               </select>
             </div>
           </div>
@@ -130,7 +113,7 @@
                 <label class="wid-auto">{{localize 'AMADEUS.label.inithealth'}}</label> {{system.initHealth}}</div>
               <div class="chardata vitality">
                 <label>{{localize 'AMADEUS.label.vitality'}}</label>
-                <a class="vitality-roll" data-roll="{{system.level}}d6" data-label="{{localize 'AMADEUS.roll.vitality'}}">
+                <a class="vitality-roll" data-action="vitalityRoll" data-roll="{{system.level}}d6" data-label="{{localize 'AMADEUS.roll.vitality'}}">
                   <i class="fas fa-dice"></i></a>
                 <input type="number" class="min" name="system.vitality" value="{{system.vitality}}"/>
               </div>
@@ -188,7 +171,7 @@
 
       {{!-- Sheet Tab Navigation --}}
       <nav class="sheet-tabs tabs" data-group="primary">
-        {{!-- Default tab is specified in actor-sheet.mjs --}}
+        {{!-- 탭 전환은 actor-sheet.mjs의 _onRender(#activateTabs)에서 처리 --}}
         <a class="item" data-tab="item">{{localize 'AMADEUS.menu.item'}}</a>
         <a class="item" data-tab="gift">{{localize 'AMADEUS.menu.gift'}}</a>
         <a class="item" data-tab="bond">{{localize 'AMADEUS.menu.bond'}}</a>
@@ -196,22 +179,21 @@
       </nav>
       {{!-- Sheet Body --}}
       <section class="sheet-body">
-        <div class="tab item" data-group="primary" data-tab="item">
+        <div class="tab" data-group="primary" data-tab="item">
           {{> "systems/amadeus/templates/actor/parts/actor-item.html"}}
         </div>
-        <div class="tab gift" data-group="primary" data-tab="gift">
-          {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll data to the rollData property. --}}
+        <div class="tab" data-group="primary" data-tab="gift">
           {{> "systems/amadeus/templates/actor/parts/actor-gift.html"}}
         </div>
-        <div class="tab bond" data-group="primary" data-tab="bond">
+        <div class="tab" data-group="primary" data-tab="bond">
             {{> "systems/amadeus/templates/actor/parts/actor-bond.html"}}
         </div>
-        <div class="tab item" data-group="primary" data-tab="features">
+        <div class="tab" data-group="primary" data-tab="features">
           {{> "systems/amadeus/templates/actor/parts/actor-features.html"}}
         </div>
       </section>
     </section>
   </section>
-</form>
+</div>
 
 <!-- input은 80px정도로 float:right-->
