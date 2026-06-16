@@ -11,7 +11,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 빌드 & 개발 명령어
 
-빌드 도구는 **Vite**다(구 gulp 스택은 제거됨). 진입점 `module/amadeus.mjs`가 `scss/amadeus.scss`를 import하며, Vite가 JS와 SCSS를 함께 번들해 **`dist/amadeus.mjs` + `dist/amadeus.css`** 를 생성한다. `system.json`은 이 두 산출물을 로드한다(`esmodules`/`styles`).
+빌드 도구는 **Vite**다(구 gulp 스택은 제거됨). 진입점 `module/amadeus.mjs`가 `scss/amadeus.scss`를 import하며, Vite가 JS와 SCSS를 함께 번들해 `dist/amadeus.mjs` + `dist/amadeus.css`를 생성한다.
+
+**`dist/`는 자립형(self-contained) 시스템 패키지다.** `vite-plugin-static-copy`가 빌드 시 `system.json`·`template.json`·`lang/`·`templates/`·`icons/`·`packs/`·`LICENSE.txt`를 `dist/` 루트로 복사하므로, **`dist/` 폴더 하나만 Foundry 서버의 `systems/amadeus`로 배포하면 완전한 시스템이 된다.** 따라서 `system.json`의 경로(`esmodules: "amadeus.mjs"`, `packs: "packs/items"`, `lang: "lang/ko.json"` 등)는 **dist 루트 기준**으로 작성되어 있다(프로젝트 루트를 직접 시스템 폴더로 쓰지 않음).
 
 ```bash
 npm install        # 의존성 설치 (최초 1회)
@@ -22,8 +24,9 @@ npm run lint:fix   # ESLint 자동 수정
 npm run format     # Prettier 포맷 적용
 ```
 
-- **`dist/`는 빌드 산출물이라 git 추적 제외**(`.gitignore`)다. 클린 체크아웃 후에는 반드시 `npm run build`를 먼저 실행해야 Foundry가 시스템을 로드할 수 있다.
-- 정적 자산(`templates/`, `lang/`, `icons/`, `packs/`)은 Foundry가 런타임에 `systems/amadeus/...` 경로로 직접 서빙하므로 번들 대상이 아니다. **CSS에서 이미지를 참조할 때는 빌드타임 인라인을 피하려고 런타임 절대경로(`/systems/amadeus/icons/...`)를 쓴다** — 상대경로(`../icons/...`)로 쓰면 Vite가 base64로 인라인해 CSS가 비대해진다.
+- **`dist/`는 빌드 산출물이라 git 추적 제외**(`.gitignore`)다. 클린 체크아웃 후에는 반드시 `npm run build`를 먼저 실행해야 `dist/`가 생성된다.
+- **배포**: Foundry는 별도 서버에서 동작하며, 빌드된 `dist/`를 서버의 `systems/amadeus`로 업로드해 사용한다. JS/CSS뿐 아니라 `system.json`·`templates/` 등 모든 변경이 `dist/`에 모이므로 `dist/`만 올리면 된다.
+- **CSS의 이미지 참조는 런타임 절대경로(`/systems/amadeus/icons/...`)를 쓴다** — 상대경로(`../icons/...`)로 쓰면 Vite가 base64로 인라인해 CSS가 비대해진다.
 
 ### 컴펜디엄 팩 빌드 (Foundry CLI)
 

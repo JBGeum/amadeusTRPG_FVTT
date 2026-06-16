@@ -10,8 +10,8 @@
   "authors": [{
     "name": "Sch"
   }],
-  "esmodules": ["dist/amadeus.mjs"],
-  "styles": ["dist/amadeus.css"],
+  "esmodules": ["amadeus.mjs"],
+  "styles": ["amadeus.css"],
   "scripts": [],
   "packs": [
     {
