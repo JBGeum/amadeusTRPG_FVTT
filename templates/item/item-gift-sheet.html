@@ -1,64 +1,53 @@
-<form class="{{cssClass}}" autocomplete="off">
-  <div class="gift-sheet">
-    <div class="sheet-header">
-      <div class="item grid gift-sheet-header" data-item-id="{{data._id}}">
-        <div class="gift-sheet-name flex-center">
-          <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
-          <div class="gift-sheet-chkbox {{#if item.isOwned}}content-visible{{else}}content-hidden{{/if}}">
-            <input type="checkbox" name="system.chkbox" {{#if system.chkbox}} checked {{/if}}>
-          </div>
-        </div>
-        <div class="gift-sheet-type">
-          <label class="gift-lbl">분류</label>
-          <select name="system.type">
-            {{#select system.type}}
-            {{#each label.type as |typename key|}}
-            <option value="{{key}}">{{typename}}</option>
-            {{/each}}
-            {{/select}}
-          </select>
-        </div>
-        <div class="gift-requirement">
-          <label class="gift-lbl">조건</label>
-          <input type="text" name="system.requirement" value="{{system.requirement}}"/>
-        </div>
-        <div class="gift-roll">
-          <label class="gift-lbl">기능</label>
-          <select name="system.action.roll">
-            {{#select system.action.roll}}
-            <option value=""> - </option>
-            {{#each label.abl as |ablname key|}}
-            <option value="{{key}}">{{ablname}}</option>
-            {{/each}}
-            {{/select}}
-          </select>
+<div class="gift-sheet">
+  <div class="sheet-header">
+    <div class="item grid gift-sheet-header" data-item-id="{{item._id}}">
+      <div class="gift-sheet-name flex-center">
+        <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+        <div class="gift-sheet-chkbox {{#if item.isOwned}}content-visible{{else}}content-hidden{{/if}}">
+          <input type="checkbox" name="system.chkbox" {{#if system.chkbox}} checked {{/if}}>
         </div>
       </div>
-    </div>
-
-    <div class="sheet-body">
-      <div class="item gift-sheet-body" data-item-id="{{data._id}}">
-        <div class="gift-effect" title="효과">
-          {{editor system.effect target="system.effect" button=true editable=editable}}
-        </div>
-        <div class="gift-description" title="설명">
-          {{editor system.description target="system.description" button=true editable=editable}}
-        </div>
-        <div class="gift-tag">
-          <label class="gift-lbl">태그</label>
-          <input type="text" name="system.tag" value="{{system.tag}}"/>
-        </div>
-        {{#if item.isOwned}}
-        <div class="gift-formula">{{!-- 수식 --}}
-          <label>수식</label>
-          <input type="text" class="gift-formula" data-path="system.formula" value="{{gift.system.formula}}">
-        </div>
-        <div class="gift-memo">
-          <label>메모</label>{{!-- 마지막줄:메모 --}}
-          <input type="text" name="system.memo" value="{{system.memo}}"/>
-        </div>
-        {{/if}}
+      <div class="gift-sheet-type">
+        <label class="gift-lbl">분류</label>
+        <select name="system.type">
+          {{selectOptions label.type selected=system.type}}
+        </select>
+      </div>
+      <div class="gift-requirement">
+        <label class="gift-lbl">조건</label>
+        <input type="text" name="system.requirement" value="{{system.requirement}}"/>
+      </div>
+      <div class="gift-roll">
+        <label class="gift-lbl">기능</label>
+        <select name="system.action.roll">
+          {{selectOptions label.abl selected=system.action.roll blank=" - "}}
+        </select>
       </div>
     </div>
   </div>
-</form>
+
+  <div class="sheet-body">
+    <div class="item gift-sheet-body" data-item-id="{{item._id}}">
+      <div class="gift-effect" title="효과">
+        {{#if editable}}<prose-mirror name="system.effect" value="{{system.effect}}">{{{enrichedEffect}}}</prose-mirror>{{else}}{{{enrichedEffect}}}{{/if}}
+      </div>
+      <div class="gift-description" title="설명">
+        {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}">{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
+      </div>
+      <div class="gift-tag">
+        <label class="gift-lbl">태그</label>
+        <input type="text" name="system.tag" value="{{system.tag}}"/>
+      </div>
+      {{#if item.isOwned}}
+      <div class="gift-formula">{{!-- 수식 --}}
+        <label>수식</label>
+        <input type="text" name="system.formula" value="{{system.formula}}">
+      </div>
+      <div class="gift-memo">
+        <label>메모</label>{{!-- 마지막줄:메모 --}}
+        <input type="text" name="system.memo" value="{{system.memo}}"/>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</div>

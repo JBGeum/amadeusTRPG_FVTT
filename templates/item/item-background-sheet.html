@@ -1,0 +1,13 @@
+<div class="background-sheet">
+  <div class="sheet-header">
+    <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
+  </div>
+  <div class="sheet-body">
+    <div class="background-type">
+      <label>분류</label>
+      <select name="system.type">
+        {{selectOptions config.background selected=system.type localize=true}}
+      </select>
+    </div>
+  </div>
+</div>

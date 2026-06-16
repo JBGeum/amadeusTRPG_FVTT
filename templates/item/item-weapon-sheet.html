@@ -1,43 +1,33 @@
-<form class="{{cssClass}}" autocomplete="off">
-  <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-      <div class="grid grid-2col">
-        <div class="resource">
-          <label class="resource-label">Quantity</label>
-          <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number"/>
-        </div>
-        <div class="resource">
-          <label class="resource-label">Weight</label>
-          <input type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number"/>
-        </div>
+<div class="weapon-sheet">
+  <div class="sheet-header">
+    <div class="item grid item-sheet-header" data-item-id="{{item._id}}">
+      <div class="item-sheet-name flex-center">
+        <input name="name" type="text" value="{{item.name}}" placeholder="아이템명"/>
+      </div>
+      <div class="item-price">
+        <label class="item-lbl">{{localize 'AMADEUS.item.price'}}</label>
+        <input type="text" name="system.price" value="{{system.price}}"/>
+      </div>
+      <div class="item-sheet-type">
+        <label class="item-lbl">{{localize 'AMADEUS.item.type'}}</label>
+        <select name="system.type">
+          {{selectOptions label.itemType selected=system.type}}
+        </select>
+      </div>
+      <div class="item-damage">
+        <label class="item-lbl">{{localize 'AMADEUS.item.power'}}</label>
+        <input type="text" name="system.action.damage" value="{{system.action.damage}}"/>
       </div>
     </div>
-  </header>
-
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="attributes">Attributes</a>
-  </nav>
-
-  {{!-- Sheet Body --}}
-  <section class="sheet-body">
-
-    {{!-- Description Tab --}}
-    <div class="tab" data-group="primary" data-tab="description">
-      {{!-- To render inline rolls in a TinyMCE editor, you need to pass the parent actor's (if any) roll data to the rollData prop. --}}
-      {{editor system.description target="system.description" rollData=rollData button=true owner=owner editable=editable}}
-    </div>
-
-    {{!-- Attributes Tab --}}
-    <div class="tab attributes" data-group="primary" data-tab="attributes">
-      {{!-- As you add new fields, add them in here! --}}
-      <div class="resource">
-        <label class="resource-label">Roll Formula</label>
-        <input type="text" name="system.formula" value="{{system.formula}}" data-dtype="String"/>
+  </div>
+  <div class="item-sheet-body">
+    <div class="item item-sheet-body" data-item-id="{{item._id}}">
+      <div class="item-effect">
+        {{#if editable}}<prose-mirror name="system.effect" value="{{system.effect}}">{{{enrichedEffect}}}</prose-mirror>{{else}}{{{enrichedEffect}}}{{/if}}
+      </div>
+      <div class="item-description">{{!-- 설명 --}}
+        {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}">{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
       </div>
     </div>
-  </section>
-</form>
+  </div>
+</div>

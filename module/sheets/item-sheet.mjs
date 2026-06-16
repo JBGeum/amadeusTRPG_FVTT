@@ -1,76 +1,65 @@
+const { HandlebarsApplicationMixin, DocumentSheetV2 } = foundry.applications.api;
+
 /**
- * Extend the basic ItemSheet with some very simple modifications
- * @extends {ItemSheet}
+ * Amadeus Item 시트 (ApplicationV2).
+ * 아이템 타입별 템플릿은 PARTS에 모두 등록하고 _configureRenderOptions에서 현재 타입만 렌더한다.
+ * @extends {DocumentSheetV2}
  */
-export class AmadeusItemSheet extends foundry.appv1.sheets.ItemSheet {
+export class AmadeusItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
+  static DEFAULT_OPTIONS = {
+    classes: ["amadeus", "sheet", "item"],
+    position: { width: 480, height: 720 },
+    window: { resizable: true },
+    form: { submitOnChange: true, closeOnSubmit: false },
+  };
 
-  /** @override */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["amadeus", "sheet", "item"],
-      width: 480,
-      height: 720,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
-    });
+  static PARTS = {
+    gift: { template: "systems/amadeus/templates/item/item-gift-sheet.html" },
+    background: { template: "systems/amadeus/templates/item/item-background-sheet.html" },
+    parent: { template: "systems/amadeus/templates/item/item-parent-sheet.html" },
+    weapon: { template: "systems/amadeus/templates/item/item-weapon-sheet.html" },
+    gear: { template: "systems/amadeus/templates/item/item-gear-sheet.html" },
+    memory: { template: "systems/amadeus/templates/item/item-memory-sheet.html" },
+    treasure: { template: "systems/amadeus/templates/item/item-treasure-sheet.html" },
+  };
+
+  /** 현재 아이템 타입의 part만 렌더한다. */
+  _configureRenderOptions(options) {
+    super._configureRenderOptions(options);
+    options.parts = [this.document.type];
   }
 
   /** @override */
-  get template() {
-    const path = "systems/amadeus/templates/item";
-    // Return a single sheet for all item types.
-    // return `${path}/item-sheet.html`;
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    const item = this.document;
 
-    // Alternatively, you could use the following return statement to do a
-    // unique item sheet by type, like `weapon-sheet.html`.
-    return `${path}/item-${this.item.type}-sheet.html`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  getData() {
-    // Retrieve base data structure.
-    const context = super.getData();
-    //schmm : 20:26 https://youtu.be/gcSN4AQcUzM?t=1226
     context.config = CONFIG.AMADEUS;
+    context.item = item;
+    context.system = item.system;
+    context.flags = item.flags;
+    context.editable = this.isEditable;
+    context.rollData = item.actor?.getRollData() ?? {};
 
-    // Use a safe clone of the item data for further operations.
-    const itemData = context.item;
+    // selectOptions용 라벨 맵: { 저장값: 현지화라벨 }.
+    // type/roll/color 는 기존처럼 i18n 키를 저장값으로 보존한다(item.mjs 챗카드의 localize 호환).
+    // rank/mod 는 letter(S~D / +++~--)를 저장값으로 보존한다.
+    context.label = { abl: {}, type: {}, itemType: {}, color: {}, rank: {}, mod: {} };
+    for (const v of Object.values(CONFIG.AMADEUS.ability)) context.label.abl[v] = game.i18n.localize(v);
+    for (const v of Object.values(CONFIG.AMADEUS.gift)) context.label.type[v] = game.i18n.localize(v);
+    for (const v of Object.values(CONFIG.AMADEUS.item)) context.label.itemType[v] = game.i18n.localize(v);
+    for (const v of Object.values(CONFIG.AMADEUS.color)) context.label.color[v] = game.i18n.localize(v);
+    for (const letter of Object.keys(CONFIG.AMADEUS.rank)) context.label.rank[letter] = letter;
+    for (const letter of Object.keys(CONFIG.AMADEUS.modL)) context.label.mod[letter] = letter;
 
-    // Retrieve the roll data for TinyMCE editors.
-    context.rollData = {};
-    let actor = this.object?.parent ?? null;
-    if (actor) {
-      context.rollData = actor.getRollData();
-    }
-
-    context.label ={};
-    context.label.abl = {};
-    for (let [k, v] of Object.entries(CONFIG.AMADEUS.ability)) {
-      context.label.abl[v] = game.i18n.localize(v) ?? k;
-    }
-    context.label.type = {};
-    for (let [k, v] of Object.entries(CONFIG.AMADEUS.gift)) {
-      context.label.type[v] = game.i18n.localize(CONFIG.AMADEUS.gift[k]) ?? k;
-    }
-
-
-    // Add the actor's data to context.data for easier access, as well as flags.
-    context.system = itemData.system;
-    context.flags = itemData.flags;
+    // 리치텍스트 enrich (effect/description 보유 타입). v13 ProseMirror 표시용.
+    const TextEditor = foundry.applications.ux.TextEditor.implementation;
+    const enrichOpts = { secrets: item.isOwner, rollData: context.rollData };
+    if (typeof item.system.effect === "string")
+      context.enrichedEffect = await TextEditor.enrichHTML(item.system.effect, enrichOpts);
+    if (typeof item.system.description === "string")
+      context.enrichedDescription = await TextEditor.enrichHTML(item.system.description, enrichOpts);
 
     return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Everything below here is only needed if the sheet is editable
-    if (!this.isEditable) return;
-
-    // Roll handlers, click handlers, etc. would go here.
   }
 }
