@@ -27,6 +27,7 @@ npm run format     # Prettier 포맷 적용
 - **`dist/`는 빌드 산출물이라 git 추적 제외**(`.gitignore`)다. 클린 체크아웃 후에는 반드시 `npm run build`를 먼저 실행해야 `dist/`가 생성된다.
 - **배포**: Foundry는 별도 서버에서 동작하며, 빌드된 `dist/`를 서버의 `systems/amadeus`로 업로드해 사용한다. JS/CSS뿐 아니라 `system.json`·`templates/` 등 모든 변경이 `dist/`에 모이므로 `dist/`만 올리면 된다.
 - **CSS의 이미지 참조는 런타임 절대경로(`/systems/amadeus/icons/...`)를 쓴다** — 상대경로(`../icons/...`)로 쓰면 Vite가 base64로 인라인해 CSS가 비대해진다.
+- **⚠️ SCSS 셀렉터 미갱신(디자인 리뉴얼 대상)**: 시트가 ApplicationV2로 전환되며 DOM 구조가 바뀌었으나(`<form>` 자동 생성, 최상위 `.application` 클래스, `.window-content`가 `div`), 기존 SCSS(`scss/`)는 여전히 AppV1 구조를 가정한다(예: `_window.scss`의 `.window-app`, `amadeus.scss`의 `.sheet.actor section.window-content`). 그 결과 색/배경 등 스타일이 적용되지 않고 Foundry 기본 스타일이 노출된다. **디자인 리뉴얼 시 AppV2 실제 렌더 DOM에 맞춰 셀렉터를 갱신**해야 한다(기능은 정상, 외형만 영향).
 
 ### 컴펜디엄 팩 빌드 (Foundry CLI)
 
