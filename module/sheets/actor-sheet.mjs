@@ -4,13 +4,13 @@ import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/ef
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class AmadeusActorSheet extends ActorSheet {
+export class AmadeusActorSheet extends foundry.appv1.sheets.ActorSheet {
 
 
 
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["amadeus", "sheet", "actor"],
       template: "systems/amadeus/templates/actor/actor-sheet.html",
       width: 800,
@@ -105,7 +105,7 @@ export class AmadeusActorSheet extends ActorSheet {
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
-      i.img = i.img || DEFAULT_TOKEN;
+      i.img = i.img || CONST.DEFAULT_TOKEN;
       // Append to gear.
       if (i.type === 'gift') {gifts.push(i);}
       else if (i.type === 'background') {background.push(i);}
@@ -284,7 +284,7 @@ export class AmadeusActorSheet extends ActorSheet {
     // Get the type of item to create.
     const type = header.dataset.type;
     // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
+    const data = foundry.utils.duplicate(header.dataset);
     // Initialize a default name.
     const name = game.i18n.localize(CONFIG.AMADEUS.label[type]);
 

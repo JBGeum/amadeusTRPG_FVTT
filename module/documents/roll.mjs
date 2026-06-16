@@ -5,6 +5,6 @@ export async function amadeRoll(rank, rankVal, rollData){
     else
         roll = new Roll(rankVal + "d6",rollData);
     //https://foundryvtt.com/api/classes/client.Roll.html#dice
-    await roll.evaluate({async: true});
+    await roll.evaluate();
     return roll;
 }

@@ -44,10 +44,10 @@ Hooks.once('init', async function() {
   CONFIG.Item.documentClass = AmadeusItem;
 
   // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("amadeus", AmadeusActorSheet, { makeDefault: true });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("amadeus", AmadeusItemSheet, { makeDefault: true });
+  foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+  foundry.documents.collections.Actors.registerSheet("amadeus", AmadeusActorSheet, { makeDefault: true });
+  foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet("amadeus", AmadeusItemSheet, { makeDefault: true });
 
   // Preload Handlebars templates.
   registerHandlebarsHelpers();

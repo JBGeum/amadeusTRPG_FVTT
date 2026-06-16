@@ -105,7 +105,7 @@ export class AmadeusItem extends Item {
       tag: system.tag,
       effect: system.effect
     };
-    let content = await renderTemplate("systems/amadeus/templates/chatcard/data-gift.html", templateData)
+    let content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/data-gift.html", templateData)
     return content;
   }
 
@@ -119,7 +119,7 @@ export class AmadeusItem extends Item {
       effect: system.effect,
       description: system.description
     };
-    let content = await renderTemplate("systems/amadeus/templates/chatcard/data-item.html", templateData)
+    let content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/data-item.html", templateData)
     return content;
   }
 
@@ -148,7 +148,7 @@ export class AmadeusItem extends Item {
     }
     let content;
     if (this.type === "gift") {
-      content = await renderTemplate("systems/amadeus/templates/chatcard/roll-gift.html", templateData)
+      content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/roll-gift.html", templateData)
     }
 
     //let content = await this.getAmadeDiceCard(resultDiceset, rollData); //목표치 넣기
@@ -157,13 +157,13 @@ export class AmadeusItem extends Item {
         content,
         flavor: ablLabel + "판정",
         speaker: speaker,
-        type: 3
+        style: CONST.CHAT_MESSAGE_STYLES.EMOTE
       })
 
   }
 
   async _getGiftChatCard(templateData) {
-    let content = await renderTemplate("systems/amadeus/templates/chatcard/roll-gift.html", templateData)
+    let content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/roll-gift.html", templateData)
     return content;
   }
 

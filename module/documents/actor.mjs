@@ -240,7 +240,7 @@ export class AmadeusActor extends Actor {
       modVal: abl.modVal,
       rollDC: this.system.dc,
       resultDiceset}
-    let content = await renderTemplate("systems/amadeus/templates/chatcard/roll-amadeabl.html", templateData)
+    let content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/roll-amadeabl.html", templateData)
     ChatMessage.create({content, speaker : ChatMessage.getSpeaker({actor: this})});
   }
 
