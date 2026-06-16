@@ -40,8 +40,10 @@ export class AmadeusActorSheet extends foundry.appv1.sheets.ActorSheet {
     // Use a safe clone of the actor data for further operations.
     const actorData = this.actor.toObject(false);
 
-    // Add the actor's data to context.data for easier access, as well as flags.
-    context.system = actorData.system;
+    // prepared system(파생값 포함)을 넘긴다. DataModel의 prepareDerivedData가 계산한
+    // initHealth/initMoney/rankVal/modVal 는 toObject(false)(source)에는 없으므로
+    // this.actor.system 을 써야 시트에서 표시된다.
+    context.system = this.actor.system;
     context.flags = actorData.flags;
 
     /*
@@ -400,18 +402,25 @@ export class AmadeusActorSheet extends foundry.appv1.sheets.ActorSheet {
 
   }
 
-  _onRollVitality(event){
+  async _onRollVitality(event){
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
     let label = dataset.label ? `${dataset.label}` : '';
     let roll = new Roll(dataset.roll, this.actor.getRollData());
-    roll.toMessage({
+    await roll.evaluate();
+    await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: label,
       rollMode: game.settings.get('core', 'rollMode'),
     });
-    this.actor.update({'system.vitality': roll.result});
+    // 활력 굴림 결과를 저장하고, 초기치(능력치 합산) + 활력을 최대 생명력(health.max)에 또렷한 값으로 자동 입력한다.
+    // 좌측 health.value는 실제 변동하는 현재 HP라 건드리지 않는다.
+    const initHealth = this.actor.system.initHealth ?? 0;
+    await this.actor.update({
+      'system.vitality': roll.total,
+      'system.health.max': initHealth + roll.total,
+    });
     return roll;
   }
 
