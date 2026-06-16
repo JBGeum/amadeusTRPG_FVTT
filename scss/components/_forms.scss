@@ -50,11 +50,11 @@ label.pathos{
   height:18px;
 }
 label.pathos-on{
-  content: url('../icons/pathos-on.svg');
+  content: url('/systems/amadeus/icons/pathos-on.svg');
   filter: invert(8%) sepia(90%) saturate(3003%) hue-rotate(345deg) brightness(108%) contrast(94%);
 }
 label.pathos-off{
-  content: url('../icons/pathos-off.svg');
+  content: url('/systems/amadeus/icons/pathos-off.svg');
 }
 
 input.pathos{

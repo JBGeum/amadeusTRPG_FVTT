@@ -10,36 +10,36 @@
   "authors": [{
     "name": "Sch"
   }],
-  "esmodules": ["module/amadeus.mjs"],
-  "styles": ["css/amadeus.css"],
+  "esmodules": ["dist/amadeus.mjs"],
+  "styles": ["dist/amadeus.css"],
   "scripts": [],
   "packs": [
     {
       "name": "gifts",
       "label" : "gifts",
       "system": "amadeus",
-      "path": "./packs/gifts.db",
+      "path": "packs/gifts",
       "type": "Item"
     },
     {
       "name": "items",
       "label" : "items",
       "system": "amadeus",
-      "path": "./packs/items.db",
+      "path": "packs/items",
       "type": "Item"
     },
     {
       "name": "parents",
       "label" : "parents",
       "system": "amadeus",
-      "path": "./packs/parents.db",
+      "path": "packs/parents",
       "type": "Item"
     },
     {
       "name": "rolltable",
       "label" : "rolltable",
       "system": "amadeus",
-      "path": "./packs/rolltable.db",
+      "path": "packs/rolltable",
       "type": "RollTable"
     }
   ],

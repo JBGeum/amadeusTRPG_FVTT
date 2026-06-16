@@ -156,7 +156,7 @@ export class AmadeusItem extends Item {
       ChatMessage.create({
         content,
         flavor: ablLabel + "판정",
-        speaker: ChatMessage.getSpeaker({alias: game.user.name}),
+        speaker: speaker,
         type: 3
       })
 

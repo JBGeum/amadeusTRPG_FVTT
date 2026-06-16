@@ -1,24 +1,27 @@
 {
   "name": "amadeus",
   "version": "1.0.0",
-  "description": "CSS compiler for the Boilerplate system",
-  "scripts": {
-    "build": "gulp build",
-    "compile": "gulp css",
-    "watch": "gulp",
-    "gulp": "gulp"
-  },
-  "browserslist": [
-    "last 3 versions"
-  ],
-  "author": "John Doe",
-  "license": "MIT",
+  "description": "Amadeus TRPG system for Foundry VTT",
+  "type": "module",
   "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{mjs,js,json,scss}\"",
+    "format:check": "prettier --check \"**/*.{mjs,js,json,scss}\"",
+    "pack:extract": "node tools/packs.mjs extract",
+    "pack:compile": "node tools/packs.mjs compile"
+  },
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^3.0.0",
-    "sass": "^1.53.0"
+    "@eslint/js": "^10.0.1",
+    "@foundryvtt/foundryvtt-cli": "^3.0.3",
+    "eslint": "^10.5.0",
+    "globals": "^17.6.0",
+    "prettier": "^3.8.4",
+    "sass": "^1.101.0",
+    "vite": "^8.0.16"
   }
 }

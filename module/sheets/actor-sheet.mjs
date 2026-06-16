@@ -146,6 +146,7 @@ export class AmadeusActorSheet extends ActorSheet {
         } //이전 부모신 데이터 삭제
       this.actor.update({
         'system.chardata.parent' : item.name,
+        'system.color' : item.system.color,
         'system.chardata.pantheon' : item.system.pantheon,
         'system.chardata.parentkey' : item._id,
         'system.chardata.parentimg' : item.system.portrait,

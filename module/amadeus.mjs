@@ -1,3 +1,6 @@
+// Import styles so Vite bundles them into dist/amadeus.css.
+import "../scss/amadeus.scss";
+
 // Import document classes.
 import { AmadeusActor } from "./documents/actor.mjs";
 import { AmadeusItem } from "./documents/item.mjs";

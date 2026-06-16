@@ -34,7 +34,7 @@
 @import 'components/chatcard';
 
 .sheet.actor section.window-content{
-  background: url('../icons/amade-bg-center.png') center no-repeat, url('../icons/amade-bg-top.png') top no-repeat, url('../icons/amade-bg-bottom.png') bottom no-repeat ;
+  background: url('/systems/amadeus/icons/amade-bg-center.png') center no-repeat, url('/systems/amadeus/icons/amade-bg-top.png') top no-repeat, url('/systems/amadeus/icons/amade-bg-bottom.png') bottom no-repeat ;
   background-size: contain, contain, contain;
   background-color: $color-bg;
 ;

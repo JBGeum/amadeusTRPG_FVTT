@@ -249,10 +249,17 @@ fabric.properties
 .npmignore
 .nvmrc
 CHANGELOG.md
-gulpfile.js
 lang/en.json
 templates/actor/actor-character-sheet-old.html
 templates/item/item-item-sheet-orig.html
 /foundry.js
 /handlebars/
 /fordev/
+
+# Vite build output
+dist/
+
+# LevelDB compendium runtime/lock files (data files like *.ldb, *.log, CURRENT, MANIFEST-* are kept)
+packs/**/LOCK
+packs/**/LOG
+packs/**/LOG.old
