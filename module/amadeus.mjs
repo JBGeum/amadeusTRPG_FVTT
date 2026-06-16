@@ -11,6 +11,10 @@ import { AmadeusItemSheet } from "./sheets/item-sheet.mjs";
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { registerHandlebarsHelpers } from "./helpers/templates.mjs";
 import { AMADEUS } from "./helpers/config.mjs";
+// Import data models.
+import { CharacterData } from "./data/actor-character.mjs";
+import { NpcData } from "./data/actor-npc.mjs";
+import { GiftData, BackgroundData, ParentData, WeaponData, GearData, MemoryData, TreasureData } from "./data/item-data.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -38,6 +42,21 @@ Hooks.once('init', async function() {
     formula: "1d20 + @abilities.dex.mod",
     decimals: 2
   };
+
+  // Register system DataModels (keys must match template.json types).
+  Object.assign(CONFIG.Actor.dataModels, {
+    character: CharacterData,
+    npc: NpcData,
+  });
+  Object.assign(CONFIG.Item.dataModels, {
+    gift: GiftData,
+    background: BackgroundData,
+    parent: ParentData,
+    weapon: WeaponData,
+    gear: GearData,
+    memory: MemoryData,
+    treasure: TreasureData,
+  });
 
   // Define custom Document classes
   CONFIG.Actor.documentClass = AmadeusActor;
