@@ -24,6 +24,14 @@
 };
 
 export function registerHandlebarsHelpers(){
+  Handlebars.registerHelper("concat", function (...args) {
+    // 마지막 인자는 Handlebars options 객체이므로 제외한다.
+    return args.slice(0, -1).join("");
+  });
+  Handlebars.registerHelper("toLowerCase", function (str) {
+    return String(str).toLowerCase();
+  });
+
   Handlebars.registerHelper("checked", function (condition) {
       return (condition) ? "checked" : "";
   });

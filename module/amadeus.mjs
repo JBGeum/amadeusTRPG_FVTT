@@ -26,22 +26,12 @@ Hooks.once('init', async function() {
   // accessible in global contexts.
   game.amadeus = {
     AmadeusActor,
-    AmadeusItem
-//    rollItemMacro ?
+    AmadeusItem,
+    rollItemMacro,
   };
 
   // Add custom constants for configuration.
   CONFIG.AMADEUS = AMADEUS;
-
-  /**
-   * Set an initiative formula for the system
-   * @type {String}
-   * schmm 컴뱃트레커와 이니셔티브는 쓸 일 없을듯
-   */
-  CONFIG.Combat.initiative = {
-    formula: "1d20 + @abilities.dex.mod",
-    decimals: 2
-  };
 
   // Register system DataModels (keys must match template.json types).
   Object.assign(CONFIG.Actor.dataModels, {
@@ -71,25 +61,6 @@ Hooks.once('init', async function() {
   // Preload Handlebars templates.
   registerHandlebarsHelpers();
   return preloadHandlebarsTemplates();
-});
-
-/* -------------------------------------------- */
-/*  Handlebars Helpers                          */
-/* -------------------------------------------- */
-
-// If you need to add Handlebars helpers, here are a few useful examples:
-Handlebars.registerHelper('concat', function() {
-  var outStr = '';
-  for (var arg in arguments) {
-    if (typeof arguments[arg] != 'object') {
-      outStr += arguments[arg];
-    }
-  }
-  return outStr;
-});
-
-Handlebars.registerHelper('toLowerCase', function(str) {
-  return str.toLowerCase();
 });
 
 /* -------------------------------------------- */
