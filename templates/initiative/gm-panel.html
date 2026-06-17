@@ -19,11 +19,11 @@
           {{#if p.isNPC}}
             <div class="plot-npc-dice">
               {{#each ../dice as |n|}}
-              <button type="button" class="plot-npc-die{{#if (eq n p.value)}} selected{{/if}}" data-action="setNpc" data-actor-id="{{p.actorId}}" data-value="{{n}}">{{n}}</button>
+              <button type="button" class="plot-npc-die{{#if (eq n p.value)}} selected{{/if}}" data-action="setNpc" data-actor-id="{{p.actorId}}" data-value="{{n}}">{{plotLabel n}}</button>
               {{/each}}
             </div>
           {{else}}
-            {{#if p.submitted}}<span class="plot-p-submitted">{{p.value}}</span>{{else}}<span class="plot-p-pending">{{localize "AMADEUS.initiative.pending"}}</span>{{/if}}
+            {{#if p.submitted}}<span class="plot-p-submitted">{{plotLabel p.value}}</span>{{else}}<span class="plot-p-pending">{{localize "AMADEUS.initiative.pending"}}</span>{{/if}}
           {{/if}}
         </td>
         <td class="plot-p-remove"><a data-action="removeParticipant" data-actor-id="{{p.actorId}}"><i class="fas fa-times"></i></a></td>
@@ -43,7 +43,7 @@
   {{#if revealed}}
   <ol class="plot-gm-order">
     {{#each order as |slot|}}
-    <li><span class="plot-rank">{{slot.rank}}</span> <span class="plot-value">[{{slot.value}}]</span> {{#each slot.members as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}</li>
+    <li><span class="plot-rank">{{slot.rank}}</span> <span class="plot-value">[{{plotLabel slot.value}}]</span> {{#each slot.members as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}</li>
     {{/each}}
   </ol>
   {{/if}}

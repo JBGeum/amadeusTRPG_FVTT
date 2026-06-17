@@ -40,6 +40,11 @@ export function registerHandlebarsHelpers(){
     return a === b;
   });
 
+  // 플롯 값 표시용: 6은 '권외'로 표시한다(값은 그대로 6).
+  Handlebars.registerHelper("plotLabel", function (value) {
+    return value === 6 ? game.i18n.localize("AMADEUS.initiative.outOfRange") : value;
+  });
+
   Handlebars.registerHelper("checked", function (condition) {
       return (condition) ? "checked" : "";
   });

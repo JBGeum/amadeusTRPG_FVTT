@@ -11,6 +11,7 @@
       "addNpc": "NPC 추가",
       "submitted": "제출됨",
       "pending": "대기",
+      "outOfRange": "권외",
       "plotDone": "플롯 완료",
       "order": "행동 순서",
       "notSubmitted": "미제출",
