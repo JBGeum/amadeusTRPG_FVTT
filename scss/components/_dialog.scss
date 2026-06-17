@@ -10,7 +10,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 22px 50px -24px rgba(0, 0, 0, 0.6);
-  font-family: 'Noto Serif KR', serif;
+  font-family: $font-body;
   color: var(--text);
 
   // Foundry's real header — tinted to match the mockup; close button + drag remain functional
@@ -22,7 +22,7 @@
 
   .window-title {
     color: var(--text);
-    font-family: 'Gowun Batang', serif;
+    font-family: $font-title;
     font-size: 15px;
   }
 
@@ -51,7 +51,7 @@
     border: 1px solid var(--line);
     border-radius: 8px;
     padding: 7px 13px;
-    font-family: 'Noto Serif KR', serif;
+    font-family: $font-body;
     font-size: 12.5px;
     cursor: pointer;
     white-space: nowrap;
@@ -204,7 +204,7 @@
     height: 26px;
     border-radius: 6px;
     color: #fff;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: $font-display;
     font-weight: 700;
     font-size: 16px;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
@@ -243,7 +243,7 @@
     border: 1px solid var(--line);
     background: var(--panel);
     color: var(--muted);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: $font-display;
     font-weight: 700;
     font-size: 13px;
     cursor: pointer;
@@ -277,7 +277,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 9px 32px 9px 12px;
-      font-family: 'Noto Serif KR', serif;
+      font-family: $font-body;
       font-size: 13px;
       cursor: pointer;
     }
@@ -311,7 +311,7 @@
     padding: 7px 11px;
 
     .dlg-order-rank {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: $font-display;
       font-weight: 700;
       font-size: 16px;
       color: var(--gold);
@@ -363,7 +363,7 @@
     background: linear-gradient(180deg, var(--panel2), var(--panel));
     border: 1px solid var(--line);
     color: var(--text);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: $font-display;
     font-weight: 700;
     font-size: 20px;
     cursor: pointer;

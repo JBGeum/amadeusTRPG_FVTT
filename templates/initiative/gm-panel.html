@@ -3,13 +3,13 @@
     <!-- 진행 중 state -->
     <div class="dlg-controls">
       <button type="button" class="dlg-btn" data-action="rerequest">
-        <i class="fa-solid fa-rotate-right dlg-btn-icon"></i>{{localize "AMADEUS.initiative.rerequest"}}
+        <i class="fa-solid fa-rotate-right dlg-btn-icon" aria-hidden="true"></i>{{localize "AMADEUS.initiative.rerequest"}}
       </button>
       <button type="button" class="dlg-btn" data-action="reveal">
-        <i class="fa-solid fa-eye dlg-btn-icon"></i>{{localize "AMADEUS.initiative.reveal"}}
+        <i class="fa-solid fa-eye dlg-btn-icon" aria-hidden="true"></i>{{localize "AMADEUS.initiative.reveal"}}
       </button>
       <button type="button" class="dlg-btn" data-action="reset">
-        <i class="fa-solid fa-arrows-rotate dlg-btn-icon"></i>{{localize "AMADEUS.initiative.reset"}}
+        <i class="fa-solid fa-arrows-rotate dlg-btn-icon" aria-hidden="true"></i>{{localize "AMADEUS.initiative.reset"}}
       </button>
     </div>
 
@@ -23,7 +23,7 @@
       {{#each participants as |p|}}
       <div class="dlg-roster-row" data-actor-id="{{p.actorId}}">
         <span class="dlg-col-name">
-          <i class="fa-solid {{#if p.isNPC}}fa-skull{{else}}fa-user{{/if}} dlg-name-icon"></i>{{p.name}}
+          <i class="fa-solid {{#if p.isNPC}}fa-skull{{else}}fa-user{{/if}} dlg-name-icon" aria-hidden="true"></i>{{p.name}}
         </span>
         <span class="dlg-col-type">
           {{#if p.isNPC}}{{localize "AMADEUS.initiative.npc"}}{{else}}{{localize "AMADEUS.initiative.pc"}}{{/if}}
@@ -55,13 +55,13 @@
   {{else}}
     <!-- 시작 전 state -->
     <button type="button" class="dlg-btn dlg-btn--primary" data-action="start">
-      <i class="fa-solid fa-play dlg-btn-icon"></i>{{localize "AMADEUS.initiative.start"}}
+      <i class="fa-solid fa-play dlg-btn-icon" aria-hidden="true"></i>{{localize "AMADEUS.initiative.start"}}
     </button>
 
     <div class="dlg-divider">
-      <span class="dlg-divider-line"></span>
-      <i class="fa-solid fa-droplet dlg-divider-icon"></i>
-      <span class="dlg-divider-line dlg-divider-line--right"></span>
+      <span class="dlg-divider-line" aria-hidden="true"></span>
+      <i class="fa-solid fa-droplet dlg-divider-icon" aria-hidden="true"></i>
+      <span class="dlg-divider-line dlg-divider-line--right" aria-hidden="true"></span>
     </div>
   {{/if}}
 
@@ -71,10 +71,10 @@
         <option value="">{{localize "AMADEUS.initiative.addNpc"}}</option>
         {{#each npcChoices as |npc|}}<option value="{{npc.id}}">{{npc.name}}</option>{{/each}}
       </select>
-      <i class="fa-solid fa-chevron-down dlg-select-caret"></i>
+      <i class="fa-solid fa-chevron-down dlg-select-caret" aria-hidden="true"></i>
     </div>
     <button type="button" class="dlg-btn" data-action="addNpc">
-      <i class="fa-solid fa-plus dlg-btn-icon"></i>{{localize "AMADEUS.initiative.addNpcBtn"}}
+      <i class="fa-solid fa-plus dlg-btn-icon" aria-hidden="true"></i>{{localize "AMADEUS.initiative.addNpcBtn"}}
     </button>
   </div>
 
