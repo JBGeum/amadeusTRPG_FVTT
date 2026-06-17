@@ -16,6 +16,7 @@ import { CharacterData } from "./data/actor-character.mjs";
 import { NpcData } from "./data/actor-npc.mjs";
 import { GiftData, BackgroundData, ParentData, WeaponData, GearData, MemoryData, TreasureData } from "./data/item-data.mjs";
 import { registerPlotSocket } from "./initiative/socket.mjs";
+import { PlotPrompt } from "./initiative/plot-prompt.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -72,6 +73,12 @@ Hooks.once("ready", async function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
   registerPlotSocket();
+  Hooks.on("amadeus.plotStart", (data) => {
+    if (!game.user.isGM) PlotPrompt.openForUser(data.sessionId);
+  });
+  Hooks.on("amadeus.plotEnd", () => {
+    if (!game.user.isGM) PlotPrompt.closeAll();
+  });
 });
 
 /* -------------------------------------------- */

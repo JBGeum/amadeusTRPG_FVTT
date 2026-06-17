@@ -1,0 +1,11 @@
+<div class="plot-prompt">
+  <p class="plot-prompt-hint">{{localize "AMADEUS.initiative.promptHint"}}</p>
+  <div class="plot-dice">
+    {{#each dice as |d|}}
+    <button type="button" class="plot-die{{#if d.selected}} selected{{/if}}" data-action="pick" data-value="{{d.value}}">{{d.value}}</button>
+    {{/each}}
+  </div>
+  {{#if selected}}
+  <p class="plot-prompt-status">{{localize "AMADEUS.initiative.submitted"}}: {{selected}}</p>
+  {{/if}}
+</div>
