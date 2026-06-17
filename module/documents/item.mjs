@@ -3,7 +3,6 @@ import {amadeRoll} from "./roll.mjs";
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
  */
-import {getKeybyValue} from "../helpers/config.mjs";
 
 export class AmadeusItem extends Item {
   /**
@@ -82,12 +81,8 @@ export class AmadeusItem extends Item {
     //타입별로 챗 카드 처리
     if (this.type === "gift") {
       content = await this.getGiftChatCard(this);
-    } else if (this.type === "weapon") {
+    } else if (this.type === "weapon" || this.type === "gear") {
       content = await this.getItemChatCard(this);
-    } else if (this.type === "gear") {
-      content = await this.getItemChatCard(this);
-    } else if (this.type === "background") {
-    } else if (this.type === "parent") {
     }
     if (content) {
       ChatMessage.create({content, speaker: speaker});
@@ -131,8 +126,6 @@ export class AmadeusItem extends Item {
     const speaker = ChatMessage.getSpeaker({actor: actor});
     // const rollMode = game.settings.get('core', 'rollMode');
     const label = `${item.name}`;
-    //const rollAbl = getKeybyValue(CONFIG.AMADEUS.ability,this.system.action.ability);
-    // AMADEUS.ability.warfare -> warfare
     const actorAbl = actor.system.ability[rollAbl];
     const ablLabel = game.i18n.localize(this.system.action.roll);
     const rank = actorAbl.rank;
@@ -151,7 +144,6 @@ export class AmadeusItem extends Item {
       content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/roll-gift.html", templateData)
     }
 
-    //let content = await this.getAmadeDiceCard(resultDiceset, rollData); //목표치 넣기
     if (content)
       ChatMessage.create({
         content,
@@ -159,52 +151,6 @@ export class AmadeusItem extends Item {
         speaker: speaker,
         style: CONST.CHAT_MESSAGE_STYLES.EMOTE
       })
-
-  }
-
-  async _getGiftChatCard(templateData) {
-    let content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/roll-gift.html", templateData)
-    return content;
-  }
-
-  getAmadeDiceCard(diceset, {label, ablLabel, rank, mod, modVal, rollDC} = {}) {
-
-    let diceCard = "<div class='amade-dicecard text-align'>" +
-      "<div class='roll-title'><h3>" + label + "(" + ablLabel + "판정)</h3>" +
-      "<div class='rankMod flexrow'>" +
-      "<div class='rank-label'>" + rank + "</div>" +
-      "<div class='mod-label'>" + mod + "</div></div></div>" +
-      "<div class='roll-dc'>목표치: " + rollDC + "</div>" + "<div class='diceset-area flexrow align-center'>";
-    for (let die of diceset) {
-      let dieCard = "<div class='die-result flexcol'>" +
-        "<div class='die-area'><div class='amade-d6 dNum-" + die + "'>" +
-        die + "</div></div>";
-      let modValFormat = modVal >= 0 ? " +" + modVal : " -" + Math.abs(modVal);
-      dieCard += "<div class='modval-format'>" + modValFormat + "</div>";
-      let resultText = die + modVal >= rollDC ? "성공" : "실패";
-      dieCard += "<div class='roll-result-text'>" + resultText + " </div></div>";
-      diceCard += dieCard;
-    }
-    diceCard += "</div>";
-    /*
-        let diceCard = "<div class='dice-roll'>" + label+ " 판정" +
-            "<div class='dice-result'><div class='dice-tooltip expanded flexrow'>" +
-            "<ol class='dice-rolls'>";
-        for(let die of diceset){
-          diceCard +=  "<div class = 'flexcol'><li class='roll die d6'>" + die + "</li><hr>"
-          let modValFormat;
-          if(modVal > 0){
-            modValFormat = " + " + modVal;
-          } else if (modVal<0){
-            modValFormat = " - " + Math.abs(modVal);
-          }
-          diceCard += die+modValFormat+ "</div>";
-        }
-        diceCard += "<div>목표치 : dc </div>"
-        diceCard += "</ol>" +
-            "</div></div></div>";
-     */
-    return diceCard;
 
   }
 
