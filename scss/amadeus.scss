@@ -1,51 +1,23 @@
-// Add custom fonts by visiting and search https://fonts.google.com
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@font-face {
-  font-family: 'RIDIBatang';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'GyeonggiBatang';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap');
 
-
-// Import utilities.
+// Utilities
 @import 'utils/typography';
-@import 'utils/colors';
-@import 'utils/mixins';
+@import 'utils/tokens';
 @import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/colors'; // 임시 유지 — _forms.scss/_chatcard.scss/_window.scss의 $color-* 참조가 남아 있음 (Task 8에서 제거 예정)
 
-/* Global styles */
+// Global
 @import 'global/window';
 @import 'global/grid';
 @import 'global/flex';
 
-/* Styles limited to amadeus sheets */
+// Components
 .amadeus {
+  @import 'components/sheet-actor';
   @import 'components/forms';
   @import 'components/items';
   @import 'components/effects';
 }
+@import 'components/dialog';
 @import 'components/chatcard';
-
-.sheet.actor section.window-content{
-  background: url('/systems/amadeus/icons/amade-bg-center.png') center no-repeat, url('/systems/amadeus/icons/amade-bg-top.png') top no-repeat, url('/systems/amadeus/icons/amade-bg-bottom.png') bottom no-repeat ;
-  background-size: contain, contain, contain;
-  background-color: $color-bg;
-;
-
-  input {
-    background-color: $color-dim;
-    color: $color-bg;
-    border:none;
-  }
-  input::placeholder{
-    color:rgba(0, 0, 0, 0.3);
-    font-style: italic;
-  }
-}
