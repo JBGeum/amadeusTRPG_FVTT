@@ -21,7 +21,7 @@ export function resolveDie(die, modVal, dc) {
   return die + modVal >= dc ? "success" : "fail";
 }
 
-/** 랭크 문자 → 숫자값 (S4..D0). */
+/** 랭크 문자 → 능력치 숫자값 (S4..D0). D는 0 (굴림 개수 아님 — 굴림 개수는 diceCountForRank 사용). */
 export function rankVal(rank) {
   return AMADEUS.rank[rank] ?? 0;
 }
@@ -34,15 +34,19 @@ export function modVal(mod) {
 /** 생명력 초기치: warfare + spirit 의 (랭크+수정치) 합. */
 export function initHealth(ability) {
   return (
-    (HEALTH_BY_RANK[ability.warfare.rank] ?? 0) + (HEALTH_BY_MOD[ability.warfare.mod] ?? 0) +
-    (HEALTH_BY_RANK[ability.spirit.rank] ?? 0) + (HEALTH_BY_MOD[ability.spirit.mod] ?? 0)
+    (HEALTH_BY_RANK[ability.warfare.rank] ?? 0) +
+    (HEALTH_BY_MOD[ability.warfare.mod] ?? 0) +
+    (HEALTH_BY_RANK[ability.spirit.rank] ?? 0) +
+    (HEALTH_BY_MOD[ability.spirit.mod] ?? 0)
   );
 }
 
 /** 소지금 초기치: love + mundane 의 (랭크+수정치) 합. */
 export function initMoney(ability) {
   return (
-    (MONEY_BY_RANK[ability.love.rank] ?? 0) + (MONEY_BY_MOD[ability.love.mod] ?? 0) +
-    (MONEY_BY_RANK[ability.mundane.rank] ?? 0) + (MONEY_BY_MOD[ability.mundane.mod] ?? 0)
+    (MONEY_BY_RANK[ability.love.rank] ?? 0) +
+    (MONEY_BY_MOD[ability.love.mod] ?? 0) +
+    (MONEY_BY_RANK[ability.mundane.rank] ?? 0) +
+    (MONEY_BY_MOD[ability.mundane.mod] ?? 0)
   );
 }

@@ -18,6 +18,9 @@ describe("diceCountForRank", () => {
   it("treats D as a 2-dice exception", () => {
     expect(diceCountForRank("D")).toBe(2);
   });
+  it("returns 0 for unknown rank", () => {
+    expect(diceCountForRank("?")).toBe(0);
+  });
 });
 
 describe("resolveDie", () => {
@@ -53,10 +56,10 @@ describe("rankVal / modVal", () => {
 
 describe("initHealth / initMoney", () => {
   const ability = {
-    warfare: { rank: "A", mod: "+" },   // health: 7 + 1
-    spirit: { rank: "B", mod: " " },    // health: 5 + 0
-    love: { rank: "C", mod: "++" },     // money: 3 + 2
-    mundane: { rank: "D", mod: "-" },   // money: 2 + (-1)
+    warfare: { rank: "A", mod: "+" }, // health: 7 + 1
+    spirit: { rank: "B", mod: " " }, // health: 5 + 0
+    love: { rank: "C", mod: "++" }, // money: 3 + 2
+    mundane: { rank: "D", mod: "-" }, // money: 2 + (-1)
   };
   it("sums warfare + spirit rank/mod for health", () => {
     // 7 + 1 + 5 + 0 = 13
