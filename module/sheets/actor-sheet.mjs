@@ -333,14 +333,15 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     const next = game.settings.get("amadeus", "theme") === "dark" ? "light" : "dark";
     await game.settings.set("amadeus", "theme", next);
     // 열려 있는 Amadeus 창 전체에 새 테마를 반영한다.
-    for (const app of foundry.applications.instances.values()) {
+    for (const app of (foundry.applications?.instances?.values() ?? [])) {
       const el = app.element;
       if (!el) continue;
       if (el.classList?.contains("amadeus") || el.classList?.contains("amadeus-dlg")) {
         el.dataset.theme = next;
       }
-      // 아마데우스 액터 시트는 재렌더하여 헤더 컨트롤 아이콘도 갱신한다.
-      if (el.classList?.contains("amadeus") && typeof app.render === "function") {
+      // 아마데우스 액터 시트만 재렌더하여 헤더 컨트롤 아이콘도 갱신한다.
+      // PlotGMPanel·PlotPrompt·AmadeusItemSheet 등은 재렌더하지 않는다.
+      if (app instanceof AmadeusActorSheet) {
         app.render();
       }
     }
