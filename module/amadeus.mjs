@@ -15,6 +15,7 @@ import { AMADEUS } from "./helpers/config.mjs";
 import { CharacterData } from "./data/actor-character.mjs";
 import { NpcData } from "./data/actor-npc.mjs";
 import { GiftData, BackgroundData, ParentData, WeaponData, GearData, MemoryData, TreasureData } from "./data/item-data.mjs";
+import { registerPlotSocket } from "./initiative/socket.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -70,6 +71,7 @@ Hooks.once('init', async function() {
 Hooks.once("ready", async function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
+  registerPlotSocket();
 });
 
 /* -------------------------------------------- */
