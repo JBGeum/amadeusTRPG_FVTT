@@ -1,4 +1,4 @@
-//.sheet.item section.window-content{background:$color-bg;}
+//.sheet.item section.window-content{background:var(--bg);}
 .gift-sheet {
   label {padding : 3px;}
   .gift-sheet-header {
@@ -6,7 +6,7 @@
     grid-template-columns : 1fr 2fr 1fr;
 
     > div {
-      //border: 1px solid #999;
+      //border: 1px solid var(--line);
       @extend .total-center;
       padding : 5px;
       label {flex-shrink : 0;}
@@ -26,18 +26,18 @@
   .gift-sheet-body {
     .gift-effect {
       height           : 200px;
-      background-color : rgba(255, 255, 255, 0.3);
+      background-color : var(--panel2);
       margin           : 10px;
-      border: 1px solid #999;
+      border: 1px solid var(--line);
       border-radius    : 15px;
       padding          : 15px;
     }
 
     .gift-description {
       height           : 100px;
-      background-color : rgba(255, 255, 255, 0.3);
+      background-color : var(--panel2);
       margin           : 10px;
-      border: 1px solid #999;
+      border: 1px solid var(--line);
       border-radius    : 10px;
       padding          : 10px;
     }
@@ -73,18 +73,18 @@
   .item-sheet-body{
     .item-effect {
       height           : 200px;
-      background-color : rgba(255, 255, 255, 0.3);
+      background-color : var(--panel2);
       margin           : 10px;
-      border: 1px solid #999;
+      border: 1px solid var(--line);
       border-radius    : 15px;
       padding          : 15px;
     }
 
     .item-description {
       height           : 100px;
-      background-color : rgba(255, 255, 255, 0.3);
+      background-color : var(--panel2);
       margin           : 10px;
-      border: 1px solid #999;
+      border: 1px solid var(--line);
       border-radius    : 10px;
       padding          : 10px;
     }
@@ -141,7 +141,7 @@
     .parent-description{
       height: 100%;
       width: 100%;
-      border:1px solid #999;
+      border:1px solid var(--line);
       padding:3px;
       border-radius:5px;
     }

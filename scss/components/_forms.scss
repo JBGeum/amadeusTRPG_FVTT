@@ -1,5 +1,5 @@
 .item-form {
-  font-family: $font-primary;
+  font-family: $font-body;
 }
 
 //전체 fontawsome 크기 조절
@@ -8,7 +8,7 @@ i {
 }
 
 a:hover {
-  text-shadow: 0 0 8px $color-bg;
+  text-shadow: 0 0 8px var(--bg);
 }
 
 
@@ -19,7 +19,7 @@ input[type="password"]:focus,
 input[type="date"]:focus,
 input[type="time"]:focus,
 input[type="search"]:focus{
-  border:2px solid $color-bg;
+  border:2px solid var(--bg);
 }
 input[type="checkbox"]{
   vertical-align: middle;
@@ -66,7 +66,7 @@ input.pathos{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $color-bright;
+  background-color: var(--panel2);
   padding: 1px;
 }
 
@@ -113,7 +113,7 @@ input.pathos{
         text-align: center;
         -webkit-appearance: none;
         -moz-appearance: none;
-        background-color: rgba(255, 255, 255, 0.3);
+        background-color: var(--panel2);
         border: none;
         border-radius: 5px;
         font-size:2rem;
@@ -135,7 +135,7 @@ input.pathos{
       height:90%;
       padding:5px;
       border:none;
-      background-color:$color-bright;
+      background-color:var(--panel2);
     }
     .charname > input[type="text"] {
       width: 100%;
@@ -188,7 +188,7 @@ input.pathos{
 section.grid-6col{margin: 5px 25px;}
 aside.sidebar{  @extend .default-div; background-color:unset;}
 aside.sidebar .abilities{
-  background-color: $color-bright;
+  background-color: var(--panel2);
   border-radius: 5px;
   width:80%;
   margin: 0 auto;
@@ -196,7 +196,7 @@ aside.sidebar .abilities{
     @include grid;
     grid-template-rows: 1.3rem 2.5rem 1.3rem;
     font-size: 1.2rem;
-    border:2px solid $color-bg;
+    border:2px solid var(--bg);
     margin:10px;
     border-radius: 5px;
 
@@ -206,7 +206,7 @@ aside.sidebar .abilities{
       text-align: center;
       -webkit-appearance: none;
       -moz-appearance: none;
-      background-color: $color-dim;
+      background-color: var(--panel2);
       border:none;
       border-radius: 0;
     }
@@ -232,7 +232,7 @@ aside.sidebar .abilities{
       margin: 0;
       grid-template-columns: 1fr 2fr 1fr;
       grid-template-rows: 1.2fr 1fr 1fr;
-      background-color: $color-bright;
+      background-color: var(--panel2);
       border-radius: 5px;
       padding:5px;
       grid-template-areas:
@@ -272,7 +272,7 @@ aside.sidebar .abilities{
         &.checked{background-color :rgba(0,0,0,0.5); color:#ffffff; border:1px solid white;}
         .bs-input {width:0.8rem;}
         input.bs-input{
-          border: none;background-color:$color-dim;font-size: 1rem;
+          border: none;background-color:var(--panel2);font-size: 1rem;
           &.checked{color:#ffffff;border:none;background: none;}
         }
         &.bs-num{justify-content: space-between;}
@@ -282,7 +282,7 @@ aside.sidebar .abilities{
   .middle-side{grid-area:middle-side;}
   .memo-side{
     grid-area:memo-side;
-    background-color: #ffffff;
+    background-color: var(--panel);
     padding: 2px;
     textarea{width : 100%; height : 100%; resize:none;}
   }
@@ -292,7 +292,7 @@ aside.sidebar .abilities{
   padding: 10px;
 
   //item tab
-  .item.gear{background-color: $color-bright;}
+  .item.gear{background-color: var(--panel2);}
   .itemtab-grid {
     display: grid;
     grid-gap: 15px;
@@ -330,11 +330,11 @@ aside.sidebar .abilities{
           "gift-name gift-name gift-name"
           "gift-type gift-requirement gift-roll"
           "gift-hidden gift-hidden gift-hidden";
-      border: 2px solid #999;
+      border: 2px solid var(--line);
       border-radius: 10px;
       align-items: center;
       grid-template-rows: 30px 30px auto;
-      background-color: $color-bright;
+      background-color: var(--panel2);
 
       .gift-name{grid-area:gift-name;font-size: 1.1rem;font-weight: bold;display:flex;
         a{flex-grow:1;}}
@@ -343,7 +343,7 @@ aside.sidebar .abilities{
       .gift-requirement{grid-area:gift-requirement;}
       .gift-type, .gift-requirement, .gift-abl {
         height:100%;
-        background-color: $color-dim;
+        background-color: var(--panel2);
         margin: 1px;
         border-radius:5px;
         display:flex;
@@ -353,9 +353,9 @@ aside.sidebar .abilities{
       .roll{grid-area:gift-roll;}
       .gift-hidden{grid-area:gift-hidden; display:none;
         .gift-effect{
-          background-color: $color-bright;
+          background-color: var(--panel2);
           padding: 5px 10px;
-          border: 1px solid #999;
+          border: 1px solid var(--line);
           border-radius: 5px;
           margin: 10px 2px;}
         div{display:flex; align-items: center; padding:2px;
@@ -374,7 +374,7 @@ aside.sidebar .abilities{
   //bond tab
   .bond-top, .bond-bottom {
     padding: 5px;
-    background-color: rgba(255,255,255,0.7);
+    background-color: var(--panel2);
     margin: 10px;
     border-radius: 5px;
   }
@@ -383,7 +383,7 @@ aside.sidebar .abilities{
     text-align: center;
     font-weight: bold;
     padding: 5px;
-    border-bottom: 1px solid $color-bg;
+    border-bottom: 1px solid var(--bg);
   }
   .bond-card{
     grid-template-columns: 3fr 40px 60px 2fr;
@@ -405,7 +405,7 @@ aside.sidebar .abilities{
   }
   .biography {
     height : 200px;
-    background-color: #FAFAFA;
+    background-color: var(--panel);
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
@@ -415,7 +415,7 @@ aside.sidebar .abilities{
   .treasure-grid, .memory-grid{
     grid-template-columns: repeat(3, 1fr);
     grid-gap:0;
-    background-color: $color-bright;
+    background-color: var(--panel2);
   }
   .treasure-list-control, .memory-list-control{
     float:right;
@@ -423,25 +423,25 @@ aside.sidebar .abilities{
     a{margin: 0 5px;}
   }
   .treasure-list, .memory-list {
-    border: 1px solid #999;
+    border: 1px solid var(--line);
     line-height: 2;
-    background-color: $color-bright;
+    background-color: var(--panel2);
     margin: 10px;
     div{text-align:center;
       .treasure-body, .memory-mission{text-align:left;}
       .memory-date, .memory-completed{text-align:right;}
     }
   .treasure-header, .memory-header{
-    border: 1px solid #999;
-    background-color: #FAFAFA;
-    color: $color-bg;
+    border: 1px solid var(--line);
+    background-color: var(--panel);
+    color: var(--bg);
     height: 30px;
     font-weight: bold;}
   }
   .treasure-card,.memory-card {
     margin: 4px;
-    border: 2px solid #999;
-    background-color: #FAFAFA;
+    border: 2px solid var(--line);
+    background-color: var(--panel);
     border-radius: 5px;
     padding: 5px;
     height: calc(100% - 8px); //margin*2 빼기
@@ -450,9 +450,9 @@ aside.sidebar .abilities{
   .treasure-card-title, .memory-card-title{display:flex;}
   .treasure-name, .memory-name{flex-grow:1;}
   .treasure-card-body, .memory-island {
-    background-color: #FAFAFA;
-    color: $color-bg;
-    border: 1px solid #999;
+    background-color: var(--panel);
+    color: var(--bg);
+    border: 1px solid var(--line);
     padding:5px;
     border-radius: 5px;
   }
@@ -461,11 +461,11 @@ aside.sidebar .abilities{
 
 nav.sheet-tabs {
   flex: 0;
-  background-color:$color-dim;
-  color: #FAFAFA;
+  background-color:var(--panel2);
+  color: var(--text);
   .active{
-    background-color:#FAFAFA;
-    color:$color-bg;
+    background-color:var(--panel);
+    color:var(--bg);
     font-weight:bold;
     font-size:larger;
     border-radius: 5px;
@@ -484,7 +484,7 @@ nav.sheet-tabs {
 
 .tox {
   .tox-editor-container {
-    background: #FAFAFA;
+    background: var(--panel);
   }
 
   .tox-edit-area {
