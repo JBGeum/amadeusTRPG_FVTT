@@ -36,6 +36,10 @@ export function registerHandlebarsHelpers(){
     return String(str).toLowerCase();
   });
 
+  Handlebars.registerHelper("eq", function (a, b) {
+    return a === b;
+  });
+
   Handlebars.registerHelper("checked", function (condition) {
       return (condition) ? "checked" : "";
   });
