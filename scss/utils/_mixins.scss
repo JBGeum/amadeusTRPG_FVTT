@@ -1,3 +1,14 @@
+// Die-face background + text colour table shared by .chat-die-chip and .chat-plot-die.
+// Callers add their own size, border-color, and text-shadow rules separately.
+@mixin die-face-colors {
+  &--1 { background: var(--d1); color: #fff; }
+  &--2 { background: var(--d2); color: #fff; }
+  &--3 { background: var(--d3); color: #fff; }
+  &--4 { background: var(--d4); color: #fff; }
+  &--5 { background: var(--d5); color: #34301f; }
+  &--6 { background: var(--d6); color: #4a3a12; }
+}
+
 @mixin element-invisible {
   position: absolute;
 

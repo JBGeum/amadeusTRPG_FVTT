@@ -166,11 +166,14 @@
   font-size: 12.5px;
   line-height: 1.6;
   color: var(--pbody);
-  padding-top: 6px;
-  border-top: 1px solid var(--pgline2);
-  margin-top: 4px;
 
   p { margin: 0 0 4px; }
+}
+
+.amadeus-chat .chat-effect + .chat-description {
+  border-top: 1px solid var(--pgline2);
+  padding-top: 6px;
+  margin-top: 4px;
 }
 
 // Tag row (gift only)
@@ -183,10 +186,6 @@
   flex-wrap: wrap;
 }
 
-.amadeus-chat .chat-tag-lbl {
-  font-size: 11px;
-  color: var(--pmuted);
-}
 
 .amadeus-chat .chat-tag-val {
   color: var(--ptext);
@@ -207,7 +206,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
 }
 
 // Die chip — face colour via modifier class
@@ -222,12 +220,9 @@
   justify-content: center;
   border: 1px solid rgba(0, 0, 0, 0.14);
 
-  &.chat-die-chip--1 { background: var(--d1); border-color: rgba(255, 255, 255, 0.1); }
-  &.chat-die-chip--2 { background: var(--d2); }
-  &.chat-die-chip--3 { background: var(--d3); }
-  &.chat-die-chip--4 { background: var(--d4); }
-  &.chat-die-chip--5 { background: var(--d5); border-color: var(--pgline2); }
-  &.chat-die-chip--6 { background: var(--d6); }
+  @include die-face-colors;
+  &--1 { border-color: rgba(255, 255, 255, 0.1); }
+  &--5 { border-color: var(--pgline2); }
 }
 
 // SVG pip overlay (faint)
@@ -290,10 +285,6 @@
 
   // No inset ring for this card
   .chat-inner::before { display: none; }
-}
-
-.amadeus-chat .chat-plot-done-inner {
-  // Reuse base layout without inset ring
 }
 
 .amadeus-chat .chat-plot-done-body {
@@ -365,14 +356,11 @@
   font-size: 15px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   flex-shrink: 0;
-  color: #fff;
 
-  &.chat-plot-die--1 { background: var(--d1); text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2); }
-  &.chat-plot-die--2 { background: var(--d2); }
-  &.chat-plot-die--3 { background: var(--d3); }
-  &.chat-plot-die--4 { background: var(--d4); }
-  &.chat-plot-die--5 { background: var(--d5); color: #34301f; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
-  &.chat-plot-die--6 { background: var(--d6); color: #4a3a12; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4); }
+  @include die-face-colors;
+  &--1 { text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2); }
+  &--5 { text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
+  &--6 { text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4); }
 }
 
 .amadeus-chat .chat-plot-members {

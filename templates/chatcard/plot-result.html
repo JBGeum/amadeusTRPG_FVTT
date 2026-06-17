@@ -22,7 +22,7 @@
     </ol>
     {{#if notSubmitted.length}}
     <div class="chat-plot-notsubmitted">
-      <i class="fa-solid fa-circle-exclamation"></i>
+      <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
       {{localize "AMADEUS.initiative.notSubmitted"}}: {{#each notSubmitted as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}
     </div>
     {{/if}}
