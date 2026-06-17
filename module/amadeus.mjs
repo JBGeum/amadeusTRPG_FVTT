@@ -55,6 +55,14 @@ Hooks.once('init', async function() {
   CONFIG.Actor.documentClass = AmadeusActor;
   CONFIG.Item.documentClass = AmadeusItem;
 
+  // Register client theme setting (dark/light)
+  game.settings.register("amadeus", "theme", {
+    scope: "client",
+    config: false,
+    type: String,
+    default: "dark",
+  });
+
   // Register sheet application classes
   foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
   foundry.documents.collections.Actors.registerSheet("amadeus", AmadeusActorSheet, { makeDefault: true });

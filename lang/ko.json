@@ -158,6 +158,10 @@
     "roll": {
       "roll": "판정",
       "vitality": "활력 판정"
+    },
+    "theme": {
+      "light": "라이트",
+      "dark": "다크"
     }
   }
 }

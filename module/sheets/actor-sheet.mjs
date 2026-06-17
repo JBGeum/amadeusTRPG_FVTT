@@ -12,7 +12,16 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
   static DEFAULT_OPTIONS = {
     classes: ["amadeus", "sheet", "actor"],
     position: { width: 800, height: 900 },
-    window: { resizable: false },
+    window: {
+      resizable: false,
+      controls: [
+        {
+          icon: "fa-solid fa-sun",
+          label: "AMADEUS.theme.light",
+          action: "toggleTheme",
+        },
+      ],
+    },
     form: { submitOnChange: true, closeOnSubmit: false },
     actions: {
       itemEdit: AmadeusActorSheet.#onItemEdit,
@@ -29,6 +38,7 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       itemChk: AmadeusActorSheet.#onItemChk,
       rollTable: AmadeusActorSheet.#onRollTable,
       toggleMenu: AmadeusActorSheet.#onToggleMenu,
+      toggleTheme: AmadeusActorSheet.#onToggleTheme,
     },
   };
 
@@ -120,6 +130,28 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       });
     }
     this.#activateTabs();
+
+    // data-skin / data-theme 주입
+    if (this.document.type === "character") {
+      this.element.dataset.skin = this.document.system.color || "red";
+    }
+    const theme = game.settings.get("amadeus", "theme");
+    this.element.dataset.theme = theme;
+
+    // 헤더 컨트롤 드롭다운의 아이콘·라벨을 현재 테마에 맞게 갱신한다.
+    // AppV2의 window.controls는 정적 배열이므로 렌더 후 DOM을 직접 업데이트한다.
+    const isDark = theme === "dark";
+    const toggleBtn = this.element.querySelector("[data-action='toggleTheme']");
+    if (toggleBtn) {
+      const icon = toggleBtn.querySelector("i");
+      if (icon) {
+        icon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+      }
+      const labelEl = toggleBtn.querySelector("label, span");
+      if (labelEl) {
+        labelEl.textContent = game.i18n.localize(isDark ? "AMADEUS.theme.light" : "AMADEUS.theme.dark");
+      }
+    }
   }
 
   /** 단일 part 내부 탭 전환(수동). part 분리 대신 display 토글로 처리한다. */
@@ -295,5 +327,22 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     const visible = hidden.classList.toggle("content-visible");
     hidden.classList.toggle("content-hidden", !visible);
     hidden.style.display = visible ? "block" : "none";
+  }
+
+  static async #onToggleTheme(_event, _target) {
+    const next = game.settings.get("amadeus", "theme") === "dark" ? "light" : "dark";
+    await game.settings.set("amadeus", "theme", next);
+    // 열려 있는 Amadeus 창 전체에 새 테마를 반영한다.
+    for (const app of foundry.applications.instances.values()) {
+      const el = app.element;
+      if (!el) continue;
+      if (el.classList?.contains("amadeus") || el.classList?.contains("amadeus-dlg")) {
+        el.dataset.theme = next;
+      }
+      // 아마데우스 액터 시트는 재렌더하여 헤더 컨트롤 아이콘도 갱신한다.
+      if (el.classList?.contains("amadeus") && typeof app.render === "function") {
+        app.render();
+      }
+    }
   }
 }
