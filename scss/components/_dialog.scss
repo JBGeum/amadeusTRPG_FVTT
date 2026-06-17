@@ -13,9 +13,17 @@
   font-family: 'Noto Serif KR', serif;
   color: var(--text);
 
-  // Hide Foundry's default header (ApplicationV2 renders its own .window-header)
+  // Foundry's real header — tinted to match the mockup; close button + drag remain functional
   .window-header {
-    display: none;
+    background: var(--bar);
+    border-bottom: 1px solid var(--line);
+    padding: 0 8px;
+  }
+
+  .window-title {
+    color: var(--text);
+    font-family: 'Gowun Batang', serif;
+    font-size: 15px;
   }
 
   // The ApplicationV2 content wrapper
@@ -23,36 +31,6 @@
     padding: 0;
     background: transparent;
     overflow: visible;
-  }
-
-  // ── Top accent bar ──
-  .dlg-top-bar {
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    opacity: 0.8;
-  }
-
-  // ── Header bar ──
-  .dlg-header {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: 11px 14px;
-    background: var(--bar);
-    border-bottom: 1px solid var(--line);
-
-    .dlg-header-icon {
-      color: var(--gold);
-      font-size: 13px;
-    }
-
-    .dlg-header-title {
-      flex: 1;
-      font-family: 'Gowun Batang', serif;
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--text);
-    }
   }
 
   // ── Body ──

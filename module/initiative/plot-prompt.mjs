@@ -10,7 +10,7 @@ export class PlotPrompt extends HandlebarsApplicationMixin(ApplicationV2) {
     classes: ["amadeus", "amadeus-dlg", "plot-prompt-app"],
     tag: "div",
     position: { width: 320, height: "auto" },
-    window: { title: "AMADEUS.initiative.promptTitle" },
+    window: { title: "AMADEUS.initiative.promptTitle", icon: "fa-solid fa-dice-d6" },
     actions: { pick: PlotPrompt.#onPick },
   };
 

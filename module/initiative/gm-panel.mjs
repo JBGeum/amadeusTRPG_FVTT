@@ -11,7 +11,7 @@ export class PlotGMPanel extends HandlebarsApplicationMixin(ApplicationV2) {
     classes: ["amadeus", "amadeus-dlg", "plot-gm-panel-app"],
     tag: "div",
     position: { width: 460, height: "auto" },
-    window: { title: "AMADEUS.initiative.panelTitle" },
+    window: { title: "AMADEUS.initiative.panelTitle", icon: "fa-solid fa-hourglass-half" },
     actions: {
       start: PlotGMPanel.#onStart,
       reveal: PlotGMPanel.#onReveal,
