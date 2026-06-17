@@ -1,3 +1,5 @@
+import { resolveDie } from "../dice/resolution.mjs";
+
 /**
  * Define a set of template paths to pre-load
  * Pre-loaded templates are compiled and cached for fast access when rendering
@@ -36,12 +38,9 @@ export function registerHandlebarsHelpers(){
       return (condition) ? "checked" : "";
   });
 
-  Handlebars.registerHelper("successCheck", function (die,modVal,rollDC) {
-      if(die == 1) return "펌블";
-      else if(die == 6) return "스페셜";
-      else if (die+modVal>=rollDC) return "성공";
-      else if (die+modVal<rollDC) return "실패";
-      else return "?";
+  Handlebars.registerHelper("successCheck", function (die, modVal, rollDC) {
+    const label = { fumble: "펌블", special: "스페셜", success: "성공", fail: "실패" };
+    return label[resolveDie(die, modVal, rollDC)] ?? "?";
   });
 
   Handlebars.registerHelper("formatModVal", function (modVal) {
