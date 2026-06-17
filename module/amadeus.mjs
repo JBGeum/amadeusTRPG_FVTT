@@ -11,6 +11,7 @@ import { AmadeusItemSheet } from "./sheets/item-sheet.mjs";
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { registerHandlebarsHelpers } from "./helpers/templates.mjs";
 import { AMADEUS } from "./helpers/config.mjs";
+import { applyThemeToOpenApps } from "./helpers/theme.mjs";
 // Import data models.
 import { CharacterData } from "./data/actor-character.mjs";
 import { NpcData } from "./data/actor-npc.mjs";
@@ -55,12 +56,19 @@ Hooks.once('init', async function() {
   CONFIG.Actor.documentClass = AmadeusActor;
   CONFIG.Item.documentClass = AmadeusItem;
 
-  // Register client theme setting (dark/light)
+  // Register client theme setting (dark/light) — 환경설정에 드롭다운으로 노출.
   game.settings.register("amadeus", "theme", {
+    name: "AMADEUS.theme.settingName",
+    hint: "AMADEUS.theme.settingHint",
     scope: "client",
-    config: false,
+    config: true,
     type: String,
+    choices: {
+      dark: "AMADEUS.theme.dark",
+      light: "AMADEUS.theme.light",
+    },
     default: "dark",
+    onChange: (value) => applyThemeToOpenApps(value),
   });
 
   // Register sheet application classes

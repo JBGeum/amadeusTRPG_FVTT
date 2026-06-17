@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 // 0. 공통 reset — 시트 내부 기본 스타일 보정
 // ---------------------------------------------------------------------------
-.sheet.actor {
+&.sheet.actor {
   // background/color/font-family for .window-content are set in scss/global/_window.scss (intentional separation)
   .window-content {
     padding: 0;
@@ -20,12 +20,20 @@
     display: none;
     &.active { display: block; }
   }
+
+  // Foundry 기본 input 높이(--input-height ≈ 28px) 제거 — 시안은 정적 텍스트 기준
+  // 높이라, 입력을 텍스트 높이로 맞춘다(명시 height를 둔 bond/gift 입력은 그대로 우선).
+  input[type="text"],
+  input[type="number"] {
+    height: auto;
+    line-height: 1.3;
+  }
 }
 
 // ---------------------------------------------------------------------------
 // 1. .sheet-inner — 최상위 래퍼 (배경 + 모서리)
 // ---------------------------------------------------------------------------
-.sheet.actor .sheet-inner {
+&.sheet.actor .sheet-inner {
   position: relative;
   background: var(--bg);
   color: var(--text);
@@ -37,7 +45,7 @@
 // ---------------------------------------------------------------------------
 // 2. 장식 레이어 (시길 / 그라디언트)
 // ---------------------------------------------------------------------------
-.sheet.actor {
+&.sheet.actor {
   .sheet-sigil {
     position: absolute;
     top: 30%;
@@ -81,21 +89,26 @@
 // ---------------------------------------------------------------------------
 // 3. HEADER
 // ---------------------------------------------------------------------------
-.sheet.actor .sheet-header {
+&.sheet.actor .sheet-header {
   display: flex;
   gap: 14px;
   padding: 18px 20px 14px;
+  margin: 0;          // 옛 _forms.scss의 .sheet-header{margin:20px} 누수 차단
+  overflow: visible;  // 옛 overflow:hidden 누수 차단
 
   // --- 초상화 영역 ---
   .header-portraits {
     display: flex;
+    align-self: flex-end;   // 헤더 행 하단에 맞춰 정렬(메타 열이 더 길 때 아래 정렬)
     gap: 8px;
     flex: none;
   }
 
+  // 캐릭터 초상화: 200×200 정사각형 고정. 넓어진 폭은 header-meta(flex:1)가 양보한다.
   .portrait-character {
-    width: 104px;
-    height: 138px;
+    width: 200px;
+    height: 200px;
+    flex: none;
     border-radius: 9px;
     background: var(--panel2);
     border: 1px solid var(--line);
@@ -118,7 +131,7 @@
     .portrait-label {
       position: absolute;
       bottom: 6px;
-      font-size: 9px;
+      font-size: 13px;
       letter-spacing: .16em;
       color: var(--muted);
       // 이미지가 있으면 가려질 수 있어 배경 추가
@@ -129,9 +142,11 @@
     }
   }
 
+  // 부모신 초상화: 가로(92px) 유지, 세로는 200px 고정(캐릭터 초상화와 정렬).
   .portrait-parent {
     width: 92px;
-    height: 138px;
+    height: 200px;
+    flex: none;
     border-radius: 9px;
     background: var(--panel2);
     border: 1px dashed var(--line);
@@ -144,7 +159,7 @@
     overflow: hidden;
 
     .portrait-sublabel {
-      font-size: 8px;
+      font-size: 12px;
       letter-spacing: .18em;
       color: var(--muted);
       position: absolute;
@@ -164,21 +179,17 @@
       }
     }
 
-    input.portrait-parent-name {
-      font-size: 11px;
+    .portrait-parent-name {
+      font-size: 16px;
       color: var(--text);
       position: absolute;
       bottom: 11px;
       max-width: 82px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--line);
-      border-radius: 0;
       text-align: center;
       padding: 1px 3px;
-
-      &:focus { outline: none; border-bottom-color: var(--gold); }
-      &::placeholder { color: var(--muted); }
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
@@ -200,7 +211,7 @@
 
     .char-tagline {
       font-family: $font-display;
-      font-size: 10px;
+      font-size: 9px;
       letter-spacing: .26em;
       color: var(--gold);
       display: flex;
@@ -208,13 +219,13 @@
       gap: 6px;
       white-space: nowrap;
 
-      i { font-size: 9px; }
+      i { font-size: 13px; }
     }
 
     .char-name {
       flex: 1;
       font-family: $font-title;
-      font-size: 22px;
+      font-size: 30px;
       font-weight: 700;
       color: var(--text);
       background: transparent;
@@ -230,14 +241,6 @@
       }
     }
 
-    .color-select-wrap {
-      select {
-        font-size: 11px;
-        padding: 3px 8px;
-        border-radius: 5px;
-        color: var(--text);
-      }
-    }
   }
 
   // 레벨 / 경험치 / 소지금
@@ -254,7 +257,7 @@
       padding: 5px 11px;
 
       .stat-label {
-        font-size: 9px;
+        font-size: 13px;
         color: var(--muted);
         letter-spacing: .1em;
         display: flex;
@@ -264,7 +267,7 @@
         margin-bottom: 2px;
 
         i {
-          font-size: 8px;
+          font-size: 12px;
           color: var(--gold);
         }
       }
@@ -272,7 +275,7 @@
       .stat-val,
       input.stat-val {
         font-family: $font-display;
-        font-size: 18px;
+        font-size: 26px;
         color: var(--gold);
         background: transparent;
         border: none;
@@ -288,7 +291,7 @@
   // 직업/신군/배경/관계/예언
   .header-chardata {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 6fr 4fr;
     gap: 6px;
 
     .chardata-row {
@@ -304,26 +307,18 @@
         grid-column: 1 / -1;
       }
 
-      .chardata-icon {
-        color: var(--gold);
-        font-size: 11px;
-        width: 15px;
-        text-align: center;
-        flex: none;
-      }
-
       .chardata-key {
-        font-size: 10px;
+        font-size: 14px;
         letter-spacing: .08em;
         color: var(--muted);
         flex: none;
-        width: 28px;
+        width: 50px;
       }
 
       input[type="text"],
       input[type="number"] {
         flex: 1;
-        font-size: 13px;
+        font-size: 16px;
         color: var(--text);
         background: transparent;
         border: none;
@@ -341,17 +336,12 @@
       }
 
       label.pathos {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: 1px solid var(--line);
-        background: var(--panel2);
         cursor: pointer;
         flex: none;
         display: inline-block;
+        margin: 0 0 0 -4px;   // 전역 0.3rem 마진 제거 + 직업 글씨에 붙임
 
         &.pathos-on {
-          background: var(--gold);
           border-color: var(--gold);
         }
       }
@@ -359,10 +349,16 @@
   }
 }
 
+// 다크모드: 직업 pathos(on) 흰색
+&.sheet.actor[data-theme="dark"] .header-chardata .chardata-row label.pathos.pathos-on {
+  filter: brightness(0) invert(1);
+  background: transparent;
+}
+
 // ---------------------------------------------------------------------------
 // 4. 구분선
 // ---------------------------------------------------------------------------
-.sheet.actor .sheet-divider {
+&.sheet.actor .sheet-divider {
   display: flex;
   align-items: center;
   gap: 11px;
@@ -376,14 +372,14 @@
     &--right { background: linear-gradient(90deg, var(--line), transparent); }
   }
 
-  .divider-gem  { color: var(--gold); font-size: 9px;  opacity: .85; }
-  .divider-drop { color: var(--gold); font-size: 11px; opacity: .95; }
+  .divider-gem  { color: var(--gold); font-size: 13px;  opacity: .85; }
+  .divider-drop { color: var(--gold); font-size: 16px; opacity: .95; }
 }
 
 // ---------------------------------------------------------------------------
 // 5. BODY 3열 레이아웃
 // ---------------------------------------------------------------------------
-.sheet.actor .sheet-body-columns {
+&.sheet.actor .sheet-body-columns {
   display: flex;
   border-top: 1px solid var(--line);
 }
@@ -391,7 +387,7 @@
 // ---------------------------------------------------------------------------
 // 6. 능력치 열
 // ---------------------------------------------------------------------------
-.sheet.actor .col-ability {
+&.sheet.actor .col-ability {
   width: 170px;
   flex: none;
   border-right: 1px solid var(--line);
@@ -406,20 +402,21 @@
     gap: 5px;
     align-items: center;
     margin-bottom: 1px;
+    height: 25px;
 
     .ability-col-title {
-      font-size: 10px;
+      font-size: 14px;
       letter-spacing: .16em;
       color: var(--muted);
       display: flex;
       align-items: center;
       gap: 5px;
 
-      i { font-size: 9px; color: var(--gold); }
+      i { font-size: 13px; color: var(--gold); }
     }
 
     .ability-col-sub {
-      font-size: 8px;
+      font-size: 12px;
       letter-spacing: .04em;
       color: var(--muted);
       text-align: center;
@@ -440,10 +437,10 @@
     background: linear-gradient(180deg, var(--panel2), var(--panel));
     border: 1px solid var(--line);
     border-radius: 8px;
-    padding: 5px 7px;
+    padding: 8px 7px;
 
     .ability-label {
-      font-size: 12px;
+      font-size: 17px;
       color: var(--text);
       display: flex;
       align-items: center;
@@ -465,7 +462,7 @@
         width: 100%;
         text-align: center;
         font-family: $font-display;
-        font-size: 15px;
+        font-size: 22px;
         color: var(--gold);
         background: var(--panel2);
         border: 1px solid var(--line);
@@ -478,8 +475,8 @@
     }
 
     .ability-rank select {
-      font-size: 19px;
-      padding: 3px 0;
+      font-size: 27px;
+      padding: 0;
     }
   }
 }
@@ -487,7 +484,7 @@
 // ---------------------------------------------------------------------------
 // 7. 중앙 열
 // ---------------------------------------------------------------------------
-.sheet.actor .col-center {
+&.sheet.actor .col-center {
   flex: 1;
   padding: 16px 14px;
   display: flex;
@@ -496,7 +493,7 @@
   gap: 13px;
   min-width: 0;
 
-  // 속성 인장
+  // 속성 인장 (클릭 시 속성 선택)
   .attribute-seal {
     position: relative;
     width: 120px;
@@ -508,6 +505,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: box-shadow .15s;
+
+    &:hover {
+      box-shadow: inset 0 0 0 1.5px var(--gold), 0 0 18px -2px var(--gold), 0 12px 28px -12px rgba(0,0,0,.55);
+    }
+
+    // 클릭 가능함을 알리는 ▼ 표식
+    .seal-caret {
+      position: absolute;
+      bottom: 13px;
+      font-size: 14px;
+      color: var(--gold);
+      opacity: .75;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    // 인장 전체를 덮는 투명 select — 클릭 시 네이티브 드롭다운(적/청/녹/백/흑)
+    .seal-select {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      z-index: 2;
+      -webkit-appearance: none;
+      appearance: none;
+    }
 
     .seal-ring {
       position: absolute;
@@ -518,7 +550,7 @@
     }
 
     .seal-sub {
-      font-size: 9.5px;
+      font-size: 14px;
       letter-spacing: .24em;
       color: var(--gold);
       opacity: .85;
@@ -527,7 +559,7 @@
 
     .seal-char {
       font-family: $font-title;
-      font-size: 40px;
+      font-size: 48px;
       line-height: 1;
       color: var(--sealtx);
       z-index: 1;
@@ -554,7 +586,7 @@
       &--wide { flex: 1.5; }
 
       .center-stat-label {
-        font-size: 9.5px;
+        font-size: 14px;
         color: var(--muted);
         display: flex;
         align-items: center;
@@ -562,13 +594,22 @@
         gap: 4px;
         margin-bottom: 2px;
 
-        i { font-size: 8px; color: var(--gold); }
+        i { font-size: 12px; color: var(--gold); }
+
+        // 활력 박스: 라벨 안 다이스 아이콘이 굴림 트리거
+        .vitality-roll {
+          color: var(--gold);
+          cursor: pointer;
+          display: inline-flex;
+          transition: opacity .15s;
+          &:hover { opacity: .7; }
+        }
       }
 
       .center-stat-val,
       input.center-stat-val {
         font-family: $font-display;
-        font-size: 23px;
+        font-size: 33px;
         color: var(--text);
         background: transparent;
         border: none;
@@ -591,7 +632,7 @@
 
         .health-sep {
           font-family: $font-display;
-          font-size: 16px;
+          font-size: 23px;
           color: var(--muted);
         }
       }
@@ -599,48 +640,32 @@
   }
 
   // 활력 행
+  // 시련표 / 휴식표 등 버튼 바 (구 활력 행 자리)
   .vitality-row {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     width: 100%;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 7px;
-    padding: 5px 10px;
 
-    .vitality-label {
-      font-size: 10px;
-      letter-spacing: .08em;
-      color: var(--muted);
-    }
-
-    .vitality-roll {
-      color: var(--gold);
-      cursor: pointer;
-      font-size: 13px;
-      transition: opacity .15s;
-
-      &:hover { opacity: .7; }
-    }
-
-    .vitality-input {
-      width: 44px;
-      text-align: center;
-      font-size: 13px;
-      padding: 2px 4px;
-    }
-
-    .init-health-label {
-      font-size: 10px;
-      color: var(--muted);
-      margin-left: auto;
-    }
-
-    .init-health-val {
-      font-family: $font-display;
+    .table-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 6px 13px;
       font-size: 15px;
       color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: border-color .15s;
+
+      i { font-size: 16px; color: var(--gold); }
+      &:hover { border-color: var(--gold); }
     }
   }
 
@@ -679,7 +704,7 @@
       }
 
       .status-name {
-        font-size: 11.5px;
+        font-size: 16px;
         cursor: pointer;
         flex: 1;
         min-width: 0;
@@ -691,7 +716,7 @@
       // 수치 입력 (겁/중상)
       .status-level {
         width: 32px;
-        font-size: 11px;
+        font-size: 16px;
         text-align: center;
         padding: 1px 3px;
         border-radius: 4px;
@@ -709,7 +734,7 @@
 // ---------------------------------------------------------------------------
 // 8. 메모 열
 // ---------------------------------------------------------------------------
-.sheet.actor .col-memo {
+&.sheet.actor .col-memo {
   width: 182px;
   flex: none;
   border-left: 1px solid var(--line);
@@ -724,19 +749,19 @@
     justify-content: space-between;
 
     .memo-title {
-      font-size: 10px;
+      font-size: 14px;
       letter-spacing: .16em;
       color: var(--muted);
       display: flex;
       align-items: center;
       gap: 5px;
 
-      i { font-size: 9px; color: var(--gold); }
+      i { font-size: 13px; color: var(--gold); }
     }
 
     .memo-deco {
       color: var(--gold);
-      font-size: 9px;
+      font-size: 13px;
       opacity: .7;
     }
   }
@@ -748,7 +773,7 @@
     border: 1px solid var(--line);
     border-radius: 8px;
     padding: 9px;
-    font-size: 11.5px;
+    font-size: 15px;
     line-height: 1.55;
     color: var(--muted);
     resize: none;
@@ -765,18 +790,19 @@
 // ---------------------------------------------------------------------------
 // 9. 탭 바
 // ---------------------------------------------------------------------------
-.sheet.actor {
+&.sheet.actor {
   .sheet-tabs.tabs {
     display: flex;
     align-items: center;
     gap: 2px;
     padding: 0 16px;
     border-top: 1px solid var(--line);
+    height: 40px;
 
     .item[data-tab] {
       display: inline-block;
-      padding: 10px 15px;
-      font-size: 13px;
+      padding: 0 20px;
+      font-size: 15px;
       font-family: $font-body;
       color: var(--muted);
       cursor: pointer;
@@ -790,12 +816,411 @@
         border-bottom-color: var(--gold);
       }
     }
+
   }
 
   // 탭 패널 공통 패딩
-  .sheet-body {
-    > .tab {
-      padding: 14px 16px 20px;
+  .sheet-body > .tab {
+    padding: 14px 16px 20px;
+  }
+
+  // 접힌 영역 기본 숨김 (toggleMenu가 display 토글로 제어)
+  .item-hidden,
+  .gift-hidden,
+  .treasure-hidden,
+  .memory-hidden { display: none; }
+}
+
+// ---------------------------------------------------------------------------
+// 10. 아이템 탭 — 3열 컴팩트 카드
+// ---------------------------------------------------------------------------
+&.sheet.actor .item-tab-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  align-items: start;
+
+  .card-item {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .card-item-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .card-item-icon {
+    color: var(--gold);
+    flex: none;
+    font-size: 17px;
+    width: 15px;
+    text-align: center;
+    cursor: pointer;
+
+    &.item-notroll { color: var(--muted); cursor: default; }
+  }
+
+  .card-item-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 16px;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover { color: var(--gold); }
+  }
+
+  .card-item-count {
+    flex: none;
+    font-size: 16px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+
+    input {
+      width: 2.2em;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 16px;
+      text-align: center;
+      padding: 0;
+      &:focus { outline: none; color: var(--text); }
+    }
+  }
+
+  .card-item-dice {
+    flex: none;
+    font-family: $font-display;
+    font-size: 18px;
+    color: var(--muted);
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover { color: var(--gold); }
+    &--none { cursor: default; }
+  }
+
+  // 컨트롤 — 평소 숨김, 카드 호버 시 노출
+  .card-item-ctrls {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    opacity: 0;
+    transition: opacity .12s;
+
+    i, a { color: var(--muted); font-size: 16px; cursor: pointer; text-decoration: none; }
+    i:hover, a:hover { color: var(--gold); }
+  }
+  .card-item:hover .card-item-ctrls { opacity: 1; }
+
+  .item-effect {
+    padding: 8px 12px;
+    border-top: 1px solid var(--line);
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 11. 기프트 탭 — 2열 카드
+// ---------------------------------------------------------------------------
+&.sheet.actor .gift-tab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+
+  .gift-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 11px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .gift-card-head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    .gift-card-icon { color: var(--gold); flex: none; }
+
+    .gift-card-name {
+      flex: 1;
+      min-width: 0;
+      font-family: $font-title;
+      font-size: 22px;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+      text-decoration: none;
+      &:hover { color: var(--gold); }
+    }
+
+    .gift-card-ctrl {
+      flex: none;
+      color: var(--muted);
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      &:hover { color: var(--gold); }
+    }
+  }
+
+  .gift-card-meta {
+    display: flex;
+    gap: 7px;
+
+    .gift-card-type {
+      flex: none;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 6px 13px;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .gift-card-req {
+      flex: 1;
+      min-width: 0;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 6px 10px;
+      font-size: 17px;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .gift-card-roll {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 6px 12px;
+      font-size: 17px;
+      color: var(--gold);
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  .gift-hidden {
+    .gift-effect {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .gift-fields {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 7px 9px;
+      align-items: center;
+
+      .gift-lbl { font-size: 14px; color: var(--muted); }
+
+      input {
+        height: 26px;
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 0 10px;
+        font-size: 17px;
+        color: var(--text);
+        &:focus { outline: none; border-color: var(--gold); }
+      }
+
+      .gift-formula-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        input { flex: 1; }
+        .gift-formula-roll { color: var(--gold); cursor: pointer; flex: none; }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 12. 인물 탭 — 인물 / 협력자
+// ---------------------------------------------------------------------------
+&.sheet.actor .bond-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .bond-panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 12px 14px;
+  }
+
+  .bond-panel-title {
+    text-align: center;
+    font-family: $font-title;
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .bond-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .bond-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    .bond-row-icon { color: var(--gold); flex: none; }
+
+    input[type="text"] {
+      height: 28px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0 10px;
+      font-size: 15px;
+      color: var(--text);
+      &:focus { outline: none; border-color: var(--gold); }
+    }
+
+    .bond-row-name,
+    .bond-row-rel { flex: 1; min-width: 0; }
+
+    .bond-row-score {
+      width: 96px;
+      flex: none;
+      height: 28px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0 10px;
+      font-size: 19px;
+      color: var(--text);
+      text-align: center;
+      &:focus { outline: none; border-color: var(--gold); }
+    }
+
+    .bond-row-truth {
+      width: 20px;
+      height: 20px;
+      flex: none;
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 13. 기타 탭 — 전기 + 보물 / 추억
+// ---------------------------------------------------------------------------
+&.sheet.actor .etc-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .etc-biography {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: 10px;
+    min-height: 150px;
+  }
+
+  .etc-collapse {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .etc-collapse-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 15px;
+
+    .etc-collapse-title {
+      font-family: $font-title;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .etc-collapse-ctrls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      i, a { color: var(--muted); cursor: pointer; text-decoration: none; &:hover { color: var(--gold); } }
+    }
+  }
+
+  .etc-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 12px 12px;
+  }
+
+  .etc-card {
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 10px;
+
+    .etc-card-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .etc-card-name { flex: 1; min-width: 0; font-size: 19px; color: var(--text); }
+      .etc-card-ctrl {
+        display: flex;
+        gap: 6px;
+        a { color: var(--muted); text-decoration: none; &:hover { color: var(--gold); } }
+      }
+    }
+
+    .etc-card-body {
+      margin-top: 6px;
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.5;
+
+      .memory-island { color: var(--text); }
+      .memory-completed { display: flex; align-items: center; gap: 5px; justify-content: flex-end; }
     }
   }
 }

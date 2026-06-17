@@ -1,17 +1,18 @@
 import { PlotSession, getActiveSession, setActiveSession } from "./session.mjs";
 import { emitPlot } from "./socket.mjs";
 import { postCard } from "../chat/chat.mjs";
+import { FixedWidthMixin } from "../helpers/fixed-width.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 /** GM이 플롯 세션을 운영하는 패널. */
-export class PlotGMPanel extends HandlebarsApplicationMixin(ApplicationV2) {
+export class PlotGMPanel extends FixedWidthMixin(HandlebarsApplicationMixin(ApplicationV2)) {
   static DEFAULT_OPTIONS = {
     id: "amadeus-plot-gm-panel",
     classes: ["amadeus", "amadeus-dlg", "plot-gm-panel-app"],
     tag: "div",
     position: { width: 460, height: "auto" },
-    window: { title: "AMADEUS.initiative.panelTitle", icon: "fa-solid fa-hourglass-half" },
+    window: { title: "AMADEUS.initiative.panelTitle", icon: "fa-solid fa-hourglass-half", resizable: true },
     actions: {
       start: PlotGMPanel.#onStart,
       reveal: PlotGMPanel.#onReveal,

@@ -34,25 +34,18 @@
         <div class="portrait-parent">
           <span class="portrait-sublabel">부모신</span>
           <img src="{{system.chardata.parentimg}}" data-edit="system.chardata.parentimg" title="{{system.chardata.parent}}" alt="{{system.chardata.parent}}"/>
-          <input class="portrait-parent-name" type="text" name="system.chardata.parent" value="{{system.chardata.parent}}"/>
+          <span class="portrait-parent-name">{{system.chardata.parent}}</span>
         </div>
       </div>
 
-      {{!-- 메타 열: 이름, 레벨/경험치/소지금, 직업/신군/배경/관계/예언 --}}
+      {{!-- 메타 열: 이름, 레벨/경험치/소지금, 직업/신군/배경/예언 --}}
       <div class="header-meta">
 
-        {{!-- 이름 + 색상 선택 --}}
+        {{!-- 이름 (속성 선택은 중앙 인장에서) --}}
         <div class="header-name-row">
           <div class="char-tagline">
-            <i class="fa-solid fa-flask"></i>
-            SOLVE ET COAGULA
           </div>
           <input class="char-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'AMADEUS.label.name'}}"/>
-          <div class="color-select-wrap">
-            <select name="system.color">
-              {{selectOptions label.color selected=system.color}}
-            </select>
-          </div>
         </div>
 
         {{!-- 레벨 / 경험치 / 소지금 --}}
@@ -71,32 +64,31 @@
           </div>
         </div>
 
-        {{!-- 직업/신군/배경/관계/예언 --}}
+        {{!-- 직업|나이 / 부모신|신군 / 배경|예언 (2열 7fr:3fr × 3행) --}}
         <div class="header-chardata">
           <div class="chardata-row">
-            <i class="fa-solid fa-hat-wizard chardata-icon"></i>
             <span class="chardata-key">직업</span>
             <input type="checkbox" class="pathos" id="job.{{actor._id}}" name="system.job.chkbox" {{checked system.job.chkbox}}>
             <label for="job.{{actor._id}}" class="pathos {{#if system.job.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
             <input type="text" name="system.chardata.job.name" value="{{system.chardata.job.name}}"/>
           </div>
           <div class="chardata-row">
-            <i class="fa-solid fa-chess-king chardata-icon"></i>
+            <span class="chardata-key">나이</span>
+            <input type="text" name="system.chardata.age" value="{{system.chardata.age}}"/>
+          </div>
+          <div class="chardata-row">
+            <span class="chardata-key">부모신</span>
+            <input type="text" name="system.chardata.parent" value="{{system.chardata.parent}}"/>
+          </div>
+          <div class="chardata-row">
             <span class="chardata-key">신군</span>
             <input type="text" name="system.chardata.pantheon" value="{{system.chardata.pantheon}}"/>
           </div>
           <div class="chardata-row">
-            <i class="fa-solid fa-book chardata-icon"></i>
             <span class="chardata-key">배경</span>
             <input type="text" name="system.chardata.background" value="{{system.chardata.background}}"/>
           </div>
           <div class="chardata-row">
-            <i class="fa-solid fa-link chardata-icon"></i>
-            <span class="chardata-key">관계</span>
-            <input type="text" name="system.chardata.relationship" value="{{system.chardata.relationship}}"/>
-          </div>
-          <div class="chardata-row chardata-row--full">
-            <i class="fa-solid fa-scroll chardata-icon"></i>
             <span class="chardata-key">예언</span>
             <input type="text" name="system.chardata.prophecy" value="{{system.chardata.prophecy}}"/>
           </div>
@@ -121,8 +113,6 @@
       <div class="col-ability">
         <div class="ability-col-header">
           <span class="ability-col-title"><i class="fa-solid fa-chart-simple"></i>능력</span>
-          <span class="ability-col-sub">등급</span>
-          <span class="ability-col-sub">보정</span>
         </div>
         <div class="abilities">
           {{#each system.ability as |ability key|}}
@@ -149,7 +139,7 @@
       {{!-- 중앙 열: 속성 인장 + 목표치/생명력/초기치 + 상태이상 --}}
       <div class="col-center">
 
-        {{!-- 속성 인장 --}}
+        {{!-- 속성 인장 (클릭 시 속성 선택 드롭다운) --}}
         <div class="attribute-seal">
           <svg class="seal-ring" viewBox="0 0 100 100" aria-hidden="true">
             <circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="1"></circle>
@@ -157,6 +147,10 @@
           </svg>
           <span class="seal-sub">속성</span>
           <span class="seal-char">{{localize (lookup config.color system.color)}}</span>
+          <i class="fa-solid fa-caret-down seal-caret" aria-hidden="true"></i>
+          <select class="seal-select" name="system.color" aria-label="{{localize 'AMADEUS.label.color'}}">
+            {{selectOptions label.color selected=system.color}}
+          </select>
         </div>
 
         {{!-- 목표치 / 생명력 / 초기치 --}}
@@ -174,20 +168,15 @@
             </div>
           </div>
           <div class="center-stat-box">
-            <div class="center-stat-label"><i class="fa-solid fa-droplet"></i>초기치</div>
-            <div class="center-stat-val">{{system.initHealth}}</div>
+            <div class="center-stat-label"><a class="vitality-roll" data-action="vitalityRoll" data-roll="{{system.level}}d6" data-label="{{localize 'AMADEUS.roll.vitality'}}" title="{{localize 'AMADEUS.roll.vitality'}}"><i class="fa-solid fa-dice"></i></a>{{localize 'AMADEUS.label.vitality'}}</div>
+            <input class="center-stat-val" type="number" name="system.vitality" value="{{system.vitality}}"/>
           </div>
         </div>
 
-        {{!-- 활력 / 소지금 초기치 --}}
+        {{!-- 시련표 / 휴식표 등 버튼 바 --}}
         <div class="vitality-row">
-          <span class="vitality-label">{{localize 'AMADEUS.label.vitality'}}</span>
-          <a class="vitality-roll" data-action="vitalityRoll" data-roll="{{system.level}}d6" data-label="{{localize 'AMADEUS.roll.vitality'}}">
-            <i class="fas fa-dice"></i>
-          </a>
-          <input class="vitality-input" type="number" name="system.vitality" value="{{system.vitality}}"/>
-          <span class="init-health-label">{{localize 'AMADEUS.label.inithealth'}}</span>
-          <span class="init-health-val">{{system.initHealth}}</span>
+          <a class="table-btn" data-action="rollTable" data-rtid="EroSbTqlikS55Zp5"><i class="fa-solid fa-skull"></i>시련표</a>
+          <a class="table-btn" data-action="rollTable" data-rtid="IkNCphhCNk3Bx0yj"><i class="fa-solid fa-bed"></i>휴식표</a>
         </div>
 
         {{!-- 상태이상 (6종) --}}

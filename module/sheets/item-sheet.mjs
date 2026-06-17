@@ -1,3 +1,5 @@
+import { FixedWidthMixin } from "../helpers/fixed-width.mjs";
+
 const { HandlebarsApplicationMixin, DocumentSheetV2 } = foundry.applications.api;
 
 /**
@@ -5,7 +7,7 @@ const { HandlebarsApplicationMixin, DocumentSheetV2 } = foundry.applications.api
  * 아이템 타입별 템플릿은 PARTS에 모두 등록하고 _configureRenderOptions에서 현재 타입만 렌더한다.
  * @extends {DocumentSheetV2}
  */
-export class AmadeusItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2) {
+export class AmadeusItemSheet extends FixedWidthMixin(HandlebarsApplicationMixin(DocumentSheetV2)) {
   static DEFAULT_OPTIONS = {
     classes: ["amadeus", "sheet", "item"],
     position: { width: 480, height: 720 },
@@ -42,13 +44,14 @@ export class AmadeusItemSheet extends HandlebarsApplicationMixin(DocumentSheetV2
     context.rollData = item.actor?.getRollData() ?? {};
 
     // selectOptions용 라벨 맵: { 저장값: 현지화라벨 }.
-    // type/roll/color 는 기존처럼 i18n 키를 저장값으로 보존한다(item.mjs 챗카드의 localize 호환).
+    // type/roll(abl) 은 기존처럼 i18n 키를 저장값으로 보존한다(item.mjs 챗카드의 localize 호환).
+    // color 는 색 키(red/blue/…)를 저장값으로 둔다 → 액터 data-skin·seal-char(lookup config.color)와 일치.
     // rank/mod 는 letter(S~D / +++~--)를 저장값으로 보존한다.
     context.label = { abl: {}, type: {}, itemType: {}, color: {}, rank: {}, mod: {} };
     for (const v of Object.values(CONFIG.AMADEUS.ability)) context.label.abl[v] = game.i18n.localize(v);
     for (const v of Object.values(CONFIG.AMADEUS.gift)) context.label.type[v] = game.i18n.localize(v);
     for (const v of Object.values(CONFIG.AMADEUS.item)) context.label.itemType[v] = game.i18n.localize(v);
-    for (const v of Object.values(CONFIG.AMADEUS.color)) context.label.color[v] = game.i18n.localize(v);
+    for (const [k, v] of Object.entries(CONFIG.AMADEUS.color)) context.label.color[k] = game.i18n.localize(v);
     for (const letter of Object.keys(CONFIG.AMADEUS.rank)) context.label.rank[letter] = letter;
     for (const letter of Object.keys(CONFIG.AMADEUS.modL)) context.label.mod[letter] = letter;
 

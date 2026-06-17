@@ -1,4 +1,5 @@
 import { onManageActiveEffect, prepareActiveEffectCategories } from "../helpers/effects.mjs";
+import { FixedWidthMixin } from "../helpers/fixed-width.mjs";
 import { postCard, postRoll } from "../chat/chat.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -8,12 +9,12 @@ const { ActorSheetV2 } = foundry.applications.sheets;
  * Amadeus Actor 시트 (ApplicationV2).
  * @extends {ActorSheetV2}
  */
-export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
+export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixin(ActorSheetV2)) {
   static DEFAULT_OPTIONS = {
     classes: ["amadeus", "sheet", "actor"],
-    position: { width: 800, height: 900 },
+    position: { width: 780, height: 860 },
     window: {
-      resizable: false,
+      resizable: true,
       controls: [
         {
           icon: "fa-solid fa-sun",
@@ -73,9 +74,9 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       }
     }
 
-    // selectOptions용 라벨 맵(저장값 의미 보존: color=i18n키, rank/mod=letter)
+    // selectOptions용 라벨 맵(저장값: color=색 키(red/blue/…) → data-skin·seal-char와 일치, rank/mod=letter)
     context.label = { color: {}, rank: {}, mod: {} };
-    for (const v of Object.values(CONFIG.AMADEUS.color)) context.label.color[v] = game.i18n.localize(v);
+    for (const [k, v] of Object.entries(CONFIG.AMADEUS.color)) context.label.color[k] = game.i18n.localize(v);
     for (const letter of Object.keys(CONFIG.AMADEUS.rank)) context.label.rank[letter] = letter;
     for (const letter of Object.keys(CONFIG.AMADEUS.modL)) context.label.mod[letter] = letter;
 
@@ -331,19 +332,7 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
 
   static async #onToggleTheme(_event, _target) {
     const next = game.settings.get("amadeus", "theme") === "dark" ? "light" : "dark";
+    // 설정 저장만 하면 setting의 onChange(applyThemeToOpenApps)가 열린 앱 전체에 반영한다.
     await game.settings.set("amadeus", "theme", next);
-    // 열려 있는 Amadeus 창 전체에 새 테마를 반영한다.
-    for (const app of (foundry.applications?.instances?.values() ?? [])) {
-      const el = app.element;
-      if (!el) continue;
-      if (el.classList?.contains("amadeus") || el.classList?.contains("amadeus-dlg")) {
-        el.dataset.theme = next;
-      }
-      // 아마데우스 액터 시트만 재렌더하여 헤더 컨트롤 아이콘도 갱신한다.
-      // PlotGMPanel·PlotPrompt·AmadeusItemSheet 등은 재렌더하지 않는다.
-      if (app instanceof AmadeusActorSheet) {
-        app.render();
-      }
-    }
   }
 }

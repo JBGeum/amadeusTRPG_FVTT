@@ -37,6 +37,8 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
         background: new fields.StringField({ initial: "" }),
         prophecy: new fields.StringField({ initial: "" }),
         relationship: new fields.StringField({ initial: "" }),
+        age: new fields.StringField({ initial: "" }),
+        job: new fields.SchemaField({ name: new fields.StringField({ initial: "" }) }),
       }),
       job: new fields.SchemaField({ chkbox: new fields.BooleanField({ initial: false }) }),
       status: new fields.SchemaField({

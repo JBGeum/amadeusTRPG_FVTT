@@ -1,16 +1,18 @@
 import { emitPlot } from "./socket.mjs";
 import { postCard } from "../chat/chat.mjs";
 
+import { FixedWidthMixin } from "../helpers/fixed-width.mjs";
+
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 /** 플레이어가 플롯 숫자(1~6)를 비밀리에 고르는 프롬프트. */
-export class PlotPrompt extends HandlebarsApplicationMixin(ApplicationV2) {
+export class PlotPrompt extends FixedWidthMixin(HandlebarsApplicationMixin(ApplicationV2)) {
   static DEFAULT_OPTIONS = {
     id: "amadeus-plot-prompt",
     classes: ["amadeus", "amadeus-dlg", "plot-prompt-app"],
     tag: "div",
     position: { width: 320, height: "auto" },
-    window: { title: "AMADEUS.initiative.promptTitle", icon: "fa-solid fa-dice-d6" },
+    window: { title: "AMADEUS.initiative.promptTitle", icon: "fa-solid fa-dice-d6", resizable: true },
     actions: { pick: PlotPrompt.#onPick },
   };
 

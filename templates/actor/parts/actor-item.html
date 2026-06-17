@@ -1,71 +1,43 @@
-<div class="itemtab-grid">
-  <div class="itemtab-leftside">
-    <div class="item gear food" data-special="food">
-      <div class="grid item-card">
-        <div class="item-name jf-left">
-          <i class="fas fa-utensils"></i>
-          <a class="item-datacard item-name" data-action="itemDataCard">{{localize 'AMADEUS.item.food'}}</a>
-        </div>
-        <div class="food-quantity">
-          <input type="number" name="system.food" value="{{system.food}}" data-type="Number" /> {{localize 'AMADEUS.label.countunit'}}
-        </div>
+{{!-- 아이템 탭: 3열 컴팩트 카드 그리드. 기능 클래스(.item/.item-hidden 등)는 보존. --}}
+<div class="item-tab-grid">
 
-        <div class="item-damage">
-          <a class="damage-formula" data-action="damageRoll" data-rolltype="item" data-roll="1D6">1D6</a>
-        </div>
-
-        <div class="item-controls">
-          <i class="fas fa-caret-down open-item" data-action="toggleMenu"></i>
-        </div>
-      </div>
-      <div class="item-hidden content-hidden">
-        <div class="item-effect">
-          {{localize 'AMADEUS.item.foodeffect'}}
-        </div>
-      </div>
+  {{!-- 식료 (특수 카드) --}}
+  <div class="item card-item food" data-special="food">
+    <div class="card-item-row">
+      <i class="fas fa-utensils card-item-icon item-notroll"></i>
+      <a class="card-item-name item-datacard" data-action="itemDataCard" title="{{localize 'AMADEUS.item.food'}}">{{localize 'AMADEUS.item.food'}}</a>
+      <span class="card-item-count">×<input type="number" name="system.food" value="{{system.food}}" data-dtype="Number"/></span>
+      <a class="card-item-dice damage-formula" data-action="damageRoll" data-rolltype="item" data-roll="1D6">1D6</a>
+      <span class="card-item-ctrls">
+        <i class="fas fa-caret-down open-item" data-action="toggleMenu" title="펼치기"></i>
+      </span>
     </div>
-    {{#each inventory as |item key|}}
-    <div class="item gear" data-item-id="{{item._id}}" draggable="true">
-      <div class="grid item-card">
-        <div class="item-datacard item-name jf-left" data-action="itemDataCard">
-          <i class="{{#if item.system.action.roll}} item-rollcard fas fa-dice {{else}} item-notroll fas fa-square {{/if}}"
-             data-action="itemRollCard" data-ability="{{item.system.action.roll}}"></i>
-          <a class="item-name">{{item.name}}</a>
-        </div>
-
-        <div class="item-type">{{!-- 두번째줄: 분류 | 조건 | 기능 --}}
-          {{localize item.system.type}}
-        </div>
-
-        <div class="item-damage">
-          <a class="damage-formula" data-action="damageRoll" data-rolltype="item" data-roll="{{item.system.action.damage}}">{{item.system.action.damage}}</a>
-        </div>
-
-        <div class="item-controls">
-          <i class="fas fa-caret-down open-item" data-action="toggleMenu"></i>
-          <a class="item-control item-edit" data-action="itemEdit" title="새 창"><i class="fas fa-up-right-from-square"></i></a>
-          {{#if @root.editable}}<a class="item-control item-delete" data-action="itemDelete" title="삭제"><i class="fas fa-trash"></i></a>{{/if}}
-        </div>
-      </div>
-      <div class="item-hidden content-hidden">
-        <div class="item-effect">
-          {{{item.system.effect}}}
-        </div>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-
-
-  <div class="itemtab-rightside">
-    <div class="sidebar-rtb flexcol">
-      <div class="rtb-header">
-        롤테이블
-      </div>
-      <a class="amd-rolltable" data-action="rollTable" data-rtid="EroSbTqlikS55Zp5"><button type="button">시련표</button></a>
-      <a class="amd-rolltable" data-action="rollTable" data-rtid="IkNCphhCNk3Bx0yj"><button type="button">휴식표</button></a>
-      <button type="button">롤테이블</button>
-      <button type="button">롤테이블</button>
+    <div class="item-hidden content-hidden">
+      <div class="item-effect">{{localize 'AMADEUS.item.foodeffect'}}</div>
     </div>
   </div>
+
+  {{#each inventory as |item key|}}
+  <div class="item card-item" data-item-id="{{item._id}}" draggable="true">
+    <div class="card-item-row">
+      <i class="{{#if item.system.action.roll}}item-rollcard fas fa-dice{{else}}item-notroll fas fa-square{{/if}} card-item-icon"
+         data-action="itemRollCard" data-ability="{{item.system.action.roll}}" title="판정"></i>
+      <a class="card-item-name item-datacard" data-action="itemDataCard" title="{{item.name}}">{{item.name}}</a>
+      {{#if item.system.action.damage}}
+      <a class="card-item-dice damage-formula" data-action="damageRoll" data-rolltype="item" data-roll="{{item.system.action.damage}}">{{item.system.action.damage}}</a>
+      {{else}}
+      <span class="card-item-dice card-item-dice--none">—</span>
+      {{/if}}
+      <span class="card-item-ctrls">
+        <i class="fas fa-caret-down open-item" data-action="toggleMenu" title="펼치기"></i>
+        <a class="item-control item-edit" data-action="itemEdit" title="새 창"><i class="fas fa-up-right-from-square"></i></a>
+        {{#if @root.editable}}<a class="item-control item-delete" data-action="itemDelete" title="삭제"><i class="fas fa-trash"></i></a>{{/if}}
+      </span>
+    </div>
+    <div class="item-hidden content-hidden">
+      <div class="item-effect">{{{item.system.effect}}}</div>
+    </div>
+  </div>
+  {{/each}}
+
 </div>

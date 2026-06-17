@@ -1,50 +1,36 @@
-<div class="bond-grid">
-  <div class="bond-top">
-    <div class="bond-header">
-      인물
-    </div>
-    <div class="item bond" >
-      <div class="grid bond-card">
-        {{#each system.bonds as |bond key|}}
-        <div class="bond-name vertical-center">
-          <input type="checkbox" class="pathos" id="bonds.{{key}}.{{actor._id}}" name="system.bonds.{{key}}.chkbox" {{checked bond.chkbox}}/>
-          <label for="bonds.{{key}}.{{actor._id}}" class="pathos {{#if bond.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
-          <input type="text" name="system.bonds.{{key}}.name" value="{{bond.name}}" />
-        </div>
-        <div class="bond-truth">
-          <input type="checkbox" name="system.bonds.{{key}}.truth" {{checked bond.truth}}/>
-        </div>
-        <div class="bond-score">
-          <input type="number" name="system.bonds.{{key}}.score" value="{{bond.score}}" />
-        </div>
-        <div class="bond-relationship">
-          <input type="text" name="system.bonds.{{key}}.relationship" value="{{bond.relationship}}" />
-        </div>
-        {{/each}}
+{{!-- 인물 탭: 인물 / 협력자 카드. bonds·supporters 입력 바인딩 전부 보존. --}}
+<div class="bond-tab">
+
+  <div class="bond-panel">
+    <div class="bond-panel-title">인물</div>
+    <div class="bond-rows">
+      {{#each system.bonds as |bond key|}}
+      <div class="bond-row">
+        <i class="fa-solid fa-user bond-row-icon"></i>
+        <input type="checkbox" class="pathos" id="bonds.{{key}}.{{actor._id}}" name="system.bonds.{{key}}.chkbox" {{checked bond.chkbox}}/>
+        <label for="bonds.{{key}}.{{actor._id}}" class="pathos {{#if bond.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
+        <input type="text" class="bond-row-name" name="system.bonds.{{key}}.name" value="{{bond.name}}" placeholder="이름"/>
+        <input type="checkbox" class="bond-row-truth" name="system.bonds.{{key}}.truth" title="진실" {{checked bond.truth}}/>
+        <input type="number" class="bond-row-score" name="system.bonds.{{key}}.score" value="{{bond.score}}"/>
+        <input type="text" class="bond-row-rel" name="system.bonds.{{key}}.relationship" value="{{bond.relationship}}" placeholder="관계"/>
       </div>
+      {{/each}}
     </div>
   </div>
 
-  <div class="bond-bottom">
-    <div class="supporter-header">
-      협력자
-    </div>
-    <div class="item supporter">
-      <div class="grid supporter-card">
-        {{#each system.supporters as |supporter key|}}
-        <div class="supporter-name">
-          <input type="checkbox"  class="pathos"  id="supporters.{{key}}.{{actor._id}}" name="system.supporters.{{key}}.chkbox" {{checked supporter.chkbox}}/>
-          <label for="supporters.{{key}}.{{actor._id}}" class="pathos {{#if supporter.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
-          <input type="text" name="system.supporters.{{key}}.name" value="{{supporter.name}}" />
-        </div>
-        <div class="supporter-score">
-          <input type="number" name="system.supporters.{{key}}.score" value="{{supporter.score}}" />
-        </div>
-        <div class="supporter-relationship">
-          <input type="text" name="system.supporters.{{key}}.relationship" value="{{supporter.relationship}}" />
-        </div>
-        {{/each}}
+  <div class="bond-panel">
+    <div class="bond-panel-title">협력자</div>
+    <div class="bond-rows">
+      {{#each system.supporters as |supporter key|}}
+      <div class="bond-row supporter-row">
+        <i class="fa-solid fa-user bond-row-icon"></i>
+        <input type="checkbox" class="pathos" id="supporters.{{key}}.{{actor._id}}" name="system.supporters.{{key}}.chkbox" {{checked supporter.chkbox}}/>
+        <label for="supporters.{{key}}.{{actor._id}}" class="pathos {{#if supporter.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
+        <input type="text" class="bond-row-name" name="system.supporters.{{key}}.name" value="{{supporter.name}}" placeholder="이름"/>
+        <input type="number" class="bond-row-score" name="system.supporters.{{key}}.score" value="{{supporter.score}}"/>
+        <input type="text" class="bond-row-rel" name="system.supporters.{{key}}.relationship" value="{{supporter.relationship}}" placeholder="관계"/>
       </div>
+      {{/each}}
     </div>
   </div>
 

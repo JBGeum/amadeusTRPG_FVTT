@@ -38,10 +38,13 @@ div.actor-dc, div.bond-score, div.supporter-score, div.actor-hp{
 }
 
 button{
-  background:rgba(255,255,255,0.9);
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--line);
 }
 button:hover, button:focus{
-  box-shadow: 0 0 5px #FAFAFA;
+  border-color: var(--gold);
+  box-shadow: none;
 }
 //파토스 표시
 label.pathos{
@@ -288,193 +291,6 @@ aside.sidebar .abilities{
   }
 }
 
-.sheet-body {
-  padding: 10px;
-
-  //item tab
-  .item.gear{background-color: var(--panel2);}
-  .itemtab-grid {
-    display: grid;
-    grid-gap: 15px;
-    padding: 10px;
-    grid-template-columns: 3fr 1fr;
-
-    .item-card{
-      padding: 1px;
-      grid-template-columns: 2fr repeat(3, 1fr);
-      grid-gap:0;
-      height:40px;
-
-      > div{@extend .default-div;}
-      .i{margin: 0 0.2rem;}
-      .food-quantity input{width:2rem;}
-      .item-name{padding-left:0.5rem;}
-      a.item-name{flex-grow:1;}
-      .item-controls{justify-content:space-evenly;}
-    }
-    .item-effect{padding:10px 20px;}
-  }
-
-  //gift tab
-  .gift-grid {
-    display: grid;
-    grid-auto-rows: minmax(80px, auto);
-    grid-auto-flow: row;
-    gap: 10px;
-    grid-template-columns: 1fr 1fr;
-
-    .gift-card{
-      padding: 5px;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-areas:
-          "gift-name gift-name gift-name"
-          "gift-type gift-requirement gift-roll"
-          "gift-hidden gift-hidden gift-hidden";
-      border: 2px solid var(--line);
-      border-radius: 10px;
-      align-items: center;
-      grid-template-rows: 30px 30px auto;
-      background-color: var(--panel2);
-
-      .gift-name{grid-area:gift-name;font-size: 1.1rem;font-weight: bold;display:flex;
-        a{flex-grow:1;}}
-      .gift-controls{flex-shrink: 0;}
-      .gift-type{grid-area:gift-type;}
-      .gift-requirement{grid-area:gift-requirement;}
-      .gift-type, .gift-requirement, .gift-abl {
-        height:100%;
-        background-color: var(--panel2);
-        margin: 1px;
-        border-radius:5px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-      }
-      .roll{grid-area:gift-roll;}
-      .gift-hidden{grid-area:gift-hidden; display:none;
-        .gift-effect{
-          background-color: var(--panel2);
-          padding: 5px 10px;
-          border: 1px solid var(--line);
-          border-radius: 5px;
-          margin: 10px 2px;}
-        div{display:flex; align-items: center; padding:2px;
-          input{flex-grow:1;}
-          label{flex-shrink: 0; margin: 5px; }}}
-      .gift-type, .gift-requirement, .gift-abl { text-align: center;}
-      .gift-formula{display: flex;align-items: center;}
-
-      i{
-        margin: 0 0.2rem;
-        .item-rollcard{ float:right;}
-      }
-    }
-  }
-
-  //bond tab
-  .bond-top, .bond-bottom {
-    padding: 5px;
-    background-color: var(--panel2);
-    margin: 10px;
-    border-radius: 5px;
-  }
-  .bond-header, .supporter-header {
-    font-size: 1.2rem;
-    text-align: center;
-    font-weight: bold;
-    padding: 5px;
-    border-bottom: 1px solid var(--line);
-  }
-  .bond-card{
-    grid-template-columns: 3fr 40px 60px 2fr;
-    grid-template-rows:minmax(30px,auto);
-    >div{ @extend .default-div; background-color: transparent;}
-
-    .bond-name input{ flex-grow:1;padding:5px;margin:3px;}
-    .bond-relationship input{padding:5px;margin:3px;}
-    input[type="checkbox"]{ width:20px;}
-  }
-  .supporter-card{
-    grid-template-columns: 3fr 40px 60px 2fr;
-    grid-template-rows:minmax(30px,auto);
-    .supporter-name{  grid-column:1 / span 2;}
-    >div{ @extend .default-div;  background-color: transparent;}
-    .supporter-name input{ flex-grow:1;padding:5px;margin:3px;}
-    .supporter-relationship input{padding:5px;margin:3px;}
-    input[type="checkbox"]{ width:20px;}
-  }
-  .biography {
-    height : 200px;
-    background-color: var(--panel);
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-  }
-
-  //feature tab
-  .treasure-grid, .memory-grid{
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap:0;
-    background-color: var(--panel2);
-  }
-  .treasure-list-control, .memory-list-control{
-    float:right;
-    margin: 0 10px;
-    a{margin: 0 5px;}
-  }
-  .treasure-list, .memory-list {
-    border: 1px solid var(--line);
-    line-height: 2;
-    background-color: var(--panel2);
-    margin: 10px;
-    div{text-align:center;
-      .treasure-body, .memory-mission{text-align:left;}
-      .memory-date, .memory-completed{text-align:right;}
-    }
-  .treasure-header, .memory-header{
-    border: 1px solid var(--line);
-    background-color: var(--panel);
-    color: var(--text);
-    height: 30px;
-    font-weight: bold;}
-  }
-  .treasure-card,.memory-card {
-    margin: 4px;
-    border: 2px solid var(--line);
-    background-color: var(--panel);
-    border-radius: 5px;
-    padding: 5px;
-    height: calc(100% - 8px); //margin*2 빼기
-  }
-  .memory-date>input {  width: 50px;}
-  .treasure-card-title, .memory-card-title{display:flex;}
-  .treasure-name, .memory-name{flex-grow:1;}
-  .treasure-card-body, .memory-island {
-    background-color: var(--panel);
-    color: var(--text);
-    border: 1px solid var(--line);
-    padding:5px;
-    border-radius: 5px;
-  }
-}
-
-
-nav.sheet-tabs {
-  flex: 0;
-  background-color:var(--panel2);
-  color: var(--text);
-  .active{
-    background-color:var(--panel);
-    color:var(--text);
-    font-weight:bold;
-    font-size:larger;
-    border-radius: 5px;
-    text-shadow: none;
-  }
-  a:hover.item{
-    text-shadow: none;
-  }
-}
 
 .sheet-body,
 .sheet-body .tab,
