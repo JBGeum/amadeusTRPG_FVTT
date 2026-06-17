@@ -1,0 +1,17 @@
+<div class="chatcard plot-result-chatcard">
+  <div class="plot-result-title">{{localize "AMADEUS.initiative.order"}}</div>
+  <ol class="plot-order">
+    {{#each order as |slot|}}
+    <li class="plot-slot">
+      <span class="plot-rank">{{slot.rank}}</span>
+      <span class="plot-value">[{{slot.value}}]</span>
+      <span class="plot-members">{{#each slot.members as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}</span>
+    </li>
+    {{/each}}
+  </ol>
+  {{#if notSubmitted.length}}
+  <div class="plot-notsubmitted">
+    {{localize "AMADEUS.initiative.notSubmitted"}}: {{#each notSubmitted as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}
+  </div>
+  {{/if}}
+</div>

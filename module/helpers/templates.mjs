@@ -21,6 +21,8 @@ import { resolveDie } from "../dice/resolution.mjs";
     "systems/amadeus/templates/chatcard/data-gift.html",
     "systems/amadeus/templates/chatcard/data-item.html",
     "systems/amadeus/templates/chatcard/data-description.html",
+    "systems/amadeus/templates/chatcard/plot-done.html",
+    "systems/amadeus/templates/chatcard/plot-result.html",
 
   ]);
 };
