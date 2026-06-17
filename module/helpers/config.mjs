@@ -134,7 +134,3 @@ AMADEUS.abilityAbbreviations = {
   "cha": "AMADEUS.AbilityChaAbbr"
 };
  */
-
-export function getKeybyValue(obj, value) {
-    return Object.keys(obj).find(key => obj[key] === value);
-}
