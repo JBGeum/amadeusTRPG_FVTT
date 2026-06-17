@@ -40,9 +40,9 @@ export class PlotGMPanel extends HandlebarsApplicationMixin(ApplicationV2) {
   async _prepareContext() {
     const session = getActiveSession();
     const participants = session ? [...session.participants.values()] : [];
-    const npcIds = new Set(participants.map((p) => p.actorId));
+    const existingIds = new Set(participants.map((p) => p.actorId));
     const npcChoices = game.actors
-      .filter((a) => a.type === "npc" && !npcIds.has(a.id))
+      .filter((a) => a.type === "npc" && !existingIds.has(a.id))
       .map((a) => ({ id: a.id, name: a.name }));
     return {
       active: !!session,
@@ -58,12 +58,13 @@ export class PlotGMPanel extends HandlebarsApplicationMixin(ApplicationV2) {
 
   static #onStart() {
     const session = new PlotSession(foundry.utils.randomID());
-    // 플레이어가 소유한 character를 기본 참가자로 등록한다.
-    for (const actor of game.actors) {
-      if (actor.type !== "character") continue;
-      const owner = game.users.find((u) => !u.isGM && actor.testUserPermission(u, "OWNER"));
-      if (!owner) continue;
-      session.addParticipant({ actorId: actor.id, name: actor.name, isNPC: false, userId: owner.id });
+    // 각 플레이어의 배정 캐릭터(user.character)를 기본 참가자로 등록한다.
+    // 플롯 프롬프트도 game.user.character로 제출하므로 actorId가 일치한다.
+    for (const user of game.users) {
+      if (user.isGM) continue;
+      const actor = user.character;
+      if (!actor) continue;
+      session.addParticipant({ actorId: actor.id, name: actor.name, isNPC: false, userId: user.id });
     }
     setActiveSession(session);
     emitPlot("plot-start", { sessionId: session.id });
@@ -77,7 +78,11 @@ export class PlotGMPanel extends HandlebarsApplicationMixin(ApplicationV2) {
 
   static async #onReveal() {
     const session = getActiveSession();
-    if (!session) return;
+    if (!session || session.revealed) return;
+    if (session.participants.size === 0) {
+      ui.notifications.warn(game.i18n.localize("AMADEUS.initiative.noParticipants"));
+      return;
+    }
     session.revealed = true;
     const order = session.computeOrder();
     const notSubmitted = [...session.participants.values()].filter((p) => !Number.isInteger(p.value)).map((p) => ({ name: p.name }));
