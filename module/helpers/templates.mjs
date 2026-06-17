@@ -10,7 +10,6 @@
     "systems/amadeus/templates/actor/parts/actor-features.html",
     "systems/amadeus/templates/actor/parts/actor-item.html",
     "systems/amadeus/templates/actor/parts/actor-bond.html",
-    "systems/amadeus/templates/actor/parts/actor-spells.html",
     "systems/amadeus/templates/actor/parts/actor-effects.html",
     "systems/amadeus/templates/actor/parts/actor-gift.html",
 
@@ -50,13 +49,5 @@ export function registerHandlebarsHelpers(){
       accum += block.fn(this);
     }
     return accum;
-  });
-  Handlebars.registerHelper('getBond', function(n, system, block) {
-    const bond = { "index": index, "bond": system.bond[index]}
-    return bond;
-  });
-  Handlebars.registerHelper('getSupporter', function(n, system, block) {
-    const supporter = { "index": index, "bond": system.supporter[index]}
-    return supporter;
   });
 }
