@@ -9,6 +9,7 @@
 // 0. 공통 reset — 시트 내부 기본 스타일 보정
 // ---------------------------------------------------------------------------
 .sheet.actor {
+  // background/color/font-family for .window-content are set in scss/global/_window.scss (intentional separation)
   .window-content {
     padding: 0;
     overflow-y: auto;
@@ -577,14 +578,6 @@
         line-height: 1.1;
 
         &:focus { outline: none; }
-      }
-
-      // 숫자 표시(span용)
-      div.center-stat-val {
-        font-family: $font-display;
-        font-size: 23px;
-        color: var(--text);
-        line-height: 1.1;
       }
 
       .health-inputs {

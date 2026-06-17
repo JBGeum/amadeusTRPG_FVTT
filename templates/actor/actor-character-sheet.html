@@ -193,48 +193,48 @@
         {{!-- 상태이상 (6종) --}}
         <div class="status-grid">
           {{!-- 1. 절망 --}}
-          <div class="status-item status-item--wk">
+          <div class="status-item">
             <input type="checkbox" class="status-chk" id="bs1.{{actor._id}}"
                    name="system.status.desperation" {{checked system.status.desperation}}/>
             <label for="bs1.{{actor._id}}" class="status-dot status-dot--wk"></label>
             <label for="bs1.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.desperation'}}</label>
           </div>
           {{!-- 2. 분노 --}}
-          <div class="status-item status-item--wr">
+          <div class="status-item">
             <input type="checkbox" class="status-chk" id="bs2.{{actor._id}}"
                    name="system.status.fury" {{checked system.status.fury}}/>
             <label for="bs2.{{actor._id}}" class="status-dot status-dot--wr"></label>
             <label for="bs2.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.fury'}}</label>
           </div>
           {{!-- 3. 겁 (수치 포함) --}}
-          <div class="status-item status-item--wb {{#if system.status.coward.chkbox}}is-active{{/if}}">
+          <div class="status-item {{#if system.status.coward.chkbox}}is-active{{/if}}">
             <input type="checkbox" class="status-chk" id="bs3.{{actor._id}}"
                    name="system.status.coward.chkbox" {{checked system.status.coward.chkbox}}/>
             <label for="bs3.{{actor._id}}" class="status-dot status-dot--wb"></label>
             <label for="bs3.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.coward'}}</label>
-            <input type="number" class="status-level {{checked system.status.coward.chkbox}}" name="system.status.coward.level" value="{{system.status.coward.level}}"/>
+            <input type="number" class="status-level" name="system.status.coward.level" value="{{system.status.coward.level}}"/>
           </div>
           {{!-- 4. 타락 --}}
-          <div class="status-item status-item--wg">
+          <div class="status-item">
             <input type="checkbox" class="status-chk" id="bs4.{{actor._id}}"
                    name="system.status.depravity" {{checked system.status.depravity}}/>
             <label for="bs4.{{actor._id}}" class="status-dot status-dot--wg"></label>
             <label for="bs4.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.depravity'}}</label>
           </div>
           {{!-- 5. 치욕 --}}
-          <div class="status-item status-item--ww">
+          <div class="status-item">
             <input type="checkbox" class="status-chk" id="bs5.{{actor._id}}"
                    name="system.status.disgrace" {{checked system.status.disgrace}}/>
             <label for="bs5.{{actor._id}}" class="status-dot status-dot--ww"></label>
             <label for="bs5.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.disgrace'}}</label>
           </div>
           {{!-- 6. 중상 (수치 포함) --}}
-          <div class="status-item status-item--wy {{#if system.status.wound.chkbox}}is-active{{/if}}">
+          <div class="status-item {{#if system.status.wound.chkbox}}is-active{{/if}}">
             <input type="checkbox" class="status-chk" id="bs6.{{actor._id}}"
                    name="system.status.wound.chkbox" {{checked system.status.wound.chkbox}}/>
             <label for="bs6.{{actor._id}}" class="status-dot status-dot--wy"></label>
             <label for="bs6.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.wound'}}</label>
-            <input type="number" class="status-level {{checked system.status.wound.chkbox}}" name="system.status.wound.level" value="{{system.status.wound.level}}"/>
+            <input type="number" class="status-level" name="system.status.wound.level" value="{{system.status.wound.level}}"/>
           </div>
         </div>
 
