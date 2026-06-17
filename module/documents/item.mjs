@@ -1,4 +1,5 @@
 import {amadeRoll} from "../dice/roll.mjs";
+import { postCard } from "../chat/chat.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -70,52 +71,43 @@ export class AmadeusItem extends Item {
 
 
   async getItemDataCard() {
-    // 아이템 정보만 표시하는 롤
-    const item = this;
-
-    const speaker = ChatMessage.getSpeaker({actor: this.actor});
-    // const rollMode = game.settings.get('core', 'rollMode');
-    const label = `[${item.type}] ${item.name}`;
-    let content = "";
-
-    //타입별로 챗 카드 처리
-    if (this.type === "gift") {
-      content = await this.getGiftChatCard(this);
-    } else if (this.type === "weapon" || this.type === "gear") {
-      content = await this.getItemChatCard(this);
-    }
-    if (content) {
-      ChatMessage.create({content, speaker: speaker});
+    // 아이템 정보만 표시하는 카드
+    let card = null;
+    if (this.type === "gift") card = this.#giftCardData();
+    else if (this.type === "weapon" || this.type === "gear") card = this.#itemCardData();
+    if (card) {
+      await postCard({ actor: this.actor, template: card.template, data: card.data });
     }
   }
 
-
-  async getGiftChatCard(item) {
-    const system = item.system;
-    const templateData = {
-      name: this.name,
-      type: game.i18n.localize(system.type),
-      requirement: system.requirement,
-      roll: game.i18n.localize(system.action.roll),
-      tag: system.tag,
-      effect: system.effect
+  #giftCardData() {
+    const system = this.system;
+    return {
+      template: "systems/amadeus/templates/chatcard/data-gift.html",
+      data: {
+        name: this.name,
+        type: game.i18n.localize(system.type),
+        requirement: system.requirement,
+        roll: game.i18n.localize(system.action.roll),
+        tag: system.tag,
+        effect: system.effect,
+      },
     };
-    let content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/data-gift.html", templateData)
-    return content;
   }
 
-  async getItemChatCard(gift) {
-    const system = gift.system;
-    const templateData = {
-      name: this.name,
-      type: game.i18n.localize(system.type),
-      price: system.price,
-      power: system.action.damage,
-      effect: system.effect,
-      description: system.description
+  #itemCardData() {
+    const system = this.system;
+    return {
+      template: "systems/amadeus/templates/chatcard/data-item.html",
+      data: {
+        name: this.name,
+        type: game.i18n.localize(system.type),
+        price: system.price,
+        power: system.action.damage,
+        effect: system.effect,
+        description: system.description,
+      },
     };
-    let content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/data-item.html", templateData)
-    return content;
   }
 
   async getItemRollCard(rollAbl) {
@@ -123,7 +115,6 @@ export class AmadeusItem extends Item {
     const item = this;
     const actor = this.actor;
 
-    const speaker = ChatMessage.getSpeaker({actor: actor});
     // const rollMode = game.settings.get('core', 'rollMode');
     const label = `${item.name}`;
     const actorAbl = actor.system.ability[rollAbl];
@@ -139,18 +130,15 @@ export class AmadeusItem extends Item {
       rollDC: actor.system.dc,
       resultDiceset: roll.dice[0].values
     }
-    let content;
     if (this.type === "gift") {
-      content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/roll-gift.html", templateData)
-    }
-
-    if (content)
-      ChatMessage.create({
-        content,
+      await postCard({
+        actor,
+        template: "systems/amadeus/templates/chatcard/roll-gift.html",
+        data: templateData,
         flavor: ablLabel + "판정",
-        speaker: speaker,
-        style: CONST.CHAT_MESSAGE_STYLES.EMOTE
-      })
+        style: CONST.CHAT_MESSAGE_STYLES.EMOTE,
+      });
+    }
 
   }
 

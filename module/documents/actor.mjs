@@ -1,4 +1,5 @@
 import {amadeRoll} from "../dice/roll.mjs";
+import { postCard } from "../chat/chat.mjs";
 
 /**
  * Extend the base Actor document.
@@ -57,8 +58,11 @@ export class AmadeusActor extends Actor {
       modVal: abl.modVal,
       rollDC: this.system.dc,
       resultDiceset}
-    let content = await foundry.applications.handlebars.renderTemplate("systems/amadeus/templates/chatcard/roll-amadeabl.html", templateData)
-    ChatMessage.create({content, speaker : ChatMessage.getSpeaker({actor: this})});
+    await postCard({
+      actor: this,
+      template: "systems/amadeus/templates/chatcard/roll-amadeabl.html",
+      data: templateData,
+    });
   }
 
 }
