@@ -1,3 +1,16 @@
-<div class="chatcard plot-done-chatcard">
-  <span class="plot-done-name">{{name}}</span> {{localize "AMADEUS.initiative.plotDone"}}
+<div class="amadeus-chat chatcard plot-done-chatcard">
+  <div class="chat-plot-done-inner">
+    <div class="chat-ornament chat-ornament--slim" aria-hidden="true">
+      <span class="chat-ornament-line chat-ornament-line--l"></span>
+      <i class="fa-solid fa-hourglass-end chat-ornament-icon"></i>
+      <span class="chat-ornament-line chat-ornament-line--r"></span>
+    </div>
+    <div class="chat-plot-done-body">
+      <i class="fa-solid fa-check chat-plot-done-check"></i>
+      <span class="chat-plot-done-text">
+        <strong class="chat-plot-done-name">{{name}}</strong>
+        {{localize "AMADEUS.initiative.plotDone"}}
+      </span>
+    </div>
+  </div>
 </div>

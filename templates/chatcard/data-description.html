@@ -1,4 +1,18 @@
-<div class="chatcard item-description-chatcard">
-  <div class="item-name">{{name}}</div>
-  <div class="item-description">{{{description}}}</div>
+<div class="amadeus-chat chatcard item-description-chatcard">
+  <div class="chat-inner">
+    <header class="chat-title">
+      <i class="fa-solid fa-scroll chat-title-icon"></i>
+      <span class="chat-title-text">{{name}}</span>
+    </header>
+    <div class="chat-ornament" aria-hidden="true">
+      <span class="chat-ornament-line chat-ornament-line--l"></span>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <i class="fa-solid fa-feather chat-ornament-icon"></i>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <span class="chat-ornament-line chat-ornament-line--r"></span>
+    </div>
+    <div class="chat-body">
+      <div class="chat-description">{{{description}}}</div>
+    </div>
+  </div>
 </div>

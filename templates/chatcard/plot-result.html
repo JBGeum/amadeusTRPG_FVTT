@@ -1,17 +1,30 @@
-<div class="chatcard plot-result-chatcard">
-  <div class="plot-result-title">{{localize "AMADEUS.initiative.order"}}</div>
-  <ol class="plot-order">
-    {{#each order as |slot|}}
-    <li class="plot-slot">
-      <span class="plot-rank">{{slot.rank}}</span>
-      <span class="plot-value">[{{plotLabel slot.value}}]</span>
-      <span class="plot-members">{{#each slot.members as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}</span>
-    </li>
-    {{/each}}
-  </ol>
-  {{#if notSubmitted.length}}
-  <div class="plot-notsubmitted">
-    {{localize "AMADEUS.initiative.notSubmitted"}}: {{#each notSubmitted as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}
+<div class="amadeus-chat chatcard plot-result-chatcard">
+  <div class="chat-inner">
+    <header class="chat-title">
+      <i class="fa-solid fa-list-ol chat-title-icon"></i>
+      <span class="chat-title-text">{{localize "AMADEUS.initiative.order"}}</span>
+    </header>
+    <div class="chat-ornament" aria-hidden="true">
+      <span class="chat-ornament-line chat-ornament-line--l"></span>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <i class="fa-solid fa-droplet chat-ornament-icon"></i>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <span class="chat-ornament-line chat-ornament-line--r"></span>
+    </div>
+    <ol class="chat-plot-order">
+      {{#each order as |slot|}}
+      <li class="chat-plot-slot">
+        <span class="chat-plot-rank lnum">{{slot.rank}}</span>
+        <span class="chat-plot-die lnum chat-plot-die--{{slot.value}}">{{plotLabel slot.value}}</span>
+        <span class="chat-plot-members">{{#each slot.members as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}</span>
+      </li>
+      {{/each}}
+    </ol>
+    {{#if notSubmitted.length}}
+    <div class="chat-plot-notsubmitted">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      {{localize "AMADEUS.initiative.notSubmitted"}}: {{#each notSubmitted as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}
+    </div>
+    {{/if}}
   </div>
-  {{/if}}
 </div>

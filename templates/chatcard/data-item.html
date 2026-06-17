@@ -1,23 +1,33 @@
-<div class="chatcard item-chatcard">
-  <div class="grid data-item-chatcard-top">
-    <div class="item-name">
-      {{name}}
+<div class="amadeus-chat chatcard item-chatcard">
+  <div class="chat-inner">
+    <header class="chat-title">
+      <i class="fa-solid fa-drumstick-bite chat-title-icon"></i>
+      <span class="chat-title-text">{{name}}</span>
+    </header>
+    <div class="chat-ornament" aria-hidden="true">
+      <span class="chat-ornament-line chat-ornament-line--l"></span>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <i class="fa-solid fa-utensils chat-ornament-icon"></i>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <span class="chat-ornament-line chat-ornament-line--r"></span>
     </div>
-    <div class="item-type">
-      <div class="item-lbl">{{localize 'AMADEUS.item.type'}}</div>
-      <div>{{type}}</div>
+    <div class="chat-chips">
+      <div class="chat-chip">
+        <span class="chat-chip-lbl">{{localize 'AMADEUS.item.type'}}</span>
+        <span class="chat-chip-val">{{type}}</span>
+      </div>
+      <div class="chat-chip">
+        <span class="chat-chip-lbl">{{localize 'AMADEUS.item.price'}}</span>
+        <span class="chat-chip-val">{{price}}</span>
+      </div>
+      <div class="chat-chip">
+        <span class="chat-chip-lbl">{{localize 'AMADEUS.item.power'}}</span>
+        <span class="chat-chip-val lnum">{{power}}</span>
+      </div>
     </div>
-    <div class="item-price">
-      <div class="item-lbl">{{localize 'AMADEUS.item.price'}}</div>
-      <div>{{price}}</div>
+    <div class="chat-body">
+      <div class="chat-effect">{{{effect}}}</div>
+      <div class="chat-description">{{{description}}}</div>
     </div>
-    <div class="item-power">
-      <div class="item-lbl">{{localize 'AMADEUS.item.power'}}</div>
-      <div>{{power}}</div>
-    </div>
-  </div>
-  <div class="data-item-chatcard-bottom">
-    <div class="item-effect">{{{effect}}}</div>
-    <div class="item-description">{{{description}}}</div>
   </div>
 </div>
