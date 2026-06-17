@@ -5,8 +5,6 @@
 @import 'utils/tokens';
 @import 'utils/variables';
 @import 'utils/mixins';
-@import 'utils/colors'; // 임시 유지 — _forms.scss/_chatcard.scss/_window.scss의 $color-* 참조가 남아 있음 (Task 8에서 제거 예정)
-
 // Global
 @import 'global/window';
 @import 'global/grid';
