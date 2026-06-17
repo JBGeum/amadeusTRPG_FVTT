@@ -1,16 +1,30 @@
-.amadeus{
-  font-family: $font-primary;
-}
-.amadeus input, .amadeus textarea, .amadeus .gift-effect{
-  font-family:$font-secondary;
-}
+.amadeus.sheet {
+  .window-content {
+    background: var(--bg);
+    color: var(--text);
+    font-family: $font-body;
+  }
 
+  input, select, textarea {
+    background: var(--panel2);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-family: $font-body;
+  }
 
-.rollable {
-  &:hover,
-  &:focus {
-    color: #000;
-    text-shadow: 0 0 10px $color-bg;
-    cursor: pointer;
+  input::placeholder { color: var(--muted); font-style: italic; opacity: .7; }
+
+  .gift-effect {
+    font-family: $font-display;
+  }
+
+  .rollable {
+    &:hover,
+    &:focus {
+      color: #000;
+      text-shadow: 0 0 10px var(--bg);
+      cursor: pointer;
+    }
   }
 }
