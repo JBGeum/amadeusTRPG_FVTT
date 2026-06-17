@@ -163,16 +163,21 @@
       }
     }
 
-    .portrait-parent-name {
+    input.portrait-parent-name {
       font-size: 11px;
       color: var(--text);
       position: absolute;
       bottom: 11px;
       max-width: 82px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
       text-align: center;
+      padding: 1px 3px;
+
+      &:focus { outline: none; border-bottom-color: var(--gold); }
+      &::placeholder { color: var(--muted); }
     }
   }
 
