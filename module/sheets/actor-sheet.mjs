@@ -157,25 +157,18 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     if (item.type === "parent") {
       const existing = this.actor.items.filter((i) => i.type === "parent").map((i) => i.id);
       if (existing.length) await this.actor.deleteEmbeddedDocuments("Item", existing);
-      await this.actor.update({
+      const updateData = {
         "system.chardata.parent": item.name,
         "system.color": item.system.color,
         "system.chardata.pantheon": item.system.pantheon,
         "system.chardata.parentkey": item.id,
         "system.chardata.parentimg": item.system.portrait,
-        "system.ability.warfare.rank": item.system.ability.warfare.rank,
-        "system.ability.warfare.mod": item.system.ability.warfare.mod,
-        "system.ability.technique.rank": item.system.ability.technique.rank,
-        "system.ability.technique.mod": item.system.ability.technique.mod,
-        "system.ability.brain.rank": item.system.ability.brain.rank,
-        "system.ability.brain.mod": item.system.ability.brain.mod,
-        "system.ability.spirit.rank": item.system.ability.spirit.rank,
-        "system.ability.spirit.mod": item.system.ability.spirit.mod,
-        "system.ability.love.rank": item.system.ability.love.rank,
-        "system.ability.love.mod": item.system.ability.love.mod,
-        "system.ability.mundane.rank": item.system.ability.mundane.rank,
-        "system.ability.mundane.mod": item.system.ability.mundane.mod,
-      });
+      };
+      for (const [key, abl] of Object.entries(item.system.ability)) {
+        updateData[`system.ability.${key}.rank`] = abl.rank;
+        updateData[`system.ability.${key}.mod`] = abl.mod;
+      }
+      await this.actor.update(updateData);
     }
     return super._onDropItem(event, item);
   }
