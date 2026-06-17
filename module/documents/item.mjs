@@ -1,4 +1,4 @@
-import {amadeRoll} from "./roll.mjs";
+import {amadeRoll} from "../dice/roll.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}

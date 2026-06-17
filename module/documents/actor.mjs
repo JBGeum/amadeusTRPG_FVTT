@@ -1,4 +1,4 @@
-import {amadeRoll} from "./roll.mjs";
+import {amadeRoll} from "../dice/roll.mjs";
 
 /**
  * Extend the base Actor document.
