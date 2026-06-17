@@ -1,81 +1,137 @@
-<div class="{{actor.type}} flexcol">
-{{!--기본 크기 가로 660 정도 --}}
-  {{!-- Sheet Header --}}
-  <header class="sheet-header">
-    <div class="header-fields">
-      <div class="grid actor-sheet-header">
-        <div class="profile-img">
-          <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="160" width="160"/>
+{{!-- 캐릭터 액터 시트 (AppV2 / ApplicationV2). 프레임(.amadeus.sheet.actor)은 JS가 제공. --}}
+<div class="sheet-inner">
+
+  {{!-- 장식 레이어: SVG 시길 + 그라디언트 --}}
+  <svg class="sheet-sigil" viewBox="0 0 220 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="0.8">
+      <circle cx="110" cy="110" r="92"></circle>
+      <circle cx="110" cy="110" r="84"></circle>
+      <circle cx="110" cy="110" r="88" stroke-dasharray="1.5 16.5"></circle>
+      <polygon points="110,42 174,158 46,158"></polygon>
+      <circle cx="110" cy="120" r="32"></circle>
+    </g>
+    <g fill="currentColor">
+      <circle cx="110" cy="42" r="3"></circle>
+      <circle cx="174" cy="158" r="3"></circle>
+      <circle cx="46" cy="158" r="3"></circle>
+    </g>
+  </svg>
+  <div class="sheet-grad-radial" aria-hidden="true"></div>
+  <div class="sheet-grad-top" aria-hidden="true"></div>
+
+  {{!-- 실제 콘텐츠 --}}
+  <div class="sheet-content">
+
+    {{!-- ===== HEADER ===== --}}
+    <header class="sheet-header">
+
+      {{!-- 이미지 열: 캐릭터 + 부모신 --}}
+      <div class="header-portraits">
+        <div class="portrait-character">
+          <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="{{actor.name}}"/>
+          <span class="portrait-label">캐릭터</span>
         </div>
-        <div class="charname">
-          <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'AMADEUS.label.name'}}"/></div>
-        <div class="actor-color">
-          <label class="chardata-color-label">{{localize 'AMADEUS.label.color'}}</label>
-          <div class="actor-color-select">
+        <div class="portrait-parent">
+          <span class="portrait-sublabel">부모신</span>
+          <img src="{{system.chardata.parentimg}}" data-edit="system.chardata.parentimg" title="{{system.chardata.parent}}" alt="{{system.chardata.parent}}"/>
+          <span class="portrait-parent-name">{{system.chardata.parent}}</span>
+        </div>
+      </div>
+
+      {{!-- 메타 열: 이름, 레벨/경험치/소지금, 직업/신군/배경/관계/예언 --}}
+      <div class="header-meta">
+
+        {{!-- 이름 + 색상 선택 --}}
+        <div class="header-name-row">
+          <div class="char-tagline">
+            <i class="fa-solid fa-flask"></i>
+            SOLVE ET COAGULA
+          </div>
+          <input class="char-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'AMADEUS.label.name'}}"/>
+          <div class="color-select-wrap">
             <select name="system.color">
               {{selectOptions label.color selected=system.color}}
             </select>
           </div>
         </div>
-        <div class="parent-img">
-          <img class="parent-img" src="{{system.chardata.parentimg}}" data-edit="system.chardata.parentimg" title="{{system.chardata.parent}}" height="120" width="120"/>
-        </div>
-        <div class="chardata job">
-          <label class="chardata-label">{{localize 'AMADEUS.label.job'}}</label>
-          <input type="checkbox" class="pathos" id="job.{{actor._id}}" name="system.job.chkbox" {{checked system.job.chkbox}}>
-          <label for="job.{{actor._id}}" class="pathos {{#if system.job.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
-          <input type="text" name="system.chardata.job.name" value="{{system.chardata.job.name}}"/>
-        </div>
-        <div class="chardata pantheon">
-          <label class="chardata-label">{{localize 'AMADEUS.label.pantheon'}}</label>
-          <input type="text" name="system.chardata.pantheon" value="{{system.chardata.pantheon}}"/>
-        </div>
-        <div class="chardata parent-name">
-          <label class="chardata-label">{{localize 'AMADEUS.label.parent'}}</label>
-          <input type="text" name="system.chardata.parent" value="{{system.chardata.parent}}"/>
-        </div>
-        <div class="chardata">
-          <label class="chardata-label">{{localize 'AMADEUS.label.background'}}</label>
-          <input type="text" name="system.chardata.background" value="{{system.chardata.background}}"/>
-        </div>
-        <div class="chardata">
-          <label class="chardata-label">{{localize 'AMADEUS.label.prophecy'}}</label>
-          <input type="text" name="system.chardata.prophecy" value="{{system.chardata.prophecy}}"/>
-        </div>
-        <div class="chardata">
-          <label class="chardata-label">{{localize 'AMADEUS.label.relationship'}}</label>
-          <input type="text" name="system.chardata.relationship" value="{{system.chardata.relationship}}"/>
-        </div>
-        <div class="chardata">
-          <label class="chardata-label">{{localize 'AMADEUS.label.money'}}</label>
-          <input type="text" name="system.money" value="{{system.money}}" placeholder="{{system.initMoney}}"/>
-        </div>
-        <div class="chardata">
-          <label class="chardata-label">{{localize 'AMADEUS.label.level'}}</label>
-          <input type="number" name="system.level" value="{{system.level}}"/>
-        </div>
-        <div class="chardata">
-          <label class="chardata-label">{{localize 'AMADEUS.label.exp'}}</label>
-          <input type="number" name="system.exp" value="{{system.exp}}"/>
-        </div>
-      </div>
-    </div>
-  </header>
 
-  <section class="grid grid-6col">
-    <section class="grid-span-1">
-      {{!-- 좌측바 --}}
-      <aside class="sidebar">
+        {{!-- 레벨 / 경험치 / 소지금 --}}
+        <div class="header-stats">
+          <div class="stat-box">
+            <div class="stat-label"><i class="fa-solid fa-angles-up"></i>레벨</div>
+            <input class="stat-val" type="number" name="system.level" value="{{system.level}}"/>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label"><i class="fa-solid fa-star"></i>경험치</div>
+            <input class="stat-val" type="number" name="system.exp" value="{{system.exp}}"/>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label"><i class="fa-solid fa-coins"></i>소지금</div>
+            <input class="stat-val" type="text" name="system.money" value="{{system.money}}" placeholder="{{system.initMoney}}"/>
+          </div>
+        </div>
+
+        {{!-- 직업/신군/배경/관계/예언 --}}
+        <div class="header-chardata">
+          <div class="chardata-row">
+            <i class="fa-solid fa-hat-wizard chardata-icon"></i>
+            <span class="chardata-key">직업</span>
+            <input type="checkbox" class="pathos" id="job.{{actor._id}}" name="system.job.chkbox" {{checked system.job.chkbox}}>
+            <label for="job.{{actor._id}}" class="pathos {{#if system.job.chkbox}}pathos-on{{else}}pathos-off{{/if}}"></label>
+            <input type="text" name="system.chardata.job.name" value="{{system.chardata.job.name}}"/>
+          </div>
+          <div class="chardata-row">
+            <i class="fa-solid fa-chess-king chardata-icon"></i>
+            <span class="chardata-key">신군</span>
+            <input type="text" name="system.chardata.pantheon" value="{{system.chardata.pantheon}}"/>
+          </div>
+          <div class="chardata-row">
+            <i class="fa-solid fa-book chardata-icon"></i>
+            <span class="chardata-key">배경</span>
+            <input type="text" name="system.chardata.background" value="{{system.chardata.background}}"/>
+          </div>
+          <div class="chardata-row">
+            <i class="fa-solid fa-link chardata-icon"></i>
+            <span class="chardata-key">관계</span>
+            <input type="text" name="system.chardata.relationship" value="{{system.chardata.relationship}}"/>
+          </div>
+          <div class="chardata-row chardata-row--full">
+            <i class="fa-solid fa-scroll chardata-icon"></i>
+            <span class="chardata-key">예언</span>
+            <input type="text" name="system.chardata.prophecy" value="{{system.chardata.prophecy}}"/>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    {{!-- 구분선 --}}
+    <div class="sheet-divider" aria-hidden="true">
+      <span class="divider-line divider-line--left"></span>
+      <i class="fa-solid fa-gem divider-gem"></i>
+      <i class="fa-solid fa-droplet divider-drop"></i>
+      <i class="fa-solid fa-gem divider-gem"></i>
+      <span class="divider-line divider-line--right"></span>
+    </div>
+
+    {{!-- ===== BODY (3열: 능력치 | 중앙 | 메모) ===== --}}
+    <div class="sheet-body-columns">
+
+      {{!-- 능력치 열 --}}
+      <div class="col-ability">
+        <div class="ability-col-header">
+          <span class="ability-col-title"><i class="fa-solid fa-chart-simple"></i>능력</span>
+          <span class="ability-col-sub">등급</span>
+          <span class="ability-col-sub">보정</span>
+        </div>
         <div class="abilities">
           {{#each system.ability as |ability key|}}
-          <div class="ability-grid">
-            <div class="ability-label">
-              <span class="ability-label amade-abl-roll"
-                     data-action="ablRoll"
-                     data-ability="{{key}}"
-                     data-label="{{ability.label}}">{{ability.label}}</span>
-            </div>
-            <div class="ability-value">
+          <div class="ability-row">
+            <span class="ability-label rollable"
+                  data-action="ablRoll"
+                  data-ability="{{key}}"
+                  data-label="{{ability.label}}">{{ability.label}}</span>
+            <div class="ability-rank">
               <select name="system.ability.{{key}}.rank">
                 {{selectOptions ../label.rank selected=ability.rank}}
               </select>
@@ -88,112 +144,136 @@
           </div>
           {{/each}}
         </div>
-
-      </aside>
-    </section>
-
-    <section class="grid-span-5">
-      <div class="grid chardata-group-bottom">
-        <div class="left-side">
-          <div class="grid dchp-grid">
-            <div class="chardata actor-dc">
-              <div class="dchp-label">{{localize 'AMADEUS.label.dc'}}</div>
-              <input type="number" name="system.dc" value="{{system.dc}}"/>
-            </div>
-            <div class="chardata actor-hp">
-              <div class="dchp-label">{{localize 'AMADEUS.label.health'}}</div>
-              <input type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number">
-              <div class="divider">/</div>
-            </div>
-            <div class="actor-hp-max">
-              <input type="number" class="min" name="system.health.max" value="{{system.health.max}}" placeholder="{{system.initHealth}}" data-dtype="Number"/>
-            </div>
-            <div class="hp-vital flexrow flex-group-center">
-              <div class="chardata init-health">
-                <label class="wid-auto">{{localize 'AMADEUS.label.inithealth'}}</label> {{system.initHealth}}</div>
-              <div class="chardata vitality">
-                <label>{{localize 'AMADEUS.label.vitality'}}</label>
-                <a class="vitality-roll" data-action="vitalityRoll" data-roll="{{system.level}}d6" data-label="{{localize 'AMADEUS.roll.vitality'}}">
-                  <i class="fas fa-dice"></i></a>
-                <input type="number" class="min" name="system.vitality" value="{{system.vitality}}"/>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="middle-side"></div>
-        <div class="right-side">{{!-- 상태이상--}}
-          <div class="grid badstatus-grid">
-            <div class="badstatus {{checked system.status.desperation}}">
-              <input type="checkbox" class="badstatus" id="bs1.{{actor._id}}"
-                     name="system.status.desperation" {{checked system.status.desperation}} />
-              <label for="bs1.{{actor._id}}" class="badstatus">
-                <i class="fas fa-dice-one color-d1"></i> {{localize 'AMADEUS.badstatus.desperation'}}</label>
-            </div>
-            <div class="badstatus {{checked system.status.fury}}">
-              <input type="checkbox" class="badstatus" id="bs2.{{actor._id}}"
-                     name="system.status.fury" {{checked system.status.fury}} />
-              <label for="bs2.{{actor._id}}" class="badstatus">
-                <i class="fas fa-dice-two color-d2"></i> {{localize 'AMADEUS.badstatus.fury'}}</label>
-            </div>
-            <div class="badstatus {{checked system.status.coward.chkbox}} bs-num">
-              <input type="checkbox" class="badstatus" id="bs3.{{actor._id}}"
-                     name="system.status.coward.chkbox" {{checked system.status.coward.chkbox}} />
-              <label for="bs3.{{actor._id}}" class="badstatus">
-                <i class="fas fa-dice-three color-d3"></i> {{localize 'AMADEUS.badstatus.coward'}}</label>
-              <input type="number" class="bs-input  {{checked system.status.coward.chkbox}}" name="system.status.coward.level" value="{{system.status.coward.level}}" />
-            </div>
-            <div class="badstatus {{checked system.status.depravity}}">
-              <input type="checkbox" class="badstatus" id="bs4.{{actor._id}}"
-                     name="system.status.depravity" {{checked system.status.depravity}} />
-              <label for="bs4.{{actor._id}}" class="badstatus">
-                <i class="fas fa-dice-four color-d4"></i> {{localize 'AMADEUS.badstatus.depravity'}}</label>
-            </div>
-            <div class="badstatus {{checked system.status.disgrace}}">
-              <input type="checkbox" class="badstatus" id="bs5.{{actor._id}}"
-                     name="system.status.disgrace" {{checked system.status.disgrace}} />
-              <label for="bs5.{{actor._id}}" class="badstatus">
-                <i class="fas fa-dice-five color-d5"></i> {{localize 'AMADEUS.badstatus.disgrace'}}</label>
-            </div>
-            <div class="badstatus {{checked system.status.wound.chkbox}} bs-num">
-              <input type="checkbox" class="badstatus" id="bs6.{{actor._id}}"
-                     name="system.status.wound.chkbox" {{checked system.status.wound.chkbox}} />
-              <label for="bs6.{{actor._id}}" class="badstatus">
-                <i class="fas fa-dice-six color-d6"></i> {{localize 'AMADEUS.badstatus.wound'}}</label>
-              <input type="number" class="bs-input {{checked system.status.wound.chkbox}}" name="system.status.wound.level" value="{{system.status.wound.level}}" />
-            </div>
-          </div>
-        </div>
-        <div class="memo-side">
-          <textarea name="system.memo" class="actor-memo">{{system.memo}}</textarea>
-        </div>
       </div>
 
+      {{!-- 중앙 열: 속성 인장 + 목표치/생명력/초기치 + 상태이상 --}}
+      <div class="col-center">
 
-      {{!-- Sheet Tab Navigation --}}
-      <nav class="sheet-tabs tabs" data-group="primary">
-        {{!-- 탭 전환은 actor-sheet.mjs의 _onRender(#activateTabs)에서 처리 --}}
-        <a class="item" data-tab="item">{{localize 'AMADEUS.menu.item'}}</a>
-        <a class="item" data-tab="gift">{{localize 'AMADEUS.menu.gift'}}</a>
-        <a class="item" data-tab="bond">{{localize 'AMADEUS.menu.bond'}}</a>
-        <a class="item" data-tab="features">{{localize 'AMADEUS.menu.features'}}</a>
-      </nav>
-      {{!-- Sheet Body --}}
-      <section class="sheet-body">
-        <div class="tab" data-group="primary" data-tab="item">
-          {{> "systems/amadeus/templates/actor/parts/actor-item.html"}}
+        {{!-- 속성 인장 --}}
+        <div class="attribute-seal">
+          <svg class="seal-ring" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="1"></circle>
+            <polygon points="50,18 78,68 22,68" fill="none" stroke="currentColor" stroke-width="1" opacity=".5"></polygon>
+          </svg>
+          <span class="seal-sub">속성</span>
+          <span class="seal-char">{{localize (lookup config.color system.color)}}</span>
         </div>
-        <div class="tab" data-group="primary" data-tab="gift">
-          {{> "systems/amadeus/templates/actor/parts/actor-gift.html"}}
+
+        {{!-- 목표치 / 생명력 / 초기치 --}}
+        <div class="center-stats">
+          <div class="center-stat-box">
+            <div class="center-stat-label"><i class="fa-solid fa-crosshairs"></i>목표치</div>
+            <input class="center-stat-val" type="number" name="system.dc" value="{{system.dc}}"/>
+          </div>
+          <div class="center-stat-box center-stat-box--wide">
+            <div class="center-stat-label"><i class="fa-solid fa-heart-pulse"></i>생명력</div>
+            <div class="health-inputs">
+              <input class="center-stat-val" type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
+              <span class="health-sep">/</span>
+              <input class="center-stat-val center-stat-val--max" type="number" name="system.health.max" value="{{system.health.max}}" placeholder="{{system.initHealth}}" data-dtype="Number"/>
+            </div>
+          </div>
+          <div class="center-stat-box">
+            <div class="center-stat-label"><i class="fa-solid fa-droplet"></i>초기치</div>
+            <div class="center-stat-val">{{system.initHealth}}</div>
+          </div>
         </div>
-        <div class="tab" data-group="primary" data-tab="bond">
-            {{> "systems/amadeus/templates/actor/parts/actor-bond.html"}}
+
+        {{!-- 활력 / 소지금 초기치 --}}
+        <div class="vitality-row">
+          <span class="vitality-label">{{localize 'AMADEUS.label.vitality'}}</span>
+          <a class="vitality-roll" data-action="vitalityRoll" data-roll="{{system.level}}d6" data-label="{{localize 'AMADEUS.roll.vitality'}}">
+            <i class="fas fa-dice"></i>
+          </a>
+          <input class="vitality-input" type="number" name="system.vitality" value="{{system.vitality}}"/>
+          <span class="init-health-label">{{localize 'AMADEUS.label.inithealth'}}</span>
+          <span class="init-health-val">{{system.initHealth}}</span>
         </div>
-        <div class="tab" data-group="primary" data-tab="features">
-          {{> "systems/amadeus/templates/actor/parts/actor-features.html"}}
+
+        {{!-- 상태이상 (6종) --}}
+        <div class="status-grid">
+          {{!-- 1. 절망 --}}
+          <div class="status-item status-item--wk">
+            <input type="checkbox" class="status-chk" id="bs1.{{actor._id}}"
+                   name="system.status.desperation" {{checked system.status.desperation}}/>
+            <label for="bs1.{{actor._id}}" class="status-dot status-dot--wk"></label>
+            <label for="bs1.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.desperation'}}</label>
+          </div>
+          {{!-- 2. 분노 --}}
+          <div class="status-item status-item--wr">
+            <input type="checkbox" class="status-chk" id="bs2.{{actor._id}}"
+                   name="system.status.fury" {{checked system.status.fury}}/>
+            <label for="bs2.{{actor._id}}" class="status-dot status-dot--wr"></label>
+            <label for="bs2.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.fury'}}</label>
+          </div>
+          {{!-- 3. 겁 (수치 포함) --}}
+          <div class="status-item status-item--wb {{#if system.status.coward.chkbox}}is-active{{/if}}">
+            <input type="checkbox" class="status-chk" id="bs3.{{actor._id}}"
+                   name="system.status.coward.chkbox" {{checked system.status.coward.chkbox}}/>
+            <label for="bs3.{{actor._id}}" class="status-dot status-dot--wb"></label>
+            <label for="bs3.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.coward'}}</label>
+            <input type="number" class="status-level {{checked system.status.coward.chkbox}}" name="system.status.coward.level" value="{{system.status.coward.level}}"/>
+          </div>
+          {{!-- 4. 타락 --}}
+          <div class="status-item status-item--wg">
+            <input type="checkbox" class="status-chk" id="bs4.{{actor._id}}"
+                   name="system.status.depravity" {{checked system.status.depravity}}/>
+            <label for="bs4.{{actor._id}}" class="status-dot status-dot--wg"></label>
+            <label for="bs4.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.depravity'}}</label>
+          </div>
+          {{!-- 5. 치욕 --}}
+          <div class="status-item status-item--ww">
+            <input type="checkbox" class="status-chk" id="bs5.{{actor._id}}"
+                   name="system.status.disgrace" {{checked system.status.disgrace}}/>
+            <label for="bs5.{{actor._id}}" class="status-dot status-dot--ww"></label>
+            <label for="bs5.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.disgrace'}}</label>
+          </div>
+          {{!-- 6. 중상 (수치 포함) --}}
+          <div class="status-item status-item--wy {{#if system.status.wound.chkbox}}is-active{{/if}}">
+            <input type="checkbox" class="status-chk" id="bs6.{{actor._id}}"
+                   name="system.status.wound.chkbox" {{checked system.status.wound.chkbox}}/>
+            <label for="bs6.{{actor._id}}" class="status-dot status-dot--wy"></label>
+            <label for="bs6.{{actor._id}}" class="status-name">{{localize 'AMADEUS.badstatus.wound'}}</label>
+            <input type="number" class="status-level {{checked system.status.wound.chkbox}}" name="system.status.wound.level" value="{{system.status.wound.level}}"/>
+          </div>
         </div>
-      </section>
+
+      </div>
+
+      {{!-- 메모 열 --}}
+      <div class="col-memo">
+        <div class="memo-header">
+          <span class="memo-title"><i class="fa-solid fa-feather"></i>MEMO</span>
+          <i class="fa-solid fa-gem memo-deco"></i>
+        </div>
+        <textarea name="system.memo" class="memo-body">{{system.memo}}</textarea>
+      </div>
+
+    </div>{{!-- /.sheet-body-columns --}}
+
+    {{!-- ===== TAB NAV ===== --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <a class="item" data-tab="item">{{localize 'AMADEUS.menu.item'}}</a>
+      <a class="item" data-tab="gift">{{localize 'AMADEUS.menu.gift'}}</a>
+      <a class="item" data-tab="bond">{{localize 'AMADEUS.menu.bond'}}</a>
+      <a class="item" data-tab="features">{{localize 'AMADEUS.menu.features'}}</a>
+    </nav>
+
+    {{!-- ===== SHEET BODY (tab panes) ===== --}}
+    <section class="sheet-body">
+      <div class="tab" data-group="primary" data-tab="item">
+        {{> "systems/amadeus/templates/actor/parts/actor-item.html"}}
+      </div>
+      <div class="tab" data-group="primary" data-tab="gift">
+        {{> "systems/amadeus/templates/actor/parts/actor-gift.html"}}
+      </div>
+      <div class="tab" data-group="primary" data-tab="bond">
+        {{> "systems/amadeus/templates/actor/parts/actor-bond.html"}}
+      </div>
+      <div class="tab" data-group="primary" data-tab="features">
+        {{> "systems/amadeus/templates/actor/parts/actor-features.html"}}
+      </div>
     </section>
-  </section>
-</div>
 
-<!-- input은 80px정도로 float:right-->
+  </div>{{!-- /.sheet-content --}}
+</div>{{!-- /.sheet-inner --}}

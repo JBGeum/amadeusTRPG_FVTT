@@ -1,1 +1,803 @@
-// 캐릭터 시트 스타일 — Task 4에서 작성
+// ===== 캐릭터 액터 시트 스타일 =====
+// 이 파일은 amadeus.scss의 `.amadeus { @import ... }` 블록 안에서 임포트되므로
+// 최상위 선택자는 이미 `.amadeus` 스코프 안에 있다.
+// 실제 렌더 DOM: .amadeus.sheet.actor (AppV2 프레임) > .window-content > .sheet-inner ...
+// 색상 토큰(--bg/--panel/--panel2/--text/--muted/--line/--gold/--acc/--seal/--sealtx)은
+// _tokens.scss에서 정의됨. 상태 토큰(--wk/--wr/--wb/--wg/--ww/--wy)도 동일.
+
+// ---------------------------------------------------------------------------
+// 0. 공통 reset — 시트 내부 기본 스타일 보정
+// ---------------------------------------------------------------------------
+.sheet.actor {
+  .window-content {
+    padding: 0;
+    overflow-y: auto;
+  }
+
+  // 탭 숨김: JS(#activateTabs)가 display를 직접 제어하므로 기본은 none
+  .sheet-body .tab {
+    display: none;
+    &.active { display: block; }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 1. .sheet-inner — 최상위 래퍼 (배경 + 모서리)
+// ---------------------------------------------------------------------------
+.sheet.actor .sheet-inner {
+  position: relative;
+  background: var(--bg);
+  color: var(--text);
+  font-family: $font-body;
+  overflow: hidden;
+  min-height: 100%;
+}
+
+// ---------------------------------------------------------------------------
+// 2. 장식 레이어 (시길 / 그라디언트)
+// ---------------------------------------------------------------------------
+.sheet.actor {
+  .sheet-sigil {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 380px;
+    height: 380px;
+    transform: translate(-50%, -50%);
+    color: var(--acc);
+    opacity: .09;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sheet-grad-radial {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 70% at 50% -8%, var(--gold), transparent 52%);
+    opacity: .08;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sheet-grad-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: .75;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .sheet-content {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. HEADER
+// ---------------------------------------------------------------------------
+.sheet.actor .sheet-header {
+  display: flex;
+  gap: 14px;
+  padding: 18px 20px 14px;
+
+  // --- 초상화 영역 ---
+  .header-portraits {
+    display: flex;
+    gap: 8px;
+    flex: none;
+  }
+
+  .portrait-character {
+    width: 104px;
+    height: 138px;
+    border-radius: 9px;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .portrait-label {
+      position: absolute;
+      bottom: 6px;
+      font-size: 9px;
+      letter-spacing: .16em;
+      color: var(--muted);
+      // 이미지가 있으면 가려질 수 있어 배경 추가
+      background: var(--panel);
+      padding: 1px 5px;
+      border-radius: 3px;
+      opacity: .8;
+    }
+  }
+
+  .portrait-parent {
+    width: 92px;
+    height: 138px;
+    border-radius: 9px;
+    background: var(--panel2);
+    border: 1px dashed var(--line);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    position: relative;
+    overflow: hidden;
+
+    .portrait-sublabel {
+      font-size: 8px;
+      letter-spacing: .18em;
+      color: var(--muted);
+      position: absolute;
+      top: 9px;
+    }
+
+    img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 50%;
+      cursor: pointer;
+      // 이미지 없을 때는 투명하게 처리
+      &[src=""],
+      &:not([src]) {
+        opacity: 0;
+      }
+    }
+
+    .portrait-parent-name {
+      font-size: 11px;
+      color: var(--text);
+      position: absolute;
+      bottom: 11px;
+      max-width: 82px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: center;
+    }
+  }
+
+  // --- 메타 열 ---
+  .header-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  // 이름 행
+  .header-name-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .char-tagline {
+      font-family: $font-display;
+      font-size: 10px;
+      letter-spacing: .26em;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+
+      i { font-size: 9px; }
+    }
+
+    .char-name {
+      flex: 1;
+      font-family: $font-title;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      padding: 2px 4px;
+      min-width: 0;
+
+      &:focus {
+        outline: none;
+        border-bottom-color: var(--gold);
+      }
+    }
+
+    .color-select-wrap {
+      select {
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: 5px;
+        color: var(--text);
+      }
+    }
+  }
+
+  // 레벨 / 경험치 / 소지금
+  .header-stats {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+
+    .stat-box {
+      text-align: center;
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 5px 11px;
+
+      .stat-label {
+        font-size: 9px;
+        color: var(--muted);
+        letter-spacing: .1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        margin-bottom: 2px;
+
+        i {
+          font-size: 8px;
+          color: var(--gold);
+        }
+      }
+
+      .stat-val,
+      input.stat-val {
+        font-family: $font-display;
+        font-size: 18px;
+        color: var(--gold);
+        background: transparent;
+        border: none;
+        text-align: center;
+        width: 50px;
+        padding: 0;
+
+        &:focus { outline: none; }
+      }
+    }
+  }
+
+  // 직업/신군/배경/관계/예언
+  .header-chardata {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+
+    .chardata-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5px 10px;
+
+      &--full {
+        grid-column: 1 / -1;
+      }
+
+      .chardata-icon {
+        color: var(--gold);
+        font-size: 11px;
+        width: 15px;
+        text-align: center;
+        flex: none;
+      }
+
+      .chardata-key {
+        font-size: 10px;
+        letter-spacing: .08em;
+        color: var(--muted);
+        flex: none;
+        width: 28px;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        flex: 1;
+        font-size: 13px;
+        color: var(--text);
+        background: transparent;
+        border: none;
+        padding: 0;
+        min-width: 0;
+
+        &:focus { outline: none; }
+
+        &::placeholder { color: var(--muted); opacity: .6; font-style: italic; }
+      }
+
+      // 직업 체크박스 + 라벨 (pathos)
+      input.pathos {
+        display: none;
+      }
+
+      label.pathos {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: var(--panel2);
+        cursor: pointer;
+        flex: none;
+        display: inline-block;
+
+        &.pathos-on {
+          background: var(--gold);
+          border-color: var(--gold);
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. 구분선
+// ---------------------------------------------------------------------------
+.sheet.actor .sheet-divider {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 2px 24px 12px;
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+
+    &--left  { background: linear-gradient(90deg, transparent, var(--line)); }
+    &--right { background: linear-gradient(90deg, var(--line), transparent); }
+  }
+
+  .divider-gem  { color: var(--gold); font-size: 9px;  opacity: .85; }
+  .divider-drop { color: var(--gold); font-size: 11px; opacity: .95; }
+}
+
+// ---------------------------------------------------------------------------
+// 5. BODY 3열 레이아웃
+// ---------------------------------------------------------------------------
+.sheet.actor .sheet-body-columns {
+  display: flex;
+  border-top: 1px solid var(--line);
+}
+
+// ---------------------------------------------------------------------------
+// 6. 능력치 열
+// ---------------------------------------------------------------------------
+.sheet.actor .col-ability {
+  width: 170px;
+  flex: none;
+  border-right: 1px solid var(--line);
+  padding: 13px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  .ability-col-header {
+    display: grid;
+    grid-template-columns: 1fr 32px 36px;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 1px;
+
+    .ability-col-title {
+      font-size: 10px;
+      letter-spacing: .16em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      i { font-size: 9px; color: var(--gold); }
+    }
+
+    .ability-col-sub {
+      font-size: 8px;
+      letter-spacing: .04em;
+      color: var(--muted);
+      text-align: center;
+    }
+  }
+
+  .abilities {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .ability-row {
+    display: grid;
+    grid-template-columns: 1fr 32px 36px;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(180deg, var(--panel2), var(--panel));
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 5px 7px;
+
+    .ability-label {
+      font-size: 12px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color .15s;
+
+      &:hover { color: var(--gold); }
+    }
+
+    .ability-rank,
+    .ability-mod {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      select {
+        width: 100%;
+        text-align: center;
+        font-family: $font-display;
+        font-size: 15px;
+        color: var(--gold);
+        background: var(--panel2);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 3px 2px;
+        cursor: pointer;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+    }
+
+    .ability-rank select {
+      font-size: 19px;
+      padding: 3px 0;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. 중앙 열
+// ---------------------------------------------------------------------------
+.sheet.actor .col-center {
+  flex: 1;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+
+  // 속성 인장
+  .attribute-seal {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.1), transparent 62%), var(--seal);
+    box-shadow: inset 0 0 0 1.5px var(--gold), 0 12px 28px -12px rgba(0,0,0,.55);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .seal-ring {
+      position: absolute;
+      inset: 0;
+      color: var(--gold);
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .seal-sub {
+      font-size: 9.5px;
+      letter-spacing: .24em;
+      color: var(--gold);
+      opacity: .85;
+      z-index: 1;
+    }
+
+    .seal-char {
+      font-family: $font-title;
+      font-size: 40px;
+      line-height: 1;
+      color: var(--sealtx);
+      z-index: 1;
+      -webkit-text-stroke: 3.5px var(--seal);
+      paint-order: stroke fill;
+      text-shadow: 0 0 6px var(--seal);
+    }
+  }
+
+  // 목표치 / 생명력 / 초기치 행
+  .center-stats {
+    display: flex;
+    gap: 7px;
+    width: 100%;
+
+    .center-stat-box {
+      flex: 1;
+      text-align: center;
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 4px;
+
+      &--wide { flex: 1.5; }
+
+      .center-stat-label {
+        font-size: 9.5px;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        margin-bottom: 2px;
+
+        i { font-size: 8px; color: var(--gold); }
+      }
+
+      .center-stat-val,
+      input.center-stat-val {
+        font-family: $font-display;
+        font-size: 23px;
+        color: var(--text);
+        background: transparent;
+        border: none;
+        text-align: center;
+        width: 100%;
+        padding: 0;
+        line-height: 1.1;
+
+        &:focus { outline: none; }
+      }
+
+      // 숫자 표시(span용)
+      div.center-stat-val {
+        font-family: $font-display;
+        font-size: 23px;
+        color: var(--text);
+        line-height: 1.1;
+      }
+
+      .health-inputs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+
+        input.center-stat-val { width: 44px; }
+        input.center-stat-val--max { color: var(--muted); }
+
+        .health-sep {
+          font-family: $font-display;
+          font-size: 16px;
+          color: var(--muted);
+        }
+      }
+    }
+  }
+
+  // 활력 행
+  .vitality-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 5px 10px;
+
+    .vitality-label {
+      font-size: 10px;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+
+    .vitality-roll {
+      color: var(--gold);
+      cursor: pointer;
+      font-size: 13px;
+      transition: opacity .15s;
+
+      &:hover { opacity: .7; }
+    }
+
+    .vitality-input {
+      width: 44px;
+      text-align: center;
+      font-size: 13px;
+      padding: 2px 4px;
+    }
+
+    .init-health-label {
+      font-size: 10px;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    .init-health-val {
+      font-family: $font-display;
+      font-size: 15px;
+      color: var(--text);
+    }
+  }
+
+  // 상태이상 그리드
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 9px;
+
+      .status-chk { display: none; }
+
+      .status-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex: none;
+        cursor: pointer;
+        transition: opacity .15s;
+
+        &--wk { background: var(--wk); border: 1px solid var(--line); }
+        &--wr { background: var(--wr); }
+        &--wb { background: var(--wb); }
+        &--wg { background: var(--wg); }
+        &--ww { background: var(--ww); border: 1px solid var(--line); }
+        &--wy { background: var(--wy); }
+      }
+
+      .status-name {
+        font-size: 11.5px;
+        cursor: pointer;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      // 수치 입력 (겁/중상)
+      .status-level {
+        width: 32px;
+        font-size: 11px;
+        text-align: center;
+        padding: 1px 3px;
+        border-radius: 4px;
+        color: var(--muted);
+
+        &:focus { outline: none; color: var(--text); }
+      }
+
+      // 체크된 상태 강조
+      &.is-active .status-dot { opacity: 1; box-shadow: 0 0 0 2px var(--line); }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8. 메모 열
+// ---------------------------------------------------------------------------
+.sheet.actor .col-memo {
+  width: 182px;
+  flex: none;
+  border-left: 1px solid var(--line);
+  padding: 13px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  .memo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .memo-title {
+      font-size: 10px;
+      letter-spacing: .16em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      i { font-size: 9px; color: var(--gold); }
+    }
+
+    .memo-deco {
+      color: var(--gold);
+      font-size: 9px;
+      opacity: .7;
+    }
+  }
+
+  .memo-body {
+    flex: 1;
+    min-height: 150px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 9px;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--muted);
+    resize: none;
+    font-family: $font-body;
+
+    &:focus {
+      outline: none;
+      border-color: var(--gold);
+      color: var(--text);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 9. 탭 바
+// ---------------------------------------------------------------------------
+.sheet.actor {
+  .sheet-tabs.tabs {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 16px;
+    border-top: 1px solid var(--line);
+
+    .item[data-tab] {
+      display: inline-block;
+      padding: 10px 15px;
+      font-size: 13px;
+      font-family: $font-body;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+      text-decoration: none;
+
+      &:hover { color: var(--text); }
+      &.active {
+        color: var(--text);
+        border-bottom-color: var(--gold);
+      }
+    }
+  }
+
+  // 탭 패널 공통 패딩
+  .sheet-body {
+    > .tab {
+      padding: 14px 16px 20px;
+    }
+  }
+}
