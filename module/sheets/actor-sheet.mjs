@@ -1,4 +1,5 @@
 import { onManageActiveEffect, prepareActiveEffectCategories } from "../helpers/effects.mjs";
+import { postRoll } from "../chat/chat.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -217,13 +218,7 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     }
     if (dataset.roll) {
       const label = dataset.label ? `[ability] ${dataset.label}` : "";
-      const roll = new Roll(dataset.roll, this.document.getRollData());
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.document }),
-        flavor: label,
-        rollMode: game.settings.get("core", "rollMode"),
-      });
-      return roll;
+      return postRoll({ actor: this.document, formula: dataset.roll, flavor: label, rollData: this.document.getRollData() });
     }
   }
 
@@ -232,35 +227,16 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     if (dataset.rolltype !== "item") return;
     const itemId = target.closest(".item")?.dataset.itemId;
     const item = this.document.items.get(itemId);
-    if (!item) return; // null guard (기존 버그 수정)
-    const roll = new Roll(dataset.roll, this.document.getRollData());
-    roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.document }),
-      flavor: item.name,
-      rollMode: game.settings.get("core", "rollMode"),
-    });
-    return roll;
+    if (!item) return; // null guard
+    return postRoll({ actor: this.document, formula: dataset.roll, flavor: item.name, rollData: this.document.getRollData() });
   }
 
   static #onAblRoll(event, target) {
     this.document.rollAmadeAbl(target.dataset.ability, target.dataset.label, { event });
   }
 
-  static async #onVitalityRoll(event, target) {
-    const label = target.dataset.label ?? "";
-    const roll = new Roll(target.dataset.roll, this.document.getRollData());
-    await roll.evaluate();
-    await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.document }),
-      flavor: label,
-      rollMode: game.settings.get("core", "rollMode"),
-    });
-    const initHealth = this.document.system.initHealth ?? 0;
-    await this.document.update({
-      "system.vitality": roll.total,
-      "system.health.max": initHealth + roll.total,
-    });
-    return roll;
+  static #onVitalityRoll(event, target) {
+    return this.document.rollVitality(target.dataset.roll, target.dataset.label ?? "");
   }
 
   static #onItemDataCard(event, target) {
@@ -286,13 +262,7 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     const item = this.document.items.get(itemId);
     const formula = target.previousElementSibling?.value;
     if (!formula) return;
-    const roll = new Roll(formula, this.document.getRollData());
-    roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.document }),
-      flavor: item?.name,
-      rollMode: game.settings.get("core", "rollMode"),
-    });
-    return roll;
+    return postRoll({ actor: this.document, formula, flavor: item?.name, rollData: this.document.getRollData() });
   }
 
   static #onItemChk(event, target) {

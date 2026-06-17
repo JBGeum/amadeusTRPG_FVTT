@@ -1,5 +1,5 @@
 import {amadeRoll} from "../dice/roll.mjs";
-import { postCard } from "../chat/chat.mjs";
+import { postCard, postRoll } from "../chat/chat.mjs";
 
 /**
  * Extend the base Actor document.
@@ -63,6 +63,17 @@ export class AmadeusActor extends Actor {
       template: "systems/amadeus/templates/chatcard/roll-amadeabl.html",
       data: templateData,
     });
+  }
+
+  /** 활력 굴림: 결과를 챗에 출력하고 vitality / health.max(=initHealth+활력)를 갱신한다. */
+  async rollVitality(formula, label = "") {
+    const roll = await postRoll({ actor: this, formula, flavor: label, rollData: this.getRollData() });
+    const initHealth = this.system.initHealth ?? 0;
+    await this.update({
+      "system.vitality": roll.total,
+      "system.health.max": initHealth + roll.total,
+    });
+    return roll;
   }
 
 }
