@@ -1,5 +1,5 @@
 import {amadeRoll} from "../dice/roll.mjs";
-import { postCard } from "../chat/chat.mjs";
+import { postCard, postRoll } from "../chat/chat.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -35,38 +35,23 @@ export class AmadeusItem extends Item {
    * @private
    */
   async roll() {
-    const item = this;
+    const label = `[${this.type}] ${this.name}`;
 
-    // Initialize chat data.
-    const speaker = ChatMessage.getSpeaker({actor: this.actor});
-    const rollMode = game.settings.get('core', 'rollMode');
-    const label = `[${item.type}] ${item.name}`;
-
-    // If there's no roll data, send a chat message.
+    // 수식이 없으면 설명을 카드로 출력하고, 있으면 굴림 결과를 출력한다.
     if (!this.system.formula) {
-      ChatMessage.create({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-        content: item.system.description ?? ''
-      });
-    }
-    // Otherwise, create a roll and send a chat message from it.
-    else {
-      // Retrieve roll data.
-      const rollData = this.getRollData();
-
-      // Invoke the roll and submit it to chat.
-      const roll = new Roll(rollData.item.formula, rollData);
-      // If you need to store the value first, uncomment the next line.
-      // let result = await roll.roll({async: true});
-      roll.toMessage({
-        speaker: speaker,
-        rollMode: rollMode,
+      return postCard({
+        actor: this.actor,
+        template: "systems/amadeus/templates/chatcard/data-description.html",
+        data: { name: this.name, description: this.system.description ?? "" },
         flavor: label,
       });
-      return roll;
     }
+    return postRoll({
+      actor: this.actor,
+      formula: this.system.formula,
+      flavor: label,
+      rollData: this.getRollData(),
+    });
   }
 
 

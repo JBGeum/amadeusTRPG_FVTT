@@ -19,8 +19,8 @@ import { resolveDie } from "../dice/resolution.mjs";
     "systems/amadeus/templates/chatcard/roll-amadeabl.html",
     "systems/amadeus/templates/chatcard/roll-gift.html",
     "systems/amadeus/templates/chatcard/data-gift.html",
-    "systems/amadeus/templates/chatcard/roll-item.html",
     "systems/amadeus/templates/chatcard/data-item.html",
+    "systems/amadeus/templates/chatcard/data-description.html",
 
   ]);
 };
