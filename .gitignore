@@ -256,6 +256,9 @@ templates/item/item-item-sheet-orig.html
 /handlebars/
 /fordev/
 
+# Design mockups (reference only, not tracked)
+docs/design/
+
 # Vite build output
 dist/
 
