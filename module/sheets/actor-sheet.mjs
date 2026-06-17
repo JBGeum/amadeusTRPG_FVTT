@@ -89,7 +89,7 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     const gifts = [], background = [], parent = [], inventory = [], memory = [], treasure = [];
     for (const i of this.document.items) {
       const img = i.img || CONST.DEFAULT_TOKEN;
-      const entry = { id: i.id, name: i.name, img, type: i.type, system: i.system, _stats: i._stats };
+      const entry = { _id: i.id, name: i.name, img, type: i.type, system: i.system, _stats: i._stats };
       if (i.type === "gift") gifts.push(entry);
       else if (i.type === "background") background.push(entry);
       else if (i.type === "parent") parent.push(entry);
@@ -217,11 +217,12 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
 
   static #onDamageRoll(event, target) {
     const dataset = target.dataset;
-    if (dataset.rolltype !== "item") return;
-    const itemId = target.closest(".item")?.dataset.itemId;
-    const item = this.document.items.get(itemId);
-    if (!item) return; // null guard
-    return postRoll({ actor: this.document, formula: dataset.roll, flavor: item.name, rollData: this.document.getRollData() });
+    if (dataset.rolltype !== "item" || !dataset.roll) return;
+    const li = target.closest(".item");
+    const itemId = li?.dataset.itemId;
+    // 식량(food)은 액터 소유가 아닌 월드 아이템을 참조한다(itemDataCard와 동일 처리).
+    const item = li?.dataset.special === "food" ? game.items.get(itemId) : this.document.items.get(itemId);
+    return postRoll({ actor: this.document, formula: dataset.roll, flavor: item?.name, rollData: this.document.getRollData() });
   }
 
   static #onAblRoll(event, target) {
