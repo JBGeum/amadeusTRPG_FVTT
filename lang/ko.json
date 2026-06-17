@@ -1,5 +1,25 @@
 {
   "AMADEUS": {
+    "initiative": {
+      "panelTitle": "플롯 이니셔티브",
+      "promptTitle": "플롯",
+      "promptHint": "행동 순서를 위한 주사위 숫자를 비밀리에 고르세요 (낮을수록 먼저)",
+      "start": "플롯 시작",
+      "reveal": "공개",
+      "reset": "초기화",
+      "rerequest": "재요청",
+      "addNpc": "NPC 추가",
+      "submitted": "제출됨",
+      "pending": "대기",
+      "plotDone": "플롯 완료",
+      "order": "행동 순서",
+      "notSubmitted": "미제출",
+      "pc": "PC",
+      "npc": "NPC",
+      "noCharacter": "배정된 캐릭터가 없습니다.",
+      "noGm": "GM이 접속해 있지 않습니다.",
+      "noParticipants": "참가자가 없습니다."
+    },
     "ability" : {
       "warfare" : "무용",
       "technique": "기술",
