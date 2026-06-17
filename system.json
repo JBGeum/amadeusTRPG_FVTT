@@ -13,6 +13,7 @@
   "esmodules": ["amadeus.mjs"],
   "styles": ["amadeus.css"],
   "scripts": [],
+  "socket": true,
   "packs": [
     {
       "name": "gifts",
