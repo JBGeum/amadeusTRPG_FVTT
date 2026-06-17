@@ -1,4 +1,5 @@
-import { abilitiesField, RANK_VAL, MOD_VAL, HEALTH_BY_RANK, HEALTH_BY_MOD, MONEY_BY_RANK, MONEY_BY_MOD } from "./_fields.mjs";
+import { abilitiesField } from "./_fields.mjs";
+import { rankVal, modVal, initHealth, initMoney } from "../dice/resolution.mjs";
 
 const fields = foundry.data.fields;
 
@@ -73,17 +74,11 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
   prepareDerivedData() {
     // 랭크/수정치 → 숫자값
     for (const ability of Object.values(this.ability)) {
-      ability.rankVal = RANK_VAL[ability.rank] ?? 0;
-      ability.modVal = MOD_VAL[ability.mod] ?? 0;
+      ability.rankVal = rankVal(ability.rank);
+      ability.modVal = modVal(ability.mod);
     }
-    // 생명력 초기치: warfare + spirit 의 (랭크+수정치) 합
-    const initHealth =
-      (HEALTH_BY_RANK[this.ability.warfare.rank] ?? 0) + (HEALTH_BY_MOD[this.ability.warfare.mod] ?? 0) +
-      (HEALTH_BY_RANK[this.ability.spirit.rank] ?? 0) + (HEALTH_BY_MOD[this.ability.spirit.mod] ?? 0);
-    this.initHealth = initHealth;
-    // 소지금 초기치: love + mundane 의 (랭크+수정치) 합
-    this.initMoney =
-      (MONEY_BY_RANK[this.ability.love.rank] ?? 0) + (MONEY_BY_MOD[this.ability.love.mod] ?? 0) +
-      (MONEY_BY_RANK[this.ability.mundane.rank] ?? 0) + (MONEY_BY_MOD[this.ability.mundane.mod] ?? 0);
+    // 생명력/소지금 초기치
+    this.initHealth = initHealth(this.ability);
+    this.initMoney = initMoney(this.ability);
   }
 }
