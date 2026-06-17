@@ -1,5 +1,5 @@
 import { onManageActiveEffect, prepareActiveEffectCategories } from "../helpers/effects.mjs";
-import { postRoll } from "../chat/chat.mjs";
+import { postCard, postRoll } from "../chat/chat.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -219,10 +219,11 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     const dataset = target.dataset;
     if (dataset.rolltype !== "item" || !dataset.roll) return;
     const li = target.closest(".item");
-    const itemId = li?.dataset.itemId;
-    // 식량(food)은 액터 소유가 아닌 월드 아이템을 참조한다(itemDataCard와 동일 처리).
-    const item = li?.dataset.special === "food" ? game.items.get(itemId) : this.document.items.get(itemId);
-    return postRoll({ actor: this.document, formula: dataset.roll, flavor: item?.name, rollData: this.document.getRollData() });
+    // 식량(food)은 자립형 기본 아이템: i18n 이름을 flavor로 쓴다(월드 아이템 의존 없음).
+    const flavor = li?.dataset.special === "food"
+      ? game.i18n.localize("AMADEUS.item.food")
+      : this.document.items.get(li?.dataset.itemId)?.name;
+    return postRoll({ actor: this.document, formula: dataset.roll, flavor, rollData: this.document.getRollData() });
   }
 
   static #onAblRoll(event, target) {
@@ -235,11 +236,19 @@ export class AmadeusActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
 
   static #onItemDataCard(event, target) {
     const li = target.closest(".item");
-    const itemId = li?.dataset.itemId;
+    // 식량(food)은 자립형 기본 아이템: i18n 상수로 카드를 직접 렌더(월드 아이템 의존 없음).
     if (li?.dataset.special === "food") {
-      return game.items.get(itemId)?.getItemDataCard();
+      return postCard({
+        actor: this.document,
+        template: "systems/amadeus/templates/chatcard/data-item.html",
+        data: {
+          name: game.i18n.localize("AMADEUS.item.food"),
+          power: "1D6",
+          effect: game.i18n.localize("AMADEUS.item.foodeffect"),
+        },
+      });
     }
-    return this.document.items.get(itemId)?.getItemDataCard();
+    return this.document.items.get(li?.dataset.itemId)?.getItemDataCard();
   }
 
   static #onItemRollCard(event, target) {
