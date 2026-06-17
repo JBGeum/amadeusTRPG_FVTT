@@ -17,6 +17,7 @@ import { NpcData } from "./data/actor-npc.mjs";
 import { GiftData, BackgroundData, ParentData, WeaponData, GearData, MemoryData, TreasureData } from "./data/item-data.mjs";
 import { registerPlotSocket } from "./initiative/socket.mjs";
 import { PlotPrompt } from "./initiative/plot-prompt.mjs";
+import { PlotGMPanel } from "./initiative/gm-panel.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -79,6 +80,10 @@ Hooks.once("ready", async function() {
   Hooks.on("amadeus.plotEnd", () => {
     if (!game.user.isGM) PlotPrompt.closeAll();
   });
+  game.amadeus.plotInitiative = () => {
+    if (!game.user.isGM) return ui.notifications.warn("GM only");
+    new PlotGMPanel().render(true);
+  };
 });
 
 /* -------------------------------------------- */
@@ -140,3 +145,26 @@ function rollItemMacro(itemUuid) {
     item.roll();
   });
 }
+
+/* -------------------------------------------- */
+/*  Scene Controls (GM: 플롯 이니셔티브)         */
+/* -------------------------------------------- */
+Hooks.on("getSceneControlButtons", (controls) => {
+  if (!game.user.isGM) return;
+  controls.amadeusPlot = {
+    name: "amadeusPlot",
+    title: "AMADEUS.initiative.panelTitle",
+    icon: "fas fa-dice",
+    layer: "tokens",
+    tools: {
+      open: {
+        name: "open",
+        title: "AMADEUS.initiative.panelTitle",
+        icon: "fas fa-dice",
+        button: true,
+        onClick: () => game.amadeus.plotInitiative(),
+      },
+    },
+    activeTool: "open",
+  };
+});
