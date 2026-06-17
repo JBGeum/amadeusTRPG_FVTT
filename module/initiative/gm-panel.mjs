@@ -8,7 +8,7 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 export class PlotGMPanel extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
     id: "amadeus-plot-gm-panel",
-    classes: ["amadeus", "plot-gm-panel-app"],
+    classes: ["amadeus", "amadeus-dlg", "plot-gm-panel-app"],
     tag: "div",
     position: { width: 460, height: "auto" },
     window: { title: "AMADEUS.initiative.panelTitle" },
@@ -35,6 +35,12 @@ export class PlotGMPanel extends HandlebarsApplicationMixin(ApplicationV2) {
   async _onClose(options) {
     Hooks.off("amadeus.plotUpdate", this._onUpdate);
     return super._onClose(options);
+  }
+
+  /** @override data-theme 주입 */
+  _onRender(context, options) {
+    super._onRender(context, options);
+    this.element.dataset.theme = game.settings.get("amadeus", "theme");
   }
 
   async _prepareContext() {

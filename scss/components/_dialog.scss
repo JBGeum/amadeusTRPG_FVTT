@@ -1,1 +1,412 @@
-// 이니셔티브 다이얼로그 스타일 — Task 5에서 작성
+// ===== 이니셔티브 다이얼로그 스타일 (Task 5) =====
+// Scope: .amadeus-dlg (applied via DEFAULT_OPTIONS.classes)
+// Tokens: --bg/--panel/--panel2/--text/--muted/--line/--gold/--bar (from _tokens.scss)
+// Die-face palette: --d1..--d6 (from :root in _tokens.scss)
+
+.amadeus-dlg {
+  // ── Foundry window frame override ──
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 22px 50px -24px rgba(0, 0, 0, 0.6);
+  font-family: 'Noto Serif KR', serif;
+  color: var(--text);
+
+  // Hide Foundry's default header (ApplicationV2 renders its own .window-header)
+  .window-header {
+    display: none;
+  }
+
+  // The ApplicationV2 content wrapper
+  .window-content {
+    padding: 0;
+    background: transparent;
+    overflow: visible;
+  }
+
+  // ── Top accent bar ──
+  .dlg-top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.8;
+  }
+
+  // ── Header bar ──
+  .dlg-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 14px;
+    background: var(--bar);
+    border-bottom: 1px solid var(--line);
+
+    .dlg-header-icon {
+      color: var(--gold);
+      font-size: 13px;
+    }
+
+    .dlg-header-title {
+      flex: 1;
+      font-family: 'Gowun Batang', serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+    }
+  }
+
+  // ── Body ──
+  .dlg-body {
+    padding: 14px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  // ── Generic button ──
+  .dlg-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--panel2);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 7px 13px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 12.5px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.12s;
+
+    &:hover {
+      background: var(--panel);
+    }
+
+    .dlg-btn-icon {
+      font-size: 11px;
+      color: var(--gold);
+    }
+
+    // Primary variant (플롯 시작)
+    &.dlg-btn--primary {
+      align-self: flex-start;
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border-color: var(--gold);
+      border-radius: 9px;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.6);
+
+      &:hover {
+        filter: brightness(1.08);
+      }
+    }
+  }
+
+  // ── Controls row (재요청/공개/초기화) ──
+  .dlg-controls {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+
+  // ── Divider (used in 시작 전 state) ──
+  .dlg-divider {
+    display: flex;
+    align-items: center;
+    gap: 0;
+
+    .dlg-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line));
+
+      &.dlg-divider-line--right {
+        background: linear-gradient(90deg, var(--line), transparent);
+      }
+    }
+
+    .dlg-divider-icon {
+      color: var(--gold);
+      font-size: 10px;
+      opacity: 0.9;
+      padding: 0 6px;
+    }
+  }
+
+  // ── Participant roster ──
+  .dlg-roster {
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    overflow: hidden;
+  }
+
+  .dlg-roster-header,
+  .dlg-roster-row {
+    display: grid;
+    grid-template-columns: 1fr 70px 64px 34px;
+    align-items: center;
+  }
+
+  .dlg-roster-header {
+    background: var(--bar);
+    border-bottom: 1px solid var(--line);
+
+    .dlg-col-name,
+    .dlg-col-type,
+    .dlg-col-plot {
+      padding: 7px 4px;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .dlg-col-name {
+      padding: 7px 12px;
+      text-align: left;
+    }
+  }
+
+  .dlg-roster-row {
+    border-bottom: 1px solid var(--line);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .dlg-col-name {
+      padding: 9px 12px;
+      font-size: 13px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      .dlg-name-icon {
+        font-size: 11px;
+        color: var(--gold);
+      }
+    }
+
+    .dlg-col-type {
+      padding: 9px 4px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .dlg-col-plot {
+      padding: 9px 4px;
+      text-align: center;
+    }
+
+    .dlg-col-remove {
+      text-align: center;
+
+      .dlg-remove-btn {
+        color: var(--muted);
+        font-size: 13px;
+        cursor: pointer;
+
+        &:hover {
+          color: var(--text);
+        }
+      }
+    }
+  }
+
+  // ── Plot value chip (die-face coloured) ──
+  .dlg-plot-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+    &.dlg-plot-chip--d1 { background: var(--d1); }
+    &.dlg-plot-chip--d2 { background: var(--d2); }
+    &.dlg-plot-chip--d3 { background: var(--d3); }
+    &.dlg-plot-chip--d4 { background: var(--d4); }
+    &.dlg-plot-chip--d5 { background: var(--d5); color: #34301f; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
+    &.dlg-plot-chip--d6 { background: var(--d6); }
+  }
+
+  // ── Pending placeholder ──
+  .dlg-plot-pending {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  // ── NPC inline die selector ──
+  .plot-npc-dice {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .plot-npc-die {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--muted);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+
+    &.selected,
+    &:hover {
+      border-color: var(--gold);
+      color: var(--text);
+    }
+  }
+
+  // ── NPC add row ──
+  .dlg-addnpc {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dlg-select-wrap {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .dlg-select {
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 32px 9px 12px;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .dlg-select-caret {
+      position: absolute;
+      right: 12px;
+      pointer-events: none;
+      color: var(--muted);
+      font-size: 10px;
+    }
+  }
+
+  // ── Order list (revealed) ──
+  .dlg-order {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .dlg-order-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 7px 11px;
+
+    .dlg-order-rank {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--gold);
+      width: 18px;
+      text-align: center;
+    }
+
+    .dlg-order-names {
+      font-size: 13px;
+      color: var(--text);
+    }
+  }
+
+  // ── Player prompt ──
+  .dlg-hint {
+    margin: 0 2px 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .dlg-hint-sub {
+    margin: 0 2px 0;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .dlg-hint-icon {
+      font-size: 10px;
+      color: var(--gold);
+    }
+  }
+
+  // ── Die button grid (1–6) ──
+  .dlg-die-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+  }
+
+  .dlg-die-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    border-radius: 9px;
+    background: linear-gradient(180deg, var(--panel2), var(--panel));
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s;
+
+    &:hover {
+      border-color: var(--gold);
+    }
+
+    &.selected {
+      border-color: var(--gold);
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+  }
+
+  // ── Submitted status line ──
+  .dlg-status {
+    margin: 0 2px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+}

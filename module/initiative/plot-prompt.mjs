@@ -7,7 +7,7 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 export class PlotPrompt extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
     id: "amadeus-plot-prompt",
-    classes: ["amadeus", "plot-prompt-app"],
+    classes: ["amadeus", "amadeus-dlg", "plot-prompt-app"],
     tag: "div",
     position: { width: 320, height: "auto" },
     window: { title: "AMADEUS.initiative.promptTitle" },
@@ -24,6 +24,12 @@ export class PlotPrompt extends HandlebarsApplicationMixin(ApplicationV2) {
     this.actor = options.actor;
     this.selected = null;
     this.posted = false;
+  }
+
+  /** @override data-theme 주입 */
+  _onRender(context, options) {
+    super._onRender(context, options);
+    this.element.dataset.theme = game.settings.get("amadeus", "theme");
   }
 
   async _prepareContext() {

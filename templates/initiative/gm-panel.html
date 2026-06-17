@@ -1,21 +1,40 @@
-<div class="plot-gm-panel">
-  <div class="plot-gm-controls">
-    {{#if active}}
-      <button type="button" data-action="rerequest">{{localize "AMADEUS.initiative.rerequest"}}</button>
-      <button type="button" data-action="reveal">{{localize "AMADEUS.initiative.reveal"}}</button>
-      <button type="button" data-action="reset">{{localize "AMADEUS.initiative.reset"}}</button>
-    {{else}}
-      <button type="button" data-action="start">{{localize "AMADEUS.initiative.start"}}</button>
-    {{/if}}
-  </div>
+<div class="dlg-top-bar"></div>
+<div class="dlg-header">
+  <i class="fa-solid fa-hourglass-half dlg-header-icon"></i>
+  <span class="dlg-header-title">{{localize "AMADEUS.initiative.panelTitle"}}</span>
+</div>
 
-  <table class="plot-gm-roster">
-    <tbody>
+<div class="dlg-body">
+  {{#if active}}
+    <!-- 진행 중 state -->
+    <div class="dlg-controls">
+      <button type="button" class="dlg-btn" data-action="rerequest">
+        <i class="fa-solid fa-rotate-right dlg-btn-icon"></i>{{localize "AMADEUS.initiative.rerequest"}}
+      </button>
+      <button type="button" class="dlg-btn" data-action="reveal">
+        <i class="fa-solid fa-eye dlg-btn-icon"></i>{{localize "AMADEUS.initiative.reveal"}}
+      </button>
+      <button type="button" class="dlg-btn" data-action="reset">
+        <i class="fa-solid fa-arrows-rotate dlg-btn-icon"></i>{{localize "AMADEUS.initiative.reset"}}
+      </button>
+    </div>
+
+    <div class="dlg-roster">
+      <div class="dlg-roster-header">
+        <span class="dlg-col-name">{{localize "AMADEUS.initiative.colName"}}</span>
+        <span class="dlg-col-type">{{localize "AMADEUS.initiative.colType"}}</span>
+        <span class="dlg-col-plot">{{localize "AMADEUS.initiative.colPlot"}}</span>
+        <span class="dlg-col-remove"></span>
+      </div>
       {{#each participants as |p|}}
-      <tr data-actor-id="{{p.actorId}}">
-        <td class="plot-p-name">{{p.name}}</td>
-        <td class="plot-p-type">{{#if p.isNPC}}{{localize "AMADEUS.initiative.npc"}}{{else}}{{localize "AMADEUS.initiative.pc"}}{{/if}}</td>
-        <td class="plot-p-value">
+      <div class="dlg-roster-row" data-actor-id="{{p.actorId}}">
+        <span class="dlg-col-name">
+          <i class="fa-solid {{#if p.isNPC}}fa-skull{{else}}fa-user{{/if}} dlg-name-icon"></i>{{p.name}}
+        </span>
+        <span class="dlg-col-type">
+          {{#if p.isNPC}}{{localize "AMADEUS.initiative.npc"}}{{else}}{{localize "AMADEUS.initiative.pc"}}{{/if}}
+        </span>
+        <span class="dlg-col-plot">
           {{#if p.isNPC}}
             <div class="plot-npc-dice">
               {{#each ../dice as |n|}}
@@ -23,27 +42,56 @@
               {{/each}}
             </div>
           {{else}}
-            {{#if p.submitted}}<span class="plot-p-submitted">{{plotLabel p.value}}</span>{{else}}<span class="plot-p-pending">{{localize "AMADEUS.initiative.pending"}}</span>{{/if}}
+            {{#if p.submitted}}
+              <span class="dlg-plot-chip dlg-plot-chip--d{{p.value}} lnum">{{plotLabel p.value}}</span>
+            {{else}}
+              <span class="dlg-plot-pending">{{localize "AMADEUS.initiative.pending"}}</span>
+            {{/if}}
           {{/if}}
-        </td>
-        <td class="plot-p-remove"><a data-action="removeParticipant" data-actor-id="{{p.actorId}}"><i class="fas fa-times"></i></a></td>
-      </tr>
+        </span>
+        <span class="dlg-col-remove">
+          <a class="dlg-remove-btn" data-action="removeParticipant" data-actor-id="{{p.actorId}}">
+            <i class="fas fa-times"></i>
+          </a>
+        </span>
+      </div>
       {{/each}}
-    </tbody>
-  </table>
+    </div>
 
-  <div class="plot-gm-addnpc">
-    <select class="plot-npc-select">
-      <option value="">{{localize "AMADEUS.initiative.addNpc"}}</option>
-      {{#each npcChoices as |npc|}}<option value="{{npc.id}}">{{npc.name}}</option>{{/each}}
-    </select>
-    <button type="button" data-action="addNpc">{{localize "AMADEUS.initiative.addNpc"}}</button>
+  {{else}}
+    <!-- 시작 전 state -->
+    <button type="button" class="dlg-btn dlg-btn--primary" data-action="start">
+      <i class="fa-solid fa-play dlg-btn-icon"></i>{{localize "AMADEUS.initiative.start"}}
+    </button>
+
+    <div class="dlg-divider">
+      <span class="dlg-divider-line"></span>
+      <i class="fa-solid fa-droplet dlg-divider-icon"></i>
+      <span class="dlg-divider-line dlg-divider-line--right"></span>
+    </div>
+  {{/if}}
+
+  <div class="plot-gm-addnpc dlg-addnpc">
+    <div class="dlg-select-wrap">
+      <select class="plot-npc-select dlg-select">
+        <option value="">{{localize "AMADEUS.initiative.addNpc"}}</option>
+        {{#each npcChoices as |npc|}}<option value="{{npc.id}}">{{npc.name}}</option>{{/each}}
+      </select>
+      <i class="fa-solid fa-chevron-down dlg-select-caret"></i>
+    </div>
+    <button type="button" class="dlg-btn" data-action="addNpc">
+      <i class="fa-solid fa-plus dlg-btn-icon"></i>{{localize "AMADEUS.initiative.addNpcBtn"}}
+    </button>
   </div>
 
   {{#if revealed}}
-  <ol class="plot-gm-order">
+  <ol class="plot-gm-order dlg-order">
     {{#each order as |slot|}}
-    <li><span class="plot-rank">{{slot.rank}}</span> <span class="plot-value">[{{plotLabel slot.value}}]</span> {{#each slot.members as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}</li>
+    <li class="dlg-order-row">
+      <span class="dlg-order-rank lnum">{{slot.rank}}</span>
+      <span class="dlg-plot-chip dlg-plot-chip--d{{slot.value}} lnum">{{plotLabel slot.value}}</span>
+      <span class="dlg-order-names">{{#each slot.members as |m|}}{{m.name}}{{#unless @last}}, {{/unless}}{{/each}}</span>
+    </li>
     {{/each}}
   </ol>
   {{/if}}

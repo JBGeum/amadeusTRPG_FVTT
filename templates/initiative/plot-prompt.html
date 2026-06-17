@@ -1,11 +1,22 @@
-<div class="plot-prompt">
-  <p class="plot-prompt-hint">{{localize "AMADEUS.initiative.promptHint"}}</p>
-  <div class="plot-dice">
+<div class="dlg-top-bar"></div>
+<div class="dlg-header">
+  <i class="fa-solid fa-dice-d6 dlg-header-icon"></i>
+  <span class="dlg-header-title">{{localize "AMADEUS.initiative.promptTitle"}}</span>
+</div>
+
+<div class="dlg-body">
+  <p class="dlg-hint">{{localize "AMADEUS.initiative.promptHint"}}</p>
+  <p class="dlg-hint-sub">
+    <i class="fa-solid fa-circle-info dlg-hint-icon"></i>{{localize "AMADEUS.initiative.promptSub"}}
+  </p>
+
+  <div class="plot-dice dlg-die-grid">
     {{#each dice as |d|}}
-    <button type="button" class="plot-die{{#if d.selected}} selected{{/if}}" data-action="pick" data-value="{{d.value}}">{{plotLabel d.value}}</button>
+    <button type="button" class="plot-die dlg-die-btn{{#if d.selected}} selected{{/if}}" data-action="pick" data-value="{{d.value}}">{{plotLabel d.value}}</button>
     {{/each}}
   </div>
+
   {{#if selected}}
-  <p class="plot-prompt-status">{{localize "AMADEUS.initiative.submitted"}}: {{plotLabel selected}}</p>
+  <p class="plot-prompt-status dlg-status">{{localize "AMADEUS.initiative.submitted"}}: {{plotLabel selected}}</p>
   {{/if}}
 </div>
