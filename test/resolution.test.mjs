@@ -116,6 +116,10 @@ describe("dieColor", () => {
     expect(dieColor(5)).toBe("white");
     expect(dieColor(6)).toBe("special");
   });
+  it("returns null for out-of-range values", () => {
+    expect(dieColor(0)).toBeNull();
+    expect(dieColor(7)).toBeNull();
+  });
 });
 
 describe("colorToFace", () => {

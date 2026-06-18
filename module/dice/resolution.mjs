@@ -92,6 +92,8 @@ export function autoJudgeIndex(diceset) {
 
 /**
  * 선택 결과 카드용 객체를 만든다.
+ * 전제: specialColor는 moodIndex가 가리키는 눈이 6일 때만 값을 가지며, moodIndex가 null인 자동 케이스에서는 null이다.
+ * 이 검증은 다이얼로그 확정 버튼이 보장하므로 여기서는 신뢰한다(호출부가 보장할 것).
  * @param {{values:number[], modVal:number, dc:number, judgeIndex:number, moodIndex:number|null, specialColor:string|null}} args
  * @returns {{judge:{value:number, outcome:string}, mood:null|{value:number, color:string, face:number, special:boolean}}}
  */
