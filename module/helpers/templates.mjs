@@ -1,4 +1,4 @@
-import { resolveDie } from "../dice/resolution.mjs";
+import { resolveDie, colorToFace } from "../dice/resolution.mjs";
 
 /**
  * Define a set of template paths to pre-load
@@ -59,6 +59,11 @@ export function registerHandlebarsHelpers(){
   Handlebars.registerHelper("outcomeLabel", function (outcome) {
     const label = { fumble: "펌블", special: "스페셜", success: "성공", fail: "실패" };
     return label[outcome] ?? "?";
+  });
+
+  // 색 키 → die-face 번호. 색 스와치가 .chat-die-chip--N 색을 재사용하기 위함.
+  Handlebars.registerHelper("colorFaceLit", function (color) {
+    return colorToFace(color);
   });
 
   Handlebars.registerHelper("formatModVal", function (modVal) {

@@ -1,0 +1,31 @@
+<div class="dlg-body mood-dialog-body">
+  <p class="dlg-hint">{{localize "AMADEUS.mood.hint"}}</p>
+
+  <div class="mood-die-list">
+    {{#each dice as |d|}}
+    <div class="mood-die-row">
+      <span class="chat-die-chip chat-die-chip--{{d.value}}">
+        <span class="chat-die-num lnum">{{d.value}}</span>
+      </span>
+      <span class="mood-die-outcome">{{successCheck d.value ../modVal ../dc}}</span>
+      <button type="button" class="mood-pick-btn{{#if d.isJudge}} selected{{/if}}" data-action="pickJudge" data-index="{{d.index}}">{{localize "AMADEUS.mood.judge"}}</button>
+      <button type="button" class="mood-pick-btn{{#if d.isMood}} selected{{/if}}" data-action="pickMood" data-index="{{d.index}}">{{localize "AMADEUS.mood.mood"}}</button>
+    </div>
+    {{/each}}
+  </div>
+
+  {{#if moodIsSpecial}}
+  <div class="mood-color-block">
+    <p class="dlg-hint-sub">{{localize "AMADEUS.mood.pickColor"}}</p>
+    <div class="mood-color-row">
+      {{#each colors as |c|}}
+      <button type="button" class="mood-color-btn chat-die-chip chat-die-chip--{{colorFaceLit c.key}}{{#if c.selected}} selected{{/if}}" data-action="pickColor" data-color="{{c.key}}" title="{{localize (concat "AMADEUS.color." c.key)}}"></button>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="mood-confirm-row">
+    <button type="button" class="dlg-btn mood-confirm" data-action="confirm" {{#unless canConfirm}}disabled{{/unless}}>{{localize "AMADEUS.mood.confirm"}}</button>
+  </div>
+</div>
