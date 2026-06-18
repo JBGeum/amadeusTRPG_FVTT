@@ -23,6 +23,8 @@ export class MoodDialog extends FixedWidthMixin(HandlebarsApplicationMixin(Appli
 
   static PARTS = { main: { template: "systems/amadeus/templates/dialog/mood-dialog.html" } };
 
+  static #current = null;
+
   constructor(options) {
     super(options);
     this.diceset = options.diceset;
@@ -116,10 +118,16 @@ export class MoodDialog extends FixedWidthMixin(HandlebarsApplicationMixin(Appli
     this.close();
   }
 
-  /** 다이얼로그를 열고 선택 결과를 Promise로 반환한다. */
+  /**
+   * 다이얼로그를 열고 선택 결과를 Promise로 반환한다.
+   * 직전 다이얼로그가 미확정 상태로 떠 있으면 강제로 닫아(=null resolve) 그 Promise를 해제한 뒤
+   * 새 다이얼로그를 연다. 같은 id 재렌더로 첫 Promise가 hang되는 것을 막는다(PlotPrompt와 동일 패턴).
+   */
   static async prompt(context) {
+    MoodDialog.#current?.close({ force: true });
     return new Promise((resolve) => {
       const dlg = new MoodDialog({ ...context, resolve });
+      MoodDialog.#current = dlg;
       dlg.render(true);
     });
   }
