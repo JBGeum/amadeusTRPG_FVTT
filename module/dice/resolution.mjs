@@ -66,3 +66,42 @@ export function initMoney(ability) {
     (MONEY_BY_MOD[ability.mundane.mod] ?? 0)
   );
 }
+
+const DIE_COLOR = { 1: "black", 2: "red", 3: "blue", 4: "green", 5: "white", 6: "special" };
+const COLOR_FACE = { black: 1, red: 2, blue: 3, green: 4, white: 5 };
+
+/** 주사위 눈 → 색 키. 6은 정식 색이 아니라 스페셜 표식. */
+export function dieColor(value) {
+  return DIE_COLOR[value] ?? null;
+}
+
+/** 색 키 → die-face 번호(1~5). 결과 카드의 색 스와치가 .chat-die-chip--N 색을 재사용하기 위함. */
+export function colorToFace(color) {
+  return COLOR_FACE[color] ?? 0;
+}
+
+/** buildDiceset 결과에서 사용 가능한(버려지지 않은) 주사위 수. 2 이상이면 무드 선택 다이얼로그. */
+export function usableCount(diceset) {
+  return diceset.filter((d) => !d.disabled).length;
+}
+
+/** 사용 가능 주사위가 1개뿐인 자동 케이스에서 그 인덱스. */
+export function autoJudgeIndex(diceset) {
+  return diceset.findIndex((d) => !d.disabled);
+}
+
+/**
+ * 선택 결과 카드용 객체를 만든다.
+ * @param {{values:number[], modVal:number, dc:number, judgeIndex:number, moodIndex:number|null, specialColor:string|null}} args
+ * @returns {{judge:{value:number, outcome:string}, mood:null|{value:number, color:string, face:number, special:boolean}}}
+ */
+export function buildMoodResult({ values, modVal, dc, judgeIndex, moodIndex, specialColor }) {
+  const judge = { value: values[judgeIndex], outcome: resolveDie(values[judgeIndex], modVal, dc) };
+  let mood = null;
+  if (moodIndex != null) {
+    const value = values[moodIndex];
+    const color = value === 6 ? specialColor : dieColor(value);
+    mood = { value, color, face: colorToFace(color), special: value === 6 };
+  }
+  return { judge, mood };
+}

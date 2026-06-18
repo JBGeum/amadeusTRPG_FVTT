@@ -7,6 +7,11 @@ import {
   initHealth,
   initMoney,
   buildDiceset,
+  dieColor,
+  colorToFace,
+  usableCount,
+  autoJudgeIndex,
+  buildMoodResult,
 } from "../module/dice/resolution.mjs";
 
 describe("diceCountForRank", () => {
@@ -99,5 +104,68 @@ describe("initHealth / initMoney", () => {
   it("sums love + mundane rank/mod for money", () => {
     // love C(3)+ ++(2) = 5 ; mundane D(2) + -(-1) = 1 ; total 6
     expect(initMoney(ability)).toBe(6);
+  });
+});
+
+describe("dieColor", () => {
+  it("maps die faces to colors, 6 is special", () => {
+    expect(dieColor(1)).toBe("black");
+    expect(dieColor(2)).toBe("red");
+    expect(dieColor(3)).toBe("blue");
+    expect(dieColor(4)).toBe("green");
+    expect(dieColor(5)).toBe("white");
+    expect(dieColor(6)).toBe("special");
+  });
+});
+
+describe("colorToFace", () => {
+  it("maps the five real colors to die-face numbers for swatch reuse", () => {
+    expect(colorToFace("black")).toBe(1);
+    expect(colorToFace("red")).toBe(2);
+    expect(colorToFace("blue")).toBe(3);
+    expect(colorToFace("green")).toBe(4);
+    expect(colorToFace("white")).toBe(5);
+  });
+  it("returns 0 for special/unknown", () => {
+    expect(colorToFace("special")).toBe(0);
+  });
+});
+
+describe("usableCount / autoJudgeIndex", () => {
+  it("counts non-disabled dice (D-rank drops the higher one)", () => {
+    expect(usableCount(buildDiceset([3, 5], "D"))).toBe(1); // 높은 5는 disabled
+    expect(usableCount(buildDiceset([3], "C"))).toBe(1);
+    expect(usableCount(buildDiceset([3, 5], "B"))).toBe(2);
+    expect(usableCount(buildDiceset([1, 2, 6], "A"))).toBe(3);
+  });
+  it("finds the single usable index for auto cases", () => {
+    expect(autoJudgeIndex(buildDiceset([3, 5], "D"))).toBe(0); // 낮은 3
+    expect(autoJudgeIndex(buildDiceset([6, 2], "D"))).toBe(1); // 낮은 2
+    expect(autoJudgeIndex(buildDiceset([4], "C"))).toBe(0);
+  });
+});
+
+describe("buildMoodResult", () => {
+  const base = { values: [4, 2, 6], modVal: 1, dc: 4 };
+  it("builds judge with outcome and a colored mood die", () => {
+    // judge = index0(4), mood = index1(2=red)
+    const r = buildMoodResult({ ...base, judgeIndex: 0, moodIndex: 1, specialColor: null });
+    expect(r.judge).toEqual({ value: 4, outcome: "success" }); // 4+1>=4
+    expect(r.mood).toEqual({ value: 2, color: "red", face: 2, special: false });
+  });
+  it("uses the chosen specialColor when mood die is 6", () => {
+    const r = buildMoodResult({ ...base, judgeIndex: 0, moodIndex: 2, specialColor: "green" });
+    expect(r.mood).toEqual({ value: 6, color: "green", face: 4, special: true });
+  });
+  it("returns null mood for auto cases (moodIndex null)", () => {
+    const r = buildMoodResult({ ...base, judgeIndex: 0, moodIndex: null, specialColor: null });
+    expect(r.mood).toBeNull();
+  });
+  it("reports fumble/special outcomes on the judge die", () => {
+    expect(buildMoodResult({ ...base, judgeIndex: 1, moodIndex: 0 }).judge.outcome).toBe("fail"); // 2+1<4
+    const sp = buildMoodResult({ values: [6, 2], modVal: 0, dc: 4, judgeIndex: 0, moodIndex: 1 });
+    expect(sp.judge.outcome).toBe("special");
+    const fb = buildMoodResult({ values: [1, 2], modVal: 0, dc: 4, judgeIndex: 0, moodIndex: 1 });
+    expect(fb.judge.outcome).toBe("fumble");
   });
 });
