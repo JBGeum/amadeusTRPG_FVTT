@@ -12,7 +12,7 @@ const { ActorSheetV2 } = foundry.applications.sheets;
 export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixin(ActorSheetV2)) {
   static DEFAULT_OPTIONS = {
     classes: ["amadeus", "sheet", "actor"],
-    position: { width: 780, height: 860 },
+    position: { width: 780, height: 1000 },
     window: {
       resizable: true,
       controls: [
