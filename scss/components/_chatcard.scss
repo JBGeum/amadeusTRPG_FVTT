@@ -208,6 +208,13 @@
   align-items: center;
 }
 
+// "사용 불가" — D 랭크에서 버리는(판정에 쓰지 않는) 높은 주사위
+.amadeus-chat .chat-die-col--disabled {
+  .chat-die-chip { opacity: 0.42; filter: grayscale(0.85); }
+  .chat-die-mod { opacity: 0.5; }
+  .chat-die-result { color: var(--pmuted); font-style: italic; }
+}
+
 // Die chip — face colour via modifier class
 .amadeus-chat .chat-die-chip {
   position: relative;

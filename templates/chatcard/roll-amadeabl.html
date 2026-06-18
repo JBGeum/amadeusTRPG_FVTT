@@ -27,30 +27,30 @@
     </div>
     <div class="chat-diceset">
       {{#each resultDiceset}}
-      <div class="chat-die-col">
-        <div class="chat-die-chip chat-die-chip--{{this}}">
-          {{#if (eq this 1)}}
+      <div class="chat-die-col{{#if this.disabled}} chat-die-col--disabled{{/if}}">
+        <div class="chat-die-chip chat-die-chip--{{this.value}}">
+          {{#if (eq this.value 1)}}
           <svg class="chat-die-pips" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="4.4"/></svg>
           {{/if}}
-          {{#if (eq this 2)}}
+          {{#if (eq this.value 2)}}
           <svg class="chat-die-pips" viewBox="0 0 60 60" aria-hidden="true"><circle cx="16" cy="16" r="4.4"/><circle cx="44" cy="44" r="4.4"/></svg>
           {{/if}}
-          {{#if (eq this 3)}}
+          {{#if (eq this.value 3)}}
           <svg class="chat-die-pips" viewBox="0 0 60 60" aria-hidden="true"><circle cx="16" cy="16" r="4.4"/><circle cx="30" cy="30" r="4.4"/><circle cx="44" cy="44" r="4.4"/></svg>
           {{/if}}
-          {{#if (eq this 4)}}
+          {{#if (eq this.value 4)}}
           <svg class="chat-die-pips" viewBox="0 0 60 60" aria-hidden="true"><circle cx="16" cy="16" r="4.4"/><circle cx="44" cy="16" r="4.4"/><circle cx="16" cy="44" r="4.4"/><circle cx="44" cy="44" r="4.4"/></svg>
           {{/if}}
-          {{#if (eq this 5)}}
+          {{#if (eq this.value 5)}}
           <svg class="chat-die-pips" viewBox="0 0 60 60" aria-hidden="true"><circle cx="16" cy="16" r="4.4"/><circle cx="44" cy="16" r="4.4"/><circle cx="30" cy="30" r="4.4"/><circle cx="16" cy="44" r="4.4"/><circle cx="44" cy="44" r="4.4"/></svg>
           {{/if}}
-          {{#if (eq this 6)}}
+          {{#if (eq this.value 6)}}
           <svg class="chat-die-pips" viewBox="0 0 60 60" aria-hidden="true"><circle cx="16" cy="14" r="4.2"/><circle cx="44" cy="14" r="4.2"/><circle cx="16" cy="30" r="4.2"/><circle cx="44" cy="30" r="4.2"/><circle cx="16" cy="46" r="4.2"/><circle cx="44" cy="46" r="4.2"/></svg>
           {{/if}}
-          <span class="chat-die-num lnum">{{this}}</span>
+          <span class="chat-die-num lnum">{{this.value}}</span>
         </div>
         <div class="chat-die-mod">{{formatModVal ../modVal}}</div>
-        <div class="chat-die-result">{{successCheck this ../modVal ../rollDC}}</div>
+        <div class="chat-die-result">{{#if this.disabled}}사용 불가{{else}}{{successCheck this.value ../modVal ../rollDC}}{{/if}}</div>
       </div>
       {{/each}}
     </div>

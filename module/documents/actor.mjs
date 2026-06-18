@@ -1,4 +1,5 @@
 import {amadeRoll} from "../dice/roll.mjs";
+import { buildDiceset } from "../dice/resolution.mjs";
 import { postCard, postRoll } from "../chat/chat.mjs";
 
 /**
@@ -51,7 +52,7 @@ export class AmadeusActor extends Actor {
     const rank = abl.rank;
     const rankVal = abl.rankVal;
     let roll = await amadeRoll(rank, rankVal, this.getRollData());
-    const resultDiceset = roll.dice[0].values;
+    const resultDiceset = buildDiceset(roll.dice[0].values, rank);
     const templateData = {
       label, rank,
       mod: abl.mod,

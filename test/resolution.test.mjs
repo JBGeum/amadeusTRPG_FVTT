@@ -6,6 +6,7 @@ import {
   modVal,
   initHealth,
   initMoney,
+  buildDiceset,
 } from "../module/dice/resolution.mjs";
 
 describe("diceCountForRank", () => {
@@ -35,6 +36,36 @@ describe("resolveDie", () => {
   });
   it("returns fail when die+mod < dc", () => {
     expect(resolveDie(3, 0, 4)).toBe("fail");
+  });
+});
+
+describe("buildDiceset", () => {
+  it("marks no die disabled for non-D ranks and preserves order", () => {
+    const set = buildDiceset([6, 2, 4], "A");
+    expect(set).toEqual([
+      { value: 6, disabled: false },
+      { value: 2, disabled: false },
+      { value: 4, disabled: false },
+    ]);
+  });
+  it("disables the single highest die for rank D", () => {
+    const set = buildDiceset([2, 5], "D");
+    expect(set).toEqual([
+      { value: 2, disabled: false },
+      { value: 5, disabled: true },
+    ]);
+  });
+  it("disables the highest die regardless of order for rank D", () => {
+    const set = buildDiceset([6, 3], "D");
+    expect(set).toEqual([
+      { value: 6, disabled: true },
+      { value: 3, disabled: false },
+    ]);
+  });
+  it("disables exactly one die when D dice tie", () => {
+    const set = buildDiceset([4, 4], "D");
+    expect(set.filter((d) => d.disabled)).toHaveLength(1);
+    expect(set.map((d) => d.value)).toEqual([4, 4]);
   });
 });
 

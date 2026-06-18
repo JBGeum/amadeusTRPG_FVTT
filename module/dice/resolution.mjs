@@ -21,6 +21,22 @@ export function resolveDie(die, modVal, dc) {
   return die + modVal >= dc ? "success" : "fail";
 }
 
+/**
+ * 굴림 결과 값 배열을 챗 표시용 주사위 목록으로 가공한다.
+ * D 랭크는 2d6 중 높은 주사위 1개를 "사용 불가"(disabled)로 버리고 낮은 1개만 판정에 쓴다.
+ * (동률이면 첫 최댓값 인덱스 하나만 disabled.)
+ * @param {number[]} values 굴린 d6 값들
+ * @param {string} rank 능력치 랭크(S~D)
+ * @returns {{value:number, disabled:boolean}[]}
+ */
+export function buildDiceset(values, rank) {
+  let disabledIndex = -1;
+  if (rank === "D") {
+    disabledIndex = values.reduce((maxI, v, i) => (v > values[maxI] ? i : maxI), 0);
+  }
+  return values.map((value, i) => ({ value, disabled: i === disabledIndex }));
+}
+
 /** 랭크 문자 → 능력치 숫자값 (S4..D0). D는 0 (굴림 개수 아님 — 굴림 개수는 diceCountForRank 사용). */
 export function rankVal(rank) {
   return AMADEUS.rank[rank] ?? 0;

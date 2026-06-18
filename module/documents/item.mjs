@@ -1,4 +1,5 @@
 import {amadeRoll} from "../dice/roll.mjs";
+import { buildDiceset } from "../dice/resolution.mjs";
 import { postCard, postRoll } from "../chat/chat.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
@@ -113,7 +114,7 @@ export class AmadeusItem extends Item {
       mod: actorAbl.mod,
       modVal: actorAbl.modVal,
       rollDC: actor.system.dc,
-      resultDiceset: roll.dice[0].values
+      resultDiceset: buildDiceset(roll.dice[0].values, rank)
     }
     if (this.type === "gift") {
       await postCard({
