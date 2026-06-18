@@ -398,3 +398,52 @@
 
   &:hover { color: var(--ptext); }
 }
+
+// --------------------------------------------------------------------------
+// Mood-result card (judge die + mood color)
+// --------------------------------------------------------------------------
+.amadeus-chat .mood-result-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.amadeus-chat .mood-result-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .chat-die-chip {
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+  }
+  .chat-die-num { font-size: 18px; }
+}
+
+.amadeus-chat .mood-result-tag {
+  min-width: 38px;
+  font-size: 12px;
+  color: var(--pmuted);
+}
+
+.amadeus-chat .mood-result-outcome,
+.amadeus-chat .mood-result-color {
+  font-size: 14px;
+  color: var(--ptext);
+}
+
+.amadeus-chat .mood-result-badge {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 9px;
+  background: var(--d6);
+  color: #4a3a12;
+}
+
+.amadeus-chat .mood-result-none {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--pmuted);
+}

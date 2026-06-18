@@ -23,6 +23,7 @@ import { resolveDie } from "../dice/resolution.mjs";
     "systems/amadeus/templates/chatcard/data-description.html",
     "systems/amadeus/templates/chatcard/plot-done.html",
     "systems/amadeus/templates/chatcard/plot-result.html",
+    "systems/amadeus/templates/chatcard/mood-result.html",
 
   ]);
 };
@@ -52,6 +53,12 @@ export function registerHandlebarsHelpers(){
   Handlebars.registerHelper("successCheck", function (die, modVal, rollDC) {
     const label = { fumble: "펌블", special: "스페셜", success: "성공", fail: "실패" };
     return label[resolveDie(die, modVal, rollDC)] ?? "?";
+  });
+
+  // 판정 결과 문자열 → 한국어 라벨. successCheck와 동일한 라벨 집합.
+  Handlebars.registerHelper("outcomeLabel", function (outcome) {
+    const label = { fumble: "펌블", special: "스페셜", success: "성공", fail: "실패" };
+    return label[outcome] ?? "?";
   });
 
   Handlebars.registerHelper("formatModVal", function (modVal) {

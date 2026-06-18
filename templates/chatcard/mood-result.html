@@ -1,0 +1,38 @@
+<div class="amadeus-chat chatcard mood-result-chatcard">
+  <div class="chat-inner">
+    <header class="chat-title">
+      <i class="fa-solid fa-dice chat-title-icon"></i>
+      <span class="chat-title-text">{{label}} · {{localize "AMADEUS.mood.resultTitle"}}</span>
+    </header>
+    <div class="chat-ornament" aria-hidden="true">
+      <span class="chat-ornament-line chat-ornament-line--l"></span>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <i class="fa-solid fa-dice-d20 chat-ornament-icon"></i>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <span class="chat-ornament-line chat-ornament-line--r"></span>
+    </div>
+
+    <div class="mood-result-rows">
+      <div class="mood-result-row">
+        <span class="mood-result-tag">{{localize "AMADEUS.mood.judgeLabel"}}</span>
+        <span class="chat-die-chip chat-die-chip--{{judge.value}}">
+          <span class="chat-die-num lnum">{{judge.value}}</span>
+        </span>
+        <span class="mood-result-outcome">{{outcomeLabel judge.outcome}}</span>
+      </div>
+
+      <div class="mood-result-row">
+        <span class="mood-result-tag">{{localize "AMADEUS.mood.moodLabel"}}</span>
+        {{#if mood}}
+        <span class="chat-die-chip chat-die-chip--{{mood.face}}">
+          <span class="chat-die-num lnum">{{mood.value}}</span>
+        </span>
+        <span class="mood-result-color">{{localize (concat "AMADEUS.color." mood.color)}}</span>
+        {{#if mood.special}}<span class="mood-result-badge">{{localize "AMADEUS.dice.special"}}</span>{{/if}}
+        {{else}}
+        <span class="mood-result-none">{{localize "AMADEUS.mood.noMood"}}</span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
