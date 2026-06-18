@@ -1,5 +1,6 @@
 import {amadeRoll} from "../dice/roll.mjs";
 import { buildDiceset } from "../dice/resolution.mjs";
+import { resolveMoodDice } from "../mood/mood.mjs";
 import { postCard, postRoll } from "../chat/chat.mjs";
 
 /**
@@ -63,6 +64,14 @@ export class AmadeusActor extends Actor {
       actor: this,
       template: "systems/amadeus/templates/chatcard/roll-amadeabl.html",
       data: templateData,
+    });
+    await resolveMoodDice({
+      actor: this,
+      values: roll.dice[0].values,
+      rank,
+      modVal: abl.modVal,
+      dc: this.system.dc,
+      label,
     });
   }
 

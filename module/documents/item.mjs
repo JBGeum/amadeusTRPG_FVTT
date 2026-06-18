@@ -1,5 +1,6 @@
 import {amadeRoll} from "../dice/roll.mjs";
 import { buildDiceset } from "../dice/resolution.mjs";
+import { resolveMoodDice } from "../mood/mood.mjs";
 import { postCard, postRoll } from "../chat/chat.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
@@ -123,6 +124,14 @@ export class AmadeusItem extends Item {
         data: templateData,
         flavor: ablLabel + "판정",
         style: CONST.CHAT_MESSAGE_STYLES.EMOTE,
+      });
+      await resolveMoodDice({
+        actor,
+        values: roll.dice[0].values,
+        rank,
+        modVal: actorAbl.modVal,
+        dc: actor.system.dc,
+        label,
       });
     }
 
