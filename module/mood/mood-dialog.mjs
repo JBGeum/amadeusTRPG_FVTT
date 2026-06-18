@@ -47,6 +47,7 @@ export class MoodDialog extends FixedWidthMixin(HandlebarsApplicationMixin(Appli
   /** 강제 종료 시 대기 중인 Promise를 안전하게 해제. */
   _onClose(options) {
     super._onClose(options);
+    if (MoodDialog.#current === this) MoodDialog.#current = null;
     if (!this._confirmed) this._resolve?.(null);
   }
 
