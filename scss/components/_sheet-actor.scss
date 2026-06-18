@@ -13,6 +13,15 @@
   .window-content {
     padding: 0;
     overflow-y: auto;
+    // flex 컬럼(.application)의 자식이라 min-height 기본값(auto)이면 콘텐츠 높이만큼 늘어나
+    // 스크롤되지 않고 본문이 리사이즈 핸들 코너까지 흘러내린다. min-height:0으로 스크롤을 활성화한다.
+    min-height: 0;
+  }
+
+  // 리사이즈 핸들은 전면(full-bleed) 본문 콘텐츠에 stacking으로 가려져 포인터를 못 받는다.
+  // position:absolute이므로 z-index로 콘텐츠 위에 올려 커서/드래그를 복구한다.
+  .window-resize-handle {
+    z-index: 10;
   }
 
   // 탭 숨김: JS(#activateTabs)가 display를 직접 제어하므로 기본은 none
@@ -40,6 +49,10 @@
   font-family: $font-body;
   overflow: hidden;
   min-height: 100%;
+  // .window-content가 flex 컬럼이라 자식인 sheet-inner는 기본 flex-shrink:1로
+  // 컨테이너 높이까지 줄어든 뒤 overflow:hidden으로 콘텐츠를 잘라낸다(긴 탭에서 잘림+스크롤 없음).
+  // flex-shrink:0으로 콘텐츠 높이만큼 커지게 해 window-content가 스크롤되도록 한다.
+  flex-shrink: 0;
 }
 
 // ---------------------------------------------------------------------------
