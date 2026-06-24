@@ -98,7 +98,7 @@ Hooks.once("ready", async function() {
   });
   game.amadeus.plotInitiative = () => {
     if (!game.user.isGM) return ui.notifications.warn("GM only");
-    new PlotGMPanel().render(true);
+    PlotGMPanel.open();
   };
 });
 
@@ -167,18 +167,26 @@ function rollItemMacro(itemUuid) {
 /* -------------------------------------------- */
 Hooks.on("getSceneControlButtons", (controls) => {
   if (!game.user.isGM) return;
+  // V13 Scene Control 의 onChange/onClick 은 "클릭"이 아니라 "활성상태 전이"에서
+  // active 값과 함께 호출된다(비활성화 시에도 발화). 가드 없는 onClick 은 다른 컨트롤을
+  // 클릭해 내 컨트롤이 꺼질 때 패널을 여는 오발화를 일으키므로, onClick 대신 onChange 에서
+  // active===true 일 때만 연다. 재오픈은 패널 _onClose 의 컨트롤 비활성화로 복원된다.
+  const openOnActivate = (_event, active) => {
+    if (active) game.amadeus.plotInitiative();
+  };
   controls.amadeusPlot = {
     name: "amadeusPlot",
     title: "AMADEUS.initiative.panelTitle",
     icon: "fas fa-dice",
     layer: "tokens",
+    onChange: openOnActivate,
     tools: {
       open: {
         name: "open",
         title: "AMADEUS.initiative.panelTitle",
         icon: "fas fa-dice",
         button: true,
-        onClick: () => game.amadeus.plotInitiative(),
+        onChange: openOnActivate,
       },
     },
     activeTool: "open",

@@ -26,22 +26,40 @@ export class PlotGMPanel extends FixedWidthMixin(HandlebarsApplicationMixin(Appl
 
   static PARTS = { main: { template: "systems/amadeus/templates/initiative/gm-panel.html" } };
 
-  constructor(options) {
-    super(options);
-    this._onUpdate = () => this.render();
-    Hooks.on("amadeus.plotUpdate", this._onUpdate);
+  /**
+   * 싱글턴 인스턴스. 씬 컨트롤/매크로에서 매번 `new` 하면 같은 id의 ApplicationV2가
+   * 중복 생성되고, height:"auto" 패널이 재오픈 렌더에서 offsetWidth(null) 크래시를 낸다.
+   */
+  static #instance = null;
+
+  /** 멱등 오픈: 떠 있으면 앞으로, 닫혀 있으면 렌더한다. */
+  static open() {
+    this.#instance ??= new this();
+    if (this.#instance.rendered) this.#instance.bringToFront?.();
+    else this.#instance.render({ force: true });
   }
 
-  /** @override AppV2 close 훅 */
+  /** @override AppV2 close 훅: 라이브 갱신 구독 해제 + 씬 컨트롤 비활성화로 재오픈 복원 */
   async _onClose(options) {
-    Hooks.off("amadeus.plotUpdate", this._onUpdate);
+    if (this._onUpdate) {
+      Hooks.off("amadeus.plotUpdate", this._onUpdate);
+      this._onUpdate = null;
+    }
+    // 내 컨트롤이 활성 상태면 기본 컨트롤(tokens)로 되돌려 비활성화한다.
+    // 그래야 다음 클릭이 false→true 전이가 되어 onChange(active:true)로 재오픈된다.
+    const controls = ui.controls;
+    if (controls?.control?.name === "amadeusPlot") void controls.activate({ control: "tokens" });
     return super._onClose(options);
   }
 
-  /** @override data-theme 주입 */
+  /** @override data-theme 주입 + 라이브 갱신 구독(멱등 — 싱글턴 재오픈 시 복원) */
   _onRender(context, options) {
     super._onRender(context, options);
     this.element.dataset.theme = game.settings.get("amadeus", "theme");
+    if (!this._onUpdate) {
+      this._onUpdate = () => this.render();
+      Hooks.on("amadeus.plotUpdate", this._onUpdate);
+    }
   }
 
   async _prepareContext() {
