@@ -29,10 +29,10 @@
   <div class="sheet-body">
     <div class="item gift-sheet-body" data-item-id="{{item._id}}">
       <div class="gift-effect" title="효과">
-        {{#if editable}}<prose-mirror name="system.effect" value="{{system.effect}}">{{{enrichedEffect}}}</prose-mirror>{{else}}{{{enrichedEffect}}}{{/if}}
+        {{#if editable}}<prose-mirror name="system.effect" value="{{system.effect}}" toggled>{{{enrichedEffect}}}</prose-mirror>{{else}}{{{enrichedEffect}}}{{/if}}
       </div>
       <div class="gift-description" title="설명">
-        {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}">{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
+        {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}" toggled>{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
       </div>
       <div class="gift-tag">
         <label class="gift-lbl">태그</label>

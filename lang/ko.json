@@ -120,13 +120,13 @@
     },
     "mood" : {
       "dialogTitle": "무드 다이스 선택",
-      "hint": "판정 다이스와 무드 다이스를 하나씩 고르세요.",
-      "judge": "판정 다이스",
+      "hint": "액션 다이스와 무드 다이스를 하나씩 고르세요.",
+      "judge": "액션 다이스",
       "mood": "무드 다이스",
       "pickColor": "스페셜 색 선택",
       "confirm": "확정",
       "resultTitle": "다이스 선택",
-      "judgeLabel": "판정",
+      "judgeLabel": "액션",
       "moodLabel": "무드",
       "noMood": "무드 없음"
     },

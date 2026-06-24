@@ -23,10 +23,10 @@
   <div class="item-sheet-body">
     <div class="item item-sheet-body" data-item-id="{{item._id}}">
       <div class="item-effect">
-        {{#if editable}}<prose-mirror name="system.effect" value="{{system.effect}}">{{{enrichedEffect}}}</prose-mirror>{{else}}{{{enrichedEffect}}}{{/if}}
+        {{#if editable}}<prose-mirror name="system.effect" value="{{system.effect}}" toggled>{{{enrichedEffect}}}</prose-mirror>{{else}}{{{enrichedEffect}}}{{/if}}
       </div>
       <div class="item-description">{{!-- 설명 --}}
-        {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}">{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
+        {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}" toggled>{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
       </div>
     </div>
   </div>

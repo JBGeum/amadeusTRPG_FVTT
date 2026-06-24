@@ -195,8 +195,9 @@
 // Dice grid
 // --------------------------------------------------------------------------
 .amadeus-chat .chat-diceset {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 9px;
   margin-top: 13px;
   text-align: center;

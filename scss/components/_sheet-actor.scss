@@ -552,6 +552,18 @@
       z-index: 2;
       -webkit-appearance: none;
       appearance: none;
+
+      // 열린 네이티브 드롭다운(흰 바탕)에서 옵션 글자가 보이도록 검정 + 중앙 정렬.
+      // 닫힌 select 자체는 opacity:0이라 영향 없음.
+      color: #000;
+      text-align: center;
+      text-align-last: center;
+
+      option {
+        color: #000;
+        background: #fff;
+        text-align: center;
+      }
     }
 
     .seal-ring {
@@ -706,7 +718,8 @@
         border-radius: 50%;
         flex: none;
         cursor: pointer;
-        transition: opacity .15s;
+        opacity: 0.3;
+        transition: opacity .15s, box-shadow .15s;
 
         &--wk { background: var(--wk); border: 1px solid var(--line); }
         &--wr { background: var(--wr); }
@@ -724,6 +737,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color: var(--muted);
+        transition: color .15s;
       }
 
       // 수치 입력 (겁/중상)
@@ -738,8 +753,10 @@
         &:focus { outline: none; color: var(--text); }
       }
 
-      // 체크된 상태 강조
-      &.is-active .status-dot { opacity: 1; box-shadow: 0 0 0 2px var(--line); }
+      // 체크된 상태 강조 — 숨긴 체크박스의 :checked를 형제(~)로 직접 읽어
+      // 렌더 의존 없이 6종 모두 즉시 on/off 반영한다.
+      .status-chk:checked ~ .status-dot { opacity: 1; box-shadow: 0 0 0 2px var(--line); }
+      .status-chk:checked ~ .status-name { color: var(--text); font-weight: 600; }
     }
   }
 }

@@ -402,6 +402,11 @@
 // die-face 색은 .amadeus-chat 스코프에만 정의돼 있어, 다이얼로그에서 재사용하는
 // .chat-die-chip--N(주사위 칩 + 색 버튼)에도 색 배경을 명시적으로 적용한다.
 .amadeus-dlg .chat-die-chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   @include die-face-colors;
 }
 

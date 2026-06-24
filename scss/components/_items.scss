@@ -25,7 +25,7 @@
 
   .gift-sheet-body {
     .gift-effect {
-      height           : 200px;
+      height           : 240px;
       background-color : var(--panel2);
       margin           : 10px;
       border: 1px solid var(--line);
@@ -34,7 +34,7 @@
     }
 
     .gift-description {
-      height           : 100px;
+      height           : 200px;
       background-color : var(--panel2);
       margin           : 10px;
       border: 1px solid var(--line);
@@ -72,7 +72,7 @@
   }
   .item-sheet-body{
     .item-effect {
-      height           : 200px;
+      height           : 240px;
       background-color : var(--panel2);
       margin           : 10px;
       border: 1px solid var(--line);
@@ -81,7 +81,7 @@
     }
 
     .item-description {
-      height           : 100px;
+      height           : 200px;
       background-color : var(--panel2);
       margin           : 10px;
       border: 1px solid var(--line);
@@ -144,6 +144,78 @@
       border:1px solid var(--line);
       padding:3px;
       border-radius:5px;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// ProseMirror 리치텍스트 에디터 (v13)
+// 고정 높이 박스 안에서 툴바는 한 줄로 유지(버튼 축소), 내용은 넘치면 스크롤.
+// 구식 TinyMCE(.tox) 스타일만 있어 ProseMirror 레이아웃이 비제어 상태였음.
+// ---------------------------------------------------------------------------
+.amadeus.sheet.item {
+  // 에디터를 감싸는 고정 높이 박스: 내부가 넘쳐도 다른 영역 침범 금지.
+  // position:relative 가 핵심 — ProseMirror의 .editor-container 는 position:absolute 계열이라
+  // positioned 조상이 없으면 박스 밖으로 빠져나온다. relative 로 박스 안에 가둔다.
+  .gift-effect, .gift-description,
+  .item-effect, .item-description,
+  .parent-description {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  prose-mirror {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-width: 100%;
+    overflow: hidden;
+
+    // 툴바: 반드시 flex 컨테이너여야 flex-wrap:nowrap(한 줄)이 동작한다.
+    // 넘치면 가로 스크롤, 버튼 크기 축소.
+    menu, .editor-menu {
+      display: flex;
+      align-items: center;
+      flex: 0 0 auto;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 1px;
+      margin: 0 0 4px;
+      padding: 0;
+      font-size: 11px;
+
+      button, .pm-dropdown {
+        font-size: inherit;
+        padding: 1px 4px;
+        min-width: 0;
+        width: auto;
+        height: auto;
+        line-height: 1.5;
+        flex: 0 0 auto;
+      }
+    }
+
+    // 내용: 박스를 꽉 채우고 넘치면 세로 스크롤(박스 밖 침범 방지)
+    .editor-container {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+      max-width: 100%;
+      display: flex;
+      overflow: hidden;
+    }
+    .editor-content, .ProseMirror {
+      flex: 1 1 auto;
+      min-height: 0;
+      max-width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
   }
 }
