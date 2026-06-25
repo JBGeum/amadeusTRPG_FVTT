@@ -401,12 +401,26 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
   }
 
   static async #onRollTable(event, target) {
-    const rtid = target.dataset.rtid;
-    if (!rtid) return;
-    const pack = game.packs.get("amadeus.rolltable");
-    const tables = await pack.getDocuments();
-    const table = tables.find((t) => t.id === rtid);
-    table?.draw();
+    const { rtid, rtname } = target.dataset;
+    let table;
+    // 월드 사이드바 우선(이름) → 팩 ID(시련/휴식 안전망) → 팩 이름 순으로 조회한다.
+    if (rtname) table = game.tables.getName(rtname);
+    if (!table && (rtid || rtname)) {
+      const tables = await game.packs.get("amadeus.rolltable").getDocuments();
+      table = rtid ? tables.find((t) => t.id === rtid) : tables.find((t) => t.name === rtname);
+    }
+    if (!table) {
+      ui.notifications.warn(`롤테이블을 찾을 수 없습니다: ${rtname ?? rtid}`);
+      return;
+    }
+    // 코어 출력은 끄고(displayChat:false) 결과만 받아 테마 카드로 렌더한다.
+    const { roll, results } = await table.draw({ displayChat: false });
+    const parts = await Promise.all(results.map((r) => r.getHTML()));
+    await postCard({
+      actor: null,
+      template: "systems/amadeus/templates/chatcard/roll-table.html",
+      data: { name: table.name, total: roll?.total, text: parts.join("") },
+    });
   }
 
   static #onToggleMenu(event, target) {

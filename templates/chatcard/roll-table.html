@@ -1,0 +1,26 @@
+<div class="amadeus-chat chatcard roll-table-chatcard">
+  <div class="chat-inner">
+    <header class="chat-title">
+      <i class="fa-solid fa-scroll chat-title-icon"></i>
+      <span class="chat-title-text">{{name}}</span>
+    </header>
+    <div class="chat-ornament" aria-hidden="true">
+      <span class="chat-ornament-line chat-ornament-line--l"></span>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <i class="fa-solid fa-dice chat-ornament-icon"></i>
+      <i class="fa-solid fa-diamond chat-ornament-dot"></i>
+      <span class="chat-ornament-line chat-ornament-line--r"></span>
+    </div>
+    {{#if total}}
+    <div class="chat-chips">
+      <div class="chat-chip">
+        <span class="chat-chip-lbl">굴림</span>
+        <span class="chat-chip-val lnum">{{total}}</span>
+      </div>
+    </div>
+    {{/if}}
+    <div class="chat-body">
+      <div class="chat-description">{{{text}}}</div>
+    </div>
+  </div>
+</div>

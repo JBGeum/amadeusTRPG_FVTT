@@ -25,6 +25,7 @@ import { resolveDie, colorToFace } from "../dice/resolution.mjs";
     "systems/amadeus/templates/chatcard/plot-result.html",
     "systems/amadeus/templates/chatcard/mood-result.html",
     "systems/amadeus/templates/chatcard/roll-formula.html",
+    "systems/amadeus/templates/chatcard/roll-table.html",
 
   ]);
 };
