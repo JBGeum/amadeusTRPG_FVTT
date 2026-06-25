@@ -12,6 +12,7 @@ import {
   usableCount,
   autoJudgeIndex,
   buildMoodResult,
+  buildFormulaRollView,
 } from "../module/dice/resolution.mjs";
 
 describe("diceCountForRank", () => {
@@ -171,5 +172,74 @@ describe("buildMoodResult", () => {
     expect(sp.judge.outcome).toBe("special");
     const fb = buildMoodResult({ values: [1, 2], modVal: 0, dc: 4, judgeIndex: 0, moodIndex: 1 });
     expect(fb.judge.outcome).toBe("fumble");
+  });
+});
+
+describe("buildFormulaRollView", () => {
+  it("builds a d6 group and uses flavor as title", () => {
+    const view = buildFormulaRollView({
+      flavor: "식량",
+      formula: "1d6",
+      total: 4,
+      dice: [{ faces: 6, values: [4] }],
+    });
+    expect(view).toEqual({
+      title: "식량",
+      formula: "1d6",
+      total: 4,
+      groups: [{ faces: 6, isD6: true, dice: [{ value: 4 }] }],
+    });
+  });
+
+  it("falls back to formula as title when flavor is empty", () => {
+    const view = buildFormulaRollView({
+      flavor: "",
+      formula: "2d6",
+      total: 7,
+      dice: [{ faces: 6, values: [3, 4] }],
+    });
+    expect(view.title).toBe("2d6");
+    expect(view.groups[0].dice).toEqual([{ value: 3 }, { value: 4 }]);
+  });
+
+  it("falls back to formula as title when flavor is undefined", () => {
+    const view = buildFormulaRollView({ formula: "1d6", total: 2, dice: [{ faces: 6, values: [2] }] });
+    expect(view.title).toBe("1d6");
+  });
+
+  it("marks non-d6 dice with isD6 false", () => {
+    const view = buildFormulaRollView({
+      flavor: "공격",
+      formula: "1d20",
+      total: 13,
+      dice: [{ faces: 20, values: [13] }],
+    });
+    expect(view.groups[0].isD6).toBe(false);
+    expect(view.groups[0].faces).toBe(20);
+  });
+
+  it("keeps the modifier in total but not in dice groups", () => {
+    const view = buildFormulaRollView({
+      flavor: "회복",
+      formula: "1d6+3",
+      total: 7,
+      dice: [{ faces: 6, values: [4] }],
+    });
+    expect(view.total).toBe(7);
+    expect(view.groups).toEqual([{ faces: 6, isD6: true, dice: [{ value: 4 }] }]);
+  });
+
+  it("supports multiple dice terms", () => {
+    const view = buildFormulaRollView({
+      flavor: "혼합",
+      formula: "2d6 + 1d4",
+      total: 9,
+      dice: [
+        { faces: 6, values: [3, 5] },
+        { faces: 4, values: [1] },
+      ],
+    });
+    expect(view.groups).toHaveLength(2);
+    expect(view.groups[1]).toEqual({ faces: 4, isD6: false, dice: [{ value: 1 }] });
   });
 });

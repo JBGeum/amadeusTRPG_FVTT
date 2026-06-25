@@ -107,3 +107,26 @@ export function buildMoodResult({ values, modVal, dc, judgeIndex, moodIndex, spe
   }
   return { judge, mood };
 }
+
+/**
+ * 단순 합산 굴림(목표치/성공판정 없음)을 챗 카드용 뷰모델로 변환한다.
+ * 능력치 판정과 달리 펌블/스페셜·목표치 비교가 없으며, 주사위 눈과 합계만 보여준다.
+ * @param {object} args
+ * @param {string} [args.flavor] 카드 제목으로 쓸 이름(아이템/기프트). 비어 있으면 수식을 제목으로.
+ * @param {string} args.formula 원본 수식 라벨("1d6", "2d6+3" 등)
+ * @param {number} args.total 최종 합계(보정 포함)
+ * @param {{faces:number, values:number[]}[]} args.dice 각 DiceTerm의 면수와 굴린 값들
+ * @returns {{title:string, formula:string, total:number, groups:{faces:number, isD6:boolean, dice:{value:number}[]}[]}}
+ */
+export function buildFormulaRollView({ flavor, formula, total, dice }) {
+  return {
+    title: flavor || formula,
+    formula,
+    total,
+    groups: dice.map((d) => ({
+      faces: d.faces,
+      isD6: d.faces === 6,
+      dice: d.values.map((value) => ({ value })),
+    })),
+  };
+}
