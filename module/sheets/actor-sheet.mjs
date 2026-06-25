@@ -25,6 +25,7 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
       ],
     },
     form: { submitOnChange: true, closeOnSubmit: false },
+    dragDrop: [{ dragSelector: ".item[data-item-id]", dropSelector: null }],
     actions: {
       itemEdit: AmadeusActorSheet.#onItemEdit,
       itemCreate: AmadeusActorSheet.#onItemCreate,
@@ -48,6 +49,47 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
     character: { template: "systems/amadeus/templates/actor/actor-character-sheet.html" },
     npc: { template: "systems/amadeus/templates/actor/actor-npc-sheet.html" },
   };
+
+  /** @type {DragDrop[]} ApplicationV2는 dragDrop 옵션을 자동 바인딩하지 않으므로 직접 만든다. */
+  #dragDrop;
+
+  constructor(options = {}) {
+    super(options);
+    this.#dragDrop = this.#createDragDropHandlers();
+  }
+
+  /** DEFAULT_OPTIONS.dragDrop 항목마다 권한/콜백을 붙여 DragDrop 인스턴스를 만든다. */
+  #createDragDropHandlers() {
+    return this.options.dragDrop.map((d) => {
+      d.permissions = {
+        dragstart: this._canDragStart.bind(this),
+        drop: this._canDragDrop.bind(this),
+      };
+      d.callbacks = {
+        dragstart: this._onDragStart.bind(this),
+        drop: this._onDrop.bind(this),
+      };
+      return new foundry.applications.ux.DragDrop.implementation(d);
+    });
+  }
+
+  /** 드래그 시작 권한: 시트가 편집 가능할 때만. */
+  _canDragStart(_selector) {
+    return this.isEditable;
+  }
+
+  /** 드롭 권한: 시트가 편집 가능할 때만. */
+  _canDragDrop(_selector) {
+    return this.isEditable;
+  }
+
+  /** 드래그 시작: 카드의 data-item-id로 드래그 데이터를 구성한다(같은 액터 내 정렬용). */
+  _onDragStart(event) {
+    const itemId = event.currentTarget.dataset.itemId;
+    const item = this.document.items.get(itemId);
+    if (!item) return;
+    event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
+  }
 
   /** 타입별 part 선택 */
   _configureRenderOptions(options) {
@@ -126,6 +168,7 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
   /** @override change 이벤트 위임 + 탭 활성화 */
   _onRender(context, options) {
     super._onRender(context, options);
+    this.#dragDrop.forEach((d) => d.bind(this.element));
     if (this.isEditable) {
       this.element.querySelectorAll(".gift-memo, .gift-formula").forEach((el) => {
         el.addEventListener("change", (ev) => this.#updateItemField(ev));
