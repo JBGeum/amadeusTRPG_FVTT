@@ -37,8 +37,11 @@ export async function themeRollMessage(message, html) {
   if (!message.isRoll || !message.rolls?.length) return;
   if (html.querySelector(".amadeus-chat")) return;
 
+  // 단일 롤 메시지를 가정한다(일반적인 경우). 복수 롤이면 첫 번째만 테마한다.
   const roll = message.rolls[0];
   const dice = roll.dice.map((d) => ({ faces: d.faces, values: d.values }));
+  // 주사위 항이 없는 순수 산술 롤(예: /r 5+3)은 테마하지 않고 코어 카드를 유지한다.
+  if (!dice.length) return;
   const view = buildFormulaRollView({
     flavor: message.flavor,
     formula: roll.formula,
