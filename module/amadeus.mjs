@@ -19,6 +19,12 @@ import { GiftData, BackgroundData, ParentData, WeaponData, GearData, MemoryData,
 import { registerPlotSocket } from "./initiative/socket.mjs";
 import { PlotPrompt } from "./initiative/plot-prompt.mjs";
 import { PlotGMPanel } from "./initiative/gm-panel.mjs";
+import { themeRollMessage } from "./chat/chat.mjs";
+
+/* -------------------------------------------- */
+/*  Chat: 수식 롤 카드 테마 통일                 */
+/* -------------------------------------------- */
+Hooks.on("renderChatMessageHTML", themeRollMessage);
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
