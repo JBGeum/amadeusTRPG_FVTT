@@ -1,6 +1,7 @@
 import { onManageActiveEffect, prepareActiveEffectCategories } from "../helpers/effects.mjs";
 import { FixedWidthMixin } from "../helpers/fixed-width.mjs";
 import { postCard, postRoll } from "../chat/chat.mjs";
+import { compareItemOrder } from "./item-sort.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -100,7 +101,7 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
     const gifts = [], background = [], parent = [], inventory = [], memory = [], treasure = [];
     for (const i of this.document.items) {
       const img = i.img || CONST.DEFAULT_TOKEN;
-      const entry = { _id: i.id, name: i.name, img, type: i.type, system: i.system, _stats: i._stats };
+      const entry = { _id: i.id, name: i.name, img, type: i.type, system: i.system, _stats: i._stats, sort: i.sort, createdTime: i._stats.createdTime };
       if (i.type === "gift") gifts.push(entry);
       else if (i.type === "background") background.push(entry);
       else if (i.type === "parent") parent.push(entry);
@@ -108,8 +109,8 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
       else if (i.type === "memory") memory.push(entry);
       else if (i.type === "treasure") treasure.push(entry);
     }
-    gifts.sort((a, b) => a._stats.modifiedTime - b._stats.modifiedTime);
-    inventory.sort((a, b) => a._stats.modifiedTime - b._stats.modifiedTime);
+    gifts.sort(compareItemOrder);
+    inventory.sort(compareItemOrder);
     memory.sort((a, b) => a._stats.createdTime - b._stats.createdTime);
     context.gifts = gifts;
     context.background = background;
