@@ -448,3 +448,45 @@
   font-style: italic;
   color: var(--pmuted);
 }
+
+// --------------------------------------------------------------------------
+// Formula roll card (단순 합산 굴림 — 목표치/성공판정 없이 주사위 + 합계만)
+// --------------------------------------------------------------------------
+.amadeus-chat .chat-formula-label {
+  text-align: center;
+  font-family: $font-display;
+  font-size: 14px;
+  color: var(--pmuted);
+  margin-top: 6px;
+}
+
+// d6 외 주사위(d20 등): 값별 색이 없으므로 중립 chip + 본문색 숫자
+.amadeus-chat .chat-die-chip--plain {
+  background: var(--pg2);
+  border-color: var(--pgline2);
+
+  .chat-die-num { color: var(--ptext); }
+}
+
+.amadeus-chat .chat-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 13px;
+  padding-top: 10px;
+  border-top: 1px solid var(--pgline2);
+}
+
+.amadeus-chat .chat-total-lbl {
+  font-size: 12px;
+  color: var(--pmuted);
+}
+
+.amadeus-chat .chat-total-val {
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--pgold);
+  line-height: 1;
+}
