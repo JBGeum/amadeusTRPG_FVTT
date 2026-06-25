@@ -25,7 +25,7 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
       ],
     },
     form: { submitOnChange: true, closeOnSubmit: false },
-    dragDrop: [{ dragSelector: ".item[data-item-id]", dropSelector: null }],
+    dragDrop: [{ dragSelector: ".gift[data-item-id], .card-item[data-item-id]", dropSelector: null }],
     actions: {
       itemEdit: AmadeusActorSheet.#onItemEdit,
       itemCreate: AmadeusActorSheet.#onItemCreate,
