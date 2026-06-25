@@ -16,6 +16,7 @@ export default defineConfig({
         { src: "lang", dest: "." },
         { src: "templates", dest: "." },
         { src: "icons", dest: "." },
+        { src: "fonts", dest: "." },
         { src: "packs", dest: "." },
         { src: "LICENSE.txt", dest: "." },
       ],

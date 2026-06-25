@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Gowun+Batang:wght@400;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap');
+// 폰트는 utils/typography 에서 로컬 Pretendard(@font-face)로 번들된다 (구 Google Fonts CDN 제거).
 
 // Utilities
 @import 'utils/typography';

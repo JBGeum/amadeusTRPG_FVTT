@@ -1,3 +1,14 @@
-$font-display: 'Cormorant Garamond', serif;  // 숫자/라틴
-$font-title: 'Gowun Batang', serif;          // 제목
-$font-body: 'Noto Serif KR', serif;          // 본문
+// Pretendard — 로컬 번들 가변 폰트 (100~920 weight를 단일 woff2 파일로 커버)
+// fonts/PretendardVariable.woff2 → 빌드 시 dist/fonts/ 로 복사되어 런타임 절대경로로 서빙된다.
+// (절대경로를 써야 Vite가 base64 인라인하지 않는다. icons/ 와 동일한 규칙)
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url('/systems/amadeus/fonts/PretendardVariable.woff2') format('woff2-variations');
+}
+
+$font-display: 'Pretendard', sans-serif;  // 숫자/라틴
+$font-title: 'Pretendard', sans-serif;    // 제목
+$font-body: 'Pretendard', sans-serif;     // 본문
