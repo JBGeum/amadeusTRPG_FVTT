@@ -165,6 +165,10 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
   /** 현재 활성 탭(렌더 간 유지) */
   #currentTab = "item";
 
+  /** 렌더 간 유지: .window-content 스크롤 위치와 펼친 항목 키 집합 */
+  #scrollTop = 0;
+  #expandedKeys = new Set();
+
   /** @override change 이벤트 위임 + 탭 활성화 */
   _onRender(context, options) {
     super._onRender(context, options);
@@ -175,6 +179,7 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
       });
     }
     this.#activateTabs();
+    this.#restoreUiState();
 
     // data-skin / data-theme 주입
     if (this.document.type === "character") {
@@ -217,6 +222,47 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
     };
     navs.forEach((a) => a.addEventListener("click", (ev) => { ev.preventDefault(); show(a.dataset.tab); }));
     show(this.#currentTab);
+  }
+
+  /** 렌더 간 스크롤 위치(.window-content)와 펼침 상태를 복원하고 이후 변동을 추적한다. */
+  #restoreUiState() {
+    // 펼침 복원은 높이에 영향을 주므로 스크롤 복원보다 먼저 수행한다.
+    for (const key of this.#expandedKeys) {
+      const container = this.#findByUiKey(key);
+      const hidden = container?.querySelector(".gift-hidden, .item-hidden, .treasure-hidden, .memory-hidden");
+      if (!hidden) continue;
+      hidden.classList.add("content-visible");
+      hidden.classList.remove("content-hidden");
+      hidden.style.display = "block";
+    }
+    // .window-content는 프레임이라 렌더 간 유지된다 → scrollTop 복원 + onscroll로 추적(덮어쓰기라 누적 없음).
+    const wc = this.element.querySelector(".window-content");
+    if (wc) {
+      wc.scrollTop = this.#scrollTop;
+      wc.onscroll = () => { this.#scrollTop = wc.scrollTop; };
+    }
+  }
+
+  /** 펼침 보존용 안정 키: 아이템=id, 식량=special, 보물/추억 섹션=클래스. */
+  #uiKey(el) {
+    const withId = el.closest("[data-item-id]");
+    if (withId) return `id:${withId.dataset.itemId}`;
+    const special = el.closest("[data-special]");
+    if (special) return `sp:${special.dataset.special}`;
+    const section = el.closest(".treasure-list, .memory-list");
+    if (section) return section.classList.contains("treasure-list") ? "sec:treasure" : "sec:memory";
+    return null;
+  }
+
+  /** #uiKey 키로 해당 컨테이너 요소를 찾는다(복원용). */
+  #findByUiKey(key) {
+    const sep = key.indexOf(":");
+    const kind = key.slice(0, sep);
+    const val = key.slice(sep + 1);
+    if (kind === "id") return this.element.querySelector(`[data-item-id="${val}"]`);
+    if (kind === "sp") return this.element.querySelector(`[data-special="${val}"]`);
+    if (kind === "sec") return this.element.querySelector(val === "treasure" ? ".treasure-list" : ".memory-list");
+    return null;
   }
 
   /** change 핸들러: 아이템 필드(dataset.path) 업데이트 */
@@ -372,6 +418,9 @@ export class AmadeusActorSheet extends FixedWidthMixin(HandlebarsApplicationMixi
     const visible = hidden.classList.toggle("content-visible");
     hidden.classList.toggle("content-hidden", !visible);
     hidden.style.display = visible ? "block" : "none";
+    // 렌더 간 유지를 위해 펼침 상태를 기록한다.
+    const key = this.#uiKey(hidden);
+    if (key) visible ? this.#expandedKeys.add(key) : this.#expandedKeys.delete(key);
   }
 
   static async #onToggleTheme(_event, _target) {
