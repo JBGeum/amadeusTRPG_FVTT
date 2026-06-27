@@ -2,7 +2,7 @@
   <div class="item grid parent-sheet-body" data-item-id="{{item._id}}">
     <div class="parent-image">
       <img class="parent-image"
-           src="{{item.img}}" data-edit="img" height="120" width="120"/>
+           src="{{item.img}}" data-edit="img" data-action="editImage" height="120" width="120"/>
     </div>
     <div class="parent-sheet-name flex-center">
       <input type="text" name="name" value="{{item.name}}" placeholder="Name"/>
@@ -47,7 +47,7 @@
     </div>
     <div class="parent-portrait">
       <img class="parent-portrait"
-           src="{{system.portrait}}" data-edit="system.portrait"/>
+           src="{{system.portrait}}" data-edit="system.portrait" data-action="editImage"/>
     </div>
     <div class="parent-sheet-description">
       <div class="parent-description">

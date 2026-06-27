@@ -28,12 +28,12 @@
       {{!-- 이미지 열: 캐릭터 + 부모신 --}}
       <div class="header-portraits">
         <div class="portrait-character">
-          <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="{{actor.name}}"/>
+          <img src="{{actor.img}}" data-edit="img" data-action="editImage" title="{{actor.name}}" alt="{{actor.name}}"/>
           <span class="portrait-label">캐릭터</span>
         </div>
         <div class="portrait-parent">
           <span class="portrait-sublabel">부모신</span>
-          <img src="{{system.chardata.parentimg}}" data-edit="system.chardata.parentimg" title="{{system.chardata.parent}}" alt="{{system.chardata.parent}}"/>
+          <img src="{{system.chardata.parentimg}}" data-edit="system.chardata.parentimg" data-action="editImage" title="{{system.chardata.parent}}" alt="{{system.chardata.parent}}"/>
           <span class="portrait-parent-name">{{system.chardata.parent}}</span>
         </div>
       </div>
