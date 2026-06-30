@@ -180,10 +180,12 @@
     }
 
     img {
-      width: 64px;
-      height: 64px;
-      object-fit: cover;
-      border-radius: 50%;
+      // 부모신 초상화: div 가로(92px)에 꽉 채우고 비율 유지, 세로 가운데 정렬.
+      // 원형 프레임 제거. 세로가 박스(200px)를 넘으면 contain 으로 안에 가둔다.
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
       cursor: pointer;
       // 이미지 없을 때는 투명하게 처리
       &[src=""],
