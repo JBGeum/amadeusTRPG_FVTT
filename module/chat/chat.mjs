@@ -36,6 +36,10 @@ export async function postCard({ actor, template, data = {}, flavor, style } = {
 export async function themeRollMessage(message, html) {
   if (!message.isRoll || !message.rolls?.length) return;
   if (html.querySelector(".amadeus-chat")) return;
+  // RollTable 드로우 메시지는 한 메시지에 주사위 + 뽑힌 결과 문구를 함께 담는다.
+  // .message-content를 통째로 교체하면 결과 문구가 사라지므로 코어 카드를 유지한다.
+  // (시트의 시련/휴식 버튼 경로는 displayChat:false + postCard라 애초에 여기로 오지 않는다.)
+  if (message.getFlag("core", "RollTable")) return;
 
   // 단일 롤 메시지를 가정한다(일반적인 경우). 복수 롤이면 첫 번째만 테마한다.
   const roll = message.rolls[0];
