@@ -1,10 +1,13 @@
-<div class="item treasure-sheet" data-item-id="{{item._id}}">
-  <div class="treasure-sheet-title">
-    <input type="text" name="name" class="trasure-name" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.itemName'}}" />
-  </div>
-  <div class="treasure-sheet-body">
-    <p class="treasure-body">
+{{!-- 보물 아이템 시트 (AppV2). 이름 + 설명. --}}
+<div class="sheet-inner item-sheet item-treasure">
+  <div class="it-accent" aria-hidden="true"></div>
+  <div class="it-pad">
+    <div class="it-eyebrow"><i class="fa-solid fa-gem"></i><span>{{localize 'AMADEUS.label.treasure'}}</span></div>
+
+    <input class="it-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.itemName'}}"/>
+
+    <div class="it-editor it-editor--tall" title="설명">
       {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}" toggled>{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
-    </p>
+    </div>
   </div>
 </div>

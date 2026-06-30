@@ -28,6 +28,13 @@
 .amadeus-dlg[data-theme="dark"]{ --bg:#16151b; --panel:#201f28; --panel2:#272631; --text:#ece6d6; --muted:#9a958a; --line:rgba(180,150,90,.22); --gold:#c9a44e; --bar:#100f14; }
 .amadeus-dlg[data-theme="light"]{ --bg:#f3efe6; --panel:#ffffff; --panel2:#efe9da; --text:#241d12; --muted:#7c715c; --line:rgba(120,95,40,.24); --gold:#9a7a2e; --bar:#e7dfcc; }
 
+// ===== item sheet palette: NEUTRAL(속성색 미적용), 라이트/다크만 =====
+// 액터 시트와 달리 data-skin 을 쓰지 않는다. `.amadeus.sheet.item`(특이도 0,3,0)이
+// _tokens 상단의 `.amadeus.sheet` 적·dark 폴백(0,2,0)을 덮어써 첫 페인트부터 중립색을 쓴다.
+.amadeus.sheet.item{ --bg:#171311; --panel:#241d19; --panel2:#2c2420; --text:#ece4da; --muted:#a89a8c; --line:rgba(196,170,142,.18); --gold:#caa86c; --acc:#caa86c; --seal:#2a2420; --sealtx:#f1e7d8; }
+.amadeus.sheet.item[data-theme="dark"]{ --bg:#171311; --panel:#241d19; --panel2:#2c2420; --text:#ece4da; --muted:#a89a8c; --line:rgba(196,170,142,.18); --gold:#caa86c; --acc:#caa86c; --seal:#2a2420; --sealtx:#f1e7d8; }
+.amadeus.sheet.item[data-theme="light"]{ --bg:#f4efe8; --panel:#ffffff; --panel2:#efe8df; --text:#2b2521; --muted:#7c7166; --line:rgba(90,74,58,.20); --gold:#9a7c44; --acc:#9a7c44; --seal:#39322c; --sealtx:#f1e7d8; }
+
 // ===== chat parchment (fixed, theme-independent) =====
 .amadeus-chat{ --pg:#e8e2d3; --pg2:#dcd5c1; --pgline:#cbc3ad; --pgline2:#bcb39a; --ptext:#34301f; --pmuted:#6a6450; --pbody:#46412f; --pgold:#9a7a3a; }
 .lnum{ font-variant-numeric:lining-nums; font-feature-settings:'lnum' 1; }

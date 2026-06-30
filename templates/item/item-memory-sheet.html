@@ -1,29 +1,25 @@
-<div class="item memory" data-item-id="{{item._id}}">
-  <div class="memory-card">
-    <div class="memory-card-title">
-      <span class="memory-name">
-        <input type="text" name="name" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.memory'}}"/>
-      </span>
+{{!-- 추억 아이템 시트 (AppV2). 날짜 + 절계/임무 + 임무 달성. --}}
+<div class="sheet-inner item-sheet item-memory">
+  <div class="it-accent" aria-hidden="true"></div>
+  <div class="it-pad">
+    <div class="it-eyebrow"><i class="fa-solid fa-hourglass-half"></i><span>{{localize 'AMADEUS.label.memory'}}</span></div>
+
+    <input class="it-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.memory'}}"/>
+
+    <div class="it-date">
+      <i class="fa-solid fa-calendar-day it-date-ic" aria-hidden="true"></i>
+      <div class="it-field"><span class="it-lbl">{{localize 'AMADEUS.label.year'}}</span><input class="it-num" type="number" name="system.date.year" value="{{system.date.year}}"/></div>
+      <div class="it-field"><span class="it-lbl">{{localize 'AMADEUS.label.month'}}</span><input class="it-num" type="number" name="system.date.month" value="{{system.date.month}}"/></div>
+      <div class="it-field"><span class="it-lbl">{{localize 'AMADEUS.label.day'}}</span><input class="it-num" type="number" name="system.date.day" value="{{system.date.day}}"/></div>
     </div>
-    <div class="memory-card-body">
-      <div class="memory-date">
-        <span class="memory-date">
-          <input type="number" name="system.date.year" value="{{system.date.year}}"/>{{localize 'AMADEUS.label.year'}}
-          <input type="number" name="system.date.month" value="{{system.date.month}}"/>{{localize 'AMADEUS.label.month'}}
-          <input type="number" name="system.date.day" value="{{system.date.day}}"/>{{localize 'AMADEUS.label.day'}}
-        </span>
-      </div>
-      <div class="memory-island">
-        <span class="memory-lbl">{{localize 'AMADEUS.label.island'}}</span>
-        <input type="text" name="system.island" value="{{system.island}}">
-      </div>
-      <div class="memory-mission">
-        <span class="memory-lbl">{{localize 'AMADEUS.label.mission'}}</span>
-        <input type="text" name="system.mission" value="{{system.mission}}">
-      </div>
-      <div class="memory-completed">
-        <input type="checkbox" name="system.completed" {{checked system.completed}} />
-        {{localize 'AMADEUS.label.completed'}}</div>
-    </div>
+
+    <div class="it-field"><span class="it-lbl">{{localize 'AMADEUS.label.island'}}</span><input type="text" name="system.island" value="{{system.island}}"/></div>
+    <div class="it-field"><span class="it-lbl">{{localize 'AMADEUS.label.mission'}}</span><input type="text" name="system.mission" value="{{system.mission}}"/></div>
+
+    <label class="it-check">
+      <input type="checkbox" name="system.completed" {{checked system.completed}}/>
+      <span class="it-check-box"><i class="fa-solid fa-check"></i></span>
+      <span class="it-check-lbl">{{localize 'AMADEUS.label.completed'}}</span>
+    </label>
   </div>
 </div>

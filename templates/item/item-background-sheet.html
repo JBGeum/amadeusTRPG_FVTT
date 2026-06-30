@@ -1,13 +1,14 @@
-<div class="background-sheet">
-  <div class="sheet-header">
-    <input name="name" type="text" value="{{item.name}}" placeholder="Name"/>
-  </div>
-  <div class="sheet-body">
-    <div class="background-type">
-      <label>분류</label>
-      <select name="system.type">
-        {{selectOptions config.background selected=system.type localize=true}}
-      </select>
+{{!-- 배경 아이템 시트 (AppV2). 별도 시안 없음 — 중립 테마로 통일(코드 기준: type 만). --}}
+<div class="sheet-inner item-sheet item-background">
+  <div class="it-accent" aria-hidden="true"></div>
+  <div class="it-pad">
+    <div class="it-eyebrow"><i class="fa-solid fa-scroll"></i><span>{{localize 'AMADEUS.label.background'}}</span></div>
+
+    <input class="it-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.name'}}"/>
+
+    <div class="it-row">
+      <span class="it-lbl">분류</span>
+      <select class="it-grow" name="system.type">{{selectOptions config.background selected=system.type localize=true}}</select>
     </div>
   </div>
 </div>

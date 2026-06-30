@@ -10,9 +10,21 @@ const { HandlebarsApplicationMixin, DocumentSheetV2 } = foundry.applications.api
 export class AmadeusItemSheet extends FixedWidthMixin(HandlebarsApplicationMixin(DocumentSheetV2)) {
   static DEFAULT_OPTIONS = {
     classes: ["amadeus", "sheet", "item"],
-    position: { width: 480, height: 720 },
-    window: { resizable: true },
+    position: { width: 530, height: 530 }, // 헤더(~30px) 제외 콘텐츠 영역 ≈ 500
+    window: {
+      resizable: true,
+      controls: [
+        {
+          icon: "fa-solid fa-sun",
+          label: "AMADEUS.theme.light",
+          action: "toggleTheme",
+        },
+      ],
+    },
     form: { submitOnChange: true, closeOnSubmit: false },
+    actions: {
+      toggleTheme: AmadeusItemSheet.#onToggleTheme,
+    },
   };
 
   static PARTS = {
@@ -64,5 +76,34 @@ export class AmadeusItemSheet extends FixedWidthMixin(HandlebarsApplicationMixin
       context.enrichedDescription = await TextEditor.enrichHTML(item.system.description, enrichOpts);
 
     return context;
+  }
+
+  /** @override 현재 테마(중립 라이트/다크)를 주입하고 헤더 토글 아이콘을 동기화한다. */
+  _onRender(context, options) {
+    super._onRender(context, options);
+    this.#syncThemeToggle(game.settings.get("amadeus", "theme"));
+  }
+
+  /**
+   * data-theme 를 시트 루트에 반영하고, 헤더 컨트롤(정적 배열)의 토글 아이콘/라벨을
+   * 현재 테마에 맞춰 갱신한다. 아이템 시트는 data-skin 없이 중립 팔레트만 쓴다.
+   * @param {"dark"|"light"} theme
+   */
+  #syncThemeToggle(theme) {
+    this.element.dataset.theme = theme;
+    const btn = this.element.querySelector("[data-action='toggleTheme']");
+    if (!btn) return;
+    const isDark = theme === "dark";
+    const icon = btn.querySelector("i");
+    if (icon) icon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    const labelEl = btn.querySelector("label, span");
+    if (labelEl) labelEl.textContent = game.i18n.localize(isDark ? "AMADEUS.theme.light" : "AMADEUS.theme.dark");
+  }
+
+  /** 전역 테마 설정을 토글한다. setting onChange(applyThemeToOpenApps)가 열린 앱에 색을 반영하고, 이 시트 토글 아이콘은 즉시 갱신한다. */
+  static async #onToggleTheme(_event, _target) {
+    const next = game.settings.get("amadeus", "theme") === "dark" ? "light" : "dark";
+    await game.settings.set("amadeus", "theme", next);
+    this.#syncThemeToggle(next);
   }
 }

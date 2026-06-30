@@ -1,221 +1,407 @@
-//.sheet.item section.window-content{background:var(--bg);}
-.gift-sheet {
-  label {padding : 3px;}
-  .gift-sheet-header {
-    padding               : 2px;
-    grid-template-columns : 1fr 2fr 1fr;
+// ===== 아이템 시트 (AppV2) — 중립 팔레트, 라이트/다크 =====
+// amadeus.scss의 `.amadeus { @import 'components/items'; }` 안에서 임포트되므로
+// 최상위 선택자는 이미 `.amadeus` 스코프. 실제 렌더 DOM: .amadeus.sheet.item > .window-content > .sheet-inner.item-sheet
+// 색 토큰(--bg/--panel/--panel2/--text/--muted/--line/--gold/--seal)은 _tokens.scss의
+// `.amadeus.sheet.item[data-theme]`(중립색)에서 정의. data-skin 미적용.
 
-    > div {
-      //border: 1px solid var(--line);
-      @extend .total-center;
-      padding : 5px;
-      label {flex-shrink : 0;}
-      select, input {flex-grow : 1;}
-    }
-
-    .gift-sheet-name {
-      grid-column : 1 / span 3;
-      grid-row    : 1 / span 1;
-
-      .gift-sheet-chkbox {display : none;}
-
-      label { font-weight : bold;}
-    }
+&.sheet.item {
+  .window-content {
+    padding: 0;
+    overflow-y: auto;
+    min-height: 0;
   }
 
-  .gift-sheet-body {
-    .gift-effect {
-      height           : 240px;
-      background-color : var(--panel2);
-      margin           : 10px;
+  // 리사이즈 핸들이 전면(full-bleed) 본문에 stacking 으로 가려져 포인터를 못 받는다(커서 안 바뀜).
+  // position:absolute 이므로 z-index 로 콘텐츠 위에 올려 커서/드래그를 복구한다. (actor 시트와 동일)
+  .window-resize-handle {
+    z-index: 10;
+  }
+
+  // Foundry 기본 input 높이 제거 — 시안은 텍스트 높이 기준
+  input[type="text"],
+  input[type="number"] { height: auto; line-height: 1.3; }
+
+  // ---- 최상위 래퍼 ----
+  .sheet-inner.item-sheet {
+    position: relative;
+    background: var(--bg);
+    color: var(--text);
+    font-family: $font-body;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  // 상단 골드 액센트 라인
+  .it-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: .7;
+    z-index: 2;
+  }
+
+  .it-pad {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    padding: 16px 15px;
+  }
+
+  // ---- 공통 요소 ----
+  .it-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: var(--muted);
+    i { color: var(--gold); font-size: 12px; }
+  }
+
+  .it-name {
+    width: 100%;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 9px 12px;
+    font-family: $font-title;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .it-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .it-name { flex: 1; min-width: 0; }
+  }
+
+  .it-lbl {
+    flex: none;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  // 가로 필드 행 (라벨 + 컨트롤 반복)
+  .it-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+
+    select,
+    input {
+      background: var(--panel2);
       border: 1px solid var(--line);
-      border-radius    : 15px;
-      padding          : 15px;
+      border-radius: 6px;
+      padding: 7px 9px;
+      font-size: 12.5px;
+      color: var(--text);
     }
-
-    .gift-description {
-      height           : 200px;
-      background-color : var(--panel2);
-      margin           : 10px;
-      border: 1px solid var(--line);
-      border-radius    : 10px;
-      padding          : 10px;
-    }
-
-    .gift-tag, .gift-memo, .gift-formula { @extend .total-center;
-      label {flex-shrink : 0;}
-      input {flex-grow : 1;}
-      padding:4px;
-    }
-  }
-}
-
-.gear-sheet{
-  label {padding : 3px;}
-  .item-sheet-header {
-    padding               : 2px;
-    grid-template-columns : 1fr 1fr 1fr;
-
-    > div {
-      @extend .total-center;
-      padding : 5px;
-
-      label {flex-shrink : 0;}
-
-      select, input {flex-grow : 1;}
-    }
-
-    .item-sheet-name {
-      grid-column : 1 / span 3;
-      grid-row    : 1 / span 1;
-    }
-  }
-  .item-sheet-body{
-    .item-effect {
-      height           : 240px;
-      background-color : var(--panel2);
-      margin           : 10px;
-      border: 1px solid var(--line);
-      border-radius    : 15px;
-      padding          : 15px;
-    }
-
-    .item-description {
-      height           : 200px;
-      background-color : var(--panel2);
-      margin           : 10px;
-      border: 1px solid var(--line);
-      border-radius    : 10px;
-      padding          : 10px;
-    }
-  }
-}
-
-.parent-sheet{
-  label {padding : 3px;}
-  .parent-sheet-body{
-    grid-template-columns: 130px 1fr 1fr;
-    >div{
-      @extend .total-center;
-      padding:3px;
-    }
-    label {flex-shrink : 0;}
-    select, input {flex-grow : 1;}
-  }
-  .parent-sheet-name{
-    grid-column : 2 / span 2;
-    grid-row : 1/ span 1;
+    select { cursor: pointer; }
+    .it-grow { flex: 1; min-width: 0; }
+    .it-num { width: 92px; font-variant-numeric: lining-nums; }
   }
 
-  .grid.parent-sheet-ability-grid {
+  // 라벨/입력 2열 그리드 (gift 태그·수식·메모)
+  .it-grid2 {
     display: grid;
-    div{
-      display:flex;
-      justify-content: center;
-      flex-direction: column;
-      text-align:center;
-      align-items:stretch;
-      padding:3px;
-      .parent-ability-label{font-weight: bold;}
-    }
-  }
-  .parent-sheet-ability-grid{
-    grid-column: 1 / span 3;
-    grid-row: 4 / span 1;
-    grid-template-columns: repeat(6, 1fr);
-  }
-  .parent-image{
-    grid-column: 1 / span 1;
-    grid-row : 5 / span 1;
-    height:auto;
-  }
-  .parent-portrait{
-    grid-column: 1 / span 1;
-    grid-row : 1 / span 3;
-    height:auto;
-  }
-  .parent-sheet-description{
-    grid-column:2 / span 2;
-    grid-row: 5 / span 2;
-    height:300px;
-    .parent-description{
-      height: 100%;
-      width: 100%;
-      border:1px solid var(--line);
-      padding:3px;
-      border-radius:5px;
-    }
-  }
-}
+    grid-template-columns: 40px 1fr;
+    gap: 8px 10px;
+    align-items: center;
 
-// ---------------------------------------------------------------------------
-// ProseMirror 리치텍스트 에디터 (v13)
-// 고정 높이 박스 안에서 툴바는 한 줄로 유지(버튼 축소), 내용은 넘치면 스크롤.
-// 구식 TinyMCE(.tox) 스타일만 있어 ProseMirror 레이아웃이 비제어 상태였음.
-// ---------------------------------------------------------------------------
-.amadeus.sheet.item {
-  // 에디터를 감싸는 고정 높이 박스: 내부가 넘쳐도 다른 영역 침범 금지.
-  // position:relative 가 핵심 — ProseMirror의 .editor-container 는 position:absolute 계열이라
-  // positioned 조상이 없으면 박스 밖으로 빠져나온다. relative 로 박스 안에 가둔다.
-  .gift-effect, .gift-description,
-  .item-effect, .item-description,
-  .parent-description {
+    input {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 7px 9px;
+      color: var(--text);
+    }
+  }
+
+  // 세로 필드 (라벨 위 / 입력 아래)
+  .it-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+
+    input,
+    select {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 11px;
+      color: var(--text);
+    }
+    .it-num { font-variant-numeric: lining-nums; }
+  }
+
+  // ProseMirror 에디터 박스
+  .it-editor {
     position: relative;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-  }
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--panel);
+    padding: 10px 12px;
+    min-height: 92px; // 콘텐츠 영역 500 에 gift(가장 큼)가 수납되도록 (effect)
 
-  prose-mirror {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    min-height: 0;
-    max-width: 100%;
-    overflow: hidden;
+    &--sm { min-height: 56px; }   // 설명(gift/gear 두 번째 에디터)
+    &--tall { min-height: 340px; } // 보물(단일 에디터 — 여유분 활용)
+    &--grow { flex: 1 1 auto; min-height: 96px; } // 부모신(남는 높이 채움)
 
-    // 툴바: 반드시 flex 컨테이너여야 flex-wrap:nowrap(한 줄)이 동작한다.
-    // 넘치면 가로 스크롤, 버튼 크기 축소.
-    menu, .editor-menu {
+    // 고정 높이 박스 안에서 툴바는 한 줄, 내용은 넘치면 스크롤.
+    prose-mirror {
       display: flex;
-      align-items: center;
-      flex: 0 0 auto;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      overflow-y: hidden;
-      gap: 1px;
-      margin: 0 0 4px;
-      padding: 0;
-      font-size: 11px;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
+      max-width: 100%;
+      overflow: hidden;
 
-      button, .pm-dropdown {
-        font-size: inherit;
-        padding: 1px 4px;
-        min-width: 0;
-        width: auto;
-        height: auto;
-        line-height: 1.5;
+      menu,
+      .editor-menu {
+        display: flex;
+        align-items: center;
         flex: 0 0 auto;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 1px;
+        margin: 0 0 4px;
+        padding: 0;
+        font-size: 11px;
+
+        button,
+        .pm-dropdown {
+          font-size: inherit;
+          padding: 1px 4px;
+          min-width: 0;
+          width: auto;
+          height: auto;
+          line-height: 1.5;
+          flex: 0 0 auto;
+        }
+      }
+
+      .editor-container {
+        position: relative;
+        flex: 1 1 auto;
+        min-height: 0;
+        max-width: 100%;
+        display: flex;
+        overflow: hidden;
+      }
+      .editor-content,
+      .ProseMirror {
+        flex: 1 1 auto;
+        min-height: 0;
+        max-width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        word-break: break-word;
+        overflow-wrap: anywhere;
       }
     }
+  }
 
-    // 내용: 박스를 꽉 채우고 넘치면 세로 스크롤(박스 밖 침범 방지)
-    .editor-container {
-      position: relative;
-      flex: 1 1 auto;
-      min-height: 0;
-      max-width: 100%;
+  // ---- 부모신 ----
+  // 2단: 좌(정사각 포트레이트=item.img + 1:2 전신=system.portrait) / 우(필드+능력치+설명).
+  .it-parent-grid {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .it-parent-imgs {
+    width: 150px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  // 이미지 박스(아이콘=item.img / 전신=system.portrait).
+  .it-imgbox {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: radial-gradient(120% 100% at 50% 0%, var(--panel2), var(--seal));
+    overflow: hidden;
+  }
+  .it-imgfill { display: block; cursor: pointer; }
+
+  // 아이콘: 가로(150px)에 맞춰 비율 유지 — 박스 높이가 이미지를 따라간다(유동, 크롭 없음).
+  .it-imgbox--square {
+    flex: none;
+    min-height: 80px; // 빈 이미지일 때 placeholder 최소 높이
+    .it-imgfill { width: 100%; height: auto; }
+  }
+  // 전신: 좌측 컬럼 하단까지 채우는 고정 높이(이미지에 따라 유동 X).
+  // 이미지는 박스 안에서 비율 유지·중앙 배치만 한다(크롭 없음).
+  .it-imgbox--tall {
+    flex: 1;
+    min-height: 0;
+    .it-imgfill { width: 100%; height: 100%; object-fit: contain; }
+  }
+  .it-parent-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .it-prow {
+    display: flex;
+    gap: 8px;
+
+    .it-field { min-width: 0; }
+    .it-field--grow { flex: 1; }
+    .it-field--color { flex: none; width: 92px; }
+  }
+
+  // 능력치: 3열 × 2행, 각 셀에 rank·mod 가로 배치(3열이라 폭 여유 있음).
+  .it-abilities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .it-ability {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+  .it-ability-lbl {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .it-ability-sel {
+    width: 100%;
+    display: flex;
+    gap: 3px;
+
+    select {
+      flex: 1;
+      min-width: 0;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5px 2px;
+      text-align: center;
+      color: var(--gold);
+      font-variant-numeric: lining-nums;
+      cursor: pointer;
+    }
+    .it-mod { color: var(--muted); }
+  }
+
+  // ---- 추억 ----
+  .it-date {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+
+    .it-date-ic {
+      flex: none;
+      margin-bottom: 9px;
+      color: var(--gold);
+      font-size: 12px;
+    }
+    .it-field { flex: 1; }
+  }
+  .it-check {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 2px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 9px 12px;
+    cursor: pointer;
+
+    input { display: none; }
+    .it-check-box {
       display: flex;
-      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      color: var(--gold);
+      font-size: 11px;
+      i { opacity: .25; transition: opacity .15s; }
     }
-    .editor-content, .ProseMirror {
-      flex: 1 1 auto;
-      min-height: 0;
-      max-width: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
-      word-break: break-word;
-      overflow-wrap: anywhere;
+    input:checked + .it-check-box i { opacity: 1; }
+    .it-check-lbl { font-size: 13px; color: var(--text); }
+  }
+
+  // 기프트 헤더 행: 분류/조건/기능을 한 줄로 compact 하게.
+  // 기본 .it-row 는 flex-wrap 이라 Foundry 의 넓은 select 폭에서 여러 줄로 접힌다.
+  // 그리드는 wrap 하지 않으므로 6칸(라벨·셀렉트·라벨·입력·라벨·셀렉트)을 한 줄로 고정한다.
+  .item-gift .it-row {
+    display: grid;
+    grid-template-columns: auto auto auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 6px 8px;
+
+    // 분류·기능 select 폭을 조금 넓힘(내용 폭 → 고정 80px). grid auto 칸이 이에 맞춰진다.
+    select { width: 80px; min-width: 0; }
+    .it-grow { min-width: 0; }
+  }
+
+  // 에디터 라벨 그룹(라벨 + 에디터 세로 스택) — 기프트 효과/설명.
+  .it-ed-group {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  // 기프트·기어·무기 설명 에디터: 내부 스크롤이 생기지 않도록 높이 확대(공용 --sm 56 → 130).
+  .item-gift .it-editor--sm,
+  .item-equip .it-editor--sm { min-height: 130px; }
+
+  // 기어/무기 헤더 행: 가격/분류/위력을 한 줄로(grow=위력은 마지막 칸).
+  // 6칸: 라벨·가격(num)·라벨·분류(select)·라벨·위력(grow).
+  .item-equip .it-row {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto minmax(0, 1fr);
+    align-items: center;
+    gap: 6px 8px;
+
+    select { min-width: 0; }
+    .it-num { width: auto; } // 그리드 칸에 맞춤(고정폭 해제)
+    .it-grow { min-width: 0; }
+  }
+
+  // ---- 기프트 파토스 토글 ----
+  .it-pathos {
+    flex: none;
+    cursor: pointer;
+
+    input { display: none; }
+    .it-pathos-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      i { opacity: .3; transition: opacity .15s; }
     }
+    input:checked + .it-pathos-box { color: var(--gold); i { opacity: 1; } }
   }
 }

@@ -1,57 +1,62 @@
-<div class="parent-sheet">
-  <div class="item grid parent-sheet-body" data-item-id="{{item._id}}">
-    <div class="parent-image">
-      <img class="parent-image"
-           src="{{item.img}}" data-edit="img" data-action="editImage" height="120" width="120"/>
-    </div>
-    <div class="parent-sheet-name flex-center">
-      <input type="text" name="name" value="{{item.name}}" placeholder="Name"/>
-    </div>
-    <div class="parent-sheet-color">
-      <label class="item-lbl">{{localize 'AMADEUS.label.color'}}</label>
-      <select name="system.color">
-        {{selectOptions label.color selected=system.color}}
-      </select>
-    </div>
-    <div class="parent-sheet-pantheon">
-      <input type="text" name="system.pantheon" value="{{system.pantheon}}"/>
-      <label class="item-lbl">{{localize 'AMADEUS.label.pantheon'}}</label>
-    </div>
-    <div class="parent-sheet-weapon">
-      <label class="item-lbl">{{localize 'AMADEUS.parent.weapon'}}</label>
-      <input type="text" name="system.weapon" value="{{system.weapon}}"/>
-    </div>
-    <div class="parent-sheet-authority">
-      <label class="item-lbl">{{localize 'AMADEUS.parent.authority'}}</label>
-      <input type="text" name="system.authority" value="{{system.authority}}"/>
-    </div>
+{{!-- 부모신 아이템 시트 (AppV2). 좌: 포트레이트(아이콘) + 전신(초상화) / 우: 필드 + 6능력치 + 설명. --}}
+<div class="sheet-inner item-sheet item-parent">
+  <div class="it-accent" aria-hidden="true"></div>
+  <div class="it-pad">
+    <div class="it-eyebrow"><i class="fa-solid fa-chess-king"></i><span>{{localize 'AMADEUS.label.parent'}}</span></div>
 
-    <div class="grid parent-sheet-ability-grid">
-      {{#each system.ability as |ability key|}}
-      <div class="parent-ability">
-        <div class="parent-ability-label">
-          {{localize (lookup ../config.ability key)}}
+    <div class="it-parent-grid">
+      {{!-- 좌: 이미지 2개 (정사각 포트레이트=item.img / 1:2 전신=system.portrait) --}}
+      <div class="it-parent-imgs">
+        <div class="it-imgbox it-imgbox--square">
+          <img class="it-imgfill" src="{{item.img}}" data-edit="img" data-action="editImage" alt="포트레이트"/>
         </div>
-        <div class="parent-ability-rank">
-          <select name="system.ability.{{key}}.rank">
-            {{selectOptions ../label.rank selected=ability.rank}}
-          </select>
-        </div>
-        <div class="parent-ability-mod">
-          <select name="system.ability.{{key}}.mod">
-            {{selectOptions ../label.mod selected=ability.mod}}
-          </select>
+        <div class="it-imgbox it-imgbox--tall">
+          <img class="it-imgfill" src="{{#if system.portrait}}{{system.portrait}}{{else}}icons/svg/mystery-man.svg{{/if}}" data-edit="system.portrait" data-action="editImage" alt="부모신 전신"/>
         </div>
       </div>
-      {{/each}}
-    </div>
-    <div class="parent-portrait">
-      <img class="parent-portrait"
-           src="{{system.portrait}}" data-edit="system.portrait" data-action="editImage"/>
-    </div>
-    <div class="parent-sheet-description">
-      <div class="parent-description">
-        {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}" toggled>{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
+
+      {{!-- 우: 필드 + 능력치 + 설명 --}}
+      <div class="it-parent-main">
+        <div class="it-prow">
+          <div class="it-field it-field--grow">
+            <span class="it-lbl">{{localize 'AMADEUS.label.name'}}</span>
+            <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.name'}}"/>
+          </div>
+          <div class="it-field it-field--color">
+            <span class="it-lbl">{{localize 'AMADEUS.label.color'}}</span>
+            <select name="system.color">{{selectOptions label.color selected=system.color}}</select>
+          </div>
+        </div>
+        <div class="it-prow">
+          <div class="it-field it-field--grow">
+            <span class="it-lbl">{{localize 'AMADEUS.label.pantheon'}}</span>
+            <input type="text" name="system.pantheon" value="{{system.pantheon}}"/>
+          </div>
+          <div class="it-field it-field--grow">
+            <span class="it-lbl">{{localize 'AMADEUS.parent.weapon'}}</span>
+            <input type="text" name="system.weapon" value="{{system.weapon}}"/>
+          </div>
+        </div>
+        <div class="it-field">
+          <span class="it-lbl">{{localize 'AMADEUS.parent.authority'}}</span>
+          <input type="text" name="system.authority" value="{{system.authority}}"/>
+        </div>
+
+        <div class="it-abilities">
+          {{#each system.ability as |ability key|}}
+          <div class="it-ability">
+            <span class="it-ability-lbl">{{localize (lookup ../config.ability key)}}</span>
+            <div class="it-ability-sel">
+              <select class="it-rank" name="system.ability.{{key}}.rank">{{selectOptions ../label.rank selected=ability.rank}}</select>
+              <select class="it-mod" name="system.ability.{{key}}.mod">{{selectOptions ../label.mod selected=ability.mod}}</select>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+
+        <div class="it-editor it-editor--grow" title="설명">
+          {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}" toggled>{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
+        </div>
       </div>
     </div>
   </div>

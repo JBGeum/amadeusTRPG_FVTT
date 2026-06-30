@@ -1,31 +1,29 @@
-<div class="weapon-sheet">
-  <div class="sheet-header">
-    <div class="item grid item-sheet-header" data-item-id="{{item._id}}">
-      <div class="item-sheet-name flex-center">
-        <input name="name" type="text" value="{{item.name}}" placeholder="아이템명"/>
-      </div>
-      <div class="item-price">
-        <label class="item-lbl">{{localize 'AMADEUS.item.price'}}</label>
-        <input type="text" name="system.price" value="{{system.price}}"/>
-      </div>
-      <div class="item-sheet-type">
-        <label class="item-lbl">{{localize 'AMADEUS.item.type'}}</label>
-        <select name="system.type">
-          {{selectOptions label.itemType selected=system.type}}
-        </select>
-      </div>
-      <div class="item-damage">
-        <label class="item-lbl">{{localize 'AMADEUS.item.power'}}</label>
-        <input type="text" name="system.action.damage" value="{{system.action.damage}}"/>
-      </div>
+{{!-- 무기 아이템 시트 (AppV2). gear 와 동일 스키마(가격/분류/위력 + 효과/설명). --}}
+<div class="sheet-inner item-sheet item-equip">
+  <div class="it-accent" aria-hidden="true"></div>
+  <div class="it-pad">
+    <div class="it-eyebrow"><i class="fa-solid fa-khanda"></i><span>무기</span></div>
+
+    <input class="it-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'AMADEUS.label.itemName'}}"/>
+
+    <div class="it-row">
+      <span class="it-lbl">{{localize 'AMADEUS.item.price'}}</span>
+      <input class="it-num" type="text" name="system.price" value="{{system.price}}"/>
+      <span class="it-lbl">{{localize 'AMADEUS.item.type'}}</span>
+      <select name="system.type">{{selectOptions label.itemType selected=system.type}}</select>
+      <span class="it-lbl">{{localize 'AMADEUS.item.power'}}</span>
+      <input class="it-grow" type="text" name="system.action.damage" value="{{system.action.damage}}"/>
     </div>
-  </div>
-  <div class="item-sheet-body">
-    <div class="item item-sheet-body" data-item-id="{{item._id}}">
-      <div class="item-effect">
+
+    <div class="it-ed-group">
+      <span class="it-lbl">효과</span>
+      <div class="it-editor" title="효과">
         {{#if editable}}<prose-mirror name="system.effect" value="{{system.effect}}" toggled>{{{enrichedEffect}}}</prose-mirror>{{else}}{{{enrichedEffect}}}{{/if}}
       </div>
-      <div class="item-description">{{!-- 설명 --}}
+    </div>
+    <div class="it-ed-group">
+      <span class="it-lbl">설명</span>
+      <div class="it-editor it-editor--sm" title="설명">
         {{#if editable}}<prose-mirror name="system.description" value="{{system.description}}" toggled>{{{enrichedDescription}}}</prose-mirror>{{else}}{{{enrichedDescription}}}{{/if}}
       </div>
     </div>
