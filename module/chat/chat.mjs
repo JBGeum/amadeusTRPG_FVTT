@@ -36,10 +36,12 @@ export async function postCard({ actor, template, data = {}, flavor, style } = {
 export async function themeRollMessage(message, html) {
   if (!message.isRoll || !message.rolls?.length) return;
   if (html.querySelector(".amadeus-chat")) return;
+
   // RollTable 드로우 메시지는 한 메시지에 주사위 + 뽑힌 결과 문구를 함께 담는다.
-  // .message-content를 통째로 교체하면 결과 문구가 사라지므로 코어 카드를 유지한다.
-  // (시트의 시련/휴식 버튼 경로는 displayChat:false + postCard라 애초에 여기로 오지 않는다.)
-  if (message.getFlag("core", "RollTable")) return;
+  // 시트의 시련/휴식 버튼(displayChat:false + postCard)과 외형을 통일하기 위해,
+  // 사이드바 Draw·/draw 등 코어 경로로 만들어진 메시지도 같은 roll-table 카드로 재렌더한다.
+  const tableId = message.getFlag("core", "RollTable");
+  if (tableId) return themeRollTableMessage(message, html, tableId);
 
   // 단일 롤 메시지를 가정한다(일반적인 경우). 복수 롤이면 첫 번째만 테마한다.
   const roll = message.rolls[0];
@@ -56,6 +58,29 @@ export async function themeRollMessage(message, html) {
   const content = await foundry.applications.handlebars.renderTemplate(
     "systems/amadeus/templates/chatcard/roll-formula.html",
     view,
+  );
+  const target = html.querySelector(".message-content");
+  if (target) target.innerHTML = content;
+}
+
+/**
+ * 코어 RollTable 드로우 메시지를 시트 경로와 동일한 테마 카드(roll-table.html)로 교체한다.
+ * 굴림 총합으로 결과를 재조회(getResultsForRoll)하므로 draw가 원래 뽑은 결과와 일치한다.
+ * 테이블/결과를 복원하지 못하면 코어 카드를 그대로 두어 결과 문구가 사라지지 않게 한다.
+ * @param {ChatMessage} message
+ * @param {HTMLElement} html
+ * @param {string} tableId  message flag(core.RollTable)에 담긴 테이블 id
+ */
+async function themeRollTableMessage(message, html, tableId) {
+  const table = game.tables.get(tableId) ?? game.tables.find((t) => t.uuid === tableId);
+  const roll = message.rolls[0];
+  const results = table?.getResultsForRoll(roll.total) ?? [];
+  if (!results.length) return; // 복원 실패 → 코어 카드 유지(결과 문구 보존)
+
+  const parts = await Promise.all(results.map((r) => r.getHTML()));
+  const content = await foundry.applications.handlebars.renderTemplate(
+    "systems/amadeus/templates/chatcard/roll-table.html",
+    { name: table.name, total: roll?.total, text: parts.join("") },
   );
   const target = html.querySelector(".message-content");
   if (target) target.innerHTML = content;
